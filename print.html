@@ -1,0 +1,486 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Project Annivers@ary 使用手册</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="00.before-start/00.readme.html"><strong aria-hidden="true">1.</strong> 开始之前</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="00.before-start/01.before.html"><strong aria-hidden="true">1.1.</strong> 讲在前面</a></li><li class="chapter-item expanded "><a href="00.before-start/02.intro.html"><strong aria-hidden="true">1.2.</strong> 前言</a></li></ol></li><li class="chapter-item expanded "><a href="01.audio-convention/00.readme.html"><strong aria-hidden="true">2.</strong> Anni 音频约定</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="01.audio-convention/01.format.html"><strong aria-hidden="true">2.1.</strong> 音频格式</a></li><li class="chapter-item expanded "><a href="01.audio-convention/02.sample-rate.html"><strong aria-hidden="true">2.2.</strong> 采样率</a></li><li class="chapter-item expanded "><a href="01.audio-convention/03.bit-per-sample.html"><strong aria-hidden="true">2.3.</strong> 位深度</a></li><li class="chapter-item expanded "><a href="01.audio-convention/04.tags.html"><strong aria-hidden="true">2.4.</strong> 音频标签</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="01.audio-convention/04.zzzz.01.vendor-string.html"><strong aria-hidden="true">2.4.1.</strong> Vendor String</a></li><li class="chapter-item expanded "><a href="01.audio-convention/04.zzzz.02.artist.html"><strong aria-hidden="true">2.4.2.</strong> 艺术家</a></li><li class="chapter-item expanded "><a href="01.audio-convention/04.zzzz.03.album.html"><strong aria-hidden="true">2.4.3.</strong> 专辑名</a></li><li class="chapter-item expanded "><a href="01.audio-convention/04.zzzz.04.date.html"><strong aria-hidden="true">2.4.4.</strong> 日期</a></li><li class="chapter-item expanded "><a href="01.audio-convention/04.zzzz.05.duplicate-empty.html"><strong aria-hidden="true">2.4.5.</strong> 对重复项、空项的说明</a></li><li class="chapter-item expanded "><a href="01.audio-convention/04.zzzz.06.middle-dot.html"><strong aria-hidden="true">2.4.6.</strong> 对间隔点（・）的说明</a></li></ol></li><li class="chapter-item expanded "><a href="01.audio-convention/05.cover.html"><strong aria-hidden="true">2.5.</strong> 专辑封面</a></li><li class="chapter-item expanded "><a href="01.audio-convention/06.filename.html"><strong aria-hidden="true">2.6.</strong> 文件名</a></li><li class="chapter-item expanded "><a href="01.audio-convention/07.catalog.html"><strong aria-hidden="true">2.7.</strong> Catalog</a></li><li class="chapter-item expanded "><a href="01.audio-convention/08.directory.html"><strong aria-hidden="true">2.8.</strong> 目录</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="01.audio-convention/08.zzzz.01.directory-type.html"><strong aria-hidden="true">2.8.1.</strong> 目录类型</a></li><li class="chapter-item expanded "><a href="01.audio-convention/08.zzzz.02.top-directory.html"><strong aria-hidden="true">2.8.2.</strong> 顶级目录</a></li><li class="chapter-item expanded "><a href="01.audio-convention/08.zzzz.03.album-directory.html"><strong aria-hidden="true">2.8.3.</strong> 专辑目录</a></li><li class="chapter-item expanded "><a href="01.audio-convention/08.zzzz.04.category-directory.html"><strong aria-hidden="true">2.8.4.</strong> 分类目录</a></li><li class="chapter-item expanded "><a href="01.audio-convention/08.zzzz.05.secondary-directory.html"><strong aria-hidden="true">2.8.5.</strong> 二级目录</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="01.flac/00.readme.html"><strong aria-hidden="true">3.</strong> FLAC 处理</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Project Annivers@ary 使用手册</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#开始之前" id="开始之前">开始之前</a></h1>
+<h1><a class="header" href="#讲在前面" id="讲在前面">讲在前面</a></h1>
+<p>Anni 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
+<p>和每一个定制项目一样，Anni 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
+<p>我只希望，在填坑 Anni 的过程中，<strong>不要遗忘了初心</strong>。</p>
+<h1><a class="header" href="#前言" id="前言">前言</a></h1>
+<h2><a class="header" href="#云音乐" id="云音乐">云音乐</a></h2>
+<p>相信大家都有过这样的经历，在各个音乐平台之间挣扎的经历。常常是平台 A 下架了某一首歌，平台 B 依靠独占吸收来自平台 A 的难民。</p>
+<p>这种现象很普遍，倒不如说在版权时代这是再正常不过的风景了。没有版权就不能上架，天经地义的事情。平台不过是希望吸引流量又不希望承担流量带来的法律风险罢了，否则一开始又为何要上架呢？</p>
+<p>罢了，<strong>下载到本地</strong>听吧。</p>
+<h2><a class="header" href="#本地音乐" id="本地音乐">本地音乐</a></h2>
+<p>本地音乐的来源就非常广泛了。</p>
+<p>一是从各大云音乐平台上下载得到的音频。其是否存在加密并不是什么麻烦的事情，因为<strong>音乐终究是要播放的</strong>，最不济你从操作系统层面把送给音频 API 的每一个采样都截下来不就拿到 <code>wav</code> 了吗（笑）</p>
+<p>二是各大公网音乐包，比如 <code>[Nemuri]</code> 的合集。这种合集的特点是音乐全，格式整齐，通常以统一的格式进行分享（如 <code>FLAC</code>、<code>MP3</code> 等）。</p>
+<p>有了音频文件，再配上音乐播放器就可以和云音乐一样听歌了。本地音乐的一大缺点在于更新，没有了云音乐运营，一切的一切都要靠你自己了。</p>
+<p>当然了，这并不是本地音乐唯一的问题。<strong>本地</strong>音乐<strong>最大的问题</strong>恰恰在于<strong>本地</strong>。且不论本地音乐增多后多端的存储成本，单单是音乐的同步就够你喝一壶的。就以基本的 <code>PC</code>、手机、平板三端同步为例，你需要在这三台设备之间反复横跳——一旦某一台设备没有同步，而你恰巧想要听某一张新发售的专辑——噩梦就降临了。</p>
+<p>于是，我们发现，云音乐恰巧是为了解决这些痛点而存在的。那我们要回到云音乐平台吗？</p>
+<h2><a class="header" href="#自建音乐平台" id="自建音乐平台">自建音乐平台</a></h2>
+<p>既希望得到本地音乐的便利，又想要云音乐的便利，这就是自建音乐平台的意义所在了。</p>
+<p>最常见的自建音乐平台应该就是 <code>Airsonic</code> 了，这是一个用 <code>Java</code> 写成，基于 <code>Subsonic</code> 的最后一个开源版本 <code>fork</code> 而出的项目，而 <code>Subsonic</code> 则是著名的自建音乐平台。</p>
+<p><code>Airsonic</code> 的存在已经能够满足很多人的需求了，但它还是无法完全满足我当前的需求，原因有以下几点：</p>
+<ol>
+<li><code>Airsonic</code> 的编写语言是 <code>Java</code>，其需求的资源对小型 <code>VPS</code> 而言还是太多了。</li>
+<li>自建音乐平台需要服务器有较大的硬盘空间，而这一点面对只会增多不会减少的音乐资源难以永久实现。</li>
+<li><code>Airsonic</code> 诸如音乐上传、下载、<code>last.fm</code> 的功能是我不需要的，而且没有办法完全关闭。尽管我可以不使用这些功能，但我不能要求和我一起整理资源，共用平台的朋友永远都不使用这些功能。</li>
+<li>更新缓慢，<code>Bug</code> 丛生。尽管有另一个 <code>fork</code> 但问题还是很多，且对我而言维护起来过于困难。</li>
+</ol>
+<p>当然了，还有一些没有列出来的问题。由于这些问题的存在，最终促使我决定在另一个意义上<strong>自建</strong>音乐平台：自己造轮子。</p>
+<p>那既然都已经自建了，<strong>我的想法</strong>就是<strong>做多不如做少，做少不如做全</strong>。这句话的前半句是指<strong>做太多没用的</strong>不如<strong>只做核心的一少部分</strong>，而后半句则指做太少事情不如<strong>把想做的都做全</strong>。</p>
+<h1><a class="header" href="#anni-音频约定" id="anni-音频约定">Anni 音频约定</a></h1>
+<p><code>Anni</code> 音频约定是 <code>Project Annivers@ry</code> 为了规整格式、简化实现而对音频文件/目录增加的一系列规定。</p>
+<p><code>Anni</code> 保证满足 <code>Anni</code> 音频约定的音频文件/目录在使用过程中不会出现未定义行为，并<strong>以约定为根本进行开发</strong>。</p>
+<p>约定外的需求可以通过 <code>Issue</code> 的方式申请加入约定。</p>
+<h2><a class="header" href="#简称" id="简称">简称</a></h2>
+<p>后文中以 「<code>Anni</code> 约定」代之 <code>Anni</code> 音频约定。</p>
+<h1><a class="header" href="#音频格式" id="音频格式">音频格式</a></h1>
+<h2><a class="header" href="#存储格式" id="存储格式">存储格式</a></h2>
+<p><code>Anni</code> 存储格式的定义是<strong>在库的音频格式</strong>，即整理完的音频格式。</p>
+<p><code>Anni</code> 约定指定 <code>FLAC</code> 为<strong>唯一存储格式</strong>。</p>
+<h2><a class="header" href="#分发格式" id="分发格式">分发格式</a></h2>
+<p>在 <code>Anni</code> 作为云音乐平台工作时，存在向用户分发音频的行为。这个过程中涉及到的音频格式称为分发格式。</p>
+<p><code>Anni</code> 约定以下格式可作为分发格式：</p>
+<ul>
+<li><code>MP3</code></li>
+<li><code>FLAC</code></li>
+</ul>
+<h1><a class="header" href="#采样率" id="采样率">采样率</a></h1>
+<p>建议取 <code>44100 Hz</code>，即 <code>CD</code> 的采样率。</p>
+<p>最高为 <code>48000 Hz</code>，不建议继续升高，如 <code>96000 Hz</code>。</p>
+<p>作为非专业用户，在此基础上的采样率提升只是浪费磁盘空间和带宽。</p>
+<h1><a class="header" href="#位深度" id="位深度">位深度</a></h1>
+<p>位深度取 <code>16</code> 即可。</p>
+<p>对应 <code>ffmpeg</code> 中的 <a href="https://ffmpeg.org/doxygen/3.1/group__lavu__sampfmts.html#ggaf9a51ca15301871723577c730b5865c5aea6132df57aebc3f76e10665395c46af"><code>AV_SAMPLE_FMT_S16</code></a>。</p>
+<h1><a class="header" href="#音频标签" id="音频标签">音频标签</a></h1>
+<p>由于 <code>FLAC</code> 为唯一存储格式，因此音频标签相关的约定也以 <code>FLAC</code> 为基础描述。</p>
+<h2><a class="header" href="#基本概念" id="基本概念">基本概念</a></h2>
+<p><code>FLAC</code> 的音频标签可以简单地理解为一个<strong>字符串数组</strong>，由 <code>KEY=VALUE</code> 格式的字符串组成。</p>
+<p>在此基础上，规定了一些常用的 <code>KEY</code> 作为某一项属性的名称。如 <code>TITLE</code> 即为标题。</p>
+<h2><a class="header" href="#约定标签" id="约定标签">约定标签</a></h2>
+<p><code>Anni</code> 约定指定了一部分必须标签和可选标签。除此之外的标签均为不建议标签，<code>Anni</code> 不会对其作任何处理。</p>
+<h3><a class="header" href="#必须标签" id="必须标签">必须标签</a></h3>
+<table><thead><tr><th>KEY</th><th>简介</th></tr></thead><tbody>
+<tr><td><code>TITLE</code></td><td>标题</td></tr>
+<tr><td><code>ARTIST</code></td><td>艺术家</td></tr>
+<tr><td><code>ALBUM</code></td><td>专辑</td></tr>
+<tr><td><code>DATE</code></td><td>专辑发售日期</td></tr>
+<tr><td><code>TRACKNUMBER</code></td><td>音轨在唱片中的编号</td></tr>
+<tr><td><code>TRACKTOTAL</code></td><td>唱片中的总音轨数</td></tr>
+<tr><td><code>DISCNUMBER</code></td><td>唱片在专辑中的编号</td></tr>
+<tr><td><code>DISCTOTAL</code></td><td>专辑中的总唱片数</td></tr>
+</tbody></table>
+<h3><a class="header" href="#可选标签" id="可选标签">可选标签</a></h3>
+<table><thead><tr><th>KEY</th><th>简介</th></tr></thead><tbody>
+<tr><td><code>ALBUMARTIST</code></td><td>专辑艺术家</td></tr>
+</tbody></table>
+<h1><a class="header" href="#vendor-string" id="vendor-string">Vendor String</a></h1>
+<p><code>Vendor String</code> 是存在于 <code>FLAC</code> 的 <code>Vorbis Comment</code> 块首部的一个字符串。</p>
+<p>目前 <code>Anni</code> 约定并未对其有所约束，但后续可能增加。</p>
+<p>此处留作 <code>Placeholder</code>。</p>
+<h1><a class="header" href="#艺术家" id="艺术家">艺术家</a></h1>
+<p>艺术家必须<strong>保留原名</strong>，不可填写译名或罗马音。</p>
+<p>艺术家姓名之间不带空格，首尾不带空格。</p>
+<h2><a class="header" href="#多艺术家" id="多艺术家">多艺术家</a></h2>
+<p>多艺术家之间以中文顿号（<code>、</code>）分隔。</p>
+<p>如 <code>[140827][GNCA-1418] ごちうさブレンド</code> 中 <code>02. Rabbit Hole</code> 的艺术家就可以表示为 <code>ココア、リゼ</code>。</p>
+<h2><a class="header" href="#艺术家别名" id="艺术家别名">艺术家别名</a></h2>
+<p>以中文括号用表示艺术家别名。</p>
+<p>如上文 <code>02. Rabbit Hole</code> 的艺术家还可以详细表示为 <code>ココア（佐倉綾音）、リゼ（種田梨沙）</code>。</p>
+<h2><a class="header" href="#艺术家别名嵌套" id="艺术家别名嵌套">艺术家别名嵌套</a></h2>
+<p>艺术家别名和多艺术家也可以嵌套，形成以中文括号和中文顿号表示的复杂艺术家关系。</p>
+<p>如 <code>TrySail</code> 组合曲的艺术家可以表示为：<code>TrySail（雨宮天、麻倉もも、夏川椎菜）</code>。</p>
+<p>别名也支持多级嵌套，如 <code>[201028][GNCA-0620] 天空カフェテリア</code> 中 <code>01. 天空カフェテリア</code> 的艺术家可以表示为：</p>
+<pre><code>Petit Rabbit's（ココア（佐倉綾音）、チノ（水瀬いのり）、リゼ（種田梨沙）、千夜（佐藤聡美）、シャロ（内田真礼））
+</code></pre>
+<h1><a class="header" href="#专辑名" id="专辑名">专辑名</a></h1>
+<p>一般填写官网的对应名称，不填写 <code>/</code> 之后的作者信息。</p>
+<p>对单张专辑的多张唱片，各曲的专辑名保持一致。</p>
+<h2><a class="header" href="#アニメ盤" id="アニメ盤">アニメ盤</a></h2>
+<p>当专辑发行了番剧的「アニメ盤」时，专辑名后追加 <code>[アニメ盤]</code>，和原专辑名以空格（<code> </code>）分隔。</p>
+<h1><a class="header" href="#日期" id="日期">日期</a></h1>
+<p>日期需填写发行的准确<strong>年月日</strong>，如 <code>2021-01-25</code>。</p>
+<p>对于只支持年份的播放器，前四个数字之后的文本会被忽略；对于支持的播放器，则可以按详细的日期进行排序。</p>
+<h1><a class="header" href="#对重复项空项的说明" id="对重复项空项的说明">对重复项、空项的说明</a></h1>
+<p>由于 <code>FLAC</code> 标签系统的特性，某一个 <code>KEY</code> 可能对应多个 <code>VALUE</code>，而 <code>VALUE</code> 则可能为空。</p>
+<h2><a class="header" href="#重复项" id="重复项">重复项</a></h2>
+<p><code>Anni</code> 对重复的项会取其<strong>有内容的最后一项</strong>。以下面的 <code>COMMENT</code> 为例：</p>
+<pre><code>KEY=VALUE
+KEY=
+</code></pre>
+<p>最终得到的是 <code>KEY=VALUE</code>，而：</p>
+<pre><code>KEY
+KEY=TEST
+KEY=
+KEY=OVERRIDE
+</code></pre>
+<p>则会得到 <code>KEY=OVERRIDE</code>。</p>
+<h2><a class="header" href="#空项" id="空项">空项</a></h2>
+<p><code>Anni</code> 对空项的取值为空，不存在初始值。</p>
+<p>如果在 <code>Anni</code> 处理过程中遇到必须项为空，<code>Anni</code> 会产生一个 <code>Err</code>。</p>
+<h1><a class="header" href="#对间隔点的说明" id="对间隔点的说明">对间隔点（・）的说明</a></h1>
+<p>在音频标签中，统一使用 <code>・</code>（<code>\u30fb</code>） 作为间隔点。</p>
+<p>如果遇到其他的间隔点，请修正为上述符号。在编码转换时需额外留意。</p>
+<h2><a class="header" href="#参考" id="参考">参考</a></h2>
+<ol>
+<li><a href="http://www.0x08.org/posts/middle-dot">中点（·）在UTF-8和GBK转换中的问题 · Dark Side</a></li>
+</ol>
+<h1><a class="header" href="#专辑封面" id="专辑封面">专辑封面</a></h1>
+<p>专辑对应的封面图片，只接受 <code>image/jpg</code>。</p>
+<p>专辑目录下须存在 <code>cover.jpg</code> 以表示封面。音乐文件须内嵌封面。</p>
+<h2><a class="header" href="#清晰度" id="清晰度">清晰度</a></h2>
+<p>封面需要尽量清晰，建议在 <code>1000x1000</code> 以上。</p>
+<h2><a class="header" href="#封面来源" id="封面来源">封面来源</a></h2>
+<p>可以在发行商官网或 <a href="https://www.generasia.com/"><code>generasia</code></a>、<a href="https://i.oppsu.cn/"><code>oppsu</code></a> 等网站寻找。</p>
+<h2><a class="header" href="#注意事项" id="注意事项">注意事项</a></h2>
+<p><code>iTunes</code> 的封面上下可能会有白边，请注意甄别去除。</p>
+<p>目录中<strong>不可保留</strong>封面裁切时使用的 PSD/XCF 文件。</p>
+<h1><a class="header" href="#文件名" id="文件名">文件名</a></h1>
+<h2><a class="header" href="#音频文件" id="音频文件">音频文件</a></h2>
+<p>音乐资源以 <code>$TRACKNUMBER. $TITLE</code> 命名，扩展名为 <code>flac</code>。</p>
+<p>其中 <code>TRACKNUMBER</code> 需以前置 <code>0</code> 补足两位字符串。</p>
+<h2><a class="header" href="#封面文件" id="封面文件">封面文件</a></h2>
+<p>封面文件名必须为 <code>cover.jpg</code>，文件名全小写。</p>
+<h1><a class="header" href="#catalog" id="catalog">Catalog</a></h1>
+<p><code>Catalog</code> 是存在于（几乎）每一张专辑上的编号。</p>
+<p><code>Anni</code> 约定其对于各专辑唯一，并使用其作为专辑的主键。</p>
+<h2><a class="header" href="#格式" id="格式">格式</a></h2>
+<p><code>Catalog</code> 通常为 <code>$CATEGORY-$NUMBER-$DISC</code> 格式，<code>$CATAGORY</code> 为字母，<code>$NUMBER</code> 和 <code>$DISC</code> 为数字。</p>
+<h2><a class="header" href="#连续表示" id="连续表示">连续表示</a></h2>
+<p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯。如：<code>VVCL-1466~7</code>。</p>
+<h2><a class="header" href="#手动分配" id="手动分配">手动分配</a></h2>
+<p>当 <code>CD</code> 属于 <code>BD</code> 的一部分，且 <code>BD</code> 给 <code>CD</code> 预留了 <code>Catalog</code>，则按 <code>CD</code> 对应的 <code>Catalog</code> 填写。</p>
+<p>若<strong>单张</strong> <code>CD</code> 属于 <code>BD</code> 的一部分，但 <code>BD</code> 没有为 <code>CD</code> 预留 <code>Catalog</code>，则按 <code>BD</code> 对应的 <code>Catalog</code> 填写。</p>
+<p>若 <code>CD</code> 存在<strong>多张唱片</strong>但只分配了一个 <code>Catalog</code>，则按 <code>CD</code> 的**盘号（<code>DISCNUMBER</code>）**填写 <code>$DISC</code> 部分，<strong>补足两位字符串</strong>。</p>
+<h1><a class="header" href="#目录" id="目录">目录</a></h1>
+<p><code>Anni</code> 的目录有严格的层级关系，从上之下依次分为：</p>
+<ol>
+<li>顶级目录</li>
+<li>二级目录（可选）</li>
+<li>分类目录（可选）</li>
+<li>专辑目录</li>
+</ol>
+<h1><a class="header" href="#目录类型" id="目录类型">目录类型</a></h1>
+<p>目录分为如下类型：</p>
+<table><thead><tr><th>标识符（<code>TYPE</code>）</th><th>类型</th><th>简介</th></tr></thead><tbody>
+<tr><td><code>A</code></td><td>个人</td><td>歌手个人专辑</td></tr>
+<tr><td><code>AAAA</code></td><td>企划</td><td>企划类专辑</td></tr>
+<tr><td><code>Bangumi</code></td><td>番剧</td><td>番剧相关专辑，包括 <code>OST</code>、角色歌等</td></tr>
+<tr><td><code>Game</code></td><td>游戏</td><td>游戏相关专辑，以 <code>OST</code> 为主</td></tr>
+</tbody></table>
+<h1><a class="header" href="#顶级目录" id="顶级目录">顶级目录</a></h1>
+<p>顶级目录负责将音乐资源按<strong>类型</strong>和<strong>名称</strong>分隔为各个大类。</p>
+<h2><a class="header" href="#目录名" id="目录名">目录名</a></h2>
+<p>顶级目录的目录名格式如下：</p>
+<pre><code>[$TYPE] $NAME
+</code></pre>
+<p>其中 <code>$TYPE</code> 取<a href="01.audio-convention/./08.zzzz.01.directory-type.html">目录类型</a>中的标识符，<code>$NAME</code> 则为对应名称。</p>
+<h2><a class="header" href="#示例" id="示例">示例</a></h2>
+<p>以下均为合法的顶级目录：</p>
+<pre><code>[A] Aimer
+[A] 水瀬いのり
+[A] 雨宮天
+[A] 麻倉もも
+[A] 夏川椎菜
+[A] 中島由貴
+[A] ReoNa
+ 
+[AAAA] THE IDOLM@STER
+[AAAA] THE IDOLM@STER SHINY COLORS
+[AAAA] TrySail
+ 
+[Bangumi] ご注文はうさぎですか？
+[Bangumi] 神様になった日
+[Bangumi] 魔王城でおやすみ
+[Bangumi] 冴えない彼女の育てかた
+ 
+[Game] ATRI -My Dear Moments-
+[Game] ef - a fairy tale of the two.
+[Game] ライザのアトリエ
+[Game] Rewrite
+[Game] サクラノ詩-櫻の森の上を舞う-
+[Game] 素晴らしき日々
+[Game] Summer Pockets
+</code></pre>
+<h1><a class="header" href="#专辑目录" id="专辑目录">专辑目录</a></h1>
+<p>专辑目录负责存储单张专辑的所有音乐。专辑封面须在每个子目录下存在。</p>
+<h2><a class="header" href="#目录名-1" id="目录名-1">目录名</a></h2>
+<p>音乐资源目录以 <code>[$DATE6][$CATALOG] $ALBUM</code> 命名，其中 <code>$DATE6</code> 为 <code>6</code> 位数字日期。</p>
+<p>当 <code>$ALBUM</code> 中存在 <code>/</code> 符号时，以其全角版本（<code>／</code>）代替。</p>
+<h2><a class="header" href="#唱片目录" id="唱片目录">唱片目录</a></h2>
+<p>当存在多张唱片时，专辑目录内需要另根据盘号<strong>分隔唱片目录</strong>。</p>
+<p>唱片目录的命名格式为：<code>[$CATALOG] $ALBUM [Disc $DISC_NUM]</code>，其中 <code>$CATALOG</code> 为每张盘对应的 <code>Catalog</code>。</p>
+<p>如唱片的 <code>Catalog</code> 在原盘已有分配，则母目录的 <code>$CATALOG</code> 中需使用 <code>~</code> 号表示各唱片的连贯 <code>Catalog</code>。</p>
+<h2><a class="header" href="#示例-1" id="示例-1">示例</a></h2>
+<p>以下均为合法专辑目录：</p>
+<pre><code>[180704][VVCL-1261] ELZA
+[180929][VVCL-1285] SWEET HURT
+[190206][VVCL-1388] forget-me-not
+[190626][VVCL-1466~7] Prologue
+[190828][VVCL-1485] Null
+[200722][VVCL-1680] ANIMA
+[201007][VVCL-1744] unknown
+</code></pre>
+<h1><a class="header" href="#分类目录" id="分类目录">分类目录</a></h1>
+<p>分类目录位于顶级目录之下，专辑目录之上，负责在二者之间增加一层嵌套以方便整理。</p>
+<p>如果使用了分类目录，则专辑目录<strong>禁止</strong>直接位于顶级目录下。</p>
+<h2><a class="header" href="#目录名-2" id="目录名-2">目录名</a></h2>
+<p>分类目录的目录名没有任何格式限制。</p>
+<h2><a class="header" href="#应用场景" id="应用场景">应用场景</a></h2>
+<p>如 <code>THE IDOLM@STER SHINY COLORS</code> 的 <code>CD</code> 存在多个系列：</p>
+<ul>
+<li><code>BRILLI@NT WING</code></li>
+<li><code>FR@GMENT WING</code></li>
+<li><code>GR@DATE WING</code></li>
+<li><code>L@YERED WING</code></li>
+<li><code>COLORFUL FE@THERS</code></li>
+</ul>
+<p>此时就可以通过分类目录，减少顶级目录下的目录数量，方便整理。</p>
+<h1><a class="header" href="#二级目录" id="二级目录">二级目录</a></h1>
+<p>二级目录位于顶级目录之下，分类目录之上，负责在二者之间增加一个次顶级域。</p>
+<h2><a class="header" href="#警告" id="警告">警告</a></h2>
+<p>尽管二级目录属于 <code>Anni</code> 约定的一部分，我们还是希望用户尽可能地将分类划分为顶级目录，减少二级目录的使用。二级目录的存在可能使得某个顶级目录过于庞大。</p>
+<h2><a class="header" href="#目录名-3" id="目录名-3">目录名</a></h2>
+<p>二级目录的目录名格式和顶级目录相同。</p>
+<h2><a class="header" href="#应用场景-1" id="应用场景-1">应用场景</a></h2>
+<p>如：企划 <code>BanG Dream!</code> 需要为旗下的每一个乐队分配一个<em>二级目录</em>；对于每一个乐队，其专辑需要分配<em>分类目录</em>。此时的目录结构如下所示：</p>
+<pre><code>[AAAA] BanG Dream!
+ |- [AAAA] Poppin'Party
+   |- Category A
+     |- [991231][CATA-001] Album Title 1
+ |- [AAAA] Roselia
+   |- Category B
+     |- [991231][CATB-001] Album Title 2
+
+</code></pre>
+<h1><a class="header" href="#flac-处理" id="flac-处理">FLAC 处理</a></h1>
+<p><code>FLAC</code> 是一种无损压缩音频的方案。其格式简单，实现方便，基本可以（对笔者而言是完全可以）满足日常生活中的无损需求。</p>
+<p><code>Anni</code> 选择了 <code>FLAC</code> 作为<strong>唯一指定支持格式</strong>。</p>
+<p>为了 <code>FLAC</code> 文件的处理、使用方便，<code>Anni</code> 包含了一系列 <code>FLAC</code> 操作相关的功能。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

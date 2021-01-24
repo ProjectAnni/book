@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>前言 - Project Annivers@ary 使用手册</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00.before-start/00.readme.html"><strong aria-hidden="true">1.</strong> 开始之前</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../00.before-start/01.before.html"><strong aria-hidden="true">1.1.</strong> 讲在前面</a></li><li class="chapter-item expanded "><a href="../00.before-start/02.intro.html" class="active"><strong aria-hidden="true">1.2.</strong> 前言</a></li></ol></li><li class="chapter-item expanded "><a href="../01.audio-convention/00.readme.html"><strong aria-hidden="true">2.</strong> Anni 音频约定</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01.audio-convention/01.format.html"><strong aria-hidden="true">2.1.</strong> 音频格式</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/02.sample-rate.html"><strong aria-hidden="true">2.2.</strong> 采样率</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/03.bit-per-sample.html"><strong aria-hidden="true">2.3.</strong> 位深度</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.tags.html"><strong aria-hidden="true">2.4.</strong> 音频标签</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.01.vendor-string.html"><strong aria-hidden="true">2.4.1.</strong> Vendor String</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.02.artist.html"><strong aria-hidden="true">2.4.2.</strong> 艺术家</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.03.album.html"><strong aria-hidden="true">2.4.3.</strong> 专辑名</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.04.date.html"><strong aria-hidden="true">2.4.4.</strong> 日期</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.05.duplicate-empty.html"><strong aria-hidden="true">2.4.5.</strong> 对重复项、空项的说明</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.06.middle-dot.html"><strong aria-hidden="true">2.4.6.</strong> 对间隔点（・）的说明</a></li></ol></li><li class="chapter-item expanded "><a href="../01.audio-convention/05.cover.html"><strong aria-hidden="true">2.5.</strong> 专辑封面</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/06.filename.html"><strong aria-hidden="true">2.6.</strong> 文件名</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/07.catalog.html"><strong aria-hidden="true">2.7.</strong> Catalog</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.directory.html"><strong aria-hidden="true">2.8.</strong> 目录</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.01.directory-type.html"><strong aria-hidden="true">2.8.1.</strong> 目录类型</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.02.top-directory.html"><strong aria-hidden="true">2.8.2.</strong> 顶级目录</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.03.album-directory.html"><strong aria-hidden="true">2.8.3.</strong> 专辑目录</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.04.category-directory.html"><strong aria-hidden="true">2.8.4.</strong> 分类目录</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.05.secondary-directory.html"><strong aria-hidden="true">2.8.5.</strong> 二级目录</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../01.flac/00.readme.html"><strong aria-hidden="true">3.</strong> FLAC 处理</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Project Annivers@ary 使用手册</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#前言" id="前言">前言</a></h1>
+<h2><a class="header" href="#云音乐" id="云音乐">云音乐</a></h2>
+<p>相信大家都有过这样的经历，在各个音乐平台之间挣扎的经历。常常是平台 A 下架了某一首歌，平台 B 依靠独占吸收来自平台 A 的难民。</p>
+<p>这种现象很普遍，倒不如说在版权时代这是再正常不过的风景了。没有版权就不能上架，天经地义的事情。平台不过是希望吸引流量又不希望承担流量带来的法律风险罢了，否则一开始又为何要上架呢？</p>
+<p>罢了，<strong>下载到本地</strong>听吧。</p>
+<h2><a class="header" href="#本地音乐" id="本地音乐">本地音乐</a></h2>
+<p>本地音乐的来源就非常广泛了。</p>
+<p>一是从各大云音乐平台上下载得到的音频。其是否存在加密并不是什么麻烦的事情，因为<strong>音乐终究是要播放的</strong>，最不济你从操作系统层面把送给音频 API 的每一个采样都截下来不就拿到 <code>wav</code> 了吗（笑）</p>
+<p>二是各大公网音乐包，比如 <code>[Nemuri]</code> 的合集。这种合集的特点是音乐全，格式整齐，通常以统一的格式进行分享（如 <code>FLAC</code>、<code>MP3</code> 等）。</p>
+<p>有了音频文件，再配上音乐播放器就可以和云音乐一样听歌了。本地音乐的一大缺点在于更新，没有了云音乐运营，一切的一切都要靠你自己了。</p>
+<p>当然了，这并不是本地音乐唯一的问题。<strong>本地</strong>音乐<strong>最大的问题</strong>恰恰在于<strong>本地</strong>。且不论本地音乐增多后多端的存储成本，单单是音乐的同步就够你喝一壶的。就以基本的 <code>PC</code>、手机、平板三端同步为例，你需要在这三台设备之间反复横跳——一旦某一台设备没有同步，而你恰巧想要听某一张新发售的专辑——噩梦就降临了。</p>
+<p>于是，我们发现，云音乐恰巧是为了解决这些痛点而存在的。那我们要回到云音乐平台吗？</p>
+<h2><a class="header" href="#自建音乐平台" id="自建音乐平台">自建音乐平台</a></h2>
+<p>既希望得到本地音乐的便利，又想要云音乐的便利，这就是自建音乐平台的意义所在了。</p>
+<p>最常见的自建音乐平台应该就是 <code>Airsonic</code> 了，这是一个用 <code>Java</code> 写成，基于 <code>Subsonic</code> 的最后一个开源版本 <code>fork</code> 而出的项目，而 <code>Subsonic</code> 则是著名的自建音乐平台。</p>
+<p><code>Airsonic</code> 的存在已经能够满足很多人的需求了，但它还是无法完全满足我当前的需求，原因有以下几点：</p>
+<ol>
+<li><code>Airsonic</code> 的编写语言是 <code>Java</code>，其需求的资源对小型 <code>VPS</code> 而言还是太多了。</li>
+<li>自建音乐平台需要服务器有较大的硬盘空间，而这一点面对只会增多不会减少的音乐资源难以永久实现。</li>
+<li><code>Airsonic</code> 诸如音乐上传、下载、<code>last.fm</code> 的功能是我不需要的，而且没有办法完全关闭。尽管我可以不使用这些功能，但我不能要求和我一起整理资源，共用平台的朋友永远都不使用这些功能。</li>
+<li>更新缓慢，<code>Bug</code> 丛生。尽管有另一个 <code>fork</code> 但问题还是很多，且对我而言维护起来过于困难。</li>
+</ol>
+<p>当然了，还有一些没有列出来的问题。由于这些问题的存在，最终促使我决定在另一个意义上<strong>自建</strong>音乐平台：自己造轮子。</p>
+<p>那既然都已经自建了，<strong>我的想法</strong>就是<strong>做多不如做少，做少不如做全</strong>。这句话的前半句是指<strong>做太多没用的</strong>不如<strong>只做核心的一少部分</strong>，而后半句则指做太少事情不如<strong>把想做的都做全</strong>。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../00.before-start/01.before.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../01.audio-convention/00.readme.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../00.before-start/01.before.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../01.audio-convention/00.readme.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
