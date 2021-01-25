@@ -23,4 +23,10 @@
     - [专辑目录](./01.audio-convention/08.zzzz.03.album-directory.md)
     - [分类目录](./01.audio-convention/08.zzzz.04.category-directory.md)
     - [二级目录](./01.audio-convention/08.zzzz.05.secondary-directory.md)
-- [FLAC 处理](./01.flac/00.readme.md)
+- [Anni 元数据仓库](./02.metadata-repository/00.readme.md)
+  - [目录结构](./02.metadata-repository/01.folder-structure.md)
+  - [专辑信息](./02.metadata-repository/02.album-information.md)
+  - [专辑封面](./02.metadata-repository/03.cover.md)
+  - [歌词](./02.metadata-repository/04.lyric.md)
+  - [仓库元数据](./02.metadata-repository/05.repo-metadata.md)
+<!-- - [FLAC 处理](./01.flac/00.readme.md) -->
