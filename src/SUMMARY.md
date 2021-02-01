@@ -29,4 +29,11 @@
   - [专辑封面](./02.metadata-repository/03.cover.md)
   - [歌词](./02.metadata-repository/04.lyric.md)
   - [仓库元数据](./02.metadata-repository/05.repo-metadata.md)
-<!-- - [FLAC 处理](./01.flac/00.readme.md) -->
+- [FLAC 处理](./03.flac/00.readme.md)
+  - [FLAC 格式简介](./03.flac/01.intro.md)
+    - [FLAC 头部](./03.flac/01.zzzz.01.header.md)
+      - [Vorbis Comment](./03.flac/01.zzzz.01.zzzz.vorbis-comment.md)
+  - [metaflac](./03.flac/02.metaflac.md)
+  - [anni 对 FLAC 的支持](./03.flac/03.anni.md)
+    - [Anni 约定检查](./03.flac/03.zzzz.01.anni-check.md)
+    - [FLAC 信息导出](./03.flac/03.zzzz.02.anni-export.md)
