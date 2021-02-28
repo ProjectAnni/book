@@ -13,7 +13,7 @@
 
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="">
+        <meta name="description" content="Anni 相关的所有文档信息均在此处。翻译募集中……">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -174,18 +174,17 @@
 <h3><a class="header" href="#整轨切分" id="整轨切分">整轨切分</a></h3>
 <p><code>ArchLinux Wiki</code> 上专门有<a href="https://wiki.archlinux.org/index.php/CUE_Splitting">一页</a>专门介绍如何切分 <code>CUE</code>，其中用到的就是 <code>shntools</code> 中的 <code>shnsplit</code>。配合上 <code>cuetools</code> 的 <code>cuetag.sh</code>，可以相对方便地实现整轨的切分和音频元数据的导入。</p>
 <p>笔者持续了这样的切分方式一段时间（如下），但最终还是放弃了。</p>
-<pre><code class="language-bash">NAME=&quot;${$(ls *.cue)%.cue}&quot; &amp;&amp; shnsplit -f &quot;$NAME.cue&quot; -o &quot;flac flac --picture cover.jpg -o %f -&quot; &quot;$NAME.wav&quot; -t &quot;%n. %t&quot; &amp;&amp; cuetag.sh &quot;$NAME.cue&quot; *.flac
+<pre><code class="language-bash">NAME=&quot;${$(ls *.cue)%.cue}&quot; &amp;&amp; shnsplit -f &quot;$NAME.cue&quot; -o &quot;flac flac --picture cover.jpg -o %f -&quot; &quot;$NAME.wav&quot; -t &quot;%n. %t&quot;
 </code></pre>
-<p>放弃的原因很大一部分其实源于这个脚本没写好，但实际我也有点厌倦了这种有点复杂的切分方式。虽然 <code>flacon</code> 或许也是个不错的选择，但其默认的设置并不讨喜，会强制把封面图片转小并强制替换。</p>
-<p>此外，<code>cuetag.sh</code> 的实现也存在一些问题：其无法识别 <code>UTF-8 With BOM</code> 的文件。隔壁的方案是使用 <code>tail</code>，于是脚本就变得更加复杂了（笑）</p>
-<p>最终的结果就是 <code>Anni</code> 目前的模式，实现 <code>CUE</code> 并输出可工作的 <code>bash</code> 脚本。从本质上来说，这样的工作方式和上面没什么不同，但区别在于：</p>
+<p>放弃的原因很大一部分其实源于这个脚本没写好，但实际我也有点厌倦了这种有点复杂的切分方式。虽然 <code>flacon</code> 或许也是个不错的选择，但其默认的设置并不讨喜，首先是会强制把封面图片转小并强制替换，其次是输出标签的 <code>key</code> 都是小写的。</p>
+<p>此外，<code>shntool</code> 对 <code>CUE</code> 读取的实现也存在一些问题：其无法识别 <code>UTF-8 With BOM</code> 的文件。隔壁的方案是使用 <code>tail</code>，于是脚本就变得更加复杂了（笑）</p>
+<p>从 <code>Anni</code> 对这方面的支持程度可以看出这个项目成长的轨迹。早期版本实现的是读取 <code>CUE</code> 并输出可工作的 <code>bash</code> 脚本。从本质上来说，这样的工作方式和上面直接用脚本的方式没什么不同，但区别在于：</p>
 <ol>
-<li>不需要每次都复制一长串命令了（虽然可以用 <code>alias</code> 简化）</li>
-<li><code>CUE</code> 的解析更可控了，还可以进行一些基于内容的检查</li>
+<li><code>CUE</code> 的解析更可控了，可以进行一些基于内容的检查</li>
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。</p>
-<p>同时，<code>Anni</code> 也在积极实现 <code>shntool</code> 的功能以摆脱依赖。</p>
+<p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code> 或 <code>flac</code> 格式的音频。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题，仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
 <p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页和企划/组合的官网；较可靠来源为 <code>iTunes</code> 上的专辑信息、<code>BK</code> 上印刷的信息等；次可靠来源为 <code>VGMDB</code> 等数据库收集的非一手资料，<code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>
