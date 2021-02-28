@@ -1,6 +1,6 @@
 [book]
+title = "Project Anni 使用手册"
+description = "Anni 相关的所有文档信息均在此处。翻译募集中……"
 authors = ["Yesterday17"]
 language = "zh"
-multilingual = false
 src = "src"
-title = "Project Anni 使用手册"
