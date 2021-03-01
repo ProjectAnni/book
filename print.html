@@ -309,7 +309,9 @@
 <p>而如果播放器选择不支持，艺术家别名也可以简单地消除，只留下艺术家的原名。</p>
 <p>即使播放器对这一项完全不作任何修正，得到的格式也比交杂着顿号（<code>、</code>）、斜杠（<code>/</code>）、与号（<code>&amp;</code>）等分隔符的格式要直观许多。</p>
 <h1><a class="header" href="#专辑名" id="专辑名">专辑名</a></h1>
-<p>一般填写官网的对应名称，不填写 <code>/</code> 之后的作者信息，不保留盘片的发行版本信息。</p>
+<p>一般填写官网的对应名称，不填写 <code>/</code> 之后的作者信息。</p>
+<p>当多个版本歌曲<strong>内容一致</strong>时，<strong>不保留</strong>盘片的发行版本信息。如初回限定盘和通常盘内容相同的情况。</p>
+<p>当多个版本歌曲<strong>内容不同</strong>时，<strong>保留</strong>发行信息。如 <code>22/7</code> 的初回限定 <code>Type-A</code>、<code>Type-B</code> 和通常盘的最后一曲不同的情况。</p>
 <p>对单张专辑的多张唱片，各曲的专辑名保持一致。</p>
 <h1><a class="header" href="#日期" id="日期">日期</a></h1>
 <p>日期需填写发行的准确<strong>年月日</strong>，如 <code>2021-01-25</code>。</p>
@@ -419,7 +421,6 @@ KEY=OVERRIDE
 <pre><code>DATE6 = /\d{6}/
 DATE-8 = /\d{4}-\d{2}-\d{2}/
 </code></pre>
-<p>当 <code>album</code> 中存在 <code>/</code> 符号时，以其全角版本（<code>／</code>）代替。</p>
 <h2><a class="header" href="#唱片目录" id="唱片目录">唱片目录</a></h2>
 <p>当存在多张唱片时，专辑目录内需要另根据盘号<strong>分隔唱片目录</strong>。</p>
 <p>唱片目录的命名格式为：<code>[{catalog}] {album} [Disc {disc_num}]</code>，其中 <code>catalog</code> 为每张盘对应的 <code>Catalog</code>。</p>
