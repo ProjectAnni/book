@@ -15,6 +15,7 @@
     - [日期](./01.audio-convention/04.zzzz.04.date.md)
     - [对重复项、空项的说明](./01.audio-convention/04.zzzz.05.duplicate-empty.md)
     - [对间隔点（・）的说明](./01.audio-convention/04.zzzz.06.middle-dot.md)
+    - [对斜线（/）的说明](./01.audio-convention/04.zzzz.07.slash.md)
   - [专辑封面](./01.audio-convention/05.cover.md)
   - [文件名](./01.audio-convention/06.filename.md)
   - [Catalog](./01.audio-convention/07.catalog.md)
