@@ -170,6 +170,7 @@
 <p><code>Project Anni</code> 包括两个部分：对音乐资源的组织和对音频资源的分发。</p>
 <p>前者包含整轨切分、元信息编辑、元数据整理等。<code>Anni</code> 规定了<a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库</a>以格式化地整理音乐的元数据。</p>
 <p>后者包括一套可用的服务端、客户端应用。我们希望将这个系统表现为 <code>P2P</code> 的形式，从而加速系统中各单元之间的数据传输速度，同时更方便系统本身的扩展。服务端不负责分发文件，资源分发的过程交由 <code>P2P</code> 网络完成。</p>
+<p>目前的实现重点为前者，<code>Anni</code> 的支持较为完善；后者可以说还没有开始动工，各项细节也尚未敲定。</p>
 <h1><a class="header" href="#讲在前面" id="讲在前面">讲在前面</a></h1>
 <p>Anni 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
 <p>和每一个定制项目一样，Anni 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
@@ -371,7 +372,7 @@ KEY=OVERRIDE
 <p>若<strong>单张</strong> <code>CD</code> 属于 <code>BD</code> 的一部分，但 <code>BD</code> 没有为 <code>CD</code> 预留 <code>Catalog</code>，则按 <code>BD</code> 对应的 <code>Catalog</code> 填写。</p>
 <p>若 <code>CD</code> 存在<strong>多张唱片</strong>但只分配了一个 <code>Catalog</code>，则按 <code>CD</code> 的<strong>盘号</strong>（<code>DISCNUMBER</code>）填写 <code>disc</code> 部分，<strong>补足两位字符串</strong>。</p>
 <h1><a class="header" href="#目录" id="目录">目录</a></h1>
-<p><code>Anni</code> 的目录有严格的层级关系，从上之下依次分为：</p>
+<p>除存储专辑的<strong>专辑目录</strong>以外，<code>Anni</code> 的目录并没有太多的约束。不过我们建议通过这样的层级组织你的音乐仓库：</p>
 <ol>
 <li>顶级目录</li>
 <li>分类目录（可选）</li>
@@ -420,7 +421,7 @@ KEY=OVERRIDE
 [Game] Summer Pockets
 </code></pre>
 <h1><a class="header" href="#专辑目录" id="专辑目录">专辑目录</a></h1>
-<p>专辑目录负责存储单张专辑的所有音乐。专辑封面须在每个子目录下存在。</p>
+<p>专辑目录负责存储单张专辑的所有音乐。专辑封面<strong>必须</strong>在每个子目录下存在。</p>
 <h2><a class="header" href="#目录名-1" id="目录名-1">目录名</a></h2>
 <p>音乐资源目录以 <code>[{date}][{catalog}] {album}</code> 命名，其中 <code>{date}</code> 的格式有两种：省略 <code>20xx</code> 年中 <code>20</code> 的 <code>6</code> 位数字日期；和以 <code>-</code> 隔开的 <code>8</code> 位数字日期。</p>
 <pre><code>DATE6 = /\d{6}/
@@ -442,7 +443,7 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 </code></pre>
 <h1><a class="header" href="#分类目录" id="分类目录">分类目录</a></h1>
 <p>分类目录位于顶级目录之下，专辑目录之上，负责在二者之间增加一层嵌套以方便整理。</p>
-<p>如果使用了分类目录，则专辑目录<strong>禁止</strong>直接位于顶级目录下。</p>
+<p>如果使用了分类目录，建议将所有专辑都放置在各个分类目录中，不建议直接位于顶级目录下。</p>
 <h2><a class="header" href="#目录名-2" id="目录名-2">目录名</a></h2>
 <p>分类目录的目录名没有任何格式限制。</p>
 <h2><a class="header" href="#应用场景" id="应用场景">应用场景</a></h2>
