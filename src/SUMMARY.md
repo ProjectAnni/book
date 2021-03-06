@@ -38,3 +38,6 @@
   - [anni 对 FLAC 的支持](./03.flac/03.anni.md)
     - [Anni 约定检查](./03.flac/03.zzzz.01.anni-check.md)
     - [FLAC 信息导出](./03.flac/03.zzzz.02.anni-export.md)
+- [文件后端](./04.file-backend/00.readme.md)
+  - [trait Backend](./04.file-backend/01.trait.md)
+  - [计划支持的后端](./04.file-backend/02.available-backend.md)
