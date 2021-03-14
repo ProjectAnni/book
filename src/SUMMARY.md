@@ -28,7 +28,6 @@
   - [目录结构](./02.metadata-repository/01.folder-structure.md)
   - [专辑信息](./02.metadata-repository/02.album-information.md)
   - [专辑分类](./02.metadata-repository/03.category.md)
-  - [歌词](./02.metadata-repository/04.lyric.md)
   - [仓库元数据](./02.metadata-repository/05.repo-metadata.md)
 - [FLAC 处理](./03.flac/00.readme.md)
   - [FLAC 格式简介](./03.flac/01.intro.md)
