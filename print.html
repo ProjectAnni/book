@@ -806,7 +806,7 @@ pub trait Backend {
   // 该 Token 的签发时间，即分享的开始时间
   &quot;iat&quot;: 1615788479,
   // 该 Token 的失效时间，即分享的结束时间
-  // 留空则标明永久有效
+  // 该字段不存在则表明永久有效
   &quot;exp&quot;: 1615874879,
   // JWT 类型，必须为 share
   &quot;type&quot;: &quot;share&quot;,
@@ -882,13 +882,31 @@ pub trait Backend {
 <p>获得可用专辑的 <code>API</code> 定义为 <code>GET /albums</code>，不需要进行鉴权；响应内容为当前仓库所有可用专辑 <code>catalog</code> 的 <code>JSON</code> 数组。</p>
 <h1><a class="header" href="#配置文件" id="配置文件">配置文件</a></h1>
 <pre><code class="language-toml">[server]
+# 音频仓库名称
 name = &quot;My Server&quot;
+# 后端连接 PostgreSQL 地址
+db = &quot;postgres://postgres:password@localhost/anni&quot;
+# 仓库监听的地址
 listen = &quot;localhost:3614&quot;
+# 仓库签名 JWT 的密钥
+hmac-key = &quot;a hmac key&quot;
 
 [[backends]]
+# 音频后端名称
 name = &quot;File Backend&quot;
-enable = true
+# 音频后端类型，此处为 file
 type = &quot;file&quot;
+# 是否启用该音频后端
+enable = true
+# FileBackend 的参数，根目录
+root = &quot;/path/to/backend&quot;
+
+[[backends]]
+name = &quot;Strict File Backend&quot;
+# 使用 file_strict 类后端
+type = &quot;file_strict&quot;
+enable = true
+# FileStrictBackend 的参数，根目录
 root = &quot;/path/to/backend&quot;
 </code></pre>
 
