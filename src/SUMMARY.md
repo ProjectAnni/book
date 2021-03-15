@@ -40,5 +40,6 @@
 - [文件后端](./04.file-backend/00.readme.md)
   - [trait Backend](./04.file-backend/01.trait.md)
   - [计划支持的后端](./04.file-backend/02.available-backend.md)
-- [服务端实现：Anniv](./05.server-backend/00.readme.md)
-  - [配置文件](./05.server-backend/02.configuration.md)
+- [音频仓库与 Annil](./05.audio-library/00.readme.md)
+  - [Anni 音频仓库草案](./05.audio-library/01.anni-audio-library-draft.md)
+  - [配置文件](./05.audio-library/02.configuration.md)
