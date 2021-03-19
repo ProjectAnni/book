@@ -4,6 +4,7 @@
   - [讲在前面](./00.before-start/01.before.md)
   - [前言](./00.before-start/02.intro.md)
   - [Anni 是如何工作的？](./00.before-start/03.how-it-works.md)
+  - [为什么有这么多名字？](./00.before-start/04.names.md)
 - [Anni 音频约定](./01.audio-convention/00.readme.md)
   - [音频格式](./01.audio-convention/01.format.md)
   - [采样率](./01.audio-convention/02.sample-rate.md)
