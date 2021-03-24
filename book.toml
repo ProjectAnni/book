@@ -4,3 +4,6 @@ description = "Anni 相关的所有文档信息均在此处。翻译募集中…
 authors = ["Yesterday17"]
 language = "zh"
 src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/project-anni/anni"

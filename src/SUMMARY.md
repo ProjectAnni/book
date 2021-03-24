@@ -42,5 +42,6 @@
   - [trait Backend](./04.file-backend/01.trait.md)
   - [计划支持的后端](./04.file-backend/02.available-backend.md)
 - [音频仓库与 Annil](./05.audio-library/00.readme.md)
-  - [Anni 音频仓库草案](./05.audio-library/01.anni-audio-library-draft.md)
-  - [配置文件](./05.audio-library/02.configuration.md)
+  - [Anni 音频仓库标准](./05.audio-library/01.anni-audio-library-draft.md)
+  - [不同的音频仓库实现](./05.audio-library/02.implements.md)
+  - [annil-rs](./05.audio-library/03.annil-rs.md)
