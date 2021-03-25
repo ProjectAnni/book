@@ -45,3 +45,8 @@
   - [Anni 音频仓库标准](./05.audio-library/01.anni-audio-library-draft.md)
   - [不同的音频仓库实现](./05.audio-library/02.implements.md)
   - [annil-rs](./05.audio-library/03.annil-rs.md)
+- [Anniv](./06.anniv/00.readme.md)
+  - [用户系统](./06.anniv/01.user.md)
+  - [插件列表](./06.anniv/plugins/00.readme.md)
+    - [邀请（invite）](./06.anniv/plugins/01.invite.md)
+    - [两步验证（2fa）](./06.anniv/plugins/02.2fa.md)
