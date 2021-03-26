@@ -955,10 +955,14 @@ root = &quot;/path/to/backend&quot;
 <blockquote>
 <p>⚠️️目前的 <code>Anniv</code> 仍处于 <code>Draft</code> 状态，尚未完全定稿。欢迎随时提出意见或建议。</p>
 </blockquote>
+<blockquote>
+<p>⚠️️目前 <code>Anniv</code> 协议的版本为 <code>1</code>。</p>
+</blockquote>
 <p><code>Anniv</code> 是统合用户体验的中心化平台，提供注入播放列表（歌单）、<code>Annil</code> Token 同步等功能。</p>
 <p>从定位上来看，它类似于 <code>last.fm</code>，但提供了针对 <code>Project Anni</code> 的独特功能。</p>
 <h2><a class="header" href="#请求" id="请求">请求</a></h2>
-<p>所有带有 <code>body</code> 的请求均为 <code>application/json</code>。</p>
+<p>所有带有 <code>body</code> 的请求均为 <code>application/json</code>，参数均写在 <code>body</code> 内。</p>
+<p>对于不带 <code>body</code> 的请求，参数以 <code>Param</code> 形式传递。</p>
 <h2><a class="header" href="#返回" id="返回">返回</a></h2>
 <p>返回的状态码<strong>一般</strong>均为 <code>200 Ok</code>，<code>body</code> 均为 <code>JSON</code> 格式，结构如下：</p>
 <pre><code class="language-typescript">interface ResponseBody&lt;T&gt; {
@@ -991,6 +995,7 @@ root = &quot;/path/to/backend&quot;
 <pre><code class="language-json">{
   &quot;site_name&quot;: &quot;Anniv 测试站点&quot;,
   &quot;description&quot;: &quot;该站点仅用于测试，请勿滥用。&quot;,
+  &quot;protocol_version&quot;: &quot;1&quot;,
   &quot;features&quot;: [&quot;2fa&quot;, &quot;invite&quot;]
 }
 </code></pre>
@@ -1043,16 +1048,23 @@ root = &quot;/path/to/backend&quot;
 </tbody></table>
 <h1><a class="header" href="#播放列表" id="播放列表">播放列表</a></h1>
 <p>播放列表是顺序的歌曲列表，用户可以通过播放列表对零散的歌曲进行整理。</p>
-<p>播放列表相关的功能有创建、加入、修改、删除。</p>
-<h2><a class="header" href="#创建修改播放列表" id="创建修改播放列表">创建/修改播放列表</a></h2>
-<p>客户端通过 <code>PUT /api/playlist</code> 创建新的播放列表。</p>
+<p>播放列表相关的功能有获取、创建、修改、删除。</p>
+<h2><a class="header" href="#获取播放列表" id="获取播放列表">获取播放列表</a></h2>
+<p>客户端通过 <code>GET /api/playlist</code> 获取播放列表。</p>
 <h3><a class="header" href="#参数列表-2" id="参数列表-2">参数列表</a></h3>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>UUID</code></td><td>当该项存在时，修改指定 <code>UUID</code> 的播放列表；当该项不存在时，创建新播放列表</td></tr>
+<tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
+</tbody></table>
+<h3><a class="header" href="#返回-1" id="返回-1">返回</a></h3>
+<p>返回播放列表的全部信息。</p>
+<h4><a class="header" href="#参数列表-3" id="参数列表-3">参数列表</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
+<tr><td><code>owner</code></td><td><code>any</code></td><td>播放列表拥有者</td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
-<tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
+<tr><td><code>songs</code></td><td><code>PlaylistSongWithId[]</code></td><td>播放列表中的歌曲</td></tr>
 </tbody></table>
 <p><code>PlaylistSong</code> 类型格式描述如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
@@ -1060,12 +1072,18 @@ root = &quot;/path/to/backend&quot;
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>歌曲的 <code>track_id</code></td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
 </tbody></table>
-<h3><a class="header" href="#参数表示-2" id="参数表示-2">参数表示</a></h3>
-<pre><code class="language-typescript">interface PutPlaylistBody extends PutPlaylistFeatureParameters {
+<p><code>PlaylistSongResponse</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>any</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
+</tbody></table>
+<h4><a class="header" href="#参数表示-2" id="参数表示-2">参数表示</a></h4>
+<pre><code class="language-typescript">interface Playlist {
+  id: string;
   name: string;
   description?: string;
+  owner: any;
   is_public: boolean;
-  songs: PlaylistSong[];
+  songs: PlaylistSongWithId[];
 }
 
 interface PlaylistSong {
@@ -1073,24 +1091,73 @@ interface PlaylistSong {
   track_id: number;
   description?: string;
 }
+
+interface PlaylistSongWithId extends PlaylistSong {
+  id: any;
+}
 </code></pre>
-<h3><a class="header" href="#返回-1" id="返回-1">返回</a></h3>
-<p>处理完成后，返回播放列表的 <code>UUID</code>。</p>
-<pre><code class="language-typescript">type PutPlaylistResponse = string;
+<h4><a class="header" href="#示例-5" id="示例-5">示例</a></h4>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
+  &quot;name&quot;: &quot;测试播放列表&quot;,
+  &quot;description&quot;: &quot;对播放列表的简单介绍&quot;,
+  &quot;owner&quot;: 0,
+  &quot;is_public&quot;: true,
+  &quot;songs&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;catalog&quot;: &quot;TEST-001&quot;,
+      &quot;track_id&quot;: 1,
+      &quot;description&quot;: &quot;interesting&quot;
+    }
+  ]
+}
 </code></pre>
-<h2><a class="header" href="#加入播放列表" id="加入播放列表">加入播放列表</a></h2>
-<p>客户端通过 <code>PATCH /api/playlist</code> 向现有的播放列表中增加新内容。</p>
-<h3><a class="header" href="#参数列表-3" id="参数列表-3">参数列表</a></h3>
+<h2><a class="header" href="#创建播放列表" id="创建播放列表">创建播放列表</a></h2>
+<p>客户端通过 <code>PUT /api/playlist</code> 创建新的播放列表。</p>
+<h3><a class="header" href="#参数列表-4" id="参数列表-4">参数列表</a></h3>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>UUID</code></td><td>待修改播放列表的 <code>UUID</code></td></tr>
-<tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>增加的歌曲列表</td></tr>
+<tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
+<tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
+<tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
+<tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
 </tbody></table>
 <h3><a class="header" href="#参数表示-3" id="参数表示-3">参数表示</a></h3>
-<pre><code class="language-typescript">interface AppendPlaylistBody {
-  id: UUID;
+<pre><code class="language-typescript">interface CreatePlaylistBody extends CreatePlaylistFeatureParameters {
+  name: string;
+  description?: string;
+  is_public: boolean;
   songs: PlaylistSong[];
 }
 </code></pre>
+<h3><a class="header" href="#返回-2" id="返回-2">返回</a></h3>
+<p>处理完成后，返回播放列表的标识符。</p>
+<pre><code class="language-typescript">type PutPlaylistResponse = string;
+</code></pre>
+<h2><a class="header" href="#修改播放列表" id="修改播放列表">修改播放列表</a></h2>
+<p>对播放列表的修改分为三个部分：增加歌曲、删除歌曲和排列歌曲。</p>
+<p>客户端通过 <code>PATCH /api/playlist</code> 实现对现有播放列表的修改。</p>
+<h3><a class="header" href="#参数列表-5" id="参数列表-5">参数列表</a></h3>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
+<tr><td><code>type</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
+<tr><td><code>append</code></td><td><code>PlaylistSong[]</code></td><td>仅当 <code>type</code> 为 <code>append</code> 时有效，表示待增加的歌曲信息</td></tr>
+<tr><td><code>remove</code></td><td><code>string[]</code></td><td>仅当 <code>type</code> 为 <code>remove</code> 时有效，表示待删除的歌曲 <code>id</code></td></tr>
+<tr><td><code>reorder</code></td><td><code>string[]</code></td><td>仅当 <code>type</code> 为 <code>reorder</code> 时有效，表示重排后歌曲 <code>id</code> 的有序列表</td></tr>
+<tr><td><code>replace</code></td><td><code>PlaylistSongWithId[]</code></td><td>仅当 <code>type</code> 为 <code>replace</code> 时有效，表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
+</tbody></table>
+<h3><a class="header" href="#参数表示-4" id="参数表示-4">参数表示</a></h3>
+<pre><code class="language-typescript">interface PatchPlaylistRequestBody {
+  id: string;
+  type: &quot;append&quot; | &quot;remove&quot; | &quot;reorder&quot; | &quot;replace&quot;;
+  append?: PlaylistSong[];
+  remove?: string[];
+  reorder?: string[];
+  replace?: PlaylistSongWithId[];
+}
+</code></pre>
+<h3><a class="header" href="#返回-3" id="返回-3">返回</a></h3>
+<p>修改成功后，返回修改后的播放列表。</p>
 <h2><a class="header" href="#删除播放列表" id="删除播放列表">删除播放列表</a></h2>
 <p>客户端通过 <code>DELETE /api/playlist</code> 删除播放列表。</p>
 <p>删除成功时，返回 <code>204 No Content</code>。</p>
@@ -1099,6 +1166,7 @@ interface PlaylistSong {
 <tr><td><code>103000</code></td><td>用户播放列表数已达上限</td></tr>
 <tr><td><code>103001</code></td><td>播放列表中歌曲数量已达上限</td></tr>
 <tr><td><code>103002</code></td><td>待修改内容不存在</td></tr>
+<tr><td><code>103003</code></td><td>非法修改类型</td></tr>
 <tr><td><code>103100</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>103101</code></td><td>用户无权操作该播放列表</td></tr>
 </tbody></table>
@@ -1113,7 +1181,7 @@ interface PlaylistSong {
 <li>用户注销</li>
 <li>……</li>
 </ul>
-<h2><a class="header" href="#参数列表-4" id="参数列表-4">参数列表</a></h2>
+<h2><a class="header" href="#参数列表-6" id="参数列表-6">参数列表</a></h2>
 <p>当特性对原有功能做加法时，通常会增加一定的输入参数。参数列表指定了这些参数的名称和类型。</p>
 <h2><a class="header" href="#错误列表-3" id="错误列表-3">错误列表</a></h2>
 <p>当某一特性开启时，往往会增加特性相关的特定错误。错误列表指定了错误代码和其代表的详细错误内容。</p>
@@ -1124,7 +1192,7 @@ interface PlaylistSong {
 <ul>
 <li>用户注册</li>
 </ul>
-<h2><a class="header" href="#参数列表-5" id="参数列表-5">参数列表</a></h2>
+<h2><a class="header" href="#参数列表-7" id="参数列表-7">参数列表</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>invite_code</code></td><td><code>string</code></td><td>邀请码</td></tr>
 </tbody></table>
@@ -1146,7 +1214,7 @@ interface PlaylistSong {
 <li>播放列表删除</li>
 </ul>
 <p>TODO: 列举出用到 <code>2FA</code> 的所有位置</p>
-<h2><a class="header" href="#参数列表-6" id="参数列表-6">参数列表</a></h2>
+<h2><a class="header" href="#参数列表-8" id="参数列表-8">参数列表</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，注册时由客户端生成，验证成功后发送至服务端</td></tr>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码</td></tr>
@@ -1164,14 +1232,14 @@ interface PlaylistSong {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>email</code></td><td><code>string</code></td><td>待查询用户的邮箱</td></tr>
 </tbody></table>
-<h4><a class="header" href="#返回-2" id="返回-2">返回</a></h4>
+<h4><a class="header" href="#返回-4" id="返回-4">返回</a></h4>
 <p>一个布尔值，<code>false</code> 表示未启用，<code>true</code> 表示启用。</p>
 <h1><a class="header" href="#禁止注册close" id="禁止注册close">禁止注册（close）</a></h1>
 <h2><a class="header" href="#适用范围-3" id="适用范围-3">适用范围</a></h2>
 <ul>
 <li>用户注册。</li>
 </ul>
-<h2><a class="header" href="#参数列表-7" id="参数列表-7">参数列表</a></h2>
+<h2><a class="header" href="#参数列表-9" id="参数列表-9">参数列表</a></h2>
 <p>无。</p>
 <h2><a class="header" href="#错误列表-6" id="错误列表-6">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
