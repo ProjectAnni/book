@@ -170,24 +170,24 @@
                         <h1><a class="header" href="#播放列表" id="播放列表">播放列表</a></h1>
 <p>播放列表是顺序的歌曲列表，用户可以通过播放列表对零散的歌曲进行整理。</p>
 <p>播放列表相关的功能有创建、加入、修改、删除。</p>
-<h2><a class="header" href="#创建播放列表" id="创建播放列表">创建播放列表</a></h2>
-<p>客户端通过 <code>POST /api/playlist</code> 创建新的播放列表。</p>
+<h2><a class="header" href="#创建修改播放列表" id="创建修改播放列表">创建/修改播放列表</a></h2>
+<p>客户端通过 <code>PUT /api/playlist</code> 创建新的播放列表。</p>
 <h3><a class="header" href="#参数列表" id="参数列表">参数列表</a></h3>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>UUID</code></td><td>当该项存在时，修改指定 <code>UUID</code> 的播放列表；当该项不存在时，创建新播放列表</td></tr>
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
-<tr><td><code>songs</code></td><td><code>Song[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
-<tr><td>其他</td><td>不定</td><td>各特性定义的参数</td></tr>
+<tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
 </tbody></table>
-<p><code>Song</code> 类型格式描述如下：</p>
+<p><code>PlaylistSong</code> 类型格式描述如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>catalog</code></td><td><code>string</code></td><td>歌曲的 <code>catalog</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>歌曲的 <code>track_id</code></td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
 </tbody></table>
 <h3><a class="header" href="#参数表示" id="参数表示">参数表示</a></h3>
-<pre><code class="language-typescript">interface CreatePlaylistBody extends CreatePlaylistFeatureParameters {
+<pre><code class="language-typescript">interface PutPlaylistBody extends PutPlaylistFeatureParameters {
   name: string;
   description?: string;
   is_public: boolean;
@@ -195,17 +195,38 @@
 }
 
 interface PlaylistSong {
-  catalog: string,
+  catalog: string;
   track_id: number;
   description?: string;
 }
 </code></pre>
 <h3><a class="header" href="#返回" id="返回">返回</a></h3>
-<p>创建播放列表后，返回</p>
+<p>处理完成后，返回播放列表的 <code>UUID</code>。</p>
+<pre><code class="language-typescript">type PutPlaylistResponse = string;
+</code></pre>
+<h2><a class="header" href="#加入播放列表" id="加入播放列表">加入播放列表</a></h2>
+<p>客户端通过 <code>PATCH /api/playlist</code> 向现有的播放列表中增加新内容。</p>
+<h3><a class="header" href="#参数列表-1" id="参数列表-1">参数列表</a></h3>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>UUID</code></td><td>待修改播放列表的 <code>UUID</code></td></tr>
+<tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>增加的歌曲列表</td></tr>
+</tbody></table>
+<h3><a class="header" href="#参数表示-1" id="参数表示-1">参数表示</a></h3>
+<pre><code class="language-typescript">interface AppendPlaylistBody {
+  id: UUID;
+  songs: PlaylistSong[];
+}
+</code></pre>
+<h2><a class="header" href="#删除播放列表" id="删除播放列表">删除播放列表</a></h2>
+<p>客户端通过 <code>DELETE /api/playlist</code> 删除播放列表。</p>
+<p>删除成功时，返回 <code>204 No Content</code>。</p>
 <h2><a class="header" href="#错误列表" id="错误列表">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103000</code></td><td>用户播放列表数已达上限</td></tr>
 <tr><td><code>103001</code></td><td>播放列表中歌曲数量已达上限</td></tr>
+<tr><td><code>103002</code></td><td>待修改内容不存在</td></tr>
+<tr><td><code>103100</code></td><td>播放列表不存在</td></tr>
+<tr><td><code>103101</code></td><td>用户无权操作该播放列表</td></tr>
 </tbody></table>
 
                     </main>

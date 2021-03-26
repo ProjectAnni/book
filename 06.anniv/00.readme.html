@@ -176,7 +176,7 @@
 <h2><a class="header" href="#请求" id="请求">请求</a></h2>
 <p>所有带有 <code>body</code> 的请求均为 <code>application/json</code>。</p>
 <h2><a class="header" href="#返回" id="返回">返回</a></h2>
-<p>返回的状态码均为 <code>200 Ok</code>，<code>body</code> 均为 <code>JSON</code> 格式，结构如下：</p>
+<p>返回的状态码<strong>一般</strong>均为 <code>200 Ok</code>，<code>body</code> 均为 <code>JSON</code> 格式，结构如下：</p>
 <pre><code class="language-typescript">interface ResponseBody&lt;T&gt; {
   status: number;
   message?: string;
@@ -185,6 +185,7 @@
 </code></pre>
 <p>在后续的描述中，我们只描述类型 <code>T</code> 的结果，省略外层包裹的 <code>JSON Object</code>。</p>
 <p>当 <code>status</code> 为 <code>0</code> 时，<code>data</code> 中包含类型为 <code>T</code> 的返回数据。</p>
+<p>当返回的状态码为 <code>204 No Content</code> 时，代表处理成功，且没有数据返回。</p>
 <h3><a class="header" href="#返回状态" id="返回状态">返回状态</a></h3>
 <p>返回状态为 <code>6</code> 位数字，具体划分如下：</p>
 <table><thead><tr><th>领域</th><th>分类</th><th>编号</th></tr></thead><tbody>
