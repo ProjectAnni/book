@@ -769,8 +769,10 @@ ARGS:
 <pre><code class="language-bash">anni flac -et=cover test.flac &gt; cover.jpg
 </code></pre>
 <h1><a class="header" href="#文件后端" id="文件后端">文件后端</a></h1>
-<p><code>Anni</code> 中的所有音频都可以通过<code>(Catalog, TrackID)</code> 二元组的形式索引，而实际提供索引内容的就是文件后端（<code>File Backend</code>）。</p>
-<p>文件后端在 <code>Anni</code> 中承载的是实际的文件获取部分，相当于 <code>Anni</code> 与实际文件系统之间的抽象层。</p>
+<p><code>Anni</code> 中的所有音频都可以通过<code>(catalog, track_id)</code> 二元组的形式索引，而实际提供索引内容的就是文件后端（<code>File Backend</code>）。</p>
+<h2><a class="header" href="#为什么要有文件后端" id="为什么要有文件后端">为什么要有文件后端？</a></h2>
+<p>文件后端在 <code>Anni</code> 中承载的是实际的文件获取部分，相当于与实际文件系统之间的抽象层。</p>
+<p>实际文件系统可能以各种形式存在，比如传统的本地文件、存放于 OSS 中的文件、通过 <code>rclone</code> 挂载的 <code>VFS</code> 等。</p>
 <h1><a class="header" href="#trait-backend" id="trait-backend">Trait Backend</a></h1>
 <p>后端由 <code>trait Backend</code> 构成：</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -778,32 +780,33 @@ ARGS:
 </span><span class="boring">fn main() {
 </span>#[async_trait]
 pub trait Backend {
-    fn need_cache(&amp;self) -&gt; bool;
+    // 获取可用专辑 catalog 的集合
+    async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
 
-    fn has(&amp;self, catalog: &amp;str) -&gt; bool;
-
-    fn albums(&amp;self) -&gt; Vec&lt;&amp;str&gt;;
-
-    async fn update_albums(&amp;mut self) -&gt; Result&lt;(), BackendError&gt;;
-
+    // 获取音频
     async fn get_audio(&amp;self, catalog: &amp;str, track_id: u8) -&gt; Result&lt;Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;, BackendError&gt;;
 
+    // 获取封面
     async fn get_cover(&amp;self, catalog: &amp;str) -&gt; Result&lt;Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;, BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>其中　<code>need_cache</code> 用于标识后端的速度是否需要缓存；<code>has</code> 用于判断后端是否包含专辑；<code>albums</code> 用于获取所有可用的专辑 <code>catalog</code>。</p>
-<p><code>update_albums</code> 用来更新后端的专辑；而<code>get_audio</code> 则通过给定的 <code>(catalog, track_id)</code> 二元组获得可 <code>AsyncRead</code> 的文件流。</p>
 <h1><a class="header" href="#计划支持的后端" id="计划支持的后端">计划支持的后端</a></h1>
 <p><code>Anni</code> 目前计划支持的后端列表如下：</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
-文件系统：常规的文件系统。</li>
-<li><input disabled="" type="checkbox" checked=""/>
-严格文件系统：通过一定的约束，减少可读性增加 <code>Annil</code> 可访问性的目录及文件格式。详见 TODO:</li>
+文件系统</li>
 <li><input disabled="" type="checkbox"/>
-<code>Google Drive</code>：通过 <code>Google Drive</code> 的团队共享盘实现音频仓库的协作整理。</li>
+<code>Google Drive</code>：通过 <code>Google Drive</code> 的团队共享盘实现音频仓库的协作整理</li>
 </ul>
+<h2><a class="header" href="#文件系统" id="文件系统">文件系统</a></h2>
+<h3><a class="header" href="#简介" id="简介">简介</a></h3>
+<p>常规的文件系统后端，通过系统调用读取目录结构和文件。</p>
+<h3><a class="header" href="#属性" id="属性">属性</a></h3>
+<table><thead><tr><th>属性名</th><th>类型</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>strict</code></td><td><code>bool</code></td><td>表明是否为严格文件系统</td></tr>
+<tr><td><code>root</code></td><td><code>string</code></td><td>文件后端的根目录</td></tr>
+</tbody></table>
 <h1><a class="header" href="#音频仓库与-annil" id="音频仓库与-annil">音频仓库与 Annil</a></h1>
 <p>文件后端本质只是一个抽象后的文件系统，实际的文件分发过程仍需要一个服务端程序的参与。</p>
 <p>这个程序需要负责对用户的访问进行鉴权，判断用户是否有权限访问仓库内的文件；权限验证通过后，其需要从合适的音频后端中获得文件，并将文件传输给用户。</p>
@@ -940,20 +943,14 @@ hmac-key = &quot;a hmac key&quot;
 [[backends]]
 # 音频后端名称
 name = &quot;File Backend&quot;
-# 音频后端类型，此处为 file
-type = &quot;file&quot;
 # 是否启用该音频后端
 enable = true
+# 音频后端类型，此处为 file
+type = &quot;file&quot;
 # FileBackend 的参数，根目录
 root = &quot;/path/to/backend&quot;
-
-[[backends]]
-name = &quot;Strict File Backend&quot;
-# 使用 file_strict 类后端
-type = &quot;file_strict&quot;
-enable = true
-# FileStrictBackend 的参数，根目录
-root = &quot;/path/to/backend&quot;
+# 是否为严格文件后端
+strict = false
 </code></pre>
 <h1><a class="header" href="#anniv-1" id="anniv-1">Anniv</a></h1>
 <blockquote>

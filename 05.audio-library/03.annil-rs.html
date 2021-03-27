@@ -181,20 +181,14 @@ hmac-key = &quot;a hmac key&quot;
 [[backends]]
 # 音频后端名称
 name = &quot;File Backend&quot;
-# 音频后端类型，此处为 file
-type = &quot;file&quot;
 # 是否启用该音频后端
 enable = true
+# 音频后端类型，此处为 file
+type = &quot;file&quot;
 # FileBackend 的参数，根目录
 root = &quot;/path/to/backend&quot;
-
-[[backends]]
-name = &quot;Strict File Backend&quot;
-# 使用 file_strict 类后端
-type = &quot;file_strict&quot;
-enable = true
-# FileStrictBackend 的参数，根目录
-root = &quot;/path/to/backend&quot;
+# 是否为严格文件后端
+strict = false
 </code></pre>
 
                     </main>

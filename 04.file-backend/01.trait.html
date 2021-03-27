@@ -174,22 +174,17 @@
 </span><span class="boring">fn main() {
 </span>#[async_trait]
 pub trait Backend {
-    fn need_cache(&amp;self) -&gt; bool;
+    // 获取可用专辑 catalog 的集合
+    async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
 
-    fn has(&amp;self, catalog: &amp;str) -&gt; bool;
-
-    fn albums(&amp;self) -&gt; Vec&lt;&amp;str&gt;;
-
-    async fn update_albums(&amp;mut self) -&gt; Result&lt;(), BackendError&gt;;
-
+    // 获取音频
     async fn get_audio(&amp;self, catalog: &amp;str, track_id: u8) -&gt; Result&lt;Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;, BackendError&gt;;
 
+    // 获取封面
     async fn get_cover(&amp;self, catalog: &amp;str) -&gt; Result&lt;Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;, BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>其中　<code>need_cache</code> 用于标识后端的速度是否需要缓存；<code>has</code> 用于判断后端是否包含专辑；<code>albums</code> 用于获取所有可用的专辑 <code>catalog</code>。</p>
-<p><code>update_albums</code> 用来更新后端的专辑；而<code>get_audio</code> 则通过给定的 <code>(catalog, track_id)</code> 二元组获得可 <code>AsyncRead</code> 的文件流。</p>
 
                     </main>
 

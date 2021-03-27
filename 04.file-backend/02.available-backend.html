@@ -171,12 +171,18 @@
 <p><code>Anni</code> 目前计划支持的后端列表如下：</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
-文件系统：常规的文件系统。</li>
-<li><input disabled="" type="checkbox" checked=""/>
-严格文件系统：通过一定的约束，减少可读性增加 <code>Annil</code> 可访问性的目录及文件格式。详见 TODO:</li>
+文件系统</li>
 <li><input disabled="" type="checkbox"/>
-<code>Google Drive</code>：通过 <code>Google Drive</code> 的团队共享盘实现音频仓库的协作整理。</li>
+<code>Google Drive</code>：通过 <code>Google Drive</code> 的团队共享盘实现音频仓库的协作整理</li>
 </ul>
+<h2><a class="header" href="#文件系统" id="文件系统">文件系统</a></h2>
+<h3><a class="header" href="#简介" id="简介">简介</a></h3>
+<p>常规的文件系统后端，通过系统调用读取目录结构和文件。</p>
+<h3><a class="header" href="#属性" id="属性">属性</a></h3>
+<table><thead><tr><th>属性名</th><th>类型</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>strict</code></td><td><code>bool</code></td><td>表明是否为严格文件系统</td></tr>
+<tr><td><code>root</code></td><td><code>string</code></td><td>文件后端的根目录</td></tr>
+</tbody></table>
 
                     </main>
 
