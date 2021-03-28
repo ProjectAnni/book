@@ -176,6 +176,8 @@
 </blockquote>
 <p><code>Anniv</code> 是统合用户体验的中心化平台，提供注入播放列表（歌单）、<code>Annil</code> Token 同步等功能。</p>
 <p>从定位上来看，它类似于 <code>last.fm</code>，但提供了针对 <code>Project Anni</code> 的独特功能。</p>
+<h2><a class="header" href="#阅读导览" id="阅读导览">阅读导览</a></h2>
+<p>对 API 的描述分为 <code>Endpoint</code>、请求（请求参数）、返回（返回参数）、参数表示和错误列表。每项中均可能存在客户端设计指引或示例。</p>
 <h2><a class="header" href="#请求" id="请求">请求</a></h2>
 <p>所有带有 <code>body</code> 的请求均为 <code>application/json</code>，参数均写在 <code>body</code> 内。</p>
 <p>对于不带 <code>body</code> 的请求，参数以 <code>Param</code> 形式传递。</p>
@@ -204,6 +206,8 @@
 <tr><td><code>900001</code></td><td>数据库连接错误</td></tr>
 <tr><td><code>901000</code></td><td>数据写入错误</td></tr>
 <tr><td><code>901001</code></td><td>数据读取错误</td></tr>
+<tr><td><code>902000</code></td><td>内容不存在</td></tr>
+<tr><td><code>902001</code></td><td>无权访问</td></tr>
 </tbody></table>
 
                     </main>
