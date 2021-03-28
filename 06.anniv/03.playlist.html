@@ -205,7 +205,7 @@
 </tbody></table>
 <p><code>PlaylistSongResponse</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>any</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
+<tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
 </tbody></table>
 <h4><a class="header" href="#示例" id="示例">示例</a></h4>
 <pre><code class="language-json">{
@@ -241,7 +241,7 @@ interface PlaylistSong {
 }
 
 interface PlaylistSongWithId extends PlaylistSong {
-  id: any;
+  id: string;
 }
 </code></pre>
 <h2><a class="header" href="#错误列表" id="错误列表">错误列表</a></h2>
@@ -284,7 +284,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
 <tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
-<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>type</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>type</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>type</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
+<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
 </tbody></table>
 <h3><a class="header" href="#返回-2" id="返回-2">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>

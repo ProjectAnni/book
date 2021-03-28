@@ -1152,7 +1152,7 @@ interface UserInfo {
 </tbody></table>
 <p><code>PlaylistSongResponse</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>any</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
+<tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
 </tbody></table>
 <h4><a class="header" href="#示例-5" id="示例-5">示例</a></h4>
 <pre><code class="language-json">{
@@ -1188,7 +1188,7 @@ interface PlaylistSong {
 }
 
 interface PlaylistSongWithId extends PlaylistSong {
-  id: any;
+  id: string;
 }
 </code></pre>
 <h2><a class="header" href="#错误列表-5" id="错误列表-5">错误列表</a></h2>
@@ -1231,7 +1231,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
 <tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
-<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>type</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>type</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>type</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
+<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
 </tbody></table>
 <h3><a class="header" href="#返回-7" id="返回-7">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
@@ -1273,41 +1273,69 @@ interface PlaylistSongWithId extends PlaylistSong {
 <h2><a class="header" href="#获取-token" id="获取-token">获取 Token</a></h2>
 <h3><a class="header" href="#endpoint-8" id="endpoint-8">Endpoint</a></h3>
 <p><code>GET /api/credential</code></p>
-<h3><a class="header" href="#请求-9" id="请求-9">请求</a></h3>
-<h4><a class="header" href="#请求参数-8" id="请求参数-8">请求参数</a></h4>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>string</code></td><td>获取 <code>Token</code> 的 <code>ID</code>，省略时获取全部</td></tr>
-</tbody></table>
 <h3><a class="header" href="#返回-9" id="返回-9">返回</a></h3>
 <p>返回包含所有请求 <code>Token</code> 的数组。</p>
+<h4><a class="header" href="#返回参数-2" id="返回参数-2">返回参数</a></h4>
+<p><code>Token</code> 的定义如下所示：</p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td><code>string</code></td><td><code>Annil</code> 名称</td></tr>
+<tr><td><code>url</code></td><td><code>string</code></td><td><code>Annil</code> 站点地址</td></tr>
+<tr><td><code>token</code></td><td><code>string</code></td><td><code>Annil Token</code> 内容</td></tr>
+<tr><td><code>priority</code></td><td><code>number</code></td><td>客户端尝试访问时的优先级</td></tr>
+</tbody></table>
+<p><code>TokenWithId</code> 在 <code>Token</code> 的基础上新增了：</p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>string</code></td><td><code>Token</code> 的 <code>ID</code></td></tr>
+</tbody></table>
+<h3><a class="header" href="#参数表示-5" id="参数表示-5">参数表示</a></h3>
+<pre><code class="language-typescript">type GetTokensResponse = Token[];
+
+interface Token {
+  name: string;
+  url: string;
+  token: string;
+  priority: number;
+}
+
+interface TokenWithId extends Token{
+  id: string;
+}
+</code></pre>
 <h2><a class="header" href="#新增-token" id="新增-token">新增 Token</a></h2>
 <h3><a class="header" href="#endpoint-9" id="endpoint-9">Endpoint</a></h3>
 <p><code>POST /api/credential</code></p>
-<h3><a class="header" href="#请求-10" id="请求-10">请求</a></h3>
-<h4><a class="header" href="#请求参数-9" id="请求参数-9">请求参数</a></h4>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>name</code></td><td><code>string</code></td><td><code>Annil</code> 名称</td></tr>
-<tr><td><code>token</code></td><td><code>string</code></td><td><code>Annil Token</code> 内容</td></tr>
-</tbody></table>
+<h3><a class="header" href="#请求-9" id="请求-9">请求</a></h3>
+<p>新增请求的类型为 <code>Token</code>。</p>
 <h3><a class="header" href="#返回-10" id="返回-10">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
 <h4><a class="header" href="#客户端实现指引" id="客户端实现指引">客户端实现指引</a></h4>
-<p>每次请求成功后，重新获取一遍 <code>Token</code> 列表。</p>
+<p>每次请求成功后，客户端需重新获取一遍 <code>Token</code> 列表。</p>
 <h3><a class="header" href="#错误列表-9" id="错误列表-9">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104000</code></td><td>用户 <code>Token</code> 存储数已达上限</td></tr>
 </tbody></table>
-<h2><a class="header" href="#删除-token" id="删除-token">删除 Token</a></h2>
+<h2><a class="header" href="#修改-token" id="修改-token">修改 Token</a></h2>
 <h3><a class="header" href="#endpoint-10" id="endpoint-10">Endpoint</a></h3>
-<p><code>DELETE /api/credential</code></p>
-<h3><a class="header" href="#请求-11" id="请求-11">请求</a></h3>
-<h4><a class="header" href="#请求参数-10" id="请求参数-10">请求参数</a></h4>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>string</code></td><td>待删除 <code>Token</code> 的 <code>ID</code></td></tr>
-</tbody></table>
+<p><code>PATCH /api/credential</code></p>
+<h3><a class="header" href="#请求-10" id="请求-10">请求</a></h3>
+<p>修改请求的类型为 <code>TokenWithId</code>，其中 <code>Token</code> 部分各属性均为可选。</p>
 <h3><a class="header" href="#返回-11" id="返回-11">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
 <h3><a class="header" href="#错误列表-10" id="错误列表-10">错误列表</a></h3>
+<table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
+</tbody></table>
+<h2><a class="header" href="#删除-token" id="删除-token">删除 Token</a></h2>
+<h3><a class="header" href="#endpoint-11" id="endpoint-11">Endpoint</a></h3>
+<p><code>DELETE /api/credential</code></p>
+<h3><a class="header" href="#请求-11" id="请求-11">请求</a></h3>
+<h4><a class="header" href="#请求参数-8" id="请求参数-8">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>string</code></td><td>待删除 <code>Token</code> 的 <code>ID</code></td></tr>
+</tbody></table>
+<h3><a class="header" href="#返回-12" id="返回-12">返回</a></h3>
+<p>请求成功时，返回 <code>204 No Content</code>。</p>
+<h3><a class="header" href="#错误列表-11" id="错误列表-11">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
 </tbody></table>
@@ -1365,7 +1393,10 @@ interface PlaylistSongWithId extends PlaylistSong {
   },
   // 存放 Annil 的分享 JWT
   // 如果导出的目的并非分享，可以省略
-  &quot;tokens&quot;: []
+  &quot;tokens&quot;: {
+    // key 为 annil 的地址，value 为 JWT 内容
+    &quot;https://annil.mmf.moe&quot;: &quot;a jwt here&quot;
+  }
 }
 </code></pre>
 <h1><a class="header" href="#短链接管理" id="短链接管理">短链接管理</a></h1>
@@ -1379,65 +1410,65 @@ interface PlaylistSongWithId extends PlaylistSong {
 <tr><td><code>106001</code></td><td>短链接不存在</td></tr>
 </tbody></table>
 <h2><a class="header" href="#获取短链接内容" id="获取短链接内容">获取短链接内容</a></h2>
-<h3><a class="header" href="#endpoint-11" id="endpoint-11">Endpoint</a></h3>
+<h3><a class="header" href="#endpoint-12" id="endpoint-12">Endpoint</a></h3>
 <p><code>GET /s/{link}</code></p>
 <h3><a class="header" href="#请求-12" id="请求-12">请求</a></h3>
-<h4><a class="header" href="#请求参数-11" id="请求参数-11">请求参数</a></h4>
+<h4><a class="header" href="#请求参数-9" id="请求参数-9">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>link</code></td><td><code>string</code></td><td>短链接的短部</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-12" id="返回-12">返回</a></h3>
+<h3><a class="header" href="#返回-13" id="返回-13">返回</a></h3>
 <p>返回短链接的实际内容。</p>
-<h3><a class="header" href="#错误列表-11" id="错误列表-11">错误列表</a></h3>
+<h3><a class="header" href="#错误列表-12" id="错误列表-12">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>106001</code></td><td>短链接不存在</td></tr>
 </tbody></table>
 <h2><a class="header" href="#获取短连接列表" id="获取短连接列表">获取短连接列表</a></h2>
-<h3><a class="header" href="#endpoint-12" id="endpoint-12">Endpoint</a></h3>
+<h3><a class="header" href="#endpoint-13" id="endpoint-13">Endpoint</a></h3>
 <p><code>GET /api/short</code></p>
-<h3><a class="header" href="#返回-13" id="返回-13">返回</a></h3>
+<h3><a class="header" href="#返回-14" id="返回-14">返回</a></h3>
 <p>返回当前用户创建的所有短连接列表。</p>
-<h4><a class="header" href="#返回参数-2" id="返回参数-2">返回参数</a></h4>
+<h4><a class="header" href="#返回参数-3" id="返回参数-3">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td><code>string</code></td><td>短链接名称</td></tr>
 <tr><td><code>link</code></td><td><code>string</code></td><td>短链接的短部</td></tr>
 </tbody></table>
 <h2><a class="header" href="#新增短链接" id="新增短链接">新增短链接</a></h2>
-<h3><a class="header" href="#endpoint-13" id="endpoint-13">Endpoint</a></h3>
+<h3><a class="header" href="#endpoint-14" id="endpoint-14">Endpoint</a></h3>
 <p><code>POST /api/short</code></p>
 <h3><a class="header" href="#请求-13" id="请求-13">请求</a></h3>
-<h4><a class="header" href="#请求参数-12" id="请求参数-12">请求参数</a></h4>
+<h4><a class="header" href="#请求参数-10" id="请求参数-10">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td><code>string</code></td><td>短链接名称</td></tr>
 <tr><td><code>data</code></td><td><code>string</code></td><td>实际内容</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-14" id="返回-14">返回</a></h3>
+<h3><a class="header" href="#返回-15" id="返回-15">返回</a></h3>
 <p>请求成功时，返回短链接的短部。</p>
-<h3><a class="header" href="#错误列表-12" id="错误列表-12">错误列表</a></h3>
+<h3><a class="header" href="#错误列表-13" id="错误列表-13">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>106000</code></td><td>用户短链接存储数已达上限</td></tr>
 </tbody></table>
 <h2><a class="header" href="#删除短链接" id="删除短链接">删除短链接</a></h2>
-<h3><a class="header" href="#endpoint-14" id="endpoint-14">Endpoint</a></h3>
+<h3><a class="header" href="#endpoint-15" id="endpoint-15">Endpoint</a></h3>
 <p><code>DELETE /api/short</code></p>
 <h3><a class="header" href="#请求-14" id="请求-14">请求</a></h3>
-<h4><a class="header" href="#请求参数-13" id="请求参数-13">请求参数</a></h4>
+<h4><a class="header" href="#请求参数-11" id="请求参数-11">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>link</code></td><td><code>string</code></td><td>待删除短链接的短部</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-15" id="返回-15">返回</a></h3>
+<h3><a class="header" href="#返回-16" id="返回-16">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
-<h2><a class="header" href="#错误列表-13" id="错误列表-13">错误列表</a></h2>
+<h2><a class="header" href="#错误列表-14" id="错误列表-14">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>106001</code></td><td>短链接不存在</td></tr>
 </tbody></table>
 <h1><a class="header" href="#播放统计" id="播放统计">播放统计</a></h1>
 <p><code>Anniv</code> 提供基本的播放统计功能。</p>
 <h2><a class="header" href="#播放记录" id="播放记录">播放记录</a></h2>
-<h3><a class="header" href="#endpoint-15" id="endpoint-15">Endpoint</a></h3>
+<h3><a class="header" href="#endpoint-16" id="endpoint-16">Endpoint</a></h3>
 <p><code>POST /api/statistics</code></p>
 <h3><a class="header" href="#请求-15" id="请求-15">请求</a></h3>
-<h4><a class="header" href="#请求参数-14" id="请求参数-14">请求参数</a></h4>
+<h4><a class="header" href="#请求参数-12" id="请求参数-12">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>time</code></td><td><code>timestamp</code></td><td>播放的时间戳</td></tr>
 <tr><td><code>songs</code></td><td><code>SongPlayRecord[]</code></td><td>播放记录</td></tr>
@@ -1445,14 +1476,14 @@ interface PlaylistSongWithId extends PlaylistSong {
 <p><code>SongPlayRecord</code> 定义如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>catalog</code></td><td><code>string</code></td><td>播放专辑的 <code>catalog</code></td></tr>
-<tr><td><code>tracks</code></td><td><code>TrackPlayRecord</code></td><td>播放的专辑</td></tr>
+<tr><td><code>tracks</code></td><td><code>TrackPlayRecord[]</code></td><td>播放的专辑</td></tr>
 </tbody></table>
 <p><code>TrackPlayRecord</code> 定义如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
+<tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
 <tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-16" id="返回-16">返回</a></h3>
+<h3><a class="header" href="#返回-17" id="返回-17">返回</a></h3>
 <p>当记录成功时，返回 <code>204 No Content</code>。</p>
 <h1><a class="header" href="#特性" id="特性">特性</a></h1>
 <p>为了控制一些可选功能的启用与否，<code>Anniv</code> 定义了一系列特性。特性的启用与否由 <code>Anniv</code> 的管理员决定，开启后会增加一些处理步骤。</p>
@@ -1467,7 +1498,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 </ul>
 <h2><a class="header" href="#参数列表" id="参数列表">参数列表</a></h2>
 <p>当特性对原有功能做加法时，通常会增加一定的输入参数。参数列表指定了这些参数的名称和类型。</p>
-<h2><a class="header" href="#错误列表-14" id="错误列表-14">错误列表</a></h2>
+<h2><a class="header" href="#错误列表-15" id="错误列表-15">错误列表</a></h2>
 <p>当某一特性开启时，往往会增加特性相关的特定错误。错误列表指定了错误代码和其代表的详细错误内容。</p>
 <h2><a class="header" href="#接口列表" id="接口列表">接口列表</a></h2>
 <p>某些特性可能会定义其独有的接口。接口列表负责描述这些接口的请求参数和返回格式。</p>
@@ -1476,11 +1507,11 @@ interface PlaylistSongWithId extends PlaylistSong {
 <ul>
 <li>用户注册</li>
 </ul>
-<h2><a class="header" href="#请求参数-15" id="请求参数-15">请求参数</a></h2>
+<h2><a class="header" href="#请求参数-13" id="请求参数-13">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>invite_code</code></td><td><code>string</code></td><td>邀请码</td></tr>
 </tbody></table>
-<h2><a class="header" href="#错误列表-15" id="错误列表-15">错误列表</a></h2>
+<h2><a class="header" href="#错误列表-16" id="错误列表-16">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>201000</code></td><td>邀请系统未开启</td></tr>
 <tr><td><code>201001</code></td><td>邀请码无效</td></tr>
@@ -1496,12 +1527,12 @@ interface PlaylistSongWithId extends PlaylistSong {
 <li>播放列表删除</li>
 </ul>
 <p>TODO: 列举出用到 <code>2FA</code> 的所有位置</p>
-<h2><a class="header" href="#请求参数-16" id="请求参数-16">请求参数</a></h2>
+<h2><a class="header" href="#请求参数-14" id="请求参数-14">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，注册时由客户端生成，验证成功后发送至服务端</td></tr>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码</td></tr>
 </tbody></table>
-<h2><a class="header" href="#错误列表-16" id="错误列表-16">错误列表</a></h2>
+<h2><a class="header" href="#错误列表-17" id="错误列表-17">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>202000</code></td><td>用户或服务端未启用两步验证</td></tr>
 <tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
@@ -1510,20 +1541,20 @@ interface PlaylistSongWithId extends PlaylistSong {
 <h2><a class="header" href="#接口列表-1" id="接口列表-1">接口列表</a></h2>
 <h3><a class="header" href="#查询两步验证状态" id="查询两步验证状态">查询两步验证状态</a></h3>
 <p>查询某用户是否启用了两步验证。</p>
-<h4><a class="header" href="#endpoint-16" id="endpoint-16">Endpoint</a></h4>
+<h4><a class="header" href="#endpoint-17" id="endpoint-17">Endpoint</a></h4>
 <p><code>GET /api/features/2fa/enabled</code></p>
-<h4><a class="header" href="#请求参数-17" id="请求参数-17">请求参数</a></h4>
+<h4><a class="header" href="#请求参数-15" id="请求参数-15">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>email</code></td><td><code>string</code></td><td>待查询用户的邮箱</td></tr>
 </tbody></table>
-<h4><a class="header" href="#返回-17" id="返回-17">返回</a></h4>
+<h4><a class="header" href="#返回-18" id="返回-18">返回</a></h4>
 <p>一个布尔值，<code>false</code> 表示未启用，<code>true</code> 表示启用。</p>
 <h1><a class="header" href="#禁止注册close" id="禁止注册close">禁止注册（close）</a></h1>
 <h2><a class="header" href="#适用范围-3" id="适用范围-3">适用范围</a></h2>
 <ul>
 <li>用户注册。</li>
 </ul>
-<h2><a class="header" href="#错误列表-17" id="错误列表-17">错误列表</a></h2>
+<h2><a class="header" href="#错误列表-18" id="错误列表-18">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>203000</code></td><td>站点关闭注册</td></tr>
 </tbody></table>
