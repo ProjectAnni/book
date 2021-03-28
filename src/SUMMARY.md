@@ -49,6 +49,7 @@
   - [基本信息](./06.anniv/01.info.md)
   - [用户系统](./06.anniv/02.user.md)
   - [播放列表](./06.anniv/03.playlist.md)
+  - [Annil Token 管理](./06.anniv/04.credential.md)
   - [特性](./06.anniv/features/00.readme.md)
     - [邀请（invite）](./06.anniv/features/01.invite.md)
     - [两步验证（2fa）](./06.anniv/features/02.2fa.md)
