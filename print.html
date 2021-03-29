@@ -993,6 +993,7 @@ strict = false
 <tr><td><code>901001</code></td><td>数据读取错误</td></tr>
 <tr><td><code>902000</code></td><td>内容不存在</td></tr>
 <tr><td><code>902001</code></td><td>无权访问</td></tr>
+<tr><td><code>902002</code></td><td>非法参数</td></tr>
 </tbody></table>
 <h1><a class="header" href="#基本信息" id="基本信息">基本信息</a></h1>
 <p>接口 <code>/api/info</code> 描述了 <code>Anniv</code> 后端的基本信息，包括站点名称、说明、特性开启状态等。</p>
@@ -1264,7 +1265,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <tr><td><code>103003</code></td><td>非法修改类型</td></tr>
 </tbody></table>
 <h1><a class="header" href="#annil-token-管理" id="annil-token-管理">Annil Token 管理</a></h1>
-<p>为了多客户端的同步考虑，<code>Anniv</code> 实现了对 <code>Annil</code> 的 <code>Token</code> 的保存。</p>
+<p>考虑到多客户端的使用场景，<code>Anniv</code> 实现了一套对 <code>Annil Token</code> 的管理系统，供客户端之间同步 <code>Token</code> 信息。</p>
 <h2><a class="header" href="#错误一览-1" id="错误一览-1">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104000</code></td><td>用户 <code>Token</code> 存储数已达上限</td></tr>
