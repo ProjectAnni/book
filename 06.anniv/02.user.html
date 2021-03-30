@@ -192,7 +192,7 @@
 <p>注册成功时，返回用户信息（<code>UserInfo</code>）。</p>
 <h4><a class="header" href="#返回参数" id="返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
+<tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
 <tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
@@ -208,7 +208,7 @@
 }
 
 interface UserInfo {
-  id: string;
+  user_id: string;
   username: string;
   email: string;
   nickname: string;

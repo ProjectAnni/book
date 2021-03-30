@@ -1034,7 +1034,7 @@ strict = false
 <p>注册成功时，返回用户信息（<code>UserInfo</code>）。</p>
 <h4><a class="header" href="#返回参数" id="返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
+<tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
 <tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
@@ -1050,7 +1050,7 @@ strict = false
 }
 
 interface UserInfo {
-  id: string;
+  user_id: string;
   username: string;
   email: string;
   nickname: string;
@@ -1582,6 +1582,7 @@ interface TokenWithId extends Token{
 <tr><td><code>202000</code></td><td>用户或服务端未启用两步验证</td></tr>
 <tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
 <tr><td><code>202002</code></td><td>两步验证 <code>Secret</code> 非法</td></tr>
+<tr><td><code>202003</code></td><td>两步验证已达尝试上限</td></tr>
 </tbody></table>
 <h2><a class="header" href="#接口列表-1" id="接口列表-1">接口列表</a></h2>
 <h3><a class="header" href="#查询两步验证状态" id="查询两步验证状态">查询两步验证状态</a></h3>
