@@ -257,11 +257,18 @@
 <p>音频分发基于音频的 <code>catalog</code> 和 <code>track_id</code>。</p>
 <p>获得音频的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}</code>，须在 <code>Authorization</code> 中携带<strong>有效的 <code>Token</code></strong>。此处的有效指有效的用户 <code>Token</code>，或包含当前请求 <code>(catalog, track_id)</code> 的有效分享 <code>Token</code>。</p>
 <h4><a class="header" href="#返回状态表-1" id="返回状态表-1">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>成功获得音频</td><td><code>Content-Type</code> 根据情况为 <code>audio/flac</code> 或 <code>audio/mp3</code></td></tr>
-<tr><td><code>401</code></td><td><code>Token</code> 校验失败</td><td></td></tr>
-<tr><td><code>403</code></td><td>分享 <code>Token</code> 无权访问该音频</td><td></td></tr>
-<tr><td><code>404</code></td><td>音频获取失败</td><td></td></tr>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>200</code></td><td>成功获取音频</td></tr>
+<tr><td><code>401</code></td><td><code>Token</code> 校验失败</td></tr>
+<tr><td><code>403</code></td><td>分享 <code>Token</code> 无权访问该音频</td></tr>
+<tr><td><code>404</code></td><td>音频获取失败</td></tr>
+</tbody></table>
+<h4><a class="header" href="#返回头部" id="返回头部">返回头部</a></h4>
+<p>当成功获取音频时，返回的头部会携带如下额外信息：</p>
+<table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>Content-Type</code></td><td>音频的 <code>MIME Type</code>，根据情况可能为 <code>audio/flac</code>、<code>audio/mp3</code> 等</td></tr>
+<tr><td><code>X-Origin-Type</code></td><td>源文件的 <code>MIME Type</code>，当与 <code>Content-Type</code> 不同时表明音频经过了转码</td></tr>
+<tr><td><code>X-Origin-Size</code></td><td>源文件的大小，单位为字节（<code>Byte</code>）</td></tr>
 </tbody></table>
 <h3><a class="header" href="#封面分发" id="封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>catalog</code>。</p>

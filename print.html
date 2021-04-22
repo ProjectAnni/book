@@ -784,15 +784,29 @@ pub trait Backend {
     async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
 
     // 获取音频
-    async fn get_audio(&amp;self, catalog: &amp;str, track_id: u8) -&gt; Result&lt;Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;, BackendError&gt;;
+    async fn get_audio(&amp;self, catalog: &amp;str, track_id: u8) -&gt; Result&lt;BackendAudio, BackendError&gt;;
 
     // 获取封面
     async fn get_cover(&amp;self, catalog: &amp;str) -&gt; Result&lt;Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;, BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
+<p>其中获取的音频由 <code>BackendAudio</code> 描述：</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct BackendAudio {
+    // 音频文件的扩展名
+    pub extension: String,
+    // 音频大小
+    pub size: u64,
+    // 读取音频文件内容的 Reader
+    pub reader: Pin&lt;Box&lt;dyn AsyncRead&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
 <h1><a class="header" href="#计划支持的后端" id="计划支持的后端">计划支持的后端</a></h1>
-<p><code>Anni</code> 目前计划支持的后端列表如下：</p>
+<p><code>Anni</code> 目前支持的后端列表如下：</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 文件系统</li>
@@ -902,11 +916,18 @@ pub trait Backend {
 <p>音频分发基于音频的 <code>catalog</code> 和 <code>track_id</code>。</p>
 <p>获得音频的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}</code>，须在 <code>Authorization</code> 中携带<strong>有效的 <code>Token</code></strong>。此处的有效指有效的用户 <code>Token</code>，或包含当前请求 <code>(catalog, track_id)</code> 的有效分享 <code>Token</code>。</p>
 <h4><a class="header" href="#返回状态表-1" id="返回状态表-1">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>成功获得音频</td><td><code>Content-Type</code> 根据情况为 <code>audio/flac</code> 或 <code>audio/mp3</code></td></tr>
-<tr><td><code>401</code></td><td><code>Token</code> 校验失败</td><td></td></tr>
-<tr><td><code>403</code></td><td>分享 <code>Token</code> 无权访问该音频</td><td></td></tr>
-<tr><td><code>404</code></td><td>音频获取失败</td><td></td></tr>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>200</code></td><td>成功获取音频</td></tr>
+<tr><td><code>401</code></td><td><code>Token</code> 校验失败</td></tr>
+<tr><td><code>403</code></td><td>分享 <code>Token</code> 无权访问该音频</td></tr>
+<tr><td><code>404</code></td><td>音频获取失败</td></tr>
+</tbody></table>
+<h4><a class="header" href="#返回头部" id="返回头部">返回头部</a></h4>
+<p>当成功获取音频时，返回的头部会携带如下额外信息：</p>
+<table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>Content-Type</code></td><td>音频的 <code>MIME Type</code>，根据情况可能为 <code>audio/flac</code>、<code>audio/mp3</code> 等</td></tr>
+<tr><td><code>X-Origin-Type</code></td><td>源文件的 <code>MIME Type</code>，当与 <code>Content-Type</code> 不同时表明音频经过了转码</td></tr>
+<tr><td><code>X-Origin-Size</code></td><td>源文件的大小，单位为字节（<code>Byte</code>）</td></tr>
 </tbody></table>
 <h3><a class="header" href="#封面分发" id="封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>catalog</code>。</p>
@@ -1019,6 +1040,8 @@ strict = false
 <tr><td><code>102010</code></td><td>邮箱或密码错误</td></tr>
 <tr><td><code>102020</code></td><td>待注销用户不存在</td></tr>
 </tbody></table>
+<h2><a class="header" href="#对用户密码的预处理建议" id="对用户密码的预处理建议">对用户密码的预处理（建议）</a></h2>
+<p>为格式统一考虑，建议客户端在向服务端发送密码之前，对用户的明文密码进行一次 <code>sha256</code> 处理。该步骤仅在一定程度上减少用户原文密码的泄露，但仍可以通过诸如彩虹表的方式破解。</p>
 <h2><a class="header" href="#用户注册" id="用户注册">用户注册</a></h2>
 <h3><a class="header" href="#endpoint" id="endpoint">Endpoint</a></h3>
 <p><code>POST /api/user/register</code></p>
@@ -1062,6 +1085,7 @@ interface UserInfo {
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
+<tr><td><code>102002</code></td><td>注册密码格式错误</td></tr>
 </tbody></table>
 <h2><a class="header" href="#用户登录" id="用户登录">用户登录</a></h2>
 <h3><a class="header" href="#endpoint-1" id="endpoint-1">Endpoint</a></h3>
