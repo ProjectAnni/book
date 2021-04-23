@@ -61,3 +61,7 @@
     - [邀请（invite）](./06.anniv/features/01.invite.md)
     - [两步验证（2fa）](./06.anniv/features/02.2fa.md)
     - [禁止注册（close）](./06.anniv/features/03.close.md)
+- [AnniSonic](./07.annisonic/00.readme.md)
+  - [实现的 API](./07.annisonic/01.apis.md)
+  - [已测试的客户端](./07.annisonic/02.clients.md)
+  - [部署向导](./07.annisonic/03.deploy.md)
