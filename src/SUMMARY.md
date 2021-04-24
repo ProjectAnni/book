@@ -1,11 +1,9 @@
 # Summary
 
 - [开始之前](./00.before-start/00.readme.md)
-  - [讲在前面](./00.before-start/01.before.md)
-  - [前言](./00.before-start/02.intro.md)
-  - [Anni 是如何工作的？](./00.before-start/03.how-it-works.md)
-  - [为什么有这么多名字？](./00.before-start/04.names.md)
-  - [术语表](./00.before-start/05.glossary-of-terms.md)
+  - [前言](./00.before-start/01.intro.md)
+  - [Anni 是如何工作的？](./00.before-start/02.how-it-works.md)
+  - [术语表](./00.before-start/03.glossary-of-terms.md)
 - [Anni 音频约定](./01.audio-convention/00.readme.md)
   - [音频格式](./01.audio-convention/01.format.md)
   - [采样率](./01.audio-convention/02.sample-rate.md)
@@ -61,7 +59,7 @@
     - [邀请（invite）](./06.anniv/features/01.invite.md)
     - [两步验证（2fa）](./06.anniv/features/02.2fa.md)
     - [禁止注册（close）](./06.anniv/features/03.close.md)
-- [AnniSonic](./07.annisonic/00.readme.md)
+- [Annisonic](./07.annisonic/00.readme.md)
   - [实现的 API](./07.annisonic/01.apis.md)
   - [已测试的客户端](./07.annisonic/02.clients.md)
   - [部署向导](./07.annisonic/03.deploy.md)
