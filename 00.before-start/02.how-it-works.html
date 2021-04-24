@@ -187,8 +187,8 @@
 <li><code>CUE</code> 的解析更可控了，可以进行一些基于内容的检查</li>
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
-<p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code> 或 <code>flac</code> 格式的音频。</p>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题，仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
+<p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题（如 <code>REM</code> 解析），仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
 <p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页和企划/组合的官网；较可靠来源为 <code>iTunes</code> 上的专辑信息、<code>BK</code> 上印刷的信息等；次可靠来源为 <code>VGMDB</code> 等数据库收集的非一手资料，<code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>

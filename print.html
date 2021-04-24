@@ -176,10 +176,10 @@
 <p>后者包括一套可用的服务端、客户端应用。我们<strong>希望</strong>将这个系统表现为 <code>P2P</code> 的形式，从而加速系统中各单元之间的数据传输速度，同时更方便系统本身的扩展。服务端不负责分发文件，资源分发的过程交由 <code>P2P</code> 网络完成。但是这一步好像跨得太大了，在现有的实现计划中，只保留未来 P2P 的可能性，目前还是按照标准的 C/S 架构设计。</p>
 <p>目前前者的实现尚需灵感，<code>Anni</code> 的支持已经较为完善，但框架还是相对较空，在一些暂时没有想到的领域还存在着空白；后者是目前开发的重点，协议相关的细节和实现也正在进行中。</p>
 <h1><a class="header" href="#讲在前面" id="讲在前面">讲在前面</a></h1>
-<p>Anni 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
-<p>和每一个定制项目一样，Anni 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
-<p>同时，这对我而言也只是一个 <code>Learn to Rust</code> 的项目，因此代码质量一定是有所不足的。在项目有所成型后我会 <code>Make Public</code>，届时还敬请各位指正。</p>
-<p>我只希望，在填坑 Anni 的过程中，<strong>不要遗忘了初心</strong>。</p>
+<p><code>Project Anni</code> 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
+<p>和每一个定制项目一样，<code>Anni</code> 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
+<p>同时，作为我用 <code>Rust</code> 编写的第一个较大型项目，这对我而言也是一个 <code>Learn to Rust</code> 的过程，因此代码质量一定有所不足，欢迎各位的 PR。</p>
+<p>我只希望，在填坑 <code>Anni</code> 的过程中，<strong>不要遗忘了初心</strong>。</p>
 <h1><a class="header" href="#前言" id="前言">前言</a></h1>
 <h2><a class="header" href="#云音乐" id="云音乐">云音乐</a></h2>
 <p>相信大家都有过这样的经历，在各个音乐平台之间挣扎的经历。常常是平台 A 下架了某一首歌，平台 B 依靠独占吸收来自平台 A 的难民。</p>
@@ -197,8 +197,8 @@
 <p>最常见的自建音乐平台应该就是 <code>Airsonic</code> 了，这是一个用 <code>Java</code> 写成，基于 <code>Subsonic</code> 的最后一个开源版本 <code>fork</code> 而出的项目，而 <code>Subsonic</code> 则是著名的自建音乐平台。</p>
 <p><code>Airsonic</code> 的存在已经能够满足很多人的需求了，但它还是无法完全满足我当前的需求，原因有以下几点：</p>
 <ol>
-<li><code>Airsonic</code> 的编写语言是 <code>Java</code>，其需求的资源对小型 <code>VPS</code> 而言还是太多了。</li>
-<li>自建音乐平台需要服务器有较大的硬盘空间，而这一点面对只会增多不会减少的音乐资源难以永久实现。</li>
+<li><code>Airsonic</code> 的编写语言是 <code>Java</code>，其需要的资源对小型 <code>VPS</code> 而言还是太多了。以我目前运行的 <code>Docker</code> 为例，没有任何人使用的情况下，基本内存占用维持在 <code>800MiB</code> 左右。</li>
+<li>自建音乐平台需要服务器有较大的硬盘空间，而这一点面对只会增多不会减少的音乐资源难以永久实现。目前我整理的音乐资源有 <code>129GiB</code>，这对于我部署 <code>Airsonic</code> 的 <code>20G</code> 小鸡肯定是不现实的。</li>
 <li>为了应对硬盘问题，我使用了 <code>rclone</code> 挂载。但在音乐更新后，<code>Airsonic</code> 需要花费大量的时间（小时级别）重新扫描整个音频目录，读取每一个音频文件的元数据。这么长的时间差完全不能满足「马上就听」的需求。</li>
 <li><code>Airsonic</code> 支持部分更新，根据目录和文件的 <code>lastModifiedTime</code> 决定是否扫描。但 <code>Google Drive</code> 对于这部分的实现并不遵循一般文件系统的行为，对内层文件的更新并不会导致外层目录的修改时间变化，宣告了 <code>Airsonic</code> 的这个特性完全无法使用。</li>
 <li><code>Airsonic</code> 诸如音乐上传、下载、<code>last.fm</code> 的功能是我不需要的，而且没有办法完全关闭。<strong>使用这些功能可能会导致未定义行为</strong>（如上传到 <code>rclone</code> 挂载的目录可能会打乱原本的目录结构）。尽管我可以不使用这些功能，但我不能要求和我一起整理资源，共用平台的朋友永远都不使用这些功能。</li>
@@ -226,8 +226,8 @@
 <li><code>CUE</code> 的解析更可控了，可以进行一些基于内容的检查</li>
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
-<p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code> 或 <code>flac</code> 格式的音频。</p>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题，仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
+<p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题（如 <code>REM</code> 解析），仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
 <p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页和企划/组合的官网；较可靠来源为 <code>iTunes</code> 上的专辑信息、<code>BK</code> 上印刷的信息等；次可靠来源为 <code>VGMDB</code> 等数据库收集的非一手资料，<code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>

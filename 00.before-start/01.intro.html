@@ -184,8 +184,8 @@
 <p>最常见的自建音乐平台应该就是 <code>Airsonic</code> 了，这是一个用 <code>Java</code> 写成，基于 <code>Subsonic</code> 的最后一个开源版本 <code>fork</code> 而出的项目，而 <code>Subsonic</code> 则是著名的自建音乐平台。</p>
 <p><code>Airsonic</code> 的存在已经能够满足很多人的需求了，但它还是无法完全满足我当前的需求，原因有以下几点：</p>
 <ol>
-<li><code>Airsonic</code> 的编写语言是 <code>Java</code>，其需求的资源对小型 <code>VPS</code> 而言还是太多了。</li>
-<li>自建音乐平台需要服务器有较大的硬盘空间，而这一点面对只会增多不会减少的音乐资源难以永久实现。</li>
+<li><code>Airsonic</code> 的编写语言是 <code>Java</code>，其需要的资源对小型 <code>VPS</code> 而言还是太多了。以我目前运行的 <code>Docker</code> 为例，没有任何人使用的情况下，基本内存占用维持在 <code>800MiB</code> 左右。</li>
+<li>自建音乐平台需要服务器有较大的硬盘空间，而这一点面对只会增多不会减少的音乐资源难以永久实现。目前我整理的音乐资源有 <code>129GiB</code>，这对于我部署 <code>Airsonic</code> 的 <code>20G</code> 小鸡肯定是不现实的。</li>
 <li>为了应对硬盘问题，我使用了 <code>rclone</code> 挂载。但在音乐更新后，<code>Airsonic</code> 需要花费大量的时间（小时级别）重新扫描整个音频目录，读取每一个音频文件的元数据。这么长的时间差完全不能满足「马上就听」的需求。</li>
 <li><code>Airsonic</code> 支持部分更新，根据目录和文件的 <code>lastModifiedTime</code> 决定是否扫描。但 <code>Google Drive</code> 对于这部分的实现并不遵循一般文件系统的行为，对内层文件的更新并不会导致外层目录的修改时间变化，宣告了 <code>Airsonic</code> 的这个特性完全无法使用。</li>
 <li><code>Airsonic</code> 诸如音乐上传、下载、<code>last.fm</code> 的功能是我不需要的，而且没有办法完全关闭。<strong>使用这些功能可能会导致未定义行为</strong>（如上传到 <code>rclone</code> 挂载的目录可能会打乱原本的目录结构）。尽管我可以不使用这些功能，但我不能要求和我一起整理资源，共用平台的朋友永远都不使用这些功能。</li>
