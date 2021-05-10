@@ -19,7 +19,7 @@
   - [专辑封面](./01.audio-convention/05.cover.md)
   - [文件名](./01.audio-convention/06.filename.md)
   - [Catalog](./01.audio-convention/07.catalog.md)
-  - [目录](./01.audio-convention/08.directory.md)
+  - [约定目录结构](./01.audio-convention/08.directory.md)
     - [目录类型](./01.audio-convention/08.zzzz.01.directory-type.md)
     - [顶级目录](./01.audio-convention/08.zzzz.02.top-directory.md)
     - [专辑目录](./01.audio-convention/08.zzzz.03.album-directory.md)
