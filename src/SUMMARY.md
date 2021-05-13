@@ -44,7 +44,7 @@
     - [Google Drive](./04.audio-backend/backends/02.drive.md)
   - [缓存](./04.audio-backend/03.cache.md)
 - [音频仓库 Annil](./05.audio-library/00.readme.md)
-  - [Anni 音频仓库标准](./05.audio-library/01.anni-audio-library-draft.md)
+  - [Anni 音频仓库协议](./05.audio-library/01.protocol.md)
   - [不同的音频仓库实现](./05.audio-library/02.implements.md)
   - [annil-rs](./05.audio-library/03.annil-rs.md)
 - [管理后端 Anniv](./06.anniv/00.readme.md)
