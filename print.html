@@ -426,6 +426,11 @@ KEY=OVERRIDE
 <p>当 <code>CD</code> 属于 <code>BD</code> 的一部分，且 <code>BD</code> 给 <code>CD</code> 预留了 <code>Catalog</code>，则按 <code>CD</code> 对应的 <code>Catalog</code> 填写。</p>
 <p>若<strong>单张</strong> <code>CD</code> 属于 <code>BD</code> 的一部分，但 <code>BD</code> 没有为 <code>CD</code> 预留 <code>Catalog</code>，则按 <code>BD</code> 对应的 <code>Catalog</code> 填写。</p>
 <p>若 <code>CD</code> 存在<strong>多张唱片</strong>但只分配了一个 <code>Catalog</code>，则按 <code>CD</code> 的<strong>盘号</strong>（<code>DISCNUMBER</code>）填写 <code>disc</code> 部分，<strong>补足两位字符串</strong>。</p>
+<h2><a class="header" href="#预定义品番域" id="预定义品番域">预定义品番域</a></h2>
+<p><code>Anni</code> 定义了以下品番前缀，供整理时使用：</p>
+<table><thead><tr><th>前缀</th><th>用例</th></tr></thead><tbody>
+<tr><td>ISBN</td><td>在图书附带光盘没有品番时用于指定该光盘。<br />如 <code>ISBN-9784091592033</code> 可用于表示 <code>アイドルマスター ミリオンライブ! 1 オリジナルCD</code>。</td></tr>
+</tbody></table>
 <h2><a class="header" href="#私有品番域" id="私有品番域">私有品番域</a></h2>
 <p>对于没有品番的专辑，<code>Anni</code> 约定以 <code>@</code> 开头的品番为私有品番域。</p>
 <h1><a class="header" href="#约定目录结构" id="约定目录结构">约定目录结构</a></h1>
@@ -553,6 +558,7 @@ date = 2020-12-16
 # absolute: 纯音乐
 # drama: 以人声为主的单元剧
 # radio: 以人声为主的广播节目
+# vocal: 纯人声，如 [140724][GNXA-1682] Daydream café ～ご注文はチノですか？ver.～ 中的 01. ご注文はチノですか？
 type = &quot;normal&quot;
 # 通过 catalog 表示光盘的盘号
 # 当存在多张光盘时 使用 ~ 表示连续编号
