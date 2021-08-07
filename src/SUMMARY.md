@@ -4,6 +4,7 @@
   - [前言](./00.before-start/01.intro.md)
   - [Anni 是如何工作的？](./00.before-start/02.how-it-works.md)
   - [术语表](./00.before-start/03.glossary-of-terms.md)
+  - [鸣谢](./00.before-start/04.credits.md)
 - [Anni 音频约定](./01.audio-convention/00.readme.md)
   - [音频格式](./01.audio-convention/01.format.md)
   - [采样率](./01.audio-convention/02.sample-rate.md)
@@ -66,3 +67,12 @@
   - [实现的 API](./07.annisonic/01.apis.md)
   - [已测试的客户端](./07.annisonic/02.clients.md)
   - [部署向导](./07.annisonic/03.deploy.md)
+
+---
+
+- [Anni 命令行工具](./50.anni-cli/00.readme.md)
+  - [flac](./50.anni-cli/01.flac.md)
+  - [split](50.anni-cli/02.split.md)
+  - [convention](50.anni-cli/03.convention.md)
+  - [repo](50.anni-cli/04.repo.md)
+  - [get](50.anni-cli/05.get.md)
