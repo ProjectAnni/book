@@ -1960,8 +1960,8 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 支持同时输出多个文件的元数据信息</li>
 </ul>
 </li>
-<li>输出图片块中数据（导出封面）
-输出元据</li>
+<li><input disabled="" type="checkbox" checked=""/>
+输出图片块中数据（导出封面）</li>
 </ul>
 </li>
 <li><input disabled="" type="checkbox"/>
@@ -1997,21 +1997,23 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 <h1><a class="header" href="#split" id="split">split</a></h1>
 <p>以音轨文件（如 <code>cue</code>）和整轨音频文件（如 <code>wav</code>）作为输入，分轨音频作为输出的音频分割工具。</p>
 <h2><a class="header" href="#支持格式" id="支持格式">支持格式</a></h2>
-<table><thead><tr><th>格式</th><th>工具</th><th>输入</th><th>输出</th></tr></thead><tbody>
-<tr><td><code>wav</code></td><td><code>Anni</code></td><td>☑</td><td>☑</td></tr>
-<tr><td><code>flac</code></td><td><code>flac</code></td><td>☑</td><td>☑</td></tr>
-<tr><td><code>ape</code></td><td><code>mac</code></td><td>☑</td><td>☒</td></tr>
-<tr><td><code>tak</code></td><td></td><td>☒</td><td>☒</td></tr>
+<table><thead><tr><th>格式</th><th>依赖工具</th><th>输入</th><th>输出</th></tr></thead><tbody>
+<tr><td><code>wav</code></td><td><code>-</code></td><td>☑</td><td>☑</td></tr>
+<tr><td><code>flac</code></td><td><a href="https://archlinux.org/packages/extra/x86_64/flac/"><code>flac</code></a></td><td>☑</td><td>☑</td></tr>
+<tr><td><code>ape</code></td><td><a href="https://archlinux.org/packages/community/x86_64/mac/"><code>mac</code></a></td><td>☑</td><td>☒</td></tr>
+<tr><td><code>tak</code></td><td><a href="https://aur.archlinux.org/packages/tak/"><code>tak</code></a></td><td>☑</td><td>☒</td></tr>
 </tbody></table>
 <h2><a class="header" href="#功能列表-1" id="功能列表-1">功能列表</a></h2>
 <p>TODO：支持除 CUE 以外的音轨文件。</p>
 <ul>
-<li><input disabled="" type="checkbox"/>
+<li><input disabled="" type="checkbox" checked=""/>
 音频分割
 <ul>
 <li><input disabled="" type="checkbox"/>
-指定输入文件
+指定输入
 <ul>
+<li><input disabled="" type="checkbox" checked=""/>
+指定输入目录</li>
 <li><input disabled="" type="checkbox"/>
 指定 CUE 文件</li>
 <li><input disabled="" type="checkbox"/>
@@ -2023,13 +2025,13 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 <li><input disabled="" type="checkbox"/>
 分割进度：进度条</li>
 <li><input disabled="" type="checkbox"/>
-指定输出文件
+指定输出
 <ul>
 <li><input disabled="" type="checkbox"/>
 指定输出文件名格式</li>
 <li><input disabled="" type="checkbox"/>
 指定输出目录</li>
-<li><input disabled="" type="checkbox"/>
+<li><input disabled="" type="checkbox" checked=""/>
 输出文件已存在时提示用户是否覆盖（分割前检查）</li>
 </ul>
 </li>
