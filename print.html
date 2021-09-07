@@ -943,6 +943,8 @@ pub struct BackendReaderExt {
 <h2><a class="header" href="#跨域约定" id="跨域约定">跨域约定</a></h2>
 <p><code>Anni</code> 音频仓库标准约定所有请求的返回中都包含头部：</p>
 <pre><code class="language-http">Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, OPTIONS
+Access-Control-Allow-Headers: Authorization
 </code></pre>
 <h2><a class="header" href="#用户身份鉴定" id="用户身份鉴定">用户身份鉴定</a></h2>
 <p>对用户身份的鉴定通过 <code>JWT</code>（<code>JSON Web Token</code>） 的形式进行。草案不限制签名的方式，只对 <code>Claim</code> 部分作出限定。仓库需要对用户的身份进行鉴定，以判断用户是否有访问该仓库的权限。</p>
