@@ -176,17 +176,21 @@
 <p><code>config.toml</code> 中存放了 <code>Annisonic</code> 部署相关的所有配置信息。</p>
 <pre><code class="language-toml">[server]
 # 监听的地址
-listen = &quot;0.0.0.0:1710&quot;
+listen = &quot;127.0.0.1:1710&quot;
 username = &quot;anni&quot;
 password = &quot;anni&quot;
 
 [repo]
-type = &quot;local&quot;
-root = &quot;/repo&quot;
+# 元数据仓库的位置
+root = &quot;/home/repo&quot;
 
-[backend]
-type = &quot;file&quot;
-root = &quot;/music&quot;
+[annil]
+# Annil 的地址
+# 确保外网可以访问，Annisonic 会直接 302 重定向
+server = &quot;http://localhost:3614&quot;
+# Annil 的用户 Token
+token = &quot;ey...&quot;
+
 </code></pre>
 <h2><a class="header" href="#构建" id="构建">构建</a></h2>
 <p>我们使用以下命令构建：</p>

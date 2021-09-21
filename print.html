@@ -937,8 +937,8 @@ pub struct BackendReaderExt {
 <blockquote>
 <p>⚠️️在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2021 年 9 月 13 日
-协议版本：0.1.1</p>
+<p>最后修改：2021 年 9 月 21 日
+协议版本：0.1.2</p>
 <h2><a class="header" href="#定义" id="定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -969,7 +969,7 @@ Access-Control-Allow-Headers: Authorization
 <h3><a class="header" href="#错误响应" id="错误响应">错误响应</a></h3>
 <p>鉴权阶段可能会产生如下错误响应：</p>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
-<tr><td><code>401</code></td><td><code>Token</code> 校验失败</td></tr>
+<tr><td><code>401</code></td><td><code>Token</code> 不存在或校验失败</td></tr>
 <tr><td><code>403</code></td><td><code>Token</code> 权限不足</td></tr>
 </tbody></table>
 <h2><a class="header" href="#用户身份鉴定" id="用户身份鉴定">用户身份鉴定</a></h2>
@@ -1042,8 +1042,6 @@ Access-Control-Allow-Headers: Authorization
 <h4><a class="header" href="#返回状态表" id="返回状态表">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功创建分享 <code>Token</code></td><td><code>Content-Type</code> 为 <code>text/plain</code>,<code>body</code> 为生成的 <code>JWT</code></td></tr>
-<tr><td><code>401</code></td><td>用户 <code>Token</code> 校验失败</td><td></td></tr>
-<tr><td><code>403</code></td><td>用户 <code>Token</code> 无分享权限</td><td></td></tr>
 </tbody></table>
 <h2><a class="header" href="#资源分发" id="资源分发">资源分发</a></h2>
 <p><code>Anni</code> 音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
@@ -1926,6 +1924,10 @@ interface Id {
 </ul>
 <h3><a class="header" href="#存在问题-1" id="存在问题-1">存在问题</a></h3>
 <p>暂无</p>
+<h2><a class="header" href="#clementine" id="clementine">Clementine</a></h2>
+<p><a href="https://www.clementine-player.org/zh_CN/">Clementine</a> 是一款兼容 SubSonic 协议的桌面音乐播放器。</p>
+<h3><a class="header" href="#存在问题-2" id="存在问题-2">存在问题</a></h3>
+<p>暂无</p>
 <h1><a class="header" href="#部署向导" id="部署向导">部署向导</a></h1>
 <h2><a class="header" href="#音频目录" id="音频目录">音频目录</a></h2>
 <p>我们假设读者已将音频文件以<strong>约定目录格式</strong>存放于 <code>/music</code> 目录下。</p>
@@ -1935,17 +1937,21 @@ interface Id {
 <p><code>config.toml</code> 中存放了 <code>Annisonic</code> 部署相关的所有配置信息。</p>
 <pre><code class="language-toml">[server]
 # 监听的地址
-listen = &quot;0.0.0.0:1710&quot;
+listen = &quot;127.0.0.1:1710&quot;
 username = &quot;anni&quot;
 password = &quot;anni&quot;
 
 [repo]
-type = &quot;local&quot;
-root = &quot;/repo&quot;
+# 元数据仓库的位置
+root = &quot;/home/repo&quot;
 
-[backend]
-type = &quot;file&quot;
-root = &quot;/music&quot;
+[annil]
+# Annil 的地址
+# 确保外网可以访问，Annisonic 会直接 302 重定向
+server = &quot;http://localhost:3614&quot;
+# Annil 的用户 Token
+token = &quot;ey...&quot;
+
 </code></pre>
 <h2><a class="header" href="#构建" id="构建">构建</a></h2>
 <p>我们使用以下命令构建：</p>
