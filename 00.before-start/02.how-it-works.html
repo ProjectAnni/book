@@ -188,19 +188,19 @@
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
 <p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题（如 <code>REM</code> 解析），仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题，目前的使用已经没有问题了。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
-<p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页和企划/组合的官网；较可靠来源为 <code>iTunes</code> 上的专辑信息、<code>BK</code> 上印刷的信息等；次可靠来源为 <code>VGMDB</code> 等数据库收集的非一手资料，<code>CUE</code> 中附带的元信息等。</p>
+<p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页、企划/组合的官网和 <code>BK</code>；较可靠来源为 <code>iTunes</code> 上的专辑信息，<code>VGMDB</code> 等数据库收集的非一手资料；次可靠来源为 <code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>
 <h3><a class="header" href="#元数据导入导出" id="元数据导入导出">元数据导入/导出</a></h3>
-<p>在整理《THE IDOLM@STER》的音乐资源时，我拿到的资源是这样的：</p>
+<p>在整理「<code>THE IDOLM@STER</code>」的音乐资源时，我拿到的资源是这样的：</p>
 <ol>
 <li>所有资源均为 <code>FLAC</code> 格式，以罗马音命名</li>
 <li>有内嵌元数据，但同样有大量罗马音填充</li>
 </ol>
 <p>理想的整理方式是这样的：</p>
 <ol>
-<li>从一个目录的 <code>FLAC</code> 中<strong>导出</strong>专辑的元数据</li>
+<li>从一个目录的 <code>FLAC</code> 中将专辑的元数据<strong>导出</strong>到文本</li>
 <li>和可信源进行对比</li>
 <li>将整理后的元数据重新<strong>导入</strong> <code>FLAC</code> 中</li>
 </ol>

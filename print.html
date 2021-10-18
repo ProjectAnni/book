@@ -172,13 +172,13 @@
                         <h1><a class="header" href="#开始之前" id="开始之前">开始之前</a></h1>
 <p>在一切开始之前，我希望各位能够对 <code>Project Anni</code> 中的各个部分有一个大致的印象。</p>
 <p><code>Project Anni</code> 包括两个部分：对音乐资源的组织和对音频资源的分发。</p>
-<p>前者包含整轨切分、元信息编辑、元数据整理等。<code>Anni</code> 规定了<a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库</a>以格式化地整理音乐的元数据。</p>
-<p>后者包括一套可用的服务端、客户端应用。我们<strong>希望在不久之后的将来</strong>能将这个系统表现为 <code>P2P</code> 的形式，从而加速系统中各单元之间的数据传输速度，同时更方便系统本身的扩展。服务端不负责分发文件，资源分发的过程交由 <code>P2P</code> 网络完成。但是这一步好像跨得太大了，在现有的实现计划中，只保留未来 <code>P2P</code> 的可能性，目前还是按照标准的 C/S 架构设计。</p>
-<p>目前前者的实现尚需灵感，<code>Anni</code> 的支持已经较为完善，但框架还是相对较空，在一些暂时没有想到的领域还存在着空白；后者是目前开发的重点，协议相关的细节和实现也正在进行中。</p>
+<p>前者包含整轨切分、元信息编辑、元数据整理等。<code>Anni</code> 提供了切分整轨、检查音频的工具，并提出了<a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库</a>的概念将音频元数据和音频文件分离，便于格式化地整理音乐的元数据。</p>
+<p>后者包括一套完整的服务端、客户端应用。客户端用于实际的播放，服务端则用于提供客户端所需的音频、封面等资源。我们曾经设想过将分发的形式以 <code>P2P</code> 的方式呈现，但最终还是选择了传统的 <code>C/S</code> 架构，将 <code>Anni</code> 定位为一个便于 <code>Self host</code> 的项目。<code>Anni</code> 服务端的理想部署环境是 <code>NAS</code>，但同时也支持基于 <code>Google Drive</code> 的 <code>VPS</code> 部署方式。</p>
+<p>目前，前者的实现已较为完善，但在数据格式及工具的易用性上仍有待优化，不能完全稳定下来（如 <a href="https://gist.github.com/Yesterday17/c7aed38d46666456f65e9af41287dc27">Anni 元数据仓库 v2</a>）；后者则是目前开发的重点，待敲定的包括 <code>Anniv</code> 的协议细节，各服务端和客户端的实现也正在进行中。</p>
 <h1><a class="header" href="#讲在前面" id="讲在前面">讲在前面</a></h1>
 <p><code>Project Anni</code> 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
 <p>和每一个定制项目一样，<code>Anni</code> 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
-<p>同时，作为我用 <code>Rust</code> 编写的第一个较大型项目，这对我而言也是一个 <code>Learn to Rust</code> 的过程，因此代码质量一定有所不足，欢迎各位的 PR。</p>
+<p>同时，作为我用 <code>Rust</code> 编写的第一个较大型项目，这对我而言也是一个 <code>Learn to Rust</code> 的过程，因此代码质量一定有所不足，欢迎各位的 <code>Pull Request</code>。</p>
 <p>我只希望，在填坑 <code>Anni</code> 的过程中，<strong>不要遗忘了初心</strong>。</p>
 <h1><a class="header" href="#前言" id="前言">前言</a></h1>
 <h2><a class="header" href="#云音乐" id="云音乐">云音乐</a></h2>
@@ -202,16 +202,33 @@
 <li>为了应对硬盘问题，我使用了 <code>rclone</code> 挂载。但在音乐更新后，<code>Airsonic</code> 需要花费大量的时间（小时级别）重新扫描整个音频目录，读取每一个音频文件的元数据。这么长的时间差完全不能满足「马上就听」的需求。</li>
 <li><code>Airsonic</code> 支持部分更新，根据目录和文件的 <code>lastModifiedTime</code> 决定是否扫描。但 <code>Google Drive</code> 对于这部分的实现并不遵循一般文件系统的行为，对内层文件的更新并不会导致外层目录的修改时间变化，宣告了 <code>Airsonic</code> 的这个特性完全无法使用。</li>
 <li><code>Airsonic</code> 诸如音乐上传、下载、<code>last.fm</code> 的功能是我不需要的，而且没有办法完全关闭。<strong>使用这些功能可能会导致未定义行为</strong>（如上传到 <code>rclone</code> 挂载的目录可能会打乱原本的目录结构）。尽管我可以不使用这些功能，但我不能要求和我一起整理资源，共用平台的朋友永远都不使用这些功能。</li>
-<li>更新缓慢，<code>Bug</code> 丛生。尽管有另一个 <code>fork</code> 但问题还是很多，且对我而言维护起来过于困难。</li>
+<li>更新缓慢，<code>Bug</code> 丛生。尽管有另一个 <code>fork</code> 但问题还是很多，且对我而言维护起来过于困难。（更新：现在只有这个 <code>fork</code> 在积极维护，原仓库已经 <code>Archive</code> 了）</li>
 </ol>
 <p>当然了，多多少少还有一些没有列出来的问题。由于这些问题的存在，最终促使我决定在另一个意义上<strong>自建</strong>音乐平台：自己造轮子。</p>
 <h2><a class="header" href="#我们需要什么" id="我们需要什么">我们需要什么？</a></h2>
 <p>在 <code>Project Anni</code> 发起半年后，我再次回头来看这个问题：我们需要什么？</p>
 <p>从听音乐的角度来看，最基础的需求是<strong>我们需要听音乐</strong>，在此之上的是我们需要听<strong>高音质的音乐</strong>。更进一步，我们希望在不同的时间<strong>根据不同的需求听不同种类的音乐</strong>。</p>
-<p>从信息的角度来看，最基础的是我们需要<strong>知道音乐的标题</strong>，然后是<strong>作者、封面等其他信息</strong>。更进一步，我们希望在专辑、艺术家等信息之间<strong>快速跳转</strong>。最重要的是，我们<strong>不希望信息消失</strong>（点名批评网易云音乐）。</p>
+<p>从信息的角度来看，最基础的是我们需要<strong>知道音乐的标题</strong>，然后是<strong>艺术家、封面等其他信息</strong>。更进一步，我们希望在专辑、艺术家等信息之间<strong>快速跳转</strong>。最重要的是，我们<strong>不希望信息消失</strong>（点名批评网易云音乐）。</p>
 <h2><a class="header" href="#理想的-anni-部署结构" id="理想的-anni-部署结构">理想的 Anni 部署结构</a></h2>
 <p><code>Anni</code> 在设计之初是针对资源所有者的。理想的部署模型是资源所有者通过 <code>Annil</code> 共享自己已有的资源，用户通过添加所有者的 <code>Annil</code> 地址以访问资源所有者共享的资源。资源所有者通过凭据限制可以访问资源者的身份、人数等。</p>
-<p>但随着我</p>
+<p>但随着资源整理的深入，<code>Annil</code> 对个人呈中心化的趋势已日趋明显。<code>Anni</code> 逐渐成为我个人从各资源平台获取音乐资源、整理后收听的唯一途径。在这种变化下，各设备只与一个 <code>Annil</code> 通信并获取音频已成为目前我个人使用中的事实架构。</p>
+<h2><a class="header" href="#与辅种的矛盾" id="与辅种的矛盾">与辅种的矛盾？</a></h2>
+<p><code>Anni</code> 的设计目标是没有考虑到辅种的，或者换句话说，<code>Anni</code> 的目标是将通过 <code>Anni</code> 整理后的音频作为做种的目标。<code>Anni</code> 整理后的音频资源包含相对统一的音频标签和内嵌的封面，并以统一的文件名和格式呈现。<code>Anni</code> 本身也提供了对标签等信息进行检查的能力，确保结果音频在元数据这一层面的质量相对较高。</p>
+<p>这样的设计考量意味着如果你希望在使用 <code>Anni</code> 的同时保种，那你就需要在硬盘上存放两份音频数据。不过一般音频相比其他资源而言占用空间还是较小的，我整理到现在近 <code>1000</code> 张单曲/专辑的空间占用也只有 <code>300GiB</code> 不到（不含 <code>Hi-res</code>），个人认为空间问题还是相对较小的。</p>
+<p>当然了，如果你整理的目标是 <code>TLMC</code> 这样的巨型合集，那就是另一个故事了（<code>93661</code> 个项目，总计 <code>1.7 TiB</code>，笑）。</p>
+<h2><a class="header" href="#与-airsonic-对比" id="与-airsonic-对比">与 <code>Airsonic</code> 对比</a></h2>
+<p>和 <code>Airsonic</code> 相比，<code>Anni</code> 的优势如下：</p>
+<ul>
+<li>扫描速度快。对于以 <code>rclone</code> 挂载到本地的 <code>250G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>1</code> 分钟左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
+<li>元数据更新方便。由于元数据和音频文件脱钩，因此修改元数据只需要对元数据仓库中的文本进行修改即可。将错误修正写回音频文件的过程<strong>并不是必须</strong>的（尽管一般个人因为强迫症会选择写回）。</li>
+<li>歌单等附加性功能（<code>Anniv</code>）与音频分发（<code>Annil</code>）脱钩。这意味着如果我们不需要多余的功能，只想专心听歌，完全可以只使用 <code>Annil</code>。而分拆出来的 <code>Anniv</code> 则可以放手实现各种附加功能。并且数据还可以跨 <code>Annil</code> 存在。</li>
+<li>资源占用小。个人实际使用下 <code>Annil</code> 的待机内存占用在 <code>10MiB</code> 以内，客户端访问时（在不转码的情况下，转码调用的是 <code>ffmpeg</code>）也不超过 <code>20MiB</code>。考虑到 <code>Annil</code> 目前的部署场景基本是 <code>Self Host</code>，这样的资源消耗对我个人而言可以说是完美的。</li>
+</ul>
+<p>而目前的劣势也很明显：</p>
+<ul>
+<li>需要手动整理。这是 <code>Anni</code> 存在的基石，<code>Anni</code> 只会提供更便于整理资源的工具，<strong>一定</strong>不会跳过资源整理这一步。</li>
+<li>对收藏、歌单等功能的支持还没有开始。<code>Anniv</code> 的协议还没有完全敲定，也没有可用的前端、后端、客户端。目前的客户端是实现了 <code>Airsonic</code> 协议后借用的 <code>DSub</code> 等 <code>Airsonic</code> 客户端，只是还算能用的状态。</li>
+</ul>
 <h1><a class="header" href="#anni-是如何工作的" id="anni-是如何工作的">Anni 是如何工作的？</a></h1>
 <p>从组成上来说，<code>Anni</code> 分为三个部分：</p>
 <ol>
@@ -233,19 +250,19 @@
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
 <p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。这个实现存在一些问题（如 <code>REM</code> 解析），仍需改进。后续 <code>Anni</code> 可能会自己重新实现一份。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题，目前的使用已经没有问题了。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
-<p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页和企划/组合的官网；较可靠来源为 <code>iTunes</code> 上的专辑信息、<code>BK</code> 上印刷的信息等；次可靠来源为 <code>VGMDB</code> 等数据库收集的非一手资料，<code>CUE</code> 中附带的元信息等。</p>
+<p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页、企划/组合的官网和 <code>BK</code>；较可靠来源为 <code>iTunes</code> 上的专辑信息，<code>VGMDB</code> 等数据库收集的非一手资料；次可靠来源为 <code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>
 <h3><a class="header" href="#元数据导入导出" id="元数据导入导出">元数据导入/导出</a></h3>
-<p>在整理《THE IDOLM@STER》的音乐资源时，我拿到的资源是这样的：</p>
+<p>在整理「<code>THE IDOLM@STER</code>」的音乐资源时，我拿到的资源是这样的：</p>
 <ol>
 <li>所有资源均为 <code>FLAC</code> 格式，以罗马音命名</li>
 <li>有内嵌元数据，但同样有大量罗马音填充</li>
 </ol>
 <p>理想的整理方式是这样的：</p>
 <ol>
-<li>从一个目录的 <code>FLAC</code> 中<strong>导出</strong>专辑的元数据</li>
+<li>从一个目录的 <code>FLAC</code> 中将专辑的元数据<strong>导出</strong>到文本</li>
 <li>和可信源进行对比</li>
 <li>将整理后的元数据重新<strong>导入</strong> <code>FLAC</code> 中</li>
 </ol>
