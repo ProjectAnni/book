@@ -75,4 +75,3 @@
   - [split](50.anni-cli/02.split.md)
   - [convention](50.anni-cli/03.convention.md)
   - [repo](50.anni-cli/04.repo.md)
-  - [get](50.anni-cli/05.get.md)
