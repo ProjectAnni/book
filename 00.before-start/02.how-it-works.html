@@ -136,7 +136,7 @@
                         </a>
                         
                         
-                        <a href="https://github.com/project-anni/anni" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
                         
@@ -188,7 +188,7 @@
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
 <p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题，目前的使用已经没有问题了。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/ProjectAnni/cue_sheet">ProjectAnni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
 <p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页、企划/组合的官网和 <code>BK</code>；较可靠来源为 <code>iTunes</code> 上的专辑信息，<code>VGMDB</code> 等数据库收集的非一手资料；次可靠来源为 <code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>
@@ -204,7 +204,7 @@
 <li>和可信源进行对比</li>
 <li>将整理后的元数据重新<strong>导入</strong> <code>FLAC</code> 中</li>
 </ol>
-<p>这也是 <code>Anni</code> 目前的分轨整理方式。<code>Anni</code> 的官方仓库位于 <code>project-anni/repo</code>，目前存放了我制定元数据仓库格式以来整理的所有的专辑信息。</p>
+<p>这也是 <code>Anni</code> 目前的分轨整理方式。<code>Anni</code> 的官方仓库位于 <code>ProjectAnni/repo</code>，目前存放了我制定元数据仓库格式以来整理的所有的专辑信息。</p>
 <h2><a class="header" href="#音频仓库相关" id="音频仓库相关">音频仓库相关</a></h2>
 <p>音频仓库（<code>Audio Library</code>）是用于存放音频文件的系统，对目录组织的要求较为松散，但对专辑目录及音轨的命名有着较严格的要求。</p>
 <p>元数据仓库（<code>Metadata Repository</code>）是用于存放音频元数据的仓库，格式要求严格。</p>

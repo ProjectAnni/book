@@ -138,7 +138,7 @@
                         </a>
                         
                         
-                        <a href="https://github.com/project-anni/anni" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
                         
@@ -174,7 +174,7 @@
 <p><code>Project Anni</code> 包括两个部分：对音乐资源的组织和对音频资源的分发。</p>
 <p>前者包含整轨切分、元信息编辑、元数据整理等。<code>Anni</code> 提供了切分整轨、检查音频的工具，并提出了<a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库</a>的概念将音频元数据和音频文件分离，便于格式化地整理音乐的元数据。</p>
 <p>后者包括一套完整的服务端、客户端应用。客户端用于实际的播放，服务端则用于提供客户端所需的音频、封面等资源。我们曾经设想过将分发的形式以 <code>P2P</code> 的方式呈现，但最终还是选择了传统的 <code>C/S</code> 架构，将 <code>Anni</code> 定位为一个便于 <code>Self host</code> 的项目。<code>Anni</code> 服务端的理想部署环境是 <code>NAS</code>，但同时也支持基于 <code>Google Drive</code> 的 <code>VPS</code> 部署方式。</p>
-<p>目前，前者的实现已较为完善，但在数据格式及工具的易用性上仍有待优化，不能完全稳定下来（如 <a href="https://gist.github.com/Yesterday17/c7aed38d46666456f65e9af41287dc27">Anni 元数据仓库 v2</a>）；后者则是目前开发的重点，待敲定的包括 <code>Anniv</code> 的协议细节，各服务端和客户端的实现也正在进行中。</p>
+<p>目前，前者的实现已较为完善，但在数据格式及工具的易用性上仍有待优化，不能完全稳定下来；后者则是目前开发的重点，待敲定的包括 <code>Anniv</code> 的协议细节，各服务端和客户端的实现也正在进行中。</p>
 <h1><a class="header" href="#讲在前面" id="讲在前面">讲在前面</a></h1>
 <p><code>Project Anni</code> 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
 <p>和每一个定制项目一样，<code>Anni</code> 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
@@ -219,7 +219,7 @@
 <h2><a class="header" href="#与-airsonic-对比" id="与-airsonic-对比">与 <code>Airsonic</code> 对比</a></h2>
 <p>和 <code>Airsonic</code> 相比，<code>Anni</code> 的优势如下：</p>
 <ul>
-<li>扫描速度快。对于以 <code>rclone</code> 挂载到本地的 <code>250G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>1</code> 分钟左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
+<li>扫描速度快。对于以 <code>rclone</code> 挂载到本地的 <code>250G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>1</code> 分钟左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构，并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
 <li>元数据更新方便。由于元数据和音频文件脱钩，因此修改元数据只需要对元数据仓库中的文本进行修改即可。将错误修正写回音频文件的过程<strong>并不是必须</strong>的（尽管一般个人因为强迫症会选择写回）。</li>
 <li>歌单等附加性功能（<code>Anniv</code>）与音频分发（<code>Annil</code>）脱钩。这意味着如果我们不需要多余的功能，只想专心听歌，完全可以只使用 <code>Annil</code>。而分拆出来的 <code>Anniv</code> 则可以放手实现各种附加功能。并且数据还可以跨 <code>Annil</code> 存在。</li>
 <li>资源占用小。个人实际使用下 <code>Annil</code> 的待机内存占用在 <code>10MiB</code> 以内，客户端访问时（在不转码的情况下，转码调用的是 <code>ffmpeg</code>）也不超过 <code>20MiB</code>。考虑到 <code>Annil</code> 目前的部署场景基本是 <code>Self Host</code>，这样的资源消耗对我个人而言可以说是完美的。</li>
@@ -250,7 +250,7 @@
 <li>实现的 <code>CUE</code> 部分还可以用于项目的其他部分</li>
 </ol>
 <p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
-<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/project-anni/cue_sheet">project-anni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题，目前的使用已经没有问题了。</p>
+<p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/ProjectAnni/cue_sheet">ProjectAnni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题。</p>
 <h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
 <p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页、企划/组合的官网和 <code>BK</code>；较可靠来源为 <code>iTunes</code> 上的专辑信息，<code>VGMDB</code> 等数据库收集的非一手资料；次可靠来源为 <code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>
@@ -266,7 +266,7 @@
 <li>和可信源进行对比</li>
 <li>将整理后的元数据重新<strong>导入</strong> <code>FLAC</code> 中</li>
 </ol>
-<p>这也是 <code>Anni</code> 目前的分轨整理方式。<code>Anni</code> 的官方仓库位于 <code>project-anni/repo</code>，目前存放了我制定元数据仓库格式以来整理的所有的专辑信息。</p>
+<p>这也是 <code>Anni</code> 目前的分轨整理方式。<code>Anni</code> 的官方仓库位于 <code>ProjectAnni/repo</code>，目前存放了我制定元数据仓库格式以来整理的所有的专辑信息。</p>
 <h2><a class="header" href="#音频仓库相关" id="音频仓库相关">音频仓库相关</a></h2>
 <p>音频仓库（<code>Audio Library</code>）是用于存放音频文件的系统，对目录组织的要求较为松散，但对专辑目录及音轨的命名有着较严格的要求。</p>
 <p>元数据仓库（<code>Metadata Repository</code>）是用于存放音频元数据的仓库，格式要求严格。</p>
@@ -1116,8 +1116,8 @@ Access-Control-Allow-Headers: Authorization
 <p><code>Annil</code> 本身只是音频仓库实现的标准。我们鼓励不同的音频仓库实现。</p>
 <h2><a class="header" href="#实现列表" id="实现列表">实现列表</a></h2>
 <table><thead><tr><th>名称</th><th>地址</th></tr></thead><tbody>
-<tr><td><code>annil-rs</code></td><td><a href="https://github.com/project-anni/anni/tree/master/annil">https://github.com/project-anni/anni/tree/master/annil</a></td></tr>
-<tr><td><code>go-annil</code></td><td><a href="https://github.com/SeraphJACK/go-annil">https://github.com/SeraphJACK/go-annil</a></td></tr>
+<tr><td><code>annil-rs</code></td><td><a href="https://github.com/ProjectAnni/anni/tree/master/annil">https://github.com/ProjectAnni/anni/tree/master/annil</a></td></tr>
+<tr><td><code>go-annil</code></td><td><a href="https://github.com/ProjectAnni/go-annil">https://github.com/ProjectAnni/go-annil</a></td></tr>
 </tbody></table>
 <h1><a class="header" href="#annil-rs" id="annil-rs">annil-rs</a></h1>
 <p><code>annil-rs</code> 是最简单的音频仓库实现之一。其本身只实现了对 <code>HS256</code> 签名的 <code>JWT</code> 的校验，只要校验通过就允许用户访问资源。</p>
@@ -1844,7 +1844,7 @@ interface Id {
 <h2><a class="header" href="#兼容性" id="兼容性">兼容性</a></h2>
 <p>当 <code>invite</code> 特性启用时，<code>close</code> 特性无效。</p>
 <h1><a class="header" href="#annisonic" id="annisonic">Annisonic</a></h1>
-<p><a href="https://github.com/project-anni/annisonic"><code>Annisonic</code></a> 是 <code>Project Anni</code> 在开发过程中为尽早替换掉当前正在使用的 <code>Airsonic</code> 而实现的。</p>
+<p><a href="https://github.com/ProjectAnni/annisonic"><code>Annisonic</code></a> 是 <code>Project Anni</code> 在开发过程中为尽早替换掉当前正在使用的 <code>Airsonic</code> 而实现的。</p>
 <p>其在最小程度上实现了 <code>Subsonic API</code>，以在客户端未开发完成的当下提供半完整的音频服务。</p>
 <h1><a class="header" href="#实现的-api" id="实现的-api">实现的 API</a></h1>
 <p><code>Annisonic</code> 实现了以下 <a href="http://www.subsonic.org/pages/api.jsp"><code>Subsonic API</code></a>：</p>
@@ -1984,8 +1984,6 @@ interface Id {
 <h3><a class="header" href="#存在问题-2" id="存在问题-2">存在问题</a></h3>
 <p>暂无</p>
 <h1><a class="header" href="#部署向导" id="部署向导">部署向导</a></h1>
-<h2><a class="header" href="#音频目录" id="音频目录">音频目录</a></h2>
-<p>我们假设读者已将音频文件以<strong>约定目录格式</strong>存放于 <code>/music</code> 目录下。</p>
 <h2><a class="header" href="#元数据仓库" id="元数据仓库">元数据仓库</a></h2>
 <p>我们假设读者已将需要的元数据仓库 <code>clone</code> 到 <code>/repo</code> 下。</p>
 <h2><a class="header" href="#配置文件-1" id="配置文件-1">配置文件</a></h2>
@@ -1998,12 +1996,12 @@ password = &quot;anni&quot;
 
 [repo]
 # 元数据仓库的位置
-root = &quot;/home/repo&quot;
+root = &quot;/repo&quot;
 
 [annil]
 # Annil 的地址
 # 确保外网可以访问，Annisonic 会直接 302 重定向
-server = &quot;http://localhost:3614&quot;
+server = &quot;https://annil.example.org&quot;
 # Annil 的用户 Token
 token = &quot;ey...&quot;
 
@@ -2029,7 +2027,6 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 <li><code>split</code>：对整轨音频分割的工具，用于替代 <code>shnsplit</code></li>
 <li><code>convention</code>：对 <code>anni</code> 音频约定进行检查的工具</li>
 <li><code>repo</code>：对 <code>Anni</code> 元数据仓库进行操作的工具</li>
-<li><code>get</code>：获取外部元数据的工具（未来可能会合并进 <code>repo</code> 中）</li>
 </ul>
 <h1><a class="header" href="#flac" id="flac">flac</a></h1>
 <p>针对日常使用的场景，<code>anni</code> 的 <code>flac</code> 部分（需要）实现的功能列表如下：</p>
@@ -2132,8 +2129,6 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 从 CUE 读取各音轨元数据</li>
-<li><input disabled="" type="checkbox"/>
-从 <code>repo</code> 直接读取元数据</li>
 </ul>
 </li>
 <li><input disabled="" type="checkbox" checked=""/>
@@ -2204,20 +2199,9 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 删除专辑
 <ul>
 <li><input disabled="" type="checkbox"/>
-从分类中删除（可选）</li>
-<li><input disabled="" type="checkbox"/>
 用户确认</li>
 </ul>
 </li>
-</ul>
-<h2><a class="header" href="#分类已废弃" id="分类已废弃">~~分类~~已废弃</a></h2>
-<ul>
-<li><input disabled="" type="checkbox"/>
-<del>增加分类</del></li>
-<li><input disabled="" type="checkbox"/>
-<del>向分类增加专辑</del></li>
-<li><input disabled="" type="checkbox"/>
-<del>删除分类</del></li>
 </ul>
 <h2><a class="header" href="#元数据" id="元数据">元数据</a></h2>
 <ul>
@@ -2244,10 +2228,12 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 </ul>
 </li>
 <li><input disabled="" type="checkbox"/>
-输出分类
+输出 Tag
 <ul>
 <li><input disabled="" type="checkbox"/>
-输出分类专辑信息</li>
+输出 Tag 信息</li>
+<li><input disabled="" type="checkbox"/>
+输出 Tag 下专辑信息</li>
 </ul>
 </li>
 </ul>

@@ -136,7 +136,7 @@
                         </a>
                         
                         
-                        <a href="https://github.com/project-anni/anni" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
                         
@@ -168,8 +168,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#部署向导" id="部署向导">部署向导</a></h1>
-<h2><a class="header" href="#音频目录" id="音频目录">音频目录</a></h2>
-<p>我们假设读者已将音频文件以<strong>约定目录格式</strong>存放于 <code>/music</code> 目录下。</p>
 <h2><a class="header" href="#元数据仓库" id="元数据仓库">元数据仓库</a></h2>
 <p>我们假设读者已将需要的元数据仓库 <code>clone</code> 到 <code>/repo</code> 下。</p>
 <h2><a class="header" href="#配置文件" id="配置文件">配置文件</a></h2>
@@ -182,12 +180,12 @@ password = &quot;anni&quot;
 
 [repo]
 # 元数据仓库的位置
-root = &quot;/home/repo&quot;
+root = &quot;/repo&quot;
 
 [annil]
 # Annil 的地址
 # 确保外网可以访问，Annisonic 会直接 302 重定向
-server = &quot;http://localhost:3614&quot;
+server = &quot;https://annil.example.org&quot;
 # Annil 的用户 Token
 token = &quot;ey...&quot;
 
