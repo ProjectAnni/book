@@ -48,6 +48,7 @@
   - [Anni 音频仓库协议](./05.audio-library/01.protocol.md)
   - [不同的音频仓库实现](./05.audio-library/02.implements.md)
   - [annil-rs](./05.audio-library/03.annil-rs.md)
+  - [[Draft] Annil 音轨扩展](./05.audio-library/04.annil-track-extension.md)
 - [管理后端 Anniv](./06.anniv/00.readme.md)
   - [基本信息](./06.anniv/01.info.md)
   - [用户系统](./06.anniv/02.user.md)
