@@ -6,4 +6,4 @@ language = "zh"
 src = "src"
 
 [output.html]
-git-repository-url = "https://github.com/project-anni/anni"
+git-repository-url = "https://github.com/ProjectAnni/anni"
