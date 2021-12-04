@@ -170,10 +170,10 @@
                         <h1><a class="header" href="#anni-音频仓库协议" id="anni-音频仓库协议">Anni 音频仓库协议</a></h1>
 <h2><a class="header" href="#版本信息" id="版本信息">版本信息</a></h2>
 <blockquote>
-<p>⚠️️在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
+<p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2021 年 9 月 21 日
-协议版本：0.1.2</p>
+<p>最后修改：2021 年 12 月 04 日
+协议版本：0.1.3-DRAFT</p>
 <h2><a class="header" href="#定义" id="定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -308,6 +308,42 @@ Access-Control-Allow-Headers: Authorization
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获得封面</td><td><code>Content-Type</code> 为 <code>image/jpeg</code></td></tr>
 <tr><td><code>404</code></td><td>封面获取失败</td><td></td></tr>
+</tbody></table>
+<h3><a class="header" href="#歌词分发-draft" id="歌词分发-draft">歌词分发 【Draft】</a></h3>
+<p>歌词分发基于音频所在专辑的 <code>catalog</code> 和 <code>track_id</code>。</p>
+<p>获得歌词的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyric</code></p>
+<h4><a class="header" href="#歌词语言信息" id="歌词语言信息">歌词语言信息</a></h4>
+<p>可以通过 <code>GET /{catalog}/{track_id}/lyrics</code> 获取歌词的原生语言与可选翻译列表。</p>
+<p>返回 <code>body</code> 为一个 JSON 对象，<code>Content-Type</code> 须为 <strong><code>application/json</code></strong>，结构如下。</p>
+<table><thead><tr><th>成员名</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>source</code></td><td>歌曲原生语言</td></tr>
+<tr><td><code>translations</code></td><td>可选的翻译</td></tr>
+</tbody></table>
+<p>示例如下。</p>
+<pre><code class="language-json">{
+  &quot;source&quot;: &quot;jp&quot;,
+  &quot;translations&quot;: [&quot;zh-Hans&quot;]
+}
+</code></pre>
+<h5><a class="header" href="#返回状态表-3" id="返回状态表-3">返回状态表</a></h5>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>200</code></td><td>成功获取歌词信息</td></tr>
+<tr><td><code>404</code></td><td>歌词信息不存在</td></tr>
+</tbody></table>
+<h4><a class="header" href="#歌词语言" id="歌词语言">歌词语言</a></h4>
+<p>音轨的歌词可能存在复数种翻译，可以通过以下参数请求特定语言的歌词。</p>
+<table><thead><tr><th>参数名</th><th>含义</th><th>可选项</th><th>缺省值</th></tr></thead><tbody>
+<tr><td><code>lang</code></td><td>所请求歌词翻译的语言代码</td><td>留空、<code>zh-Hans</code>、<code>zh-Hant</code>、<code>ja</code>、...</td><td><code> </code></td></tr>
+</tbody></table>
+<p>当 <code>lang</code> 参数留空时，表示请求未翻译的原文。否则则请求指定语言的歌词，语言代码的使用参考 <a href="https://datatracker.ietf.org/doc/html/rfc5646">RFC5646</a> 标准。</p>
+<h4><a class="header" href="#返回状态表-4" id="返回状态表-4">返回状态表</a></h4>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>200</code></td><td>成功获取歌词</td></tr>
+<tr><td><code>404</code></td><td>歌词获取失败</td></tr>
+</tbody></table>
+<h4><a class="header" href="#返回头部-1" id="返回头部-1">返回头部</a></h4>
+<table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>Content-Type</code></td><td>歌词的 <code>MIME Type</code>，根据情况可能为 <code>text/plain</code> 或 <code>text/lrc</code></td></tr>
 </tbody></table>
 
                     </main>
