@@ -1104,6 +1104,7 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>Content-Type</code></td><td>音频的 <code>MIME Type</code>，根据情况可能为 <code>audio/flac</code>、<code>audio/mp3</code> 等</td></tr>
 <tr><td><code>X-Origin-Type</code></td><td>源文件的 <code>MIME Type</code>，当与 <code>Content-Type</code> 不同时表明音频经过了转码</td></tr>
 <tr><td><code>X-Origin-Size</code></td><td>源文件的大小，单位为字节（<code>Byte</code>）</td></tr>
+<tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
 </tbody></table>
 <h3><a class="header" href="#封面分发" id="封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>catalog</code>。获得封面的 <code>API</code> 定义为 <code>GET /{catalog}/cover</code>。</p>
