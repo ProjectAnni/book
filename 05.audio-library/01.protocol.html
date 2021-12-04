@@ -222,13 +222,13 @@ Access-Control-Allow-Headers: Authorization
 <h2><a class="header" href="#获取可用专辑" id="获取可用专辑">获取可用专辑</a></h2>
 <p>由于音频仓库整合了多个音频后端，因此继承了所有音频后端的可用音频数据。</p>
 <p>获得可用专辑的 <code>API</code> 定义为 <code>GET /albums</code>，仅合法的用户 <code>Token</code> 可以正常请求。</p>
-<p>响应内容包含当前仓库所有可用的专辑 <code>catalog</code> 与专辑 <code>Catalog</code> 和 <code>Disc Catalog</code> 的映射，如下例：</p>
+<p>响应内容包含当前仓库所有可用的 <code>catalog</code> 以及多专辑 <code>Catalog</code> 包含的 <code>Catalog</code> 列表，如下例：</p>
 <pre><code class="language-json">{
-  // 所有可用的专辑 Catalog
-  &quot;albums&quot;: [&quot;KSLA-0178&quot;, &quot;KSLA-0155~9&quot;, &quot;TS-0003&quot;],
-  // 对含有多张 Disc 的专辑，额外返回专辑 Catalog 与 Disc Catalog 的映射
-  // 请求音频和歌词时应使用 Disc catalog，即数组中的 Catalog 请求资源
-  // 请求封面时，专辑 Catalog 和 Disc Catalog 都可以使用
+  // 所有可用的 Catalog
+  &quot;albums&quot;: [&quot;KSLA-0178&quot;, &quot;KSLA-0155&quot;, &quot;KSLA-0156&quot;, &quot;KSLA-0157&quot;, &quot;KSLA-0158&quot;, &quot;KSLA-0159&quot;, &quot;TS-0003-01&quot;, &quot;TS-0003-02&quot;],
+  // 对含有多张 Disc 的专辑，额外返回专辑 Catalog 与 Catalog 的映射
+  // 请求音频和歌词时应使用 Catalog，即数组中的 Catalog 请求资源
+  // 请求封面时，专辑 Catalog 也可以使用
   &quot;discs&quot;: {
     &quot;KSLA-0155~9&quot;: [&quot;KSLA-0155&quot;, &quot;KSLA-0156&quot;, &quot;KSLA-0157&quot;, &quot;KSLA-0158&quot;, &quot;KSLA-0159&quot;],
     &quot;TS-0003&quot;: [&quot;TS-0003-01&quot;, &quot;TS-0003-02&quot;]
@@ -250,7 +250,7 @@ Access-Control-Allow-Headers: Authorization
   // 分享人用户名
   &quot;username&quot;: &quot;SeraphJACK&quot;,
   // 分享的音频，以 JSON Object 的形式表示
-  // 作为 key 的字符串表示该分享允许访问者访问的专辑（Disc Catalog）
+  // 作为 key 的字符串表示该分享允许访问者访问的专辑（Catalog）
   // 作为 value 的数组（[]int）表示该分享允许访问者访问的音轨号（track_id）
   &quot;audios&quot;: {
     &quot;LACM-14713&quot;: [1, 2, 3],
