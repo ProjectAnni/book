@@ -222,7 +222,19 @@ Access-Control-Allow-Headers: Authorization
 <h2><a class="header" href="#获取可用专辑" id="获取可用专辑">获取可用专辑</a></h2>
 <p>由于音频仓库整合了多个音频后端，因此继承了所有音频后端的可用音频数据。</p>
 <p>获得可用专辑的 <code>API</code> 定义为 <code>GET /albums</code>，仅合法的用户 <code>Token</code> 可以正常请求。</p>
-<p>响应内容为当前仓库所有可用专辑 <code>catalog</code> 的 <code>JSON</code> 数组。</p>
+<p>响应内容包含当前仓库所有可用的专辑 <code>catalog</code> 与专辑 <code>Catalog</code> 和 <code>Disc Catalog</code> 的映射，如下例：</p>
+<pre><code class="language-json">{
+  // 所有可用的专辑 Catalog
+  &quot;albums&quot;: [&quot;KSLA-0178&quot;, &quot;KSLA-0155~9&quot;, &quot;TS-0003&quot;],
+  // 对含有多张 Disc 的专辑，额外返回专辑 Catalog 与 Disc Catalog 的映射
+  // 请求音频和歌词时应使用 Disc catalog，即数组中的 Catalog 请求资源
+  // 请求封面时，专辑 Catalog 和 Disc Catalog 都可以使用
+  &quot;discs&quot;: {
+    &quot;KSLA-0155~9&quot;: [&quot;KSLA-0155&quot;, &quot;KSLA-0156&quot;, &quot;KSLA-0157&quot;, &quot;KSLA-0158&quot;, &quot;KSLA-0159&quot;],
+    &quot;TS-0003&quot;: [&quot;TS-0003-01&quot;, &quot;TS-0003-02&quot;]
+  }
+}
+</code></pre>
 <h2><a class="header" href="#资源分享" id="资源分享">资源分享</a></h2>
 <p>由于 <code>Anni</code> 音频仓库对用户身份存在验证，非注册用户无法访问未注册仓库中的资源；但如将音频仓库全面开放，则可能出现诸如滥用、版权等方面的问题。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
 <h3><a class="header" href="#分享-tokenshare-token" id="分享-tokenshare-token">分享 Token（Share Token）</a></h3>
@@ -238,7 +250,7 @@ Access-Control-Allow-Headers: Authorization
   // 分享人用户名
   &quot;username&quot;: &quot;SeraphJACK&quot;,
   // 分享的音频，以 JSON Object 的形式表示
-  // 作为 key 的字符串表示该分享允许访问者访问的专辑（Catalog）
+  // 作为 key 的字符串表示该分享允许访问者访问的专辑（Disc Catalog）
   // 作为 value 的数组（[]int）表示该分享允许访问者访问的音轨号（track_id）
   &quot;audios&quot;: {
     &quot;LACM-14713&quot;: [1, 2, 3],
@@ -281,7 +293,7 @@ Access-Control-Allow-Headers: Authorization
 <p><code>Anni</code> 音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
 <h3><a class="header" href="#音频分发" id="音频分发">音频分发</a></h3>
-<p>音频分发基于音频的 <code>catalog</code> 和 <code>track_id</code>。</p>
+<p>音频分发基于音频所在 <code>Disc</code> 的 <code>catalog</code> 和 <code>track_id</code>。</p>
 <p>获得音频的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}</code>。</p>
 <h4><a class="header" href="#音频偏好" id="音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
@@ -304,45 +316,46 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
 </tbody></table>
 <h3><a class="header" href="#封面分发" id="封面分发">封面分发</a></h3>
-<p>封面分发基于音频所在专辑的 <code>catalog</code>。获得封面的 <code>API</code> 定义为 <code>GET /{catalog}/cover</code>。</p>
+<p>封面分发基于音频所在专辑或 <code>Disc</code> 的 <code>catalog</code>。获得封面的 <code>API</code> 定义为 <code>GET /{catalog}/cover</code>。</p>
 <h4><a class="header" href="#返回状态表-2" id="返回状态表-2">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获得封面</td><td><code>Content-Type</code> 为 <code>image/jpeg</code></td></tr>
 <tr><td><code>404</code></td><td>封面获取失败</td><td></td></tr>
 </tbody></table>
-<h3><a class="header" href="#歌词分发-draft" id="歌词分发-draft">歌词分发 【Draft】</a></h3>
-<p>歌词分发基于音频所在专辑的 <code>catalog</code> 和 <code>track_id</code>。</p>
-<p>获得歌词的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyric</code></p>
-<h4><a class="header" href="#歌词语言信息" id="歌词语言信息">歌词语言信息</a></h4>
-<p>可以通过 <code>GET /{catalog}/{track_id}/lyrics</code> 获取歌词的原生语言与可选翻译列表。</p>
-<p>返回 <code>body</code> 为一个 JSON 对象，<code>Content-Type</code> 须为 <strong><code>application/json</code></strong>，结构如下。</p>
+<h3><a class="header" href="#歌词信息" id="歌词信息">歌词信息</a></h3>
+<p>歌词信息基于音频所在专辑 <code>Disc</code> 的 <code>catalog</code> 和 <code>track_id</code>。获取歌词信息的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyrics</code>。</p>
+<p>该请求的返回为一个 JSON 对象，<code>Content-Type</code> 须为 <strong><code>application/json</code></strong>，包含歌词的<strong>原生语言</strong>与可选<strong>翻译列表</strong> ，结构如下：</p>
 <table><thead><tr><th>成员名</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>source</code></td><td>歌曲原生语言</td></tr>
 <tr><td><code>translations</code></td><td>可选的翻译</td></tr>
 </tbody></table>
-<p>示例如下。</p>
+<p>如下例：。</p>
 <pre><code class="language-json">{
   &quot;source&quot;: &quot;jp&quot;,
   &quot;translations&quot;: [&quot;zh-Hans&quot;]
 }
 </code></pre>
-<h5><a class="header" href="#返回状态表-3" id="返回状态表-3">返回状态表</a></h5>
+<p>涉及到的语言代码参考 [RFC5646][rfc5646] 标准。
+[rfc5646]: https://datatracker.ietf.org/doc/html/rfc5646</p>
+<h4><a class="header" href="#返回状态表-3" id="返回状态表-3">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取歌词信息</td></tr>
-<tr><td><code>404</code></td><td>歌词信息不存在</td></tr>
+<tr><td><code>404</code></td><td>不存在可用歌词</td></tr>
 </tbody></table>
-<h4><a class="header" href="#歌词语言" id="歌词语言">歌词语言</a></h4>
-<p>音轨的歌词可能存在复数种翻译，可以通过以下参数请求特定语言的歌词。</p>
-<table><thead><tr><th>参数名</th><th>含义</th><th>可选项</th><th>缺省值</th></tr></thead><tbody>
-<tr><td><code>lang</code></td><td>所请求歌词翻译的语言代码</td><td>留空、<code>zh-Hans</code>、<code>zh-Hant</code>、<code>ja</code>、...</td><td><code> </code></td></tr>
+<h3><a class="header" href="#歌词分发" id="歌词分发">歌词分发</a></h3>
+<p>歌词分发的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyric</code>，可用参数如下：</p>
+<table><thead><tr><th>参数名</th><th>含义</th><th>可选项</th></tr></thead><tbody>
+<tr><td><code>lang</code></td><td>所请求歌词翻译的语言代码</td><td>留空、<code>zh-Hans</code>、<code>zh-Hant</code>、<code>ja</code> 等</td></tr>
 </tbody></table>
-<p>当 <code>lang</code> 参数留空时，表示请求未翻译的原文。否则则请求指定语言的歌词，语言代码的使用参考 <a href="https://datatracker.ietf.org/doc/html/rfc5646">RFC5646</a> 标准。</p>
+<p>当 <code>lang</code> 参数留空时，表示请求未翻译的原文，否则则请求指定语言的歌词。</p>
+<p>当存在 <code>lrc</code> 歌词时，优先返回 <code>lrc</code> 歌词，否则则返回 <code>txt</code> 歌词。</p>
 <h4><a class="header" href="#返回状态表-4" id="返回状态表-4">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取歌词</td></tr>
-<tr><td><code>404</code></td><td>歌词获取失败</td></tr>
+<tr><td><code>404</code></td><td>请求的歌词不存在</td></tr>
 </tbody></table>
 <h4><a class="header" href="#返回头部-1" id="返回头部-1">返回头部</a></h4>
+<p>当成功获得返回时，返回的头部会携带如下信息：</p>
 <table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>Content-Type</code></td><td>歌词的 <code>MIME Type</code>，根据情况可能为 <code>text/plain</code> 或 <code>text/lrc</code></td></tr>
 </tbody></table>
