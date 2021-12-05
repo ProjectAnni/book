@@ -4,49 +4,28 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Project Anni 使用手册</title>
-        
         <meta name="robots" content="noindex" />
-        
-        
-
-
         <!-- Custom HTML head -->
-        
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Anni 相关的所有文档信息均在此处。翻译募集中……">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
-
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -105,7 +84,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -122,33 +100,26 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Project Anni 使用手册</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -156,8 +127,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -169,30 +138,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#开始之前" id="开始之前">开始之前</a></h1>
+                        <h1 id="开始之前"><a class="header" href="#开始之前">开始之前</a></h1>
 <p>在一切开始之前，我希望各位能够对 <code>Project Anni</code> 中的各个部分有一个大致的印象。</p>
 <p><code>Project Anni</code> 包括两个部分：对音乐资源的组织和对音频资源的分发。</p>
 <p>前者包含整轨切分、元信息编辑、元数据整理等。<code>Anni</code> 提供了切分整轨、检查音频的工具，并提出了<a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库</a>的概念将音频元数据和音频文件分离，便于格式化地整理音乐的元数据。</p>
 <p>后者包括一套完整的服务端、客户端应用。客户端用于实际的播放，服务端则用于提供客户端所需的音频、封面等资源。我们曾经设想过将分发的形式以 <code>P2P</code> 的方式呈现，但最终还是选择了传统的 <code>C/S</code> 架构，将 <code>Anni</code> 定位为一个便于 <code>Self host</code> 的项目。<code>Anni</code> 服务端的理想部署环境是 <code>NAS</code>，但同时也支持基于 <code>Google Drive</code> 的 <code>VPS</code> 部署方式。</p>
 <p>目前，前者的实现已较为完善，但在数据格式及工具的易用性上仍有待优化，不能完全稳定下来；后者则是目前开发的重点，待敲定的包括 <code>Anniv</code> 的协议细节，各服务端和客户端的实现也正在进行中。</p>
-<h1><a class="header" href="#讲在前面" id="讲在前面">讲在前面</a></h1>
+<h1 id="讲在前面"><a class="header" href="#讲在前面">讲在前面</a></h1>
 <p><code>Project Anni</code> 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
 <p>和每一个定制项目一样，<code>Anni</code> 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
 <p>同时，作为我用 <code>Rust</code> 编写的第一个较大型项目，这对我而言也是一个 <code>Learn to Rust</code> 的过程，因此代码质量一定有所不足，欢迎各位的 <code>Pull Request</code>。</p>
 <p>我只希望，在填坑 <code>Anni</code> 的过程中，<strong>不要遗忘了初心</strong>。</p>
-<h1><a class="header" href="#前言" id="前言">前言</a></h1>
-<h2><a class="header" href="#云音乐" id="云音乐">云音乐</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="前言"><a class="header" href="#前言">前言</a></h1>
+<h2 id="云音乐"><a class="header" href="#云音乐">云音乐</a></h2>
 <p>相信大家都有过这样的经历，在各个音乐平台之间挣扎的经历。常常是平台 A 下架了某一首歌，平台 B 依靠独占吸收来自平台 A 的难民。</p>
 <p>这种现象很普遍，倒不如说在版权时代这是再正常不过的风景了。没有版权就不能上架，天经地义的事情。平台不过是希望吸引流量又不希望承担流量带来的法律风险罢了，否则一开始又为何要上架呢？</p>
 <p>罢了，<strong>下载到本地</strong>听吧。</p>
-<h2><a class="header" href="#本地音乐" id="本地音乐">本地音乐</a></h2>
+<h2 id="本地音乐"><a class="header" href="#本地音乐">本地音乐</a></h2>
 <p>本地音乐的来源就非常广泛了。</p>
 <p>一是从各大云音乐平台上下载得到的音频。其是否存在加密并不是什么麻烦的事情，因为<strong>音乐终究是要播放的</strong>，最不济你从操作系统层面把送给音频 API 的每一个采样都截下来不就拿到 <code>wav</code> 了吗（笑）</p>
 <p>二是各大公网音乐包，比如 <code>[Nemuri]</code> 的合集。这种合集的特点是音乐全，格式整齐，通常以统一的格式进行分享（如 <code>FLAC</code>、<code>MP3</code> 等）。</p>
 <p>有了音频文件，再配上音乐播放器就可以和云音乐一样听歌了。本地音乐的一大缺点在于更新，没有了云音乐运营，一切的一切都要靠你自己了。</p>
 <p>当然了，这并不是本地音乐唯一的问题。<strong>本地</strong>音乐<strong>最大的问题</strong>恰恰在于<strong>本地</strong>。且不论本地音乐增多后多端的存储成本，单单是音乐的同步就够你喝一壶的。就以基本的 <code>PC</code>、手机、平板三端同步为例，你需要在这三台设备之间反复横跳——一旦某一台设备没有同步，而你恰巧想要听某一张新发售的专辑——噩梦就降临了。</p>
 <p>于是，我们发现，云音乐恰巧是为了解决这些痛点而存在的。那我们要回到云音乐平台吗？</p>
-<h2><a class="header" href="#自建音乐平台" id="自建音乐平台">自建音乐平台</a></h2>
+<h2 id="自建音乐平台"><a class="header" href="#自建音乐平台">自建音乐平台</a></h2>
 <p>既希望得到本地音乐的便利，又想要云音乐的便利，这就是自建音乐平台的意义所在了。</p>
 <p>最常见的自建音乐平台应该就是 <code>Airsonic</code> 了，这是一个用 <code>Java</code> 写成，基于 <code>Subsonic</code> 的最后一个开源版本 <code>fork</code> 而出的项目，而 <code>Subsonic</code> 则是著名的自建音乐平台。</p>
 <p><code>Airsonic</code> 的存在已经能够满足很多人的需求了，但它还是无法完全满足我当前的需求，原因有以下几点：</p>
@@ -205,18 +174,18 @@
 <li>更新缓慢，<code>Bug</code> 丛生。尽管有另一个 <code>fork</code> 但问题还是很多，且对我而言维护起来过于困难。（更新：现在只有这个 <code>fork</code> 在积极维护，原仓库已经 <code>Archive</code> 了）</li>
 </ol>
 <p>当然了，多多少少还有一些没有列出来的问题。由于这些问题的存在，最终促使我决定在另一个意义上<strong>自建</strong>音乐平台：自己造轮子。</p>
-<h2><a class="header" href="#我们需要什么" id="我们需要什么">我们需要什么？</a></h2>
+<h2 id="我们需要什么"><a class="header" href="#我们需要什么">我们需要什么？</a></h2>
 <p>在 <code>Project Anni</code> 发起半年后，我再次回头来看这个问题：我们需要什么？</p>
 <p>从听音乐的角度来看，最基础的需求是<strong>我们需要听音乐</strong>，在此之上的是我们需要听<strong>高音质的音乐</strong>。更进一步，我们希望在不同的时间<strong>根据不同的需求听不同种类的音乐</strong>。</p>
 <p>从信息的角度来看，最基础的是我们需要<strong>知道音乐的标题</strong>，然后是<strong>艺术家、封面等其他信息</strong>。更进一步，我们希望在专辑、艺术家等信息之间<strong>快速跳转</strong>。最重要的是，我们<strong>不希望信息消失</strong>（点名批评网易云音乐）。</p>
-<h2><a class="header" href="#理想的-anni-部署结构" id="理想的-anni-部署结构">理想的 Anni 部署结构</a></h2>
+<h2 id="理想的-anni-部署结构"><a class="header" href="#理想的-anni-部署结构">理想的 Anni 部署结构</a></h2>
 <p><code>Anni</code> 在设计之初是针对资源所有者的。理想的部署模型是资源所有者通过 <code>Annil</code> 共享自己已有的资源，用户通过添加所有者的 <code>Annil</code> 地址以访问资源所有者共享的资源。资源所有者通过凭据限制可以访问资源者的身份、人数等。</p>
 <p>但随着资源整理的深入，<code>Annil</code> 对个人呈中心化的趋势已日趋明显。<code>Anni</code> 逐渐成为我个人从各资源平台获取音乐资源、整理后收听的唯一途径。在这种变化下，各设备只与一个 <code>Annil</code> 通信并获取音频已成为目前我个人使用中的事实架构。</p>
-<h2><a class="header" href="#与辅种的矛盾" id="与辅种的矛盾">与辅种的矛盾？</a></h2>
+<h2 id="与辅种的矛盾"><a class="header" href="#与辅种的矛盾">与辅种的矛盾？</a></h2>
 <p><code>Anni</code> 的设计目标是没有考虑到辅种的，或者换句话说，<code>Anni</code> 的目标是将通过 <code>Anni</code> 整理后的音频作为做种的目标。<code>Anni</code> 整理后的音频资源包含相对统一的音频标签和内嵌的封面，并以统一的文件名和格式呈现。<code>Anni</code> 本身也提供了对标签等信息进行检查的能力，确保结果音频在元数据这一层面的质量相对较高。</p>
 <p>这样的设计考量意味着如果你希望在使用 <code>Anni</code> 的同时保种，那你就需要在硬盘上存放两份音频数据。不过一般音频相比其他资源而言占用空间还是较小的，我整理到现在近 <code>1000</code> 张单曲/专辑的空间占用也只有 <code>300GiB</code> 不到（不含 <code>Hi-res</code>），个人认为空间问题还是相对较小的。</p>
 <p>当然了，如果你整理的目标是 <code>TLMC</code> 这样的巨型合集，那就是另一个故事了（<code>93661</code> 个项目，总计 <code>1.7 TiB</code>，笑）。</p>
-<h2><a class="header" href="#与-airsonic-对比" id="与-airsonic-对比">与 <code>Airsonic</code> 对比</a></h2>
+<h2 id="与-airsonic-对比"><a class="header" href="#与-airsonic-对比">与 <code>Airsonic</code> 对比</a></h2>
 <p>和 <code>Airsonic</code> 相比，<code>Anni</code> 的优势如下：</p>
 <ul>
 <li>扫描速度快。对于以 <code>rclone</code> 挂载到本地的 <code>250G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>1</code> 分钟左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构，并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
@@ -229,15 +198,15 @@
 <li>需要手动整理。这是 <code>Anni</code> 存在的基石，<code>Anni</code> 只会提供更便于整理资源的工具，<strong>一定</strong>不会跳过资源整理这一步。</li>
 <li>对收藏、歌单等功能的支持还没有开始。<code>Anniv</code> 的协议还没有完全敲定，也没有可用的前端、后端、客户端。目前的客户端是实现了 <code>Airsonic</code> 协议后借用的 <code>DSub</code> 等 <code>Airsonic</code> 客户端，只是还算能用的状态。</li>
 </ul>
-<h1><a class="header" href="#anni-是如何工作的" id="anni-是如何工作的">Anni 是如何工作的？</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-是如何工作的"><a class="header" href="#anni-是如何工作的">Anni 是如何工作的？</a></h1>
 <p>从组成上来说，<code>Anni</code> 分为三个部分：</p>
 <ol>
 <li>音频文件相关：音频元信息处理、整轨切分、元数据导入/导出</li>
 <li>音乐仓库相关：仓库结构管理、数据整理</li>
 <li>服务端/客户端相关</li>
 </ol>
-<h2><a class="header" href="#音频文件相关" id="音频文件相关">音频文件相关</a></h2>
-<h3><a class="header" href="#整轨切分" id="整轨切分">整轨切分</a></h3>
+<h2 id="音频文件相关"><a class="header" href="#音频文件相关">音频文件相关</a></h2>
+<h3 id="整轨切分"><a class="header" href="#整轨切分">整轨切分</a></h3>
 <p><code>ArchLinux Wiki</code> 上专门有<a href="https://wiki.archlinux.org/index.php/CUE_Splitting">一页</a>专门介绍如何切分 <code>CUE</code>，其中用到的就是 <code>shntools</code> 中的 <code>shnsplit</code>。配合上 <code>cuetools</code> 的 <code>cuetag.sh</code>，可以相对方便地实现整轨的切分和音频元数据的导入。</p>
 <p>笔者持续了这样的切分方式一段时间（如下），但最终还是放弃了。</p>
 <pre><code class="language-bash">NAME=&quot;${$(ls *.cue)%.cue}&quot; &amp;&amp; shnsplit -f &quot;$NAME.cue&quot; -o &quot;flac flac --picture cover.jpg -o %f -&quot; &quot;$NAME.wav&quot; -t &quot;%n. %t&quot;
@@ -251,10 +220,10 @@
 </ol>
 <p>而目前的版本则是基本实现了 <code>shnsplit</code> 的对应功能，可以根据 <code>CUE</code> 切分并输出 <code>wav</code>、<code>flac</code> 或 <code>ape</code> 格式的音频。<code>Anni</code> 实现了 <code>wav</code> 的解析与切分；而其他格式则是调用对应的解码器解码为 <code>wav</code> 后再进行切分，与 <code>shnsplit</code> 一致。</p>
 <p>目前使用的 <code>CUE</code> 解析库为 <a href="https://github.com/ProjectAnni/cue_sheet">ProjectAnni/cue_sheet</a>，<code>fork</code> 自 <code>leoschwarz/cue_sheet</code>。<code>Anni</code> 在这个实现的基础上修复了 <code>REM</code> 解析的问题。</p>
-<h3><a class="header" href="#音频元数据处理" id="音频元数据处理">音频元数据处理</a></h3>
+<h3 id="音频元数据处理"><a class="header" href="#音频元数据处理">音频元数据处理</a></h3>
 <p>音频元数据的可靠来源为发行商的官方网站、歌手的个人主页、企划/组合的官网和 <code>BK</code>；较可靠来源为 <code>iTunes</code> 上的专辑信息，<code>VGMDB</code> 等数据库收集的非一手资料；次可靠来源为 <code>CUE</code> 中附带的元信息等。</p>
 <p>参差不齐的数据需要经过一定的整理后才能写入音频文件，作为自带的元数据存储。由于音频元数据的变动需要修改整个音频文件，更新较为麻烦，因此我们希望尽量减少对音频本身的修改，力求一次到位，将正确的元数据写入后就不再变动。</p>
-<h3><a class="header" href="#元数据导入导出" id="元数据导入导出">元数据导入/导出</a></h3>
+<h3 id="元数据导入导出"><a class="header" href="#元数据导入导出">元数据导入/导出</a></h3>
 <p>在整理「<code>THE IDOLM@STER</code>」的音乐资源时，我拿到的资源是这样的：</p>
 <ol>
 <li>所有资源均为 <code>FLAC</code> 格式，以罗马音命名</li>
@@ -267,59 +236,59 @@
 <li>将整理后的元数据重新<strong>导入</strong> <code>FLAC</code> 中</li>
 </ol>
 <p>这也是 <code>Anni</code> 目前的分轨整理方式。<code>Anni</code> 的官方仓库位于 <code>ProjectAnni/repo</code>，目前存放了我制定元数据仓库格式以来整理的所有的专辑信息。</p>
-<h2><a class="header" href="#音频仓库相关" id="音频仓库相关">音频仓库相关</a></h2>
+<h2 id="音频仓库相关"><a class="header" href="#音频仓库相关">音频仓库相关</a></h2>
 <p>音频仓库（<code>Audio Library</code>）是用于存放音频文件的系统，对目录组织的要求较为松散，但对专辑目录及音轨的命名有着较严格的要求。</p>
 <p>元数据仓库（<code>Metadata Repository</code>）是用于存放音频元数据的仓库，格式要求严格。</p>
 <p>在二者的结合下，我们便可以通过 <code>(Catalog, TrackID)</code> 二元组的形式索引 <code>Anni</code> 系统中的所有音频文件。</p>
-<h1><a class="header" href="#术语表" id="术语表">术语表</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="术语表"><a class="header" href="#术语表">术语表</a></h1>
 <p>此处列出该文档中使用的所有术语。文档编写者在书写时应以此处的术语为准。</p>
-<h2><a class="header" href="#主要术语" id="主要术语">主要术语</a></h2>
-<h3><a class="header" href="#anni狭义" id="anni狭义">Anni（狭义）</a></h3>
+<h2 id="主要术语"><a class="header" href="#主要术语">主要术语</a></h2>
+<h3 id="anni狭义"><a class="header" href="#anni狭义">Anni（狭义）</a></h3>
 <p>为整理音频而写的一套命令行工具</p>
-<h3><a class="header" href="#anni广义" id="anni广义">Anni（广义）</a></h3>
+<h3 id="anni广义"><a class="header" href="#anni广义">Anni（广义）</a></h3>
 <p><code>Project Anni</code>。</p>
-<h3><a class="header" href="#品番catalog" id="品番catalog">品番（<code>Catalog</code>）</a></h3>
+<h3 id="品番catalog"><a class="header" href="#品番catalog">品番（<code>Catalog</code>）</a></h3>
 <p>可用于唯一表示专辑的字符。</p>
-<h3><a class="header" href="#元数据metadata" id="元数据metadata">元数据（<code>Metadata</code>）</a></h3>
+<h3 id="元数据metadata"><a class="header" href="#元数据metadata">元数据（<code>Metadata</code>）</a></h3>
 <p>描述音频信息的数据，一般会内嵌在音频文件中，包括标题、专辑、艺术家等。</p>
-<h3><a class="header" href="#a-href00before-start02metadata-repository00readmehtml元数据仓库metadata-repositorya" id="a-href00before-start02metadata-repository00readmehtml元数据仓库metadata-repositorya"><a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库（<code>Metadata Repository</code>）</a></a></h3>
+<h3 id="元数据仓库metadata-repository"><a class="header" href="#元数据仓库metadata-repository"><a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库（<code>Metadata Repository</code>）</a></a></h3>
 <p><code>Anni</code> 中统一管理元数据的仓库。</p>
-<h3><a class="header" href="#a-href00before-start04audio-backend00readmehtml音频后端audio-backenda" id="a-href00before-start04audio-backend00readmehtml音频后端audio-backenda"><a href="00.before-start/../04.audio-backend/00.readme.html">音频后端（<code>Audio Backend</code>）</a></a></h3>
+<h3 id="音频后端audio-backend"><a class="header" href="#音频后端audio-backend"><a href="00.before-start/../04.audio-backend/00.readme.html">音频后端（<code>Audio Backend</code>）</a></a></h3>
 <p><code>Anni</code> 为方便提供文件而使用的抽象文件系统。</p>
-<h3><a class="header" href="#a-href00before-start05audio-library02implementshtml音频仓库audio-libraryannil广义a" id="a-href00before-start05audio-library02implementshtml音频仓库audio-libraryannil广义a"><a href="00.before-start/../05.audio-library/02.implements.html">音频仓库（<code>Audio Library</code>）、<code>Annil</code>（广义）</a></a></h3>
+<h3 id="音频仓库audio-libraryannil广义"><a class="header" href="#音频仓库audio-libraryannil广义"><a href="00.before-start/../05.audio-library/02.implements.html">音频仓库（<code>Audio Library</code>）、<code>Annil</code>（广义）</a></a></h3>
 <p>以 <code>Annil</code> 协议分发音频文件及封面的服务端。</p>
-<h3><a class="header" href="#a-href00before-start05audio-library01anni-audio-library-drafthtmlannil狭义a" id="a-href00before-start05audio-library01anni-audio-library-drafthtmlannil狭义a"><a href="00.before-start/../05.audio-library/01.anni-audio-library-draft.html"><code>Annil</code>（狭义）</a></a></h3>
+<h3 id="annil狭义"><a class="header" href="#annil狭义"><a href="00.before-start/../05.audio-library/01.anni-audio-library-draft.html"><code>Annil</code>（狭义）</a></a></h3>
 <p><code>Project Anni</code> 定义的一种音频服务端协议。</p>
-<h3><a class="header" href="#a-href00before-start01audio-convention00readmehtmlanni-音频约定anni-audio-conventiona" id="a-href00before-start01audio-convention00readmehtmlanni-音频约定anni-audio-conventiona"><a href="00.before-start/../01.audio-convention/00.readme.html"><code>Anni</code> 音频约定（<code>Anni Audio Convention</code>）</a></a></h3>
+<h3 id="anni-音频约定anni-audio-convention"><a class="header" href="#anni-音频约定anni-audio-convention"><a href="00.before-start/../01.audio-convention/00.readme.html"><code>Anni</code> 音频约定（<code>Anni Audio Convention</code>）</a></a></h3>
 <p><code>Project Anni</code> 定义的一套音频文件管理方式约定，包括必须和可选部分。</p>
-<h3><a class="header" href="#a-href00before-start01audio-convention08directoryhtml约定目录格式a" id="a-href00before-start01audio-convention08directoryhtml约定目录格式a"><a href="00.before-start/../01.audio-convention/08.directory.html">约定目录格式</a></a></h3>
+<h3 id="约定目录格式"><a class="header" href="#约定目录格式"><a href="00.before-start/../01.audio-convention/08.directory.html">约定目录格式</a></a></h3>
 <p><code>Anni</code> 音频约定定义的音频文件、目录、封面组织形式。</p>
-<h3><a class="header" href="#严格目录格式" id="严格目录格式">严格目录格式</a></h3>
+<h3 id="严格目录格式"><a class="header" href="#严格目录格式">严格目录格式</a></h3>
 <p>在 <code>Anni</code> 音频约定的基础上，取消目录嵌套，将专辑目录名修改为对应品番，音轨文件名修改为对应 <code>Track Id</code> 的目录格式。</p>
-<h3><a class="header" href="#annix" id="annix"><code>Annix</code></a></h3>
+<h3 id="annix"><a class="header" href="#annix"><code>Annix</code></a></h3>
 <p>使用 <code>flutter</code> 编写的客户端。<code>x</code> 代表 <code>Cross Platform</code> 中的 <code>cross</code>。</p>
-<h3><a class="header" href="#anniw" id="anniw"><code>Anniw</code></a></h3>
+<h3 id="anniw"><a class="header" href="#anniw"><code>Anniw</code></a></h3>
 <p>（尚未动工的）网页端应用，<code>w</code> 代表的是 <code>web</code>。</p>
-<h3><a class="header" href="#a-href00before-start06anniv00readmehtmlanniva" id="a-href00before-start06anniv00readmehtmlanniva"><a href="00.before-start/../06.anniv/00.readme.html"><code>Anniv</code></a></a></h3>
+<h3 id="anniv"><a class="header" href="#anniv"><a href="00.before-start/../06.anniv/00.readme.html"><code>Anniv</code></a></a></h3>
 <p>音频管理后端，负责歌单、歌词等，与音频仓库解耦。</p>
-<h2><a class="header" href="#开发术语" id="开发术语">开发术语</a></h2>
+<h2 id="开发术语"><a class="header" href="#开发术语">开发术语</a></h2>
 <p>这部分术语一般用户不必关心，仅开发者需要阅读。</p>
-<h3><a class="header" href="#anni-flac" id="anni-flac"><code>anni-flac</code></a></h3>
+<h3 id="anni-flac"><a class="header" href="#anni-flac"><code>anni-flac</code></a></h3>
 <p>提供 <code>flac</code> 文件解析相关功能的库。</p>
-<h3><a class="header" href="#anni-repo" id="anni-repo"><code>anni-repo</code></a></h3>
+<h3 id="anni-repo"><a class="header" href="#anni-repo"><code>anni-repo</code></a></h3>
 <p>提供元数据仓库操作功能的库。</p>
-<h3><a class="header" href="#a-href00before-start04audio-backend01traithtmlanni-backenda" id="a-href00before-start04audio-backend01traithtmlanni-backenda"><a href="00.before-start/../04.audio-backend/01.trait.html"><code>anni-backend</code></a></a></h3>
+<h3 id="anni-backend"><a class="header" href="#anni-backend"><a href="00.before-start/../04.audio-backend/01.trait.html"><code>anni-backend</code></a></a></h3>
 <p>实际实现音频后端的库。</p>
-<h3><a class="header" href="#anni-fetch" id="anni-fetch"><code>anni-fetch</code></a></h3>
+<h3 id="anni-fetch"><a class="header" href="#anni-fetch"><code>anni-fetch</code></a></h3>
 <p>模拟 <code>git fetch</code> 工作的库，在该库基础上可以实现元数据仓库更新相关功能。</p>
-<h3><a class="header" href="#anni-common" id="anni-common"><code>anni-common</code></a></h3>
+<h3 id="anni-common"><a class="header" href="#anni-common"><code>anni-common</code></a></h3>
 <p>跨 <code>Anni</code> 项目的公用库。</p>
-<h3><a class="header" href="#anni-derive" id="anni-derive"><code>anni-derive</code></a></h3>
+<h3 id="anni-derive"><a class="header" href="#anni-derive"><code>anni-derive</code></a></h3>
 <p>过程宏。</p>
-<h1><a class="header" href="#鸣谢" id="鸣谢">鸣谢</a></h1>
-<h2><a class="header" href="#成员贡献者" id="成员贡献者">成员/贡献者</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="鸣谢"><a class="header" href="#鸣谢">鸣谢</a></h1>
+<h2 id="成员贡献者"><a class="header" href="#成员贡献者">成员/贡献者</a></h2>
 <p>TODO</p>
-<h2><a class="header" href="#开源项目" id="开源项目">开源项目</a></h2>
+<h2 id="开源项目"><a class="header" href="#开源项目">开源项目</a></h2>
 <p>本项目的出现离不开前人项目们的引导和支持，因此在此特别列出。</p>
 <table><thead><tr><th>项目名</th><th>链接</th></tr></thead><tbody>
 <tr><td>cuetools</td><td>https://github.com/svend/cuetools</td></tr>
@@ -327,41 +296,41 @@
 <tr><td>Airsonic</td><td>https://github.com/airsonic/airsonic</td></tr>
 <tr><td>flac</td><td>https://github.com/xiph/flac</td></tr>
 </tbody></table>
-<h1><a class="header" href="#anni-音频约定" id="anni-音频约定">Anni 音频约定</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-音频约定"><a class="header" href="#anni-音频约定">Anni 音频约定</a></h1>
 <p><code>Anni</code> 音频约定是 <code>Project Anni</code> 为了规整格式、简化实现而对音频文件/专辑增加的一系列规定。</p>
 <p><code>Anni</code> 保证满足 <code>Anni</code> 音频约定的音频文件/专辑在使用过程中不会出现未定义行为，并<strong>以约定为基础进行开发</strong>。</p>
 <p>约定外的需求可以通过 <code>Issue</code> 的方式申请加入约定。</p>
-<h2><a class="header" href="#前言-1" id="前言-1">前言</a></h2>
+<h2 id="前言-1"><a class="header" href="#前言-1">前言</a></h2>
 <p><code>Anni</code> 音频约定实质上是基于对 <code>Project Anni</code> 的理解而生的，某种意义上也可以称作是 <code>Yesterday17's Audio Convention</code>。如对采样率和位深度的限制，完全是基于分发的角度考量的。你完全可以用 <code>Anni</code> 收藏 <code>Hi-Res</code> 的音乐，但在使用时就需要承受其体积带来的问题。</p>
 <p><code>Anni</code> 音频约定<strong>不是强制的</strong>，这只是我个人对于音乐资源整理的一己之见。<code>Anni</code> 作为贯彻我这种独断而开发出的工具，可以较为方便地将音频组织成符合该约定的格式。</p>
-<h2><a class="header" href="#简称" id="简称">简称</a></h2>
+<h2 id="简称"><a class="header" href="#简称">简称</a></h2>
 <p>后文中以 「<code>Anni</code> 约定」代之 <code>Anni</code> 音频约定。</p>
-<h1><a class="header" href="#音频格式" id="音频格式">音频格式</a></h1>
-<h2><a class="header" href="#存储格式" id="存储格式">存储格式</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="音频格式"><a class="header" href="#音频格式">音频格式</a></h1>
+<h2 id="存储格式"><a class="header" href="#存储格式">存储格式</a></h2>
 <p><code>Anni</code> 存储格式的定义是<strong>在库的音频格式</strong>，即整理完的音频格式。</p>
 <p><code>Anni</code> 约定指定 <code>FLAC</code> 为<strong>唯一存储格式</strong>。</p>
-<h2><a class="header" href="#分发格式" id="分发格式">分发格式</a></h2>
+<h2 id="分发格式"><a class="header" href="#分发格式">分发格式</a></h2>
 <p>在 <code>Anni</code> 作为云音乐平台工作时，存在向用户分发音频的行为。这个过程中涉及到的音频格式称为分发格式。</p>
 <p><code>Anni</code> 约定以下格式可作为分发格式：</p>
 <ul>
 <li><code>MP3</code></li>
 <li><code>FLAC</code></li>
 </ul>
-<h1><a class="header" href="#采样率" id="采样率">采样率</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="采样率"><a class="header" href="#采样率">采样率</a></h1>
 <p>建议取 <code>44100 Hz</code>，即 <code>CD</code> 的采样率。</p>
 <p>最高为 <code>48000 Hz</code>，不建议继续升高，如 <code>96000 Hz</code>。</p>
 <p>作为非专业用户，在此基础上的采样率提升只是浪费磁盘空间和带宽。</p>
-<h1><a class="header" href="#位深度" id="位深度">位深度</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="位深度"><a class="header" href="#位深度">位深度</a></h1>
 <p>位深度取 <code>16</code> 即可，即采样为 16 位带符号整数。</p>
 <p>对应 <code>ffmpeg</code> 中的 <a href="https://ffmpeg.org/doxygen/3.1/group__lavu__sampfmts.html#ggaf9a51ca15301871723577c730b5865c5aea6132df57aebc3f76e10665395c46af"><code>AV_SAMPLE_FMT_S16</code></a>。</p>
-<h1><a class="header" href="#音频标签" id="音频标签">音频标签</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="音频标签"><a class="header" href="#音频标签">音频标签</a></h1>
 <p>由于 <code>FLAC</code> 为唯一存储格式，因此音频标签相关的约定也以 <code>FLAC</code> 为基础描述。</p>
-<h2><a class="header" href="#基本概念" id="基本概念">基本概念</a></h2>
+<h2 id="基本概念"><a class="header" href="#基本概念">基本概念</a></h2>
 <p><code>FLAC</code> 的音频标签可以简单地理解为一个<strong>字符串数组</strong>，由 <code>KEY=VALUE</code> 格式的字符串组成。</p>
 <p>在此基础上，规定了一些常用的 <code>KEY</code> 作为某一项属性的名称。如 <code>TITLE</code> 即为标题。</p>
-<h2><a class="header" href="#约定标签" id="约定标签">约定标签</a></h2>
+<h2 id="约定标签"><a class="header" href="#约定标签">约定标签</a></h2>
 <p><code>Anni</code> 约定指定了一部分必须标签和可选标签。除此之外的标签均为不建议标签，<code>Anni</code> 不会对其作任何处理。</p>
-<h3><a class="header" href="#必须标签" id="必须标签">必须标签</a></h3>
+<h3 id="必须标签"><a class="header" href="#必须标签">必须标签</a></h3>
 <table><thead><tr><th>KEY</th><th>简介</th></tr></thead><tbody>
 <tr><td><code>TITLE</code></td><td>标题</td></tr>
 <tr><td><code>ARTIST</code></td><td>艺术家</td></tr>
@@ -372,44 +341,44 @@
 <tr><td><code>DISCNUMBER</code></td><td>唱片在专辑中的编号</td></tr>
 <tr><td><code>DISCTOTAL</code></td><td>专辑中的总唱片数</td></tr>
 </tbody></table>
-<h3><a class="header" href="#可选标签" id="可选标签">可选标签</a></h3>
+<h3 id="可选标签"><a class="header" href="#可选标签">可选标签</a></h3>
 <table><thead><tr><th>KEY</th><th>简介</th></tr></thead><tbody>
 <tr><td><code>ALBUMARTIST</code></td><td>专辑艺术家</td></tr>
 </tbody></table>
-<h1><a class="header" href="#vendor-string" id="vendor-string">Vendor String</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vendor-string"><a class="header" href="#vendor-string">Vendor String</a></h1>
 <p><code>Vendor String</code> 是存在于 <code>FLAC</code> 的 <code>Vorbis Comment</code> 块首部的一个字符串。</p>
 <p>目前 <code>Anni</code> 约定并未对其有所约束。后续可能增加，但大概率不会有过多要求。此处仅留作 <code>Placeholder</code>。</p>
-<h1><a class="header" href="#艺术家" id="艺术家">艺术家</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="艺术家"><a class="header" href="#艺术家">艺术家</a></h1>
 <p>艺术家必须<strong>保留原名</strong>，不可填写译名或罗马音。</p>
 <p>艺术家姓名之间不带空格，首尾不带空格。</p>
-<h2><a class="header" href="#多艺术家" id="多艺术家">多艺术家</a></h2>
+<h2 id="多艺术家"><a class="header" href="#多艺术家">多艺术家</a></h2>
 <p>多艺术家之间以中文顿号（<code>、</code>）分隔。</p>
 <p>如 <code>[140827][GNCA-1418] ごちうさブレンド</code> 中 <code>02. Rabbit Hole</code> 的艺术家就可以表示为 <code>ココア、リゼ</code>。</p>
-<h2><a class="header" href="#艺术家别名" id="艺术家别名">艺术家别名</a></h2>
+<h2 id="艺术家别名"><a class="header" href="#艺术家别名">艺术家别名</a></h2>
 <p>以中文括号用表示艺术家别名。</p>
 <p>如上文 <code>02. Rabbit Hole</code> 的艺术家还可以详细表示为 <code>ココア（佐倉綾音）、リゼ（種田梨沙）</code>。</p>
-<h2><a class="header" href="#艺术家别名嵌套" id="艺术家别名嵌套">艺术家别名嵌套</a></h2>
+<h2 id="艺术家别名嵌套"><a class="header" href="#艺术家别名嵌套">艺术家别名嵌套</a></h2>
 <p>艺术家别名和多艺术家也可以嵌套，形成以中文括号和中文顿号表示的复杂艺术家关系。</p>
 <p>如 <code>TrySail</code> 组合曲的艺术家可以表示为：<code>TrySail（雨宮天、麻倉もも、夏川椎菜）</code>。</p>
 <p>别名也支持多级嵌套，如 <code>[201028][GNCA-0620] 天空カフェテリア</code> 中 <code>01. 天空カフェテリア</code> 的艺术家可以表示为：</p>
 <pre><code>Petit Rabbit's（ココア（佐倉綾音）、チノ（水瀬いのり）、リゼ（種田梨沙）、千夜（佐藤聡美）、シャロ（内田真礼））
 </code></pre>
-<h2><a class="header" href="#艺术家别名及嵌套的意义" id="艺术家别名及嵌套的意义">艺术家别名及嵌套的意义</a></h2>
+<h2 id="艺术家别名及嵌套的意义"><a class="header" href="#艺术家别名及嵌套的意义">艺术家别名及嵌套的意义</a></h2>
 <p>虽然艺术家别名的直接观感并不是很好（尤其是在多级嵌套之后），但较为规整的格式使得播放器可以对这样的格式进行更为复杂的支持。播放器完全可以通过别名支持基于艺术家的复杂歌曲检索，组合名也就可以方便地映射到个人。</p>
 <p>而如果播放器选择不支持，艺术家别名也可以简单地消除，只留下艺术家的原名。</p>
 <p>即使播放器对这一项完全不作任何修正，得到的格式也比交杂着顿号（<code>、</code>）、斜杠（<code>/</code>）、与号（<code>&amp;</code>）等分隔符的格式要直观许多。</p>
-<h1><a class="header" href="#专辑名" id="专辑名">专辑名</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="专辑名"><a class="header" href="#专辑名">专辑名</a></h1>
 <p>一般填写官网的对应名称，不填写 <code>/</code> 之后的作者信息。</p>
 <p>当多个版本歌曲<strong>内容一致</strong>时，<strong>不保留</strong>盘片的发行版本信息。如初回限定盘和通常盘内容相同的情况。</p>
 <p>当多个版本歌曲<strong>内容不同</strong>时，<strong>保留</strong>发行信息。如 <code>22/7</code> 的初回限定 <code>Type-A</code>、<code>Type-B</code> 和通常盘的最后一曲不同的情况。</p>
 <p>对单张专辑的多张唱片，各曲的专辑名保持一致。</p>
-<h1><a class="header" href="#日期" id="日期">日期</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="日期"><a class="header" href="#日期">日期</a></h1>
 <p>日期需填写发行的准确<strong>年月日</strong>，如 <code>2021-01-25</code>。</p>
 <p>对于只支持年份的播放器，前四个数字之后的文本会被忽略；对于支持的播放器，则可以按详细的日期进行排序。</p>
-<h1><a class="header" href="#对重复项空项的说明" id="对重复项空项的说明">对重复项、空项的说明</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="对重复项空项的说明"><a class="header" href="#对重复项空项的说明">对重复项、空项的说明</a></h1>
 <p>由于 <code>FLAC</code> 标签系统的特性，某一个 <code>KEY</code> 可能对应多个 <code>VALUE</code>，而 <code>VALUE</code> 则可能为空。</p>
 <p><code>Anni</code> 约定<strong>严格禁止</strong>重复项和空项。对可能存在的重复项和空项，<code>Anni</code> 约定处理逻辑如下。</p>
-<h2><a class="header" href="#重复项" id="重复项">重复项</a></h2>
+<h2 id="重复项"><a class="header" href="#重复项">重复项</a></h2>
 <p><code>Anni</code> 对重复的项会取其<strong>有内容的最后一项</strong>。以下面的 <code>COMMENT</code> 为例：</p>
 <pre><code>KEY=VALUE
 KEY=
@@ -421,53 +390,53 @@ KEY=
 KEY=OVERRIDE
 </code></pre>
 <p>则会得到 <code>KEY=OVERRIDE</code>。</p>
-<h2><a class="header" href="#空项" id="空项">空项</a></h2>
+<h2 id="空项"><a class="header" href="#空项">空项</a></h2>
 <p><code>Anni</code> 对空项的取值为空，不存在初始值。</p>
 <p>如果在 <code>Anni</code> 处理过程中遇到必须项为空，<code>Anni</code> 会产生一个 <code>Err</code>。</p>
-<h1><a class="header" href="#对间隔点的说明" id="对间隔点的说明">对间隔点（・）的说明</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="对间隔点的说明"><a class="header" href="#对间隔点的说明">对间隔点（・）的说明</a></h1>
 <p>在音频标签中，统一使用 <code>・</code>（<code>\u30fb</code>） 作为间隔点。</p>
 <p>如果遇到其他的间隔点，请修正为上述符号。在编码转换时需额外留意。</p>
-<h2><a class="header" href="#参考" id="参考">参考</a></h2>
+<h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <ol>
 <li><a href="http://www.0x08.org/posts/middle-dot">中点（·）在UTF-8和GBK转换中的问题 · Dark Side</a></li>
 </ol>
-<h1><a class="header" href="#对斜线的说明" id="对斜线的说明">对斜线（/）的说明</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="对斜线的说明"><a class="header" href="#对斜线的说明">对斜线（/）的说明</a></h1>
 <p>由于斜线被各大操作系统用作目录之间的分隔符，因此无法用作目录或文件的名称。</p>
 <p>当为专辑命名时，必须对专辑目录名作此修正。可以<strong>根据语义</strong>替换成分数号（<code>⁄</code>）或除号（<code>∕</code>），否则替换成全角斜线（<code>／</code>）。</p>
 <p>当为专辑内歌曲命名时，<strong>写入标签</strong>的歌曲名称<strong>不作任何修正</strong>，文件名中以全角斜线（<code>／</code>）替换斜线（<code>/</code>）。</p>
 <p><code>Anni</code> 会自动修正歌曲的文件名中的斜线。</p>
-<h1><a class="header" href="#专辑封面" id="专辑封面">专辑封面</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="专辑封面"><a class="header" href="#专辑封面">专辑封面</a></h1>
 <p>专辑对应的封面图片，只接受 <code>image/jpg</code>。</p>
 <p>专辑目录下须存在 <code>cover.jpg</code> 以表示封面。音乐文件须内嵌封面。</p>
-<h2><a class="header" href="#清晰度" id="清晰度">清晰度</a></h2>
+<h2 id="清晰度"><a class="header" href="#清晰度">清晰度</a></h2>
 <p>封面需要尽量清晰，建议在 <code>800x800</code> 以上。</p>
-<h2><a class="header" href="#封面来源" id="封面来源">封面来源</a></h2>
+<h2 id="封面来源"><a class="header" href="#封面来源">封面来源</a></h2>
 <p>可以在发行商官网或 <a href="https://www.generasia.com/"><code>generasia</code></a>、<a href="https://i.oppsu.cn/"><code>oppsu</code></a> 等网站寻找。</p>
-<h2><a class="header" href="#注意事项" id="注意事项">注意事项</a></h2>
+<h2 id="注意事项"><a class="header" href="#注意事项">注意事项</a></h2>
 <p><code>iTunes</code> 的封面上下可能会有白边，请注意甄别去除。</p>
 <p>目录中<strong>不可保留</strong>封面裁切时使用的 PSD/XCF 文件。</p>
-<h1><a class="header" href="#文件名" id="文件名">文件名</a></h1>
-<h2><a class="header" href="#音频文件" id="音频文件">音频文件</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="文件名"><a class="header" href="#文件名">文件名</a></h1>
+<h2 id="音频文件"><a class="header" href="#音频文件">音频文件</a></h2>
 <p>音乐资源以 <code>{tracknumber:02}. {title}</code> 命名，扩展名为 <code>flac</code>。</p>
-<h2><a class="header" href="#封面文件" id="封面文件">封面文件</a></h2>
+<h2 id="封面文件"><a class="header" href="#封面文件">封面文件</a></h2>
 <p>封面文件名必须为 <code>cover.jpg</code>，文件名全小写。</p>
-<h1><a class="header" href="#品番" id="品番">品番</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="品番"><a class="header" href="#品番">品番</a></h1>
 <p>品番（<code>Catalog</code>） 是存在于（几乎）每一张专辑上的编号。</p>
 <p><code>Anni</code> 约定其对于各专辑唯一，并使用其作为专辑的主键。</p>
-<h2><a class="header" href="#连续表示" id="连续表示">连续表示</a></h2>
+<h2 id="连续表示"><a class="header" href="#连续表示">连续表示</a></h2>
 <p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯。如：<code>VVCL-1466~7</code>。</p>
-<h2><a class="header" href="#手动分配" id="手动分配">手动分配</a></h2>
+<h2 id="手动分配"><a class="header" href="#手动分配">手动分配</a></h2>
 <p>当 <code>CD</code> 属于 <code>BD</code> 的一部分，且 <code>BD</code> 给 <code>CD</code> 预留了 <code>Catalog</code>，则按 <code>CD</code> 对应的 <code>Catalog</code> 填写。</p>
 <p>若<strong>单张</strong> <code>CD</code> 属于 <code>BD</code> 的一部分，但 <code>BD</code> 没有为 <code>CD</code> 预留 <code>Catalog</code>，则按 <code>BD</code> 对应的 <code>Catalog</code> 填写。</p>
 <p>若 <code>CD</code> 存在<strong>多张唱片</strong>但只分配了一个 <code>Catalog</code>，则按 <code>CD</code> 的<strong>盘号</strong>（<code>DISCNUMBER</code>）填写 <code>disc</code> 部分，<strong>补足两位字符串</strong>。</p>
-<h2><a class="header" href="#预定义品番域" id="预定义品番域">预定义品番域</a></h2>
+<h2 id="预定义品番域"><a class="header" href="#预定义品番域">预定义品番域</a></h2>
 <p><code>Anni</code> 定义了以下品番前缀，供整理时使用：</p>
 <table><thead><tr><th>前缀</th><th>用例</th></tr></thead><tbody>
 <tr><td>ISBN</td><td>在图书附带光盘没有品番时用于指定该光盘。<br />如 <code>ISBN-9784091592033</code> 可用于表示 <code>アイドルマスター ミリオンライブ! 1 オリジナルCD</code>。</td></tr>
 </tbody></table>
-<h2><a class="header" href="#私有品番域" id="私有品番域">私有品番域</a></h2>
+<h2 id="私有品番域"><a class="header" href="#私有品番域">私有品番域</a></h2>
 <p>对于没有品番的专辑，<code>Anni</code> 约定以 <code>@</code> 开头的品番为私有品番域。</p>
-<h1><a class="header" href="#约定目录结构" id="约定目录结构">约定目录结构</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="约定目录结构"><a class="header" href="#约定目录结构">约定目录结构</a></h1>
 <p>除存储专辑的<strong>专辑目录</strong>以外，<code>Anni</code> 的目录并没有太多的约束。不过我们建议通过这样的层级组织你的音乐仓库：</p>
 <ol>
 <li>顶级目录</li>
@@ -475,7 +444,7 @@ KEY=OVERRIDE
 <li>专辑目录</li>
 </ol>
 <p>该目录结构格式称为<strong>约定目录结构</strong>。</p>
-<h1><a class="header" href="#目录类型" id="目录类型">目录类型</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="目录类型"><a class="header" href="#目录类型">目录类型</a></h1>
 <p>目录分为如下类型：</p>
 <table><thead><tr><th>标识符（<code>TYPE</code>）</th><th>类型</th><th>简介</th></tr></thead><tbody>
 <tr><td><code>A</code></td><td>个人</td><td>歌手个人专辑</td></tr>
@@ -483,14 +452,14 @@ KEY=OVERRIDE
 <tr><td><code>Bangumi</code></td><td>番剧</td><td>番剧相关专辑</td></tr>
 <tr><td><code>Game</code></td><td>游戏</td><td>游戏相关专辑</td></tr>
 </tbody></table>
-<h1><a class="header" href="#顶级目录" id="顶级目录">顶级目录</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="顶级目录"><a class="header" href="#顶级目录">顶级目录</a></h1>
 <p>顶级目录负责将音乐资源按<strong>类型</strong>和<strong>名称</strong>分隔为各个大类。</p>
-<h2><a class="header" href="#目录名" id="目录名">目录名</a></h2>
+<h2 id="目录名"><a class="header" href="#目录名">目录名</a></h2>
 <p>顶级目录的目录名格式如下：</p>
 <pre><code>[{type}] {name}
 </code></pre>
 <p>其中 <code>type</code> 取<a href="01.audio-convention/./08.zzzz.01.directory-type.html">目录类型</a>中的标识符，<code>name</code> 则为对应名称。</p>
-<h2><a class="header" href="#示例" id="示例">示例</a></h2>
+<h2 id="示例"><a class="header" href="#示例">示例</a></h2>
 <p>以下均为合法的顶级目录：</p>
 <pre><code>[A] Aimer
 [A] 水瀬いのり
@@ -517,20 +486,20 @@ KEY=OVERRIDE
 [Game] 素晴らしき日々
 [Game] Summer Pockets
 </code></pre>
-<h1><a class="header" href="#专辑目录" id="专辑目录">专辑目录</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="专辑目录"><a class="header" href="#专辑目录">专辑目录</a></h1>
 <p>专辑目录负责存储单张专辑的所有音乐。专辑封面<strong>必须</strong>在每个子目录下存在。</p>
-<h2><a class="header" href="#目录名-1" id="目录名-1">目录名</a></h2>
+<h2 id="目录名-1"><a class="header" href="#目录名-1">目录名</a></h2>
 <p>音乐资源目录以 <code>[{date}][{catalog}] {album} [{disc_num} Discs]</code> 命名，其中 <code>{date}</code> 的格式有两种：省略 <code>20xx</code> 年中 <code>20</code> 的 <code>6</code> 位数字日期；和以 <code>-</code> 隔开的 <code>8</code> 位数字日期。</p>
 <p><code>6</code> 位数字日期以 <code>CD</code> 出现的 <code>1982</code> 年作为分隔点，<code>82-99</code> 表示 <code>19xx</code> 年，<code>00-81</code> 表示 <code>20xx</code> 年。</p>
 <p>当只有一张碟片时，最后的 <code> [{disc_num} Discs]</code> 可以省略。</p>
 <pre><code>DATE6 = /\d{6}/
 DATE-8 = /\d{4}-\d{2}-\d{2}/
 </code></pre>
-<h2><a class="header" href="#唱片目录" id="唱片目录">唱片目录</a></h2>
+<h2 id="唱片目录"><a class="header" href="#唱片目录">唱片目录</a></h2>
 <p>当存在多张唱片时，专辑目录内需要另根据盘号<strong>分隔唱片目录</strong>。</p>
 <p>唱片目录的命名格式为：<code>[{catalog}] {album} [Disc {disc_num}]</code>，其中 <code>catalog</code> 为每张盘对应的 <code>Catalog</code>。</p>
 <p>如唱片的 <code>Catalog</code> 在原盘已有分配，则母目录的 <code>catalog</code> 中需使用 <code>~</code> 号表示各唱片的连贯 <code>Catalog</code>。</p>
-<h2><a class="header" href="#示例-1" id="示例-1">示例</a></h2>
+<h2 id="示例-1"><a class="header" href="#示例-1">示例</a></h2>
 <p>以下均为合法专辑目录：</p>
 <pre><code>[180704][VVCL-1261] ELZA
 [180929][VVCL-1285] SWEET HURT
@@ -540,12 +509,12 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 [200722][VVCL-1680] ANIMA
 [201007][VVCL-1744] unknown
 </code></pre>
-<h1><a class="header" href="#分类目录" id="分类目录">分类目录</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="分类目录"><a class="header" href="#分类目录">分类目录</a></h1>
 <p>分类目录位于顶级目录之下，专辑目录之上，负责在二者之间增加一层嵌套以方便整理。</p>
 <p>如果使用了分类目录，建议将所有专辑都放置在各个分类目录中，不建议直接位于顶级目录下。</p>
-<h2><a class="header" href="#目录名-2" id="目录名-2">目录名</a></h2>
+<h2 id="目录名-2"><a class="header" href="#目录名-2">目录名</a></h2>
 <p>分类目录的目录名没有任何格式限制。</p>
-<h2><a class="header" href="#应用场景" id="应用场景">应用场景</a></h2>
+<h2 id="应用场景"><a class="header" href="#应用场景">应用场景</a></h2>
 <p>如 <code>THE IDOLM@STER SHINY COLORS</code> 的 <code>CD</code> 存在多个系列：</p>
 <ul>
 <li><code>BRILLI@NT WING</code></li>
@@ -555,7 +524,7 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 <li><code>COLORFUL FE@THERS</code></li>
 </ul>
 <p>此时就可以通过分类目录，减少顶级目录下的目录数量，方便整理。</p>
-<h1><a class="header" href="#anni-元数据仓库" id="anni-元数据仓库">Anni 元数据仓库</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-元数据仓库"><a class="header" href="#anni-元数据仓库">Anni 元数据仓库</a></h1>
 <blockquote>
 <p>⚠️️目前的元数据仓库标准仍处于 <code>Draft</code> 状态，尚未完全定稿。欢迎随时提出意见或建议。</p>
 </blockquote>
@@ -568,7 +537,7 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 <li>数据的更新伴随着<strong>对文件的扫描</strong>。对于存储于网络和慢速硬盘上的资源，扫描需要消耗大量的时间，而这是我们希望避免的。</li>
 </ol>
 <p>基于上述原因，我们将音频的元数据独立出来，以<strong>静态</strong>的形式存放。称为「仓库」是因为元数据仓库建议通过 <code>Git</code> 仓库的形式维护。</p>
-<h1><a class="header" href="#目录结构" id="目录结构">目录结构</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="目录结构"><a class="header" href="#目录结构">目录结构</a></h1>
 <p>元数据仓库的基本结构如下所示：</p>
 <pre><code>├── album
 │   └── KSLA-0178.toml
@@ -576,10 +545,10 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 │ └── [Bangumi] 神様になった日.toml
 ├── repo.toml
 </code></pre>
-<h1><a class="header" href="#专辑信息" id="专辑信息">专辑信息</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="专辑信息"><a class="header" href="#专辑信息">专辑信息</a></h1>
 <p>对专辑信息的描述存放于元数据仓库下的 <code>album</code> 目录，以专辑的 <code>Catalog</code> 作文件名。</p>
 <p>专辑信息通过 <code>toml</code> 描述。</p>
-<h2><a class="header" href="#示例-2" id="示例-2">示例</a></h2>
+<h2 id="示例-2"><a class="header" href="#示例-2">示例</a></h2>
 <pre><code class="language-toml">######################################################
 # 专辑信息
 [album]
@@ -698,7 +667,7 @@ title = &quot;宝物になった日(Instrumental)&quot;
 artist = &quot;麻枝准&quot;
 type = &quot;instrumental&quot;
 </code></pre>
-<h1><a class="header" href="#专辑标签" id="专辑标签">专辑标签</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="专辑标签"><a class="header" href="#专辑标签">专辑标签</a></h1>
 <p>为了显示更加有序的专辑列表，元数据仓库以 <code>Tag</code> 的形式对专辑、唱片和音轨进行了分类。</p>
 <pre><code class="language-toml">######################################################
 # Tag 信息
@@ -732,34 +701,34 @@ included-by = [&quot;THE IDOLM@STER&quot;]
 # 子 Tag 可以在 Album 信息中使用。
 includes = [&quot;THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
 </code></pre>
-<h1><a class="header" href="#仓库元数据" id="仓库元数据">仓库元数据</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="仓库元数据"><a class="header" href="#仓库元数据">仓库元数据</a></h1>
 <p>仓库元数据位于仓库根目录下，文件名为 <code>repo.toml</code>，用于描述元数据仓库的属性。</p>
-<h2><a class="header" href="#示例-3" id="示例-3">示例</a></h2>
+<h2 id="示例-3"><a class="header" href="#示例-3">示例</a></h2>
 <pre><code class="language-toml">[repo]
 # 仓库名
 name = &quot;Yesterday17's Metadata Repo&quot;
 # 仓库使用的元数据仓库描述版本
 edition = &quot;1.1&quot;
 </code></pre>
-<h1><a class="header" href="#flac-处理" id="flac-处理">FLAC 处理</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flac-处理"><a class="header" href="#flac-处理">FLAC 处理</a></h1>
 <p><code>FLAC</code> 是 <a href="03.flac/../01.audio-convention/00.readme.html">Anni 音频约定</a> 中唯一指定音乐仓库使用的格式，其本身作为一种无损压缩音频的方案，格式简单，实现方便。</p>
 <p>为方便对 <code>FLAC</code> 文件的处理，<code>Anni</code> 包含了一系列 <code>FLAC</code> 操作相关的功能。</p>
-<h1><a class="header" href="#flac-格式简介" id="flac-格式简介">FLAC 格式简介</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flac-格式简介"><a class="header" href="#flac-格式简介">FLAC 格式简介</a></h1>
 <blockquote>
 <p>⚠️ FLAC 的官方文档可以在 <a href="https://xiph.org/flac/format.html">https://xiph.org/flac/format.html</a> 获取，此处只作简要说明。</p>
 </blockquote>
 <p><code>FLAC</code> 文件主要由包含 <code>Metadata</code> 的 <code>Block</code> 和包含音频信息的 <code>Frame</code> 组成。</p>
 <p>一个 <code>FLAC</code> 文件被称为一个 <code>Stream</code>。</p>
-<h2><a class="header" href="#magic-number" id="magic-number">Magic number</a></h2>
+<h2 id="magic-number"><a class="header" href="#magic-number">Magic number</a></h2>
 <p><code>FLAC</code> 文件开头以 <code>fLaC</code> 标识，即：<code>66 4c 61 43</code>。</p>
-<h2><a class="header" href="#metadata-block" id="metadata-block">Metadata Block</a></h2>
+<h2 id="metadata-block"><a class="header" href="#metadata-block">Metadata Block</a></h2>
 <p>紧跟在 <code>Magic Number</code> 之后的是 <code>1-n</code> 个 <code>Metadata Block</code>。其中第一个必须为 <code>STREAMINFO</code> 类型。</p>
 <p>我们将与音频无关的这一部分称为<strong>头部（<code>Header</code>）</strong>。</p>
-<h2><a class="header" href="#frame" id="frame">Frame</a></h2>
+<h2 id="frame"><a class="header" href="#frame">Frame</a></h2>
 <p>在 <code>Metadata Block</code> 结束后，跟随 <code>1-n</code> 个 <code>Frame</code>。</p>
-<h1><a class="header" href="#flac-头部" id="flac-头部">FLAC 头部</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flac-头部"><a class="header" href="#flac-头部">FLAC 头部</a></h1>
 <p><code>FLAC</code> 头部主要由 <code>Block Type</code> 和 <code>Block Data</code> 组成。</p>
-<h2><a class="header" href="#block-type" id="block-type">Block Type</a></h2>
+<h2 id="block-type"><a class="header" href="#block-type">Block Type</a></h2>
 <p><code>Block Type</code> 用来标明该 <code>Block</code> 的类型，合法类型如下：</p>
 <table><thead><tr><th>ID</th><th>类型</th></tr></thead><tbody>
 <tr><td>0</td><td>STREAMINFO</td></tr>
@@ -772,31 +741,31 @@ edition = &quot;1.1&quot;
 <tr><td>7-126</td><td>RESERVED</td></tr>
 <tr><td>127</td><td>INVALID</td></tr>
 </tbody></table>
-<h2><a class="header" href="#block-data" id="block-data">Block Data</a></h2>
+<h2 id="block-data"><a class="header" href="#block-data">Block Data</a></h2>
 <p>在有了 <code>3</code> 个字节标明 <code>Header</code> 长度后，接下来的 <code>n</code> 个字节就可以用来表示该 <code>Block</code> 的数据了。</p>
-<h1><a class="header" href="#vorbis-comment" id="vorbis-comment">Vorbis Comment</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vorbis-comment"><a class="header" href="#vorbis-comment">Vorbis Comment</a></h1>
 <p><code>Vorbis Comment</code> 负责记录 <code>FLAC</code> 文件中的音频元信息。</p>
 <p>可以在 <a href="03.flac/../01.audio-convention/04.tags.html">音频标签</a> 一节的开头简单了解该块的结构。</p>
-<h1><a class="header" href="#metaflac" id="metaflac">metaflac</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="metaflac"><a class="header" href="#metaflac">metaflac</a></h1>
 <p><code>metaflac</code> 是 <code>Xiph</code> 提供的用以管理 <code>FLAC</code> 文件元数据的工具。</p>
 <p>使用 <code>metaflac</code> 可以方便地查看、修改、删除 <code>FLAC</code> 文件的元数据，但命令本身较为冗长，书写麻烦。</p>
 <p>此处简单介绍 <code>metaflac</code> 的一些实用功能。</p>
-<h2><a class="header" href="#增加标签" id="增加标签">增加标签</a></h2>
+<h2 id="增加标签"><a class="header" href="#增加标签">增加标签</a></h2>
 <p><code>metaflac</code> 通过 <code>--set-tag</code> 来增加一个标签。</p>
 <p>值得注意的是，<code>metaflac</code> 并不禁止音频标签中出现重复。</p>
 <pre><code class="language-bash">metaflac --set-tag=&quot;TITLE=test&quot; test.flac
 </code></pre>
-<h2><a class="header" href="#删除标签" id="删除标签">删除标签</a></h2>
+<h2 id="删除标签"><a class="header" href="#删除标签">删除标签</a></h2>
 <p><code>metaflac</code> 通过 <code>--remove-tag</code> 来删除一个标签的<strong>所有值</strong>。</p>
 <pre><code class="language-bash">metaflac --remove-tag=&quot;TITLE&quot; test.flac
 </code></pre>
-<h2><a class="header" href="#列出标签" id="列出标签">列出标签</a></h2>
+<h2 id="列出标签"><a class="header" href="#列出标签">列出标签</a></h2>
 <p><code>metaflac</code> 通过 <code>--export-tags-to</code> 来列出标签，使用 <code>-</code> 表示 <code>stdout</code>。</p>
 <pre><code class="language-bash">metaflac --export-tags-to=- test.flac
 </code></pre>
-<h1><a class="header" href="#anni-对-flac-的支持" id="anni-对-flac-的支持">anni 对 FLAC 的支持</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-对-flac-的支持"><a class="header" href="#anni-对-flac-的支持">anni 对 FLAC 的支持</a></h1>
 <p><code>anni</code> 通过 <code>anni-flac</code> 实现了对 <code>FLAC</code> 格式的解析，自身也提供了一组工具以方便地对 <code>FLAC</code> 文件进行操作。</p>
-<h2><a class="header" href="#flac-子命令" id="flac-子命令"><code>flac</code> 子命令</a></h2>
+<h2 id="flac-子命令"><a class="header" href="#flac-子命令"><code>flac</code> 子命令</a></h2>
 <p><code>anni</code> 对 <code>flac</code> 的支持位于 <code>flac</code> 子命令下：</p>
 <pre><code>❯ anni flac --help                                                                                                                                                    
 anni-flac 
@@ -814,13 +783,13 @@ SUBCOMMANDS:
     help      Prints this message or the help of the given subcommand(s)
 </code></pre>
 <p>目前，<code>anni flac</code> 提供两个功能：<code>Anni</code> 约定检查和 <code>FLAC</code> 信息导出。</p>
-<h1><a class="header" href="#anni-约定检查" id="anni-约定检查">Anni 约定检查</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-约定检查"><a class="header" href="#anni-约定检查">Anni 约定检查</a></h1>
 <p><code>flac</code> 子命令下对 <code>Anni</code> 音频约定的检查局限于 <code>FLAC</code> 文件内。</p>
-<h2><a class="header" href="#使用" id="使用">使用</a></h2>
+<h2 id="使用"><a class="header" href="#使用">使用</a></h2>
 <pre><code class="language-bash">anni convention check /path/to/flac
 </code></pre>
 <p>该命令会打印出对应的检测报告，并在可能时会提供解决方案。可以通过管道符交由 <code>bash</code> 执行。</p>
-<h2><a class="header" href="#检查内容" id="检查内容">检查内容</a></h2>
+<h2 id="检查内容"><a class="header" href="#检查内容">检查内容</a></h2>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 对<a href="03.flac/../01.audio-convention/04.tags.html">标签</a>存在性的检测（包括必须标签、可选标签以及在此之外的标签）</li>
@@ -841,25 +810,25 @@ SUBCOMMANDS:
 <li><input disabled="" type="checkbox" checked=""/>
 对文件名和歌曲标题一致性的检测</li>
 </ul>
-<h1><a class="header" href="#flac-信息导出" id="flac-信息导出">FLAC 信息导出</a></h1>
-<h2><a class="header" href="#导出标签信息" id="导出标签信息">导出标签信息</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flac-信息导出"><a class="header" href="#flac-信息导出">FLAC 信息导出</a></h1>
+<h2 id="导出标签信息"><a class="header" href="#导出标签信息">导出标签信息</a></h2>
 <p>当我们希望浏览当前 <code>FLAC</code> 文件的标签信息时，可以使用如下命令：</p>
 <pre><code class="language-bash">anni flac export test.flac
 </code></pre>
-<h2><a class="header" href="#导出封面" id="导出封面">导出封面</a></h2>
+<h2 id="导出封面"><a class="header" href="#导出封面">导出封面</a></h2>
 <pre><code class="language-bash">anni flac export -t=cover test.flac &gt; cover.jpg
 </code></pre>
-<h1><a class="header" href="#音频后端" id="音频后端">音频后端</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="音频后端"><a class="header" href="#音频后端">音频后端</a></h1>
 <p>音频后端是 <code>Anni</code> 中与实际文件系统接触的抽象层。</p>
 <p>对 <code>Anni</code> 而言，需要获取的资源主要分为两类：音频资源和图片资源。其中图片资源作为音频资源的附加而存在，如封面等。</p>
 <p>由于 <code>Anni</code> 约定的存在，我们将音频资源按照全局唯一的 <code>catalog</code> 进行了区分，因此只要以 <code>catalog</code> 和 <code>track_id</code> 作为复合主键，我们就可以索引音频仓库中的所有歌曲；而对于图片资源，目前唯一有定义的是专辑的封面，其位于专辑目录下，且文件名固定，为 <code>cover.jpg</code>，因此其只需要 <code>catalog</code> 便可唯一指定。</p>
 <p>由此，我们抽象出一个简单的文件系统，其通过 <code>catalog</code> 和 <code>track_id</code> 访问音频资源，通过 <code>catalog</code> 访问封面。</p>
-<h2><a class="header" href="#音频后端-1" id="音频后端-1">音频？后端</a></h2>
+<h2 id="音频后端-1"><a class="header" href="#音频后端-1">音频？后端</a></h2>
 <p>之所以命名为音频后端，是因为其核心交付内容还是音频，封面的优先度相对较低。</p>
-<h2><a class="header" href="#简单之外的价值" id="简单之外的价值">简单之外的价值</a></h2>
+<h2 id="简单之外的价值"><a class="header" href="#简单之外的价值">简单之外的价值</a></h2>
 <p>我们最常接触的文件系统是本地的文件系统，其访问延迟相对固定且较短。但对于 <code>Anni</code>，其设计之初针对的便是 <code>Google Drive</code>，即远程文件系统。</p>
 <p>我们的根本目的是<strong>获取音频和封面</strong>。我们不一定需要一般文件系统的某些特性，比如随机可读性等，但最基本的是一定要满足的。音频后端的抽象使得我们将所有的请求最终归约到向外暴露的两个接口，从而大大简化了音频后端的实现难度。</p>
-<h1><a class="header" href="#trait-backend" id="trait-backend">Trait Backend</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="trait-backend"><a class="header" href="#trait-backend">Trait Backend</a></h1>
 <p>此处描述 <code>Rust</code> 实现的 <code>anni-backend</code> 的基本 <code>Trait</code>。其他语言可模仿设计类似接口。</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -893,7 +862,7 @@ pub struct BackendReaderExt {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h1><a class="header" href="#可用后端" id="可用后端">可用后端</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="可用后端"><a class="header" href="#可用后端">可用后端</a></h1>
 <p><code>Anni</code> 目前支持的后端列表如下：</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
@@ -901,19 +870,19 @@ pub struct BackendReaderExt {
 <li><input disabled="" type="checkbox" checked=""/>
 <code>Google Drive</code>：通过 <code>Google Drive</code> 的团队共享盘实现音频仓库的协作整理</li>
 </ul>
-<h1><a class="header" href="#文件系统" id="文件系统">文件系统</a></h1>
-<h2><a class="header" href="#简介" id="简介">简介</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="文件系统"><a class="header" href="#文件系统">文件系统</a></h1>
+<h2 id="简介"><a class="header" href="#简介">简介</a></h2>
 <p>常规的文件系统后端，通过系统调用读取目录结构和文件。</p>
-<h2><a class="header" href="#属性" id="属性">属性</a></h2>
+<h2 id="属性"><a class="header" href="#属性">属性</a></h2>
 <table><thead><tr><th>属性名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>strict</code></td><td><code>bool</code></td><td>表明是否为严格文件系统</td></tr>
 <tr><td><code>root</code></td><td><code>string</code></td><td>文件后端的根目录</td></tr>
 </tbody></table>
-<h1><a class="header" href="#google-drive" id="google-drive">Google Drive</a></h1>
-<h2><a class="header" href="#简介-1" id="简介-1">简介</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="google-drive"><a class="header" href="#google-drive">Google Drive</a></h1>
+<h2 id="简介-1"><a class="header" href="#简介-1">简介</a></h2>
 <p>以 <code>Google Drive</code> 作为文件存储部分的后端，通过 <code>Google Drive API v3</code> 与 <code>Google</code> 服务器进行通信。</p>
-<h2><a class="header" href="#认证方式" id="认证方式">认证方式</a></h2>
-<h3><a class="header" href="#oauth2" id="oauth2">OAuth2</a></h3>
+<h2 id="认证方式"><a class="header" href="#认证方式">认证方式</a></h2>
+<h3 id="oauth2"><a class="header" href="#oauth2">OAuth2</a></h3>
 <p><code>OAuth2</code> 是最常规的验证方式。用户通过 <code>OAuth</code> 同意屏幕授予 <code>Anni</code> 其申请的权限，<code>Anni</code> 通过得到的 <code>Token</code> 向 <code>Google</code> 服务器发出请求。</p>
 <p>通过 <code>OAuth2</code> 认证，我们至少需要如下基本参数：</p>
 <table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody>
@@ -921,13 +890,13 @@ pub struct BackendReaderExt {
 <tr><td><code>client_secret</code></td><td><code>OAuth</code> 客户端 <code>Secret</code></td></tr>
 <tr><td><code>project_id</code></td><td>项目的唯一标识符</td></tr>
 </tbody></table>
-<h3><a class="header" href="#服务帐号service-account" id="服务帐号service-account">服务帐号（Service Account）</a></h3>
+<h3 id="服务帐号service-account"><a class="header" href="#服务帐号service-account">服务帐号（Service Account）</a></h3>
 <p><code>Service Account</code> 是另一种认证方式。通过增加 <code>Service Account</code>，我们可以实现细粒度的权限控制。</p>
-<h2><a class="header" href="#文件访问" id="文件访问">文件访问</a></h2>
+<h2 id="文件访问"><a class="header" href="#文件访问">文件访问</a></h2>
 <p><code>Google Drive</code> 中网盘大致可分为两类：个人盘和团队盘。</p>
-<h1><a class="header" href="#缓存" id="缓存">缓存</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="缓存"><a class="header" href="#缓存">缓存</a></h1>
 <p>对于存储于云端的音频而言，每次用户请求都重新下载的成本是非常大的。因此，我们需要一种对文件的缓存机制。</p>
-<h2><a class="header" href="#需求" id="需求">需求</a></h2>
+<h2 id="需求"><a class="header" href="#需求">需求</a></h2>
 <p>这种缓存机制<strong>必须</strong>满足的需求如下：</p>
 <ul>
 <li>缓存命中<sup class="footnote-reference"><a href="#1">1</a></sup>: 当缓存<strong>命中</strong>时，直接返回文件</li>
@@ -939,7 +908,7 @@ pub struct BackendReaderExt {
 <li>缓存复用<sup class="footnote-reference"><a href="#4">4</a></sup>: 当该文件<strong>正在缓存</strong>时，新进入的请求能实时获取部分缓存的文件内容</li>
 <li>正常删除<sup class="footnote-reference"><a href="#5">5</a></sup>: 当缓存区域已满时，<strong>对文件的删除</strong>不能影响正在传输的请求</li>
 </ul>
-<h2><a class="header" href="#上层接口" id="上层接口">上层接口</a></h2>
+<h2 id="上层接口"><a class="header" href="#上层接口">上层接口</a></h2>
 <p>对于上层应用，我们只需要向其暴露<strong>读取</strong>的接口即可。当缓存命中<sup class="footnote-reference"><a href="#1">1</a></sup>时，直接返回缓存的内容；而对于缓存缺失<sup class="footnote-reference"><a href="#2">2</a></sup>的情况，则将新数据写入缓存并读取。定义如下：</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -954,14 +923,14 @@ pub struct BackendReaderExt {
 <span class="boring">}
 </span></code></pre></pre>
 <p>当缓存命中时，<code>on_miss</code> 将不会被调用（<code>.await</code>）。</p>
-<h2><a class="header" href="#中层逻辑" id="中层逻辑">中层逻辑</a></h2>
+<h2 id="中层逻辑"><a class="header" href="#中层逻辑">中层逻辑</a></h2>
 <p>对于中层实现，我们需要将缓存的状态分为几个大类：</p>
 <ul>
 <li>缓存完成：表示文件已完全缓存，可以直接读取</li>
 <li>缓存部分完成：表示文件正在缓存，文件以分块形式存在</li>
 <li>缓存</li>
 </ul>
-<h1><a class="header" href="#音频仓库与-annil" id="音频仓库与-annil">音频仓库与 Annil</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="音频仓库与-annil"><a class="header" href="#音频仓库与-annil">音频仓库与 Annil</a></h1>
 <p>文件后端本质只是一个抽象后的文件系统，实际的文件分发过程仍需要一个服务端程序的参与。或者更准确地说，一套协议的参与。</p>
 <p>这套协议需要实现的功能有：</p>
 <ol>
@@ -970,21 +939,21 @@ pub struct BackendReaderExt {
 </ol>
 <p>同时，由于通常我们会拥有复数个音频后端，因此音频仓库需要在单个接口下提供对不同后端的透明访问。</p>
 <p>在 <code>Project Anni</code> 中，实现了这一系列操作的就是 <code>Annil</code>（<code>Anni Library</code>）。</p>
-<h1><a class="header" href="#anni-音频仓库协议" id="anni-音频仓库协议">Anni 音频仓库协议</a></h1>
-<h2><a class="header" href="#版本信息" id="版本信息">版本信息</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-音频仓库协议"><a class="header" href="#anni-音频仓库协议">Anni 音频仓库协议</a></h1>
+<h2 id="版本信息"><a class="header" href="#版本信息">版本信息</a></h2>
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
 <p>最后修改：2021 年 12 月 04 日
 协议版本：0.1.4-DRAFT</p>
-<h2><a class="header" href="#定义" id="定义">定义</a></h2>
+<h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
 <li>对用户身份的鉴定</li>
 <li>对分享的权限认证及限制</li>
 <li>向用户分发资源（包括音频和封面）</li>
 </ol>
-<h2><a class="header" href="#跨域约定" id="跨域约定">跨域约定</a></h2>
+<h2 id="跨域约定"><a class="header" href="#跨域约定">跨域约定</a></h2>
 <p><code>Anni</code> 音频仓库协议<strong>约定</strong>所有请求的返回中都包含头部：</p>
 <pre><code class="language-http">Access-Control-Allow-Methods: GET, OPTIONS
 Access-Control-Allow-Headers: Authorization
@@ -993,23 +962,23 @@ Access-Control-Allow-Headers: Authorization
 <pre><code class="language-http">Access-Control-Allow-Origin: *
 </code></pre>
 <p>各实现可以允许用户选择能够进行跨域请求的域名。</p>
-<h2><a class="header" href="#鉴权" id="鉴权">鉴权</a></h2>
+<h2 id="鉴权"><a class="header" href="#鉴权">鉴权</a></h2>
 <p>对请求着的身份鉴定通过 <code>JWT</code>（<code>JSON Web Token</code>） 的形式进行，称作 <code>Token</code>。协议不限制签名的方式，只对 <code>Claim</code> 部分作出限定。各实现需要对请求者的身份进行鉴权，以判断是否有对应资源的权限。</p>
 <p>协议规定了两种 <code>Token</code>：用户 <code>Token</code> 和分享 <code>Token</code>。用户 <code>Token</code> 的使用者为音频仓库的正式用户，部分用户拥有创建分享 <code>Token</code> 的权限；分享 <code>Token</code> 的使用者为任意用户，可以在分享 <code>Token</code> 的限定范围内获取 <code>Anni</code> 音频仓库中的资源。下文中除特殊说明外，限定的访问范围均为有用户 <code>Token</code> 和有对应资源访问权限的分享 <code>Token</code>。</p>
 <p><code>Anni</code> 音频仓库协议允许以下两种鉴权方式中的任意一种。客户端可以根据需要选用其中任意一种调用。</p>
-<h3><a class="header" href="#authorization-头部" id="authorization-头部">Authorization 头部</a></h3>
+<h3 id="authorization-头部"><a class="header" href="#authorization-头部">Authorization 头部</a></h3>
 <p>当使用 <code>Authorization</code> 头部时，客户端需要将合法的 <code>JWT</code> 携带于 <code>Authorization</code> 头部中，<strong>不需要</strong>增加 <code>Bearer </code> 前缀。</p>
 <p><code>Anni</code> 音频仓库能否正确处理带 <code>Bearer </code> 的请求属于未定义行为。</p>
 <p>该方式对所有请求均有效。</p>
-<h3><a class="header" href="#auth" id="auth">?auth=</a></h3>
+<h3 id="auth"><a class="header" href="#auth">?auth=</a></h3>
 <p>和 <code>Authorization</code> 类似，客户端也可以选择将 <code>JWT</code> 夹带在 <code>URL</code> 的 <code>query</code> 中。仅对 <strong>GET 请求</strong>可用。</p>
-<h3><a class="header" href="#错误响应" id="错误响应">错误响应</a></h3>
+<h3 id="错误响应"><a class="header" href="#错误响应">错误响应</a></h3>
 <p>鉴权阶段可能会产生如下错误响应：</p>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>401</code></td><td><code>Token</code> 不存在或校验失败</td></tr>
 <tr><td><code>403</code></td><td><code>Token</code> 权限不足</td></tr>
 </tbody></table>
-<h2><a class="header" href="#用户身份鉴定" id="用户身份鉴定">用户身份鉴定</a></h2>
+<h2 id="用户身份鉴定"><a class="header" href="#用户身份鉴定">用户身份鉴定</a></h2>
 <p>以下为用户 <code>Token</code>（<code>User Token</code>） 的 <code>Claim</code> 部分样例：</p>
 <pre><code class="language-json">{
   // Token 签发的时间
@@ -1022,7 +991,7 @@ Access-Control-Allow-Headers: Authorization
   &quot;allowShare&quot;: true
 }
 </code></pre>
-<h2><a class="header" href="#获取可用专辑" id="获取可用专辑">获取可用专辑</a></h2>
+<h2 id="获取可用专辑"><a class="header" href="#获取可用专辑">获取可用专辑</a></h2>
 <p>由于音频仓库整合了多个音频后端，因此继承了所有音频后端的可用音频数据。</p>
 <p>获得可用专辑的 <code>API</code> 定义为 <code>GET /albums</code>，仅合法的用户 <code>Token</code> 可以正常请求。</p>
 <p>响应内容包含当前仓库所有可用的专辑 <code>Catalog</code> 包含的 <code>Catalog</code> 映射，如下例：</p>
@@ -1041,9 +1010,9 @@ Access-Control-Allow-Headers: Authorization
   &quot;KSLA-0178&quot;: [&quot;KSLA-0178&quot;]
 }
 </code></pre>
-<h2><a class="header" href="#资源分享" id="资源分享">资源分享</a></h2>
+<h2 id="资源分享"><a class="header" href="#资源分享">资源分享</a></h2>
 <p>由于 <code>Anni</code> 音频仓库对用户身份存在验证，非注册用户无法访问未注册仓库中的资源；但如将音频仓库全面开放，则可能出现诸如滥用、版权等方面的问题。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
-<h3><a class="header" href="#分享-tokenshare-token" id="分享-tokenshare-token">分享 Token（Share Token）</a></h3>
+<h3 id="分享-tokenshare-token"><a class="header" href="#分享-tokenshare-token">分享 Token（Share Token）</a></h3>
 <p>资源共享通过 <code>JWT</code> 的方式进行鉴权，如下例：</p>
 <pre><code class="language-json">{
   // 该 Token 的签发时间，即分享的开始时间
@@ -1064,7 +1033,7 @@ Access-Control-Allow-Headers: Authorization
   }
 }
 </code></pre>
-<h3><a class="header" href="#api创建分享-token" id="api创建分享-token">API：创建分享 Token</a></h3>
+<h3 id="api创建分享-token"><a class="header" href="#api创建分享-token">API：创建分享 Token</a></h3>
 <p>创建分享的 <code>API</code> 定义为 <code>POST /share</code>，仅 <strong><code>allowShare</code> 为 <code>true</code></strong> 的用户 <code>Token</code> 可以正常请求。</p>
 <p>请求的 <code>body</code> 定义如下（不包含注释）：</p>
 <pre><code class="language-json">{
@@ -1091,29 +1060,29 @@ Access-Control-Allow-Headers: Authorization
 }
 </code></pre>
 <p>当用户 Token 没有创建分享的权限，即 <code>allowShare</code> 为 <code>false</code> 时，服务端须响应 <strong><code>403 Forbidden</code></strong>。</p>
-<h4><a class="header" href="#返回状态表" id="返回状态表">返回状态表</a></h4>
+<h4 id="返回状态表"><a class="header" href="#返回状态表">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功创建分享 <code>Token</code></td><td><code>Content-Type</code> 为 <code>text/plain</code>,<code>body</code> 为生成的 <code>JWT</code></td></tr>
 </tbody></table>
-<h2><a class="header" href="#资源分发" id="资源分发">资源分发</a></h2>
+<h2 id="资源分发"><a class="header" href="#资源分发">资源分发</a></h2>
 <p><code>Anni</code> 音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
-<h3><a class="header" href="#音频分发" id="音频分发">音频分发</a></h3>
+<h3 id="音频分发"><a class="header" href="#音频分发">音频分发</a></h3>
 <p>音频分发基于音频所在 <code>Disc</code> 的 <code>catalog</code> 和 <code>track_id</code>。</p>
 <p>获得音频的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}</code>。</p>
-<h4><a class="header" href="#音频偏好" id="音频偏好">音频偏好</a></h4>
+<h4 id="音频偏好"><a class="header" href="#音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
 <table><thead><tr><th>参数名</th><th>说明</th><th>可选项</th></tr></thead><tbody>
 <tr><td><code>prefer_bitrate</code></td><td>客户端期待的音频码率。</td><td><code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
 </tbody></table>
 <p>值得注意的是，客户端传递的参数仅为客户端偏好，对音频仓库仅有指导意义，不代表实际结果。</p>
 <p>音频仓库在对参数进行处理时，应以<strong>枚举</strong>而非<strong>字符串拼接</strong>的形式进行，以防止命令注入。</p>
-<h4><a class="header" href="#返回状态表-1" id="返回状态表-1">返回状态表</a></h4>
+<h4 id="返回状态表-1"><a class="header" href="#返回状态表-1">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取音频</td></tr>
 <tr><td><code>404</code></td><td>音频获取失败</td></tr>
 </tbody></table>
-<h4><a class="header" href="#返回头部" id="返回头部">返回头部</a></h4>
+<h4 id="返回头部"><a class="header" href="#返回头部">返回头部</a></h4>
 <p>当成功获取音频时，返回的头部会携带如下额外信息：</p>
 <table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>Content-Type</code></td><td>音频的 <code>MIME Type</code>，根据情况可能为 <code>audio/flac</code>、<code>audio/mp3</code> 等</td></tr>
@@ -1121,14 +1090,14 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>X-Origin-Size</code></td><td>源文件的大小，单位为字节（<code>Byte</code>）</td></tr>
 <tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
 </tbody></table>
-<h3><a class="header" href="#封面分发" id="封面分发">封面分发</a></h3>
+<h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑或 <code>Disc</code> 的 <code>catalog</code>。获得封面的 <code>API</code> 定义为 <code>GET /{catalog}/cover</code>。</p>
-<h4><a class="header" href="#返回状态表-2" id="返回状态表-2">返回状态表</a></h4>
+<h4 id="返回状态表-2"><a class="header" href="#返回状态表-2">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获得封面</td><td><code>Content-Type</code> 为 <code>image/jpeg</code></td></tr>
 <tr><td><code>404</code></td><td>封面获取失败</td><td></td></tr>
 </tbody></table>
-<h3><a class="header" href="#歌词信息" id="歌词信息">歌词信息</a></h3>
+<h3 id="歌词信息"><a class="header" href="#歌词信息">歌词信息</a></h3>
 <p>歌词信息基于音频所在专辑 <code>Disc</code> 的 <code>catalog</code> 和 <code>track_id</code>。获取歌词信息的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyrics</code>。</p>
 <p>该请求的返回为一个 JSON 对象，<code>Content-Type</code> 须为 <strong><code>application/json</code></strong>，包含歌词的<strong>原生语言</strong>与可选<strong>翻译列表</strong> ，结构如下：</p>
 <table><thead><tr><th>成员名</th><th>含义</th></tr></thead><tbody>
@@ -1142,38 +1111,38 @@ Access-Control-Allow-Headers: Authorization
 }
 </code></pre>
 <p>涉及到的语言代码参考 <a href="https://datatracker.ietf.org/doc/html/rfc5646">RFC5646</a> 标准。</p>
-<h4><a class="header" href="#返回状态表-3" id="返回状态表-3">返回状态表</a></h4>
+<h4 id="返回状态表-3"><a class="header" href="#返回状态表-3">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取歌词信息</td></tr>
 <tr><td><code>404</code></td><td>不存在可用歌词</td></tr>
 </tbody></table>
-<h3><a class="header" href="#歌词分发" id="歌词分发">歌词分发</a></h3>
+<h3 id="歌词分发"><a class="header" href="#歌词分发">歌词分发</a></h3>
 <p>歌词分发的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyric</code>，可用参数如下：</p>
 <table><thead><tr><th>参数名</th><th>含义</th><th>可选项</th></tr></thead><tbody>
 <tr><td><code>lang</code></td><td>所请求歌词翻译的语言代码</td><td>留空、<code>zh-Hans</code>、<code>zh-Hant</code>、<code>ja</code> 等</td></tr>
 </tbody></table>
 <p>当 <code>lang</code> 参数留空时，表示请求未翻译的原文，否则则请求指定语言的歌词。</p>
 <p>当存在 <code>lrc</code> 歌词时，优先返回 <code>lrc</code> 歌词，否则则返回 <code>txt</code> 歌词。</p>
-<h4><a class="header" href="#返回状态表-4" id="返回状态表-4">返回状态表</a></h4>
+<h4 id="返回状态表-4"><a class="header" href="#返回状态表-4">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取歌词</td></tr>
 <tr><td><code>404</code></td><td>请求的歌词不存在</td></tr>
 </tbody></table>
-<h4><a class="header" href="#返回头部-1" id="返回头部-1">返回头部</a></h4>
+<h4 id="返回头部-1"><a class="header" href="#返回头部-1">返回头部</a></h4>
 <p>当成功获得返回时，返回的头部会携带如下信息：</p>
 <table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>Content-Type</code></td><td>歌词的 <code>MIME Type</code>，根据情况可能为 <code>text/plain</code> 或 <code>text/lrc</code></td></tr>
 </tbody></table>
-<h1><a class="header" href="#不同的音频仓库实现" id="不同的音频仓库实现">不同的音频仓库实现</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="不同的音频仓库实现"><a class="header" href="#不同的音频仓库实现">不同的音频仓库实现</a></h1>
 <p><code>Annil</code> 本身只是音频仓库实现的标准。我们鼓励不同的音频仓库实现。</p>
-<h2><a class="header" href="#实现列表" id="实现列表">实现列表</a></h2>
+<h2 id="实现列表"><a class="header" href="#实现列表">实现列表</a></h2>
 <table><thead><tr><th>名称</th><th>地址</th></tr></thead><tbody>
 <tr><td><code>annil-rs</code></td><td><a href="https://github.com/ProjectAnni/anni/tree/master/annil">https://github.com/ProjectAnni/anni/tree/master/annil</a></td></tr>
 <tr><td><code>go-annil</code></td><td><a href="https://github.com/ProjectAnni/go-annil">https://github.com/ProjectAnni/go-annil</a></td></tr>
 </tbody></table>
-<h1><a class="header" href="#annil-rs" id="annil-rs">annil-rs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="annil-rs"><a class="header" href="#annil-rs">annil-rs</a></h1>
 <p><code>annil-rs</code> 是最简单的音频仓库实现之一。其本身只实现了对 <code>HS256</code> 签名的 <code>JWT</code> 的校验，只要校验通过就允许用户访问资源。</p>
-<h2><a class="header" href="#配置文件" id="配置文件">配置文件</a></h2>
+<h2 id="配置文件"><a class="header" href="#配置文件">配置文件</a></h2>
 <pre><code class="language-toml">[server]
 # 音频仓库名称
 name = &quot;My Server&quot;
@@ -1208,19 +1177,19 @@ root = &quot;/tmp&quot;
 # 缓存最大容量
 max-size = 0
 </code></pre>
-<h1><a class="header" href="#draft-annil-音轨扩展" id="draft-annil-音轨扩展">[Draft] Annil 音轨扩展</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="draft-annil-音轨扩展"><a class="header" href="#draft-annil-音轨扩展">[Draft] Annil 音轨扩展</a></h1>
 <blockquote>
 <p>⚠️️目前的音频扩展仍处于 <code>Draft</code> 状态，尚未完全定稿。欢迎随时提出意见或建议。</p>
 </blockquote>
 <p>针对互联网上流通较为广泛的单音轨音频，原本的 <code>Annil</code> 只能以专辑的形式分散管理。<code>Annil</code> 音轨扩展约定了针对单音轨音频的处理方式。</p>
-<h2><a class="header" href="#音频文件名" id="音频文件名">音频文件名</a></h2>
+<h2 id="音频文件名"><a class="header" href="#音频文件名">音频文件名</a></h2>
 <p>我们规定音频的文件名统一为 <code>{标题} - {艺术家}</code>。其中艺术家名称使用逗号 <code>,</code> 分隔，<strong>不采用 <code>Anni</code> 音频约定中的形式</strong>，以减短文件名长度。</p>
 <p>以下文件名均为有效文件名：</p>
 <pre><code class="language-text">三月雨 - 洛天依,Wing翼
 霜雪千年 - 洛天依,乐正绫,COPY
 </code></pre>
 <p>我们不建议使用 <code>Various Artists</code> 作为音轨的艺术家，因为容易产生冲突。</p>
-<h2><a class="header" href="#品番生成" id="品番生成">品番生成</a></h2>
+<h2 id="品番生成"><a class="header" href="#品番生成">品番生成</a></h2>
 <p>为了最大程度兼容 <code>Annil</code> 协议，音轨扩展依然采用 <code>Annil</code> 的专辑-音轨形式，因此需要对每个音轨生成独一无二的品番。</p>
 <p>品番通过 <code>UUIDv5</code> 生成，<code>Name</code> 为音频文件名，<code>Namespace</code> 如下：</p>
 <pre><code class="language-text">7696064f-415c-518e-a828-4d9019c3cf93
@@ -1230,9 +1199,9 @@ max-size = 0
 <pre><code class="language-text">102e82a3-9949-5e09-a9e2-59895fa3f194 # 三月雨 - 洛天依,Wing翼
 b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 </code></pre>
-<h2><a class="header" href="#音频获取" id="音频获取">音频获取</a></h2>
+<h2 id="音频获取"><a class="header" href="#音频获取">音频获取</a></h2>
 <p>在尝试获取 <code>Annil</code> 音轨扩展定义的音频时，和一般的 <code>Annil</code> 音频相同，需要提供品番和音轨号。其中品番由上文定义，音轨号则强制为 1。</p>
-<h1><a class="header" href="#anniv" id="anniv">Anniv</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anniv-1"><a class="header" href="#anniv-1">Anniv</a></h1>
 <blockquote>
 <p>⚠️️目前的 <code>Anniv</code> 仍处于 <code>Draft</code> 状态，尚未完全定稿。欢迎随时提出意见或建议。</p>
 </blockquote>
@@ -1241,12 +1210,12 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 </blockquote>
 <p><code>Anniv</code> 是统合用户体验的中心化平台，提供注入播放列表（歌单）、<code>Annil</code> Token 同步等功能。</p>
 <p>从定位上来看，它类似于 <code>last.fm</code>，但提供了针对 <code>Project Anni</code> 的独特功能。</p>
-<h2><a class="header" href="#阅读导览" id="阅读导览">阅读导览</a></h2>
+<h2 id="阅读导览"><a class="header" href="#阅读导览">阅读导览</a></h2>
 <p>对 API 的描述分为 <code>Endpoint</code>、请求（请求参数）、返回（返回参数）、参数表示和错误列表。每项中均可能存在客户端设计指引或示例。</p>
-<h2><a class="header" href="#请求" id="请求">请求</a></h2>
+<h2 id="请求"><a class="header" href="#请求">请求</a></h2>
 <p>所有带有 <code>body</code> 的请求均为 <code>application/json</code>，参数均写在 <code>body</code> 内。</p>
 <p>对于不带 <code>body</code> 的请求，参数以 <code>Param</code> 形式传递。</p>
-<h2><a class="header" href="#返回" id="返回">返回</a></h2>
+<h2 id="返回"><a class="header" href="#返回">返回</a></h2>
 <p>返回的状态码<strong>一般</strong>均为 <code>200 Ok</code>，<code>body</code> 均为 <code>JSON</code> 格式，结构如下：</p>
 <pre><code class="language-typescript">interface ResponseBody&lt;T&gt; {
   status: number;
@@ -1257,14 +1226,14 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <p>在后续的描述中，我们只描述类型 <code>T</code> 的结果，省略外层包裹的 <code>JSON Object</code>。</p>
 <p>当 <code>status</code> 为 <code>0</code> 时，<code>data</code> 中包含类型为 <code>T</code> 的返回数据。</p>
 <p>当返回的状态码为 <code>204 No Content</code> 时，代表处理成功，且没有数据返回。</p>
-<h3><a class="header" href="#返回状态" id="返回状态">返回状态</a></h3>
+<h3 id="返回状态"><a class="header" href="#返回状态">返回状态</a></h3>
 <p>返回状态为 <code>6</code> 位数字，具体划分如下：</p>
 <table><thead><tr><th>领域</th><th>分类</th><th>编号</th></tr></thead><tbody>
 <tr><td><code>1</code> 代表基本错误代码，<code>2</code> 代表特性错误代码，<code>9</code> 代表通用错误代码</td><td><code>2</code> 位数字</td><td><code>3</code> 位数字</td></tr>
 </tbody></table>
-<h4><a class="header" href="#无错误" id="无错误">无错误</a></h4>
+<h4 id="无错误"><a class="header" href="#无错误">无错误</a></h4>
 <p>无错误时，返回的 <code>status</code> 为 <code>0</code>。</p>
-<h4><a class="header" href="#通用错误" id="通用错误">通用错误</a></h4>
+<h4 id="通用错误"><a class="header" href="#通用错误">通用错误</a></h4>
 <p>通用错误如下表所示：</p>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>900000</code></td><td>站点致命错误</td></tr>
@@ -1276,9 +1245,9 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>
 <tr><td><code>902003</code></td><td>非法参数</td></tr>
 </tbody></table>
-<h1><a class="header" href="#基本信息" id="基本信息">基本信息</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基本信息"><a class="header" href="#基本信息">基本信息</a></h1>
 <p>接口 <code>/api/info</code> 描述了 <code>Anniv</code> 后端的基本信息，包括站点名称、说明、特性开启状态等。</p>
-<h2><a class="header" href="#示例-4" id="示例-4">示例</a></h2>
+<h2 id="示例-4"><a class="header" href="#示例-4">示例</a></h2>
 <pre><code class="language-json">{
   &quot;site_name&quot;: &quot;Anniv 测试站点&quot;,
   &quot;description&quot;: &quot;该站点仅用于测试，请勿滥用。&quot;,
@@ -1286,26 +1255,26 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
   &quot;features&quot;: [&quot;2fa&quot;, &quot;invite&quot;]
 }
 </code></pre>
-<h2><a class="header" href="#错误列表" id="错误列表">错误列表</a></h2>
+<h2 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>101000</code></td><td>站点维护中</td></tr>
 </tbody></table>
-<h1><a class="header" href="#用户系统" id="用户系统">用户系统</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="用户系统"><a class="header" href="#用户系统">用户系统</a></h1>
 <p><code>Anniv</code> 的用户系统分为注册、登录、注销三个部分。</p>
-<h2><a class="header" href="#错误代码一览" id="错误代码一览">错误代码一览</a></h2>
+<h2 id="错误代码一览"><a class="header" href="#错误代码一览">错误代码一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
 <tr><td><code>102010</code></td><td>邮箱或密码错误</td></tr>
 <tr><td><code>102020</code></td><td>待注销用户不存在</td></tr>
 </tbody></table>
-<h2><a class="header" href="#对用户密码的预处理建议" id="对用户密码的预处理建议">对用户密码的预处理（建议）</a></h2>
+<h2 id="对用户密码的预处理建议"><a class="header" href="#对用户密码的预处理建议">对用户密码的预处理（建议）</a></h2>
 <p>为格式统一考虑，建议客户端在向服务端发送密码之前，对用户的明文密码进行一次 <code>sha256</code> 处理。该步骤仅在一定程度上减少用户原文密码的泄露，但仍可以通过诸如彩虹表的方式破解。</p>
-<h2><a class="header" href="#用户注册" id="用户注册">用户注册</a></h2>
-<h3><a class="header" href="#endpoint" id="endpoint">Endpoint</a></h3>
+<h2 id="用户注册"><a class="header" href="#用户注册">用户注册</a></h2>
+<h3 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h3>
 <p><code>POST /api/user/register</code></p>
-<h3><a class="header" href="#请求-1" id="请求-1">请求</a></h3>
-<h4><a class="header" href="#请求参数" id="请求参数">请求参数</a></h4>
+<h3 id="请求-1"><a class="header" href="#请求-1">请求</a></h3>
+<h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 <tr><td><code>password</code></td><td><code>string</code></td><td>密码</td></tr>
@@ -1313,9 +1282,9 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
 <tr><td><code>avatar</code></td><td><code>string</code></td><td>头像链接</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-1" id="返回-1">返回</a></h3>
+<h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
 <p>注册成功时，返回用户信息（<code>UserInfo</code>）。</p>
-<h4><a class="header" href="#返回参数" id="返回参数">返回参数</a></h4>
+<h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
 <tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
@@ -1323,7 +1292,7 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
 <tr><td><code>avatar</code></td><td><code>string</code></td><td>头像链接</td></tr>
 </tbody></table>
-<h3><a class="header" href="#参数表示" id="参数表示">参数表示</a></h3>
+<h3 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h3>
 <pre><code class="language-typescript">interface RegisterBody extends RegisterFeatureParameters {
   username: string;
   password: string;
@@ -1340,80 +1309,80 @@ interface UserInfo {
   avatar: string;
 }
 </code></pre>
-<h3><a class="header" href="#错误列表-1" id="错误列表-1">错误列表</a></h3>
+<h3 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
 <tr><td><code>102002</code></td><td>注册密码格式错误</td></tr>
 </tbody></table>
-<h2><a class="header" href="#用户登录" id="用户登录">用户登录</a></h2>
-<h3><a class="header" href="#endpoint-1" id="endpoint-1">Endpoint</a></h3>
+<h2 id="用户登录"><a class="header" href="#用户登录">用户登录</a></h2>
+<h3 id="endpoint-1"><a class="header" href="#endpoint-1">Endpoint</a></h3>
 <p><code>POST /api/user/login</code></p>
-<h3><a class="header" href="#请求-2" id="请求-2">请求</a></h3>
-<h4><a class="header" href="#请求参数-1" id="请求参数-1">请求参数</a></h4>
+<h3 id="请求-2"><a class="header" href="#请求-2">请求</a></h3>
+<h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
 <table><thead><tr><th>参数</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>password</code></td><td><code>string</code></td><td>密码</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-2" id="返回-2">返回</a></h3>
+<h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>登录成功时，返回用户信息（<code>UserInfo</code>）。</p>
-<h3><a class="header" href="#参数表示-1" id="参数表示-1">参数表示</a></h3>
+<h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
 <pre><code class="language-typescript">interface LoginBody extends LoginFeatureParameters {
   email: string;
   password: string;
 }
 </code></pre>
-<h3><a class="header" href="#错误列表-2" id="错误列表-2">错误列表</a></h3>
+<h3 id="错误列表-2"><a class="header" href="#错误列表-2">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102010</code></td><td>邮箱或密码错误</td></tr>
 </tbody></table>
-<h2><a class="header" href="#用户退出" id="用户退出">用户退出</a></h2>
-<h3><a class="header" href="#endpoint-2" id="endpoint-2">Endpoint</a></h3>
+<h2 id="用户退出"><a class="header" href="#用户退出">用户退出</a></h2>
+<h3 id="endpoint-2"><a class="header" href="#endpoint-2">Endpoint</a></h3>
 <p><code>POST /api/user/logout</code></p>
-<h3><a class="header" href="#返回-3" id="返回-3">返回</a></h3>
+<h3 id="返回-3"><a class="header" href="#返回-3">返回</a></h3>
 <p>当退出成功时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#客户端设计指引" id="客户端设计指引">客户端设计指引</a></h3>
+<h3 id="客户端设计指引"><a class="header" href="#客户端设计指引">客户端设计指引</a></h3>
 <p>当用户退出成功时，建议清理对应客户端的 <code>Cookie</code>。</p>
-<h3><a class="header" href="#错误列表-3" id="错误列表-3">错误列表</a></h3>
+<h3 id="错误列表-3"><a class="header" href="#错误列表-3">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>
 </tbody></table>
-<h2><a class="header" href="#用户注销" id="用户注销">用户注销</a></h2>
-<h3><a class="header" href="#endpoint-3" id="endpoint-3">Endpoint</a></h3>
+<h2 id="用户注销"><a class="header" href="#用户注销">用户注销</a></h2>
+<h3 id="endpoint-3"><a class="header" href="#endpoint-3">Endpoint</a></h3>
 <p><code>POST /api/user/revoke</code></p>
-<h3><a class="header" href="#请求-3" id="请求-3">请求</a></h3>
-<h4><a class="header" href="#请求参数-2" id="请求参数-2">请求参数</a></h4>
+<h3 id="请求-3"><a class="header" href="#请求-3">请求</a></h3>
+<h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
 <table><thead><tr><th>参数</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>待注销的用户 ID</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-4" id="返回-4">返回</a></h3>
+<h3 id="返回-4"><a class="header" href="#返回-4">返回</a></h3>
 <p>当注销成功时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#客户端设计指引-1" id="客户端设计指引-1">客户端设计指引</a></h3>
+<h3 id="客户端设计指引-1"><a class="header" href="#客户端设计指引-1">客户端设计指引</a></h3>
 <p>用户注销接口一旦请求，用户<strong>立即注销</strong>。客户端在设计时应考虑增加多道确认步骤。</p>
-<h3><a class="header" href="#错误列表-4" id="错误列表-4">错误列表</a></h3>
+<h3 id="错误列表-4"><a class="header" href="#错误列表-4">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102020</code></td><td>待注销用户不存在</td></tr>
 </tbody></table>
-<h2><a class="header" href="#使用情况" id="使用情况">使用情况</a></h2>
-<h3><a class="header" href="#endpoint-4" id="endpoint-4">Endpoint</a></h3>
+<h2 id="使用情况"><a class="header" href="#使用情况">使用情况</a></h2>
+<h3 id="endpoint-4"><a class="header" href="#endpoint-4">Endpoint</a></h3>
 <p><code>POST /api/user/register/check</code></p>
-<h3><a class="header" href="#请求-4" id="请求-4">请求</a></h3>
-<h4><a class="header" href="#请求参数-3" id="请求参数-3">请求参数</a></h4>
+<h3 id="请求-4"><a class="header" href="#请求-4">请求</a></h3>
+<h4 id="请求参数-3"><a class="header" href="#请求参数-3">请求参数</a></h4>
 <table><thead><tr><th>参数</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-5" id="返回-5">返回</a></h3>
+<h3 id="返回-5"><a class="header" href="#返回-5">返回</a></h3>
 <p>当检查全部通过时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#错误列表-5" id="错误列表-5">错误列表</a></h3>
+<h3 id="错误列表-5"><a class="header" href="#错误列表-5">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
 </tbody></table>
-<h1><a class="header" href="#播放列表" id="播放列表">播放列表</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="播放列表"><a class="header" href="#播放列表">播放列表</a></h1>
 <p>播放列表是顺序的歌曲列表，用户可以通过播放列表对零散的歌曲进行整理。</p>
 <p>播放列表相关的功能有获取、创建、修改、删除。</p>
-<h2><a class="header" href="#错误一览" id="错误一览">错误一览</a></h2>
+<h2 id="错误一览"><a class="header" href="#错误一览">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103000</code></td><td>用户播放列表数已达上限</td></tr>
 <tr><td><code>103001</code></td><td>播放列表中歌曲数量已达上限</td></tr>
@@ -1421,17 +1390,17 @@ interface UserInfo {
 <tr><td><code>103003</code></td><td>修改类型非法</td></tr>
 <tr><td><code>103003</code></td><td>歌曲 ID 非法</td></tr>
 </tbody></table>
-<h2><a class="header" href="#获取播放列表" id="获取播放列表">获取播放列表</a></h2>
-<h3><a class="header" href="#endpoint-5" id="endpoint-5">Endpoint</a></h3>
+<h2 id="获取播放列表"><a class="header" href="#获取播放列表">获取播放列表</a></h2>
+<h3 id="endpoint-5"><a class="header" href="#endpoint-5">Endpoint</a></h3>
 <p><code>GET /api/playlist</code></p>
-<h3><a class="header" href="#请求-5" id="请求-5">请求</a></h3>
-<h4><a class="header" href="#请求参数-4" id="请求参数-4">请求参数</a></h4>
+<h3 id="请求-5"><a class="header" href="#请求-5">请求</a></h3>
+<h4 id="请求参数-4"><a class="header" href="#请求参数-4">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-6" id="返回-6">返回</a></h3>
+<h3 id="返回-6"><a class="header" href="#返回-6">返回</a></h3>
 <p>请求成功时，返回播放列表的全部信息。</p>
-<h4><a class="header" href="#返回参数-1" id="返回参数-1">返回参数</a></h4>
+<h4 id="返回参数-1"><a class="header" href="#返回参数-1">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
@@ -1450,7 +1419,7 @@ interface UserInfo {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
 </tbody></table>
-<h4><a class="header" href="#示例-5" id="示例-5">示例</a></h4>
+<h4 id="示例-5"><a class="header" href="#示例-5">示例</a></h4>
 <pre><code class="language-json">{
   &quot;id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
   &quot;name&quot;: &quot;测试播放列表&quot;,
@@ -1467,7 +1436,7 @@ interface UserInfo {
   ]
 }
 </code></pre>
-<h3><a class="header" href="#参数表示-2" id="参数表示-2">参数表示</a></h3>
+<h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
 <pre><code class="language-typescript">interface Playlist {
   id: string;
   name: string;
@@ -1487,25 +1456,25 @@ interface PlaylistSongWithId extends PlaylistSong {
   id: string;
 }
 </code></pre>
-<h2><a class="header" href="#错误列表-6" id="错误列表-6">错误列表</a></h2>
+<h2 id="错误列表-6"><a class="header" href="#错误列表-6">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>902001</code></td><td>禁止访问私有播放列表</td></tr>
 </tbody></table>
-<h2><a class="header" href="#创建播放列表" id="创建播放列表">创建播放列表</a></h2>
-<h3><a class="header" href="#endpoint-6" id="endpoint-6">Endpoint</a></h3>
+<h2 id="创建播放列表"><a class="header" href="#创建播放列表">创建播放列表</a></h2>
+<h3 id="endpoint-6"><a class="header" href="#endpoint-6">Endpoint</a></h3>
 <p><code>PUT /api/playlist</code></p>
-<h3><a class="header" href="#请求-6" id="请求-6">请求</a></h3>
-<h4><a class="header" href="#请求参数-5" id="请求参数-5">请求参数</a></h4>
+<h3 id="请求-6"><a class="header" href="#请求-6">请求</a></h3>
+<h4 id="请求参数-5"><a class="header" href="#请求参数-5">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
 <tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-7" id="返回-7">返回</a></h3>
+<h3 id="返回-7"><a class="header" href="#返回-7">返回</a></h3>
 <p>处理完成后，返回新创建的播放列表信息（<code>Playlist</code>）。</p>
-<h3><a class="header" href="#参数表示-3" id="参数表示-3">参数表示</a></h3>
+<h3 id="参数表示-3"><a class="header" href="#参数表示-3">参数表示</a></h3>
 <pre><code class="language-typescript">interface CreatePlaylistBody extends CreatePlaylistFeatureParameters {
   name: string;
   description?: string;
@@ -1513,65 +1482,65 @@ interface PlaylistSongWithId extends PlaylistSong {
   songs: PlaylistSong[];
 }
 </code></pre>
-<h3><a class="header" href="#错误列表-7" id="错误列表-7">错误列表</a></h3>
+<h3 id="错误列表-7"><a class="header" href="#错误列表-7">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103000</code></td><td>用户播放列表数已达上限</td></tr>
 <tr><td><code>103001</code></td><td>播放列表中歌曲数量已达上限</td></tr>
 </tbody></table>
-<h2><a class="header" href="#修改播放列表" id="修改播放列表">修改播放列表</a></h2>
-<h3><a class="header" href="#endpoint-7" id="endpoint-7">Endpoint</a></h3>
+<h2 id="修改播放列表"><a class="header" href="#修改播放列表">修改播放列表</a></h2>
+<h3 id="endpoint-7"><a class="header" href="#endpoint-7">Endpoint</a></h3>
 <p><code>PATCH /api/playlist</code></p>
-<h3><a class="header" href="#请求-7" id="请求-7">请求</a></h3>
+<h3 id="请求-7"><a class="header" href="#请求-7">请求</a></h3>
 <p>对播放列表的修改分为三个部分：增加歌曲、删除歌曲和排列歌曲。</p>
-<h4><a class="header" href="#请求参数-6" id="请求参数-6">请求参数</a></h4>
+<h4 id="请求参数-6"><a class="header" href="#请求参数-6">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
 <tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
 <tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-8" id="返回-8">返回</a></h3>
+<h3 id="返回-8"><a class="header" href="#返回-8">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
-<h3><a class="header" href="#参数表示-4" id="参数表示-4">参数表示</a></h3>
+<h3 id="参数表示-4"><a class="header" href="#参数表示-4">参数表示</a></h3>
 <pre><code class="language-typescript">interface PatchPlaylistRequestBody {
   id: string;
   command: &quot;append&quot; | &quot;remove&quot; | &quot;reorder&quot; | &quot;replace&quot;;
   payload: PlaylistSong[] | string[] | PlaylistSongWithid[];
 }
 </code></pre>
-<h3><a class="header" href="#错误列表-8" id="错误列表-8">错误列表</a></h3>
+<h3 id="错误列表-8"><a class="header" href="#错误列表-8">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>103003</code></td><td>修改类型非法</td></tr>
 <tr><td><code>103003</code></td><td>歌曲 ID 非法</td></tr>
 </tbody></table>
-<h2><a class="header" href="#删除播放列表" id="删除播放列表">删除播放列表</a></h2>
-<h3><a class="header" href="#endpoint-8" id="endpoint-8">Endpoint</a></h3>
+<h2 id="删除播放列表"><a class="header" href="#删除播放列表">删除播放列表</a></h2>
+<h3 id="endpoint-8"><a class="header" href="#endpoint-8">Endpoint</a></h3>
 <p><code>DELETE /api/playlist</code></p>
-<h3><a class="header" href="#请求-8" id="请求-8">请求</a></h3>
-<h4><a class="header" href="#请求参数-7" id="请求参数-7">请求参数</a></h4>
+<h3 id="请求-8"><a class="header" href="#请求-8">请求</a></h3>
+<h4 id="请求参数-7"><a class="header" href="#请求参数-7">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-9" id="返回-9">返回</a></h3>
+<h3 id="返回-9"><a class="header" href="#返回-9">返回</a></h3>
 <p>删除成功时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#错误列表-9" id="错误列表-9">错误列表</a></h3>
+<h3 id="错误列表-9"><a class="header" href="#错误列表-9">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>103003</code></td><td>非法修改类型</td></tr>
 </tbody></table>
-<h1><a class="header" href="#annil-token-管理" id="annil-token-管理">Annil Token 管理</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="annil-token-管理"><a class="header" href="#annil-token-管理">Annil Token 管理</a></h1>
 <p>考虑到多客户端的使用场景，<code>Anniv</code> 实现了一套对 <code>Annil Token</code> 的管理系统，供客户端之间同步 <code>Token</code> 信息。</p>
-<h2><a class="header" href="#错误一览-1" id="错误一览-1">错误一览</a></h2>
+<h2 id="错误一览-1"><a class="header" href="#错误一览-1">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104000</code></td><td>用户 <code>Token</code> 存储数已达上限</td></tr>
 <tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
 </tbody></table>
-<h2><a class="header" href="#获取-token" id="获取-token">获取 Token</a></h2>
-<h3><a class="header" href="#endpoint-9" id="endpoint-9">Endpoint</a></h3>
+<h2 id="获取-token"><a class="header" href="#获取-token">获取 Token</a></h2>
+<h3 id="endpoint-9"><a class="header" href="#endpoint-9">Endpoint</a></h3>
 <p><code>GET /api/credential</code></p>
-<h3><a class="header" href="#返回-10" id="返回-10">返回</a></h3>
+<h3 id="返回-10"><a class="header" href="#返回-10">返回</a></h3>
 <p>返回包含所有请求 <code>Token</code> 的数组。</p>
-<h4><a class="header" href="#返回参数-2" id="返回参数-2">返回参数</a></h4>
+<h4 id="返回参数-2"><a class="header" href="#返回参数-2">返回参数</a></h4>
 <p><code>Token</code> 的定义如下所示：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td><code>string</code></td><td><code>Annil</code> 名称</td></tr>
@@ -1583,7 +1552,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td><code>Token</code> 的 <code>ID</code></td></tr>
 </tbody></table>
-<h3><a class="header" href="#参数表示-5" id="参数表示-5">参数表示</a></h3>
+<h3 id="参数表示-5"><a class="header" href="#参数表示-5">参数表示</a></h3>
 <pre><code class="language-typescript">type GetTokensResponse = Token[];
 
 interface Token {
@@ -1597,49 +1566,49 @@ interface Id {
   id: string;
 }
 </code></pre>
-<h2><a class="header" href="#新增-token" id="新增-token">新增 Token</a></h2>
-<h3><a class="header" href="#endpoint-10" id="endpoint-10">Endpoint</a></h3>
+<h2 id="新增-token"><a class="header" href="#新增-token">新增 Token</a></h2>
+<h3 id="endpoint-10"><a class="header" href="#endpoint-10">Endpoint</a></h3>
 <p><code>POST /api/credential</code></p>
-<h3><a class="header" href="#请求-9" id="请求-9">请求</a></h3>
+<h3 id="请求-9"><a class="header" href="#请求-9">请求</a></h3>
 <p>新增请求的类型为 <code>Token</code>。</p>
-<h3><a class="header" href="#返回-11" id="返回-11">返回</a></h3>
+<h3 id="返回-11"><a class="header" href="#返回-11">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
-<h4><a class="header" href="#客户端实现指引" id="客户端实现指引">客户端实现指引</a></h4>
+<h4 id="客户端实现指引"><a class="header" href="#客户端实现指引">客户端实现指引</a></h4>
 <p>每次请求成功后，客户端需重新获取一遍 <code>Token</code> 列表。</p>
-<h3><a class="header" href="#错误列表-10" id="错误列表-10">错误列表</a></h3>
+<h3 id="错误列表-10"><a class="header" href="#错误列表-10">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104000</code></td><td>用户 <code>Token</code> 存储数已达上限</td></tr>
 </tbody></table>
-<h2><a class="header" href="#修改-token" id="修改-token">修改 Token</a></h2>
-<h3><a class="header" href="#endpoint-11" id="endpoint-11">Endpoint</a></h3>
+<h2 id="修改-token"><a class="header" href="#修改-token">修改 Token</a></h2>
+<h3 id="endpoint-11"><a class="header" href="#endpoint-11">Endpoint</a></h3>
 <p><code>PATCH /api/credential</code></p>
-<h3><a class="header" href="#请求-10" id="请求-10">请求</a></h3>
+<h3 id="请求-10"><a class="header" href="#请求-10">请求</a></h3>
 <p>修改请求的类型为 <code>Token &amp; Id</code>，其中 <code>Token</code> 部分各属性均为可选。</p>
-<h3><a class="header" href="#返回-12" id="返回-12">返回</a></h3>
+<h3 id="返回-12"><a class="header" href="#返回-12">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#错误列表-11" id="错误列表-11">错误列表</a></h3>
+<h3 id="错误列表-11"><a class="header" href="#错误列表-11">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
 </tbody></table>
-<h2><a class="header" href="#删除-token" id="删除-token">删除 Token</a></h2>
-<h3><a class="header" href="#endpoint-12" id="endpoint-12">Endpoint</a></h3>
+<h2 id="删除-token"><a class="header" href="#删除-token">删除 Token</a></h2>
+<h3 id="endpoint-12"><a class="header" href="#endpoint-12">Endpoint</a></h3>
 <p><code>DELETE /api/credential</code></p>
-<h3><a class="header" href="#请求-11" id="请求-11">请求</a></h3>
-<h4><a class="header" href="#请求参数-8" id="请求参数-8">请求参数</a></h4>
+<h3 id="请求-11"><a class="header" href="#请求-11">请求</a></h3>
+<h4 id="请求参数-8"><a class="header" href="#请求参数-8">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>待删除 <code>Token</code> 的 <code>ID</code></td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-13" id="返回-13">返回</a></h3>
+<h3 id="返回-13"><a class="header" href="#返回-13">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#错误列表-12" id="错误列表-12">错误列表</a></h3>
+<h3 id="错误列表-12"><a class="header" href="#错误列表-12">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
 </tbody></table>
-<h1><a class="header" href="#信息导出格式" id="信息导出格式">信息导出格式</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="信息导出格式"><a class="header" href="#信息导出格式">信息导出格式</a></h1>
 <p><code>Annil</code> 提供了分享 <code>Token</code> 的创建功能，但这只是资源分享的基石。</p>
 <p>对于音频分享而言，我们需要的不只是音频文件的集合，还需要包含顺序、元数据等在内的一系列信息。而这一切需求汇总到一起，信息导出格式便应运而生。</p>
 <p>信息导出格式根据音频资源的三个粒度，分为单曲导出、专辑导出和播放列表导出。</p>
-<h1><a class="header" href="#单曲导出" id="单曲导出">单曲导出</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="单曲导出"><a class="header" href="#单曲导出">单曲导出</a></h1>
 <p>单曲的导出最为简单，包括单曲所属专辑的 <code>catalog</code>、单曲的 <code>track_id</code>、单曲的元数据和分享 <code>Token</code>。</p>
 <pre><code class="language-json">{
   &quot;title&quot;: &quot;僕は存在していなかった&quot;,   // 标题
@@ -1650,7 +1619,7 @@ interface Id {
   &quot;token&quot;: &quot;jwt token here&quot;        // 此处省略分享 JWT
 }
 </code></pre>
-<h1><a class="header" href="#专辑导出" id="专辑导出">专辑导出</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="专辑导出"><a class="header" href="#专辑导出">专辑导出</a></h1>
 <p>专辑导出和单曲导出相比，需要记录专辑名和专辑内的所有单曲信息。</p>
 <pre><code class="language-json">{
   &quot;title&quot;: &quot;僕は存在していなかった&quot;,
@@ -1677,7 +1646,7 @@ interface Id {
   &quot;token&quot;: &quot;jwt token here&quot;
 }
 </code></pre>
-<h1><a class="header" href="#播放列表导出" id="播放列表导出">播放列表导出</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="播放列表导出"><a class="header" href="#播放列表导出">播放列表导出</a></h1>
 <blockquote>
 <p>⚠️ 该部分尚未设计完成</p>
 </blockquote>
@@ -1732,77 +1701,77 @@ interface Id {
   &quot;token&quot;: &quot;jwt token here&quot;        // 此处省略分享 JWT
 }
 </code></pre>
-<h1><a class="header" href="#分享管理" id="分享管理">分享管理</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="分享管理"><a class="header" href="#分享管理">分享管理</a></h1>
 <blockquote>
 <p>⚠️ 该部分尚未设计完成</p>
 </blockquote>
 <p><code>Anniv</code> 基于<a href="06.anniv/./export-format/00.readme.html">信息导出格式</a>实现单曲、专辑和播放列表的分享。</p>
-<h2><a class="header" href="#错误一览-2" id="错误一览-2">错误一览</a></h2>
+<h2 id="错误一览-2"><a class="header" href="#错误一览-2">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105000</code></td><td>用户分享数已达上限</td></tr>
 <tr><td><code>105001</code></td><td>分享链接不存在</td></tr>
 </tbody></table>
-<h2><a class="header" href="#获取分享链接内容" id="获取分享链接内容">获取分享链接内容</a></h2>
-<h3><a class="header" href="#endpoint-13" id="endpoint-13">Endpoint</a></h3>
+<h2 id="获取分享链接内容"><a class="header" href="#获取分享链接内容">获取分享链接内容</a></h2>
+<h3 id="endpoint-13"><a class="header" href="#endpoint-13">Endpoint</a></h3>
 <p><code>GET /s/{link}</code></p>
-<h3><a class="header" href="#请求-12" id="请求-12">请求</a></h3>
-<h4><a class="header" href="#请求参数-9" id="请求参数-9">请求参数</a></h4>
+<h3 id="请求-12"><a class="header" href="#请求-12">请求</a></h3>
+<h4 id="请求参数-9"><a class="header" href="#请求参数-9">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>link</code></td><td><code>string</code></td><td>分享链接的短部</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-14" id="返回-14">返回</a></h3>
+<h3 id="返回-14"><a class="header" href="#返回-14">返回</a></h3>
 <p>返回分享链接的实际内容。</p>
-<h3><a class="header" href="#错误列表-13" id="错误列表-13">错误列表</a></h3>
+<h3 id="错误列表-13"><a class="header" href="#错误列表-13">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105001</code></td><td>分享链接不存在</td></tr>
 </tbody></table>
-<h2><a class="header" href="#获取分享连接列表" id="获取分享连接列表">获取分享连接列表</a></h2>
-<h3><a class="header" href="#endpoint-14" id="endpoint-14">Endpoint</a></h3>
+<h2 id="获取分享连接列表"><a class="header" href="#获取分享连接列表">获取分享连接列表</a></h2>
+<h3 id="endpoint-14"><a class="header" href="#endpoint-14">Endpoint</a></h3>
 <p><code>GET /api/share</code></p>
-<h3><a class="header" href="#返回-15" id="返回-15">返回</a></h3>
+<h3 id="返回-15"><a class="header" href="#返回-15">返回</a></h3>
 <p>返回当前用户创建的所有分享链接列表。</p>
-<h4><a class="header" href="#返回参数-3" id="返回参数-3">返回参数</a></h4>
+<h4 id="返回参数-3"><a class="header" href="#返回参数-3">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td><code>string</code></td><td>分享链接名称</td></tr>
 <tr><td><code>link</code></td><td><code>string</code></td><td>分享链接的短部</td></tr>
 </tbody></table>
-<h2><a class="header" href="#创建分享链接" id="创建分享链接">创建分享链接</a></h2>
+<h2 id="创建分享链接"><a class="header" href="#创建分享链接">创建分享链接</a></h2>
 <p>创建分享链接时，客户端需要提供待分享资源的元数据和供被分享人播放音乐的分享 <code>Token</code>。<code>Anniv</code> 负责记录用户提供的上述信息，并存储一份用户指定播放列表的快照。</p>
-<h3><a class="header" href="#endpoint-15" id="endpoint-15">Endpoint</a></h3>
+<h3 id="endpoint-15"><a class="header" href="#endpoint-15">Endpoint</a></h3>
 <p><code>POST /api/share</code></p>
-<h3><a class="header" href="#请求-13" id="请求-13">请求</a></h3>
-<h4><a class="header" href="#请求参数-10" id="请求参数-10">请求参数</a></h4>
+<h3 id="请求-13"><a class="header" href="#请求-13">请求</a></h3>
+<h4 id="请求参数-10"><a class="header" href="#请求参数-10">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>播放列表 <code>ID</code></td></tr>
 <tr><td><code>data</code></td><td><code>string</code></td><td>实际内容</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-16" id="返回-16">返回</a></h3>
+<h3 id="返回-16"><a class="header" href="#返回-16">返回</a></h3>
 <p>请求成功时，返回分享链接的短部。</p>
-<h3><a class="header" href="#错误列表-14" id="错误列表-14">错误列表</a></h3>
+<h3 id="错误列表-14"><a class="header" href="#错误列表-14">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105000</code></td><td>用户分享数已达上限</td></tr>
 </tbody></table>
-<h2><a class="header" href="#删除分享链接" id="删除分享链接">删除分享链接</a></h2>
-<h3><a class="header" href="#endpoint-16" id="endpoint-16">Endpoint</a></h3>
+<h2 id="删除分享链接"><a class="header" href="#删除分享链接">删除分享链接</a></h2>
+<h3 id="endpoint-16"><a class="header" href="#endpoint-16">Endpoint</a></h3>
 <p><code>DELETE /api/share</code></p>
-<h3><a class="header" href="#请求-14" id="请求-14">请求</a></h3>
-<h4><a class="header" href="#请求参数-11" id="请求参数-11">请求参数</a></h4>
+<h3 id="请求-14"><a class="header" href="#请求-14">请求</a></h3>
+<h4 id="请求参数-11"><a class="header" href="#请求参数-11">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>link</code></td><td><code>string</code></td><td>待删除分享链接的短部</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-17" id="返回-17">返回</a></h3>
+<h3 id="返回-17"><a class="header" href="#返回-17">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
-<h2><a class="header" href="#错误列表-15" id="错误列表-15">错误列表</a></h2>
+<h2 id="错误列表-15"><a class="header" href="#错误列表-15">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105001</code></td><td>分享链接不存在</td></tr>
 </tbody></table>
-<h1><a class="header" href="#播放统计" id="播放统计">播放统计</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="播放统计"><a class="header" href="#播放统计">播放统计</a></h1>
 <p><code>Anniv</code> 提供基本的播放统计功能。</p>
-<h2><a class="header" href="#播放记录" id="播放记录">播放记录</a></h2>
-<h3><a class="header" href="#endpoint-17" id="endpoint-17">Endpoint</a></h3>
+<h2 id="播放记录"><a class="header" href="#播放记录">播放记录</a></h2>
+<h3 id="endpoint-17"><a class="header" href="#endpoint-17">Endpoint</a></h3>
 <p><code>POST /api/statistics</code></p>
-<h3><a class="header" href="#请求-15" id="请求-15">请求</a></h3>
-<h4><a class="header" href="#请求参数-12" id="请求参数-12">请求参数</a></h4>
+<h3 id="请求-15"><a class="header" href="#请求-15">请求</a></h3>
+<h4 id="请求参数-12"><a class="header" href="#请求参数-12">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>time</code></td><td><code>timestamp</code></td><td>播放的时间戳</td></tr>
 <tr><td><code>songs</code></td><td><code>SongPlayRecord[]</code></td><td>播放记录</td></tr>
@@ -1817,11 +1786,11 @@ interface Id {
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
 <tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-18" id="返回-18">返回</a></h3>
+<h3 id="返回-18"><a class="header" href="#返回-18">返回</a></h3>
 <p>当记录成功时，返回 <code>204 No Content</code>。</p>
-<h1><a class="header" href="#特性" id="特性">特性</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="特性"><a class="header" href="#特性">特性</a></h1>
 <p>为了控制一些可选功能的启用与否，<code>Anniv</code> 定义了一系列特性。特性的启用与否由 <code>Anniv</code> 的管理员决定，开启后会增加一些处理步骤。</p>
-<h2><a class="header" href="#适用范围" id="适用范围">适用范围</a></h2>
+<h2 id="适用范围"><a class="header" href="#适用范围">适用范围</a></h2>
 <p>特性的适用范围描述了特性实现的具体部分，以描述其在客户端实现中应处的具体位置。</p>
 <p>目前有效的适用范围有：</p>
 <ul>
@@ -1830,30 +1799,30 @@ interface Id {
 <li>用户注销</li>
 <li>……</li>
 </ul>
-<h2><a class="header" href="#参数列表" id="参数列表">参数列表</a></h2>
+<h2 id="参数列表"><a class="header" href="#参数列表">参数列表</a></h2>
 <p>当特性对原有功能做加法时，通常会增加一定的输入参数。参数列表指定了这些参数的名称和类型。</p>
-<h2><a class="header" href="#错误列表-16" id="错误列表-16">错误列表</a></h2>
+<h2 id="错误列表-16"><a class="header" href="#错误列表-16">错误列表</a></h2>
 <p>当某一特性开启时，往往会增加特性相关的特定错误。错误列表指定了错误代码和其代表的详细错误内容。</p>
-<h2><a class="header" href="#接口列表" id="接口列表">接口列表</a></h2>
+<h2 id="接口列表"><a class="header" href="#接口列表">接口列表</a></h2>
 <p>某些特性可能会定义其独有的接口。接口列表负责描述这些接口的请求参数和返回格式。</p>
-<h1><a class="header" href="#邀请invite" id="邀请invite">邀请（invite）</a></h1>
-<h2><a class="header" href="#适用范围-1" id="适用范围-1">适用范围</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="邀请invite"><a class="header" href="#邀请invite">邀请（invite）</a></h1>
+<h2 id="适用范围-1"><a class="header" href="#适用范围-1">适用范围</a></h2>
 <ul>
 <li>用户注册</li>
 </ul>
-<h2><a class="header" href="#请求参数-13" id="请求参数-13">请求参数</a></h2>
+<h2 id="请求参数-13"><a class="header" href="#请求参数-13">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>invite_code</code></td><td><code>string</code></td><td>邀请码</td></tr>
 </tbody></table>
-<h2><a class="header" href="#错误列表-17" id="错误列表-17">错误列表</a></h2>
+<h2 id="错误列表-17"><a class="header" href="#错误列表-17">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>201000</code></td><td>邀请系统未开启</td></tr>
 <tr><td><code>201001</code></td><td>邀请码无效</td></tr>
 <tr><td><code>201002</code></td><td>邀请码与被邀请用户不符</td></tr>
 <tr><td><code>201003</code></td><td>邀请码已到达使用上限</td></tr>
 </tbody></table>
-<h1><a class="header" href="#两步验证2fa" id="两步验证2fa">两步验证（2fa）</a></h1>
-<h2><a class="header" href="#适用范围-2" id="适用范围-2">适用范围</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="两步验证2fa"><a class="header" href="#两步验证2fa">两步验证（2fa）</a></h1>
+<h2 id="适用范围-2"><a class="header" href="#适用范围-2">适用范围</a></h2>
 <ul>
 <li>用户注册</li>
 <li>用户登录</li>
@@ -1861,55 +1830,55 @@ interface Id {
 <li>播放列表删除</li>
 </ul>
 <p>TODO: 列举出用到 <code>2FA</code> 的所有位置</p>
-<h2><a class="header" href="#请求参数-14" id="请求参数-14">请求参数</a></h2>
+<h2 id="请求参数-14"><a class="header" href="#请求参数-14">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，注册时由客户端生成，验证成功后发送至服务端</td></tr>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码</td></tr>
 </tbody></table>
-<h2><a class="header" href="#错误列表-18" id="错误列表-18">错误列表</a></h2>
+<h2 id="错误列表-18"><a class="header" href="#错误列表-18">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>202000</code></td><td>用户或服务端未启用两步验证</td></tr>
 <tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
 <tr><td><code>202002</code></td><td>两步验证 <code>Secret</code> 非法</td></tr>
 <tr><td><code>202003</code></td><td>两步验证已达尝试上限</td></tr>
 </tbody></table>
-<h2><a class="header" href="#接口列表-1" id="接口列表-1">接口列表</a></h2>
-<h3><a class="header" href="#查询两步验证状态" id="查询两步验证状态">查询两步验证状态</a></h3>
+<h2 id="接口列表-1"><a class="header" href="#接口列表-1">接口列表</a></h2>
+<h3 id="查询两步验证状态"><a class="header" href="#查询两步验证状态">查询两步验证状态</a></h3>
 <p>查询某用户是否启用了两步验证。</p>
-<h4><a class="header" href="#endpoint-18" id="endpoint-18">Endpoint</a></h4>
+<h4 id="endpoint-18"><a class="header" href="#endpoint-18">Endpoint</a></h4>
 <p><code>GET /api/features/2fa/enabled</code></p>
-<h4><a class="header" href="#请求参数-15" id="请求参数-15">请求参数</a></h4>
+<h4 id="请求参数-15"><a class="header" href="#请求参数-15">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>email</code></td><td><code>string</code></td><td>待查询用户的邮箱</td></tr>
 </tbody></table>
-<h4><a class="header" href="#返回-19" id="返回-19">返回</a></h4>
+<h4 id="返回-19"><a class="header" href="#返回-19">返回</a></h4>
 <p>一个布尔值，<code>false</code> 表示未启用，<code>true</code> 表示启用。</p>
-<h1><a class="header" href="#禁止注册close" id="禁止注册close">禁止注册（close）</a></h1>
-<h2><a class="header" href="#适用范围-3" id="适用范围-3">适用范围</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="禁止注册close"><a class="header" href="#禁止注册close">禁止注册（close）</a></h1>
+<h2 id="适用范围-3"><a class="header" href="#适用范围-3">适用范围</a></h2>
 <ul>
 <li>用户注册。</li>
 </ul>
-<h2><a class="header" href="#错误列表-19" id="错误列表-19">错误列表</a></h2>
+<h2 id="错误列表-19"><a class="header" href="#错误列表-19">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>203000</code></td><td>站点关闭注册</td></tr>
 </tbody></table>
-<h2><a class="header" href="#兼容性" id="兼容性">兼容性</a></h2>
+<h2 id="兼容性"><a class="header" href="#兼容性">兼容性</a></h2>
 <p>当 <code>invite</code> 特性启用时，<code>close</code> 特性无效。</p>
-<h1><a class="header" href="#annisonic" id="annisonic">Annisonic</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="annisonic"><a class="header" href="#annisonic">Annisonic</a></h1>
 <p><a href="https://github.com/ProjectAnni/annisonic"><code>Annisonic</code></a> 是 <code>Project Anni</code> 在开发过程中为尽早替换掉当前正在使用的 <code>Airsonic</code> 而实现的。</p>
 <p>其在最小程度上实现了 <code>Subsonic API</code>，以在客户端未开发完成的当下提供半完整的音频服务。</p>
-<h1><a class="header" href="#实现的-api" id="实现的-api">实现的 API</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实现的-api"><a class="header" href="#实现的-api">实现的 API</a></h1>
 <p><code>Annisonic</code> 实现了以下 <a href="http://www.subsonic.org/pages/api.jsp"><code>Subsonic API</code></a>：</p>
-<h2><a class="header" href="#支持或部分支持的-api" id="支持或部分支持的-api">支持或部分支持的 API</a></h2>
+<h2 id="支持或部分支持的-api"><a class="header" href="#支持或部分支持的-api">支持或部分支持的 API</a></h2>
 <p>支持的 <code>API</code> 已打勾，待支持的 <code>API</code> 未打勾，不支持的 <code>API</code> 以 <del>删除线</del> 删去。</p>
-<h3><a class="header" href="#system" id="system">System</a></h3>
+<h3 id="system"><a class="header" href="#system">System</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>ping</code></li>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>getLicense</code></li>
 </ul>
-<h3><a class="header" href="#browsing" id="browsing">Browsing</a></h3>
+<h3 id="browsing"><a class="header" href="#browsing">Browsing</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>getMusicFolders</code></li>
@@ -1946,7 +1915,7 @@ interface Id {
 <li><input disabled="" type="checkbox"/>
 <del><code>getTopSongs</code></del></li>
 </ul>
-<h3><a class="header" href="#albumsong-lists" id="albumsong-lists">Album/song lists</a></h3>
+<h3 id="albumsong-lists"><a class="header" href="#albumsong-lists">Album/song lists</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>getAlbumList</code></li>
@@ -1963,7 +1932,7 @@ interface Id {
 <li><input disabled="" type="checkbox"/>
 <del><code>getStarred2</code></del></li>
 </ul>
-<h3><a class="header" href="#searching" id="searching">Searching</a></h3>
+<h3 id="searching"><a class="header" href="#searching">Searching</a></h3>
 <ul>
 <li><input disabled="" type="checkbox"/>
 <del><code>search</code></del></li>
@@ -1972,7 +1941,7 @@ interface Id {
 <li><input disabled="" type="checkbox"/>
 <del><code>search3</code></del></li>
 </ul>
-<h3><a class="header" href="#media-retrieval" id="media-retrieval">Media retrieval</a></h3>
+<h3 id="media-retrieval"><a class="header" href="#media-retrieval">Media retrieval</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>stream</code></li>
@@ -1989,14 +1958,14 @@ interface Id {
 <li><input disabled="" type="checkbox"/>
 <del><code>getAvatar</code></del></li>
 </ul>
-<h2><a class="header" href="#兼容性支持-api" id="兼容性支持-api">兼容性支持 API</a></h2>
+<h2 id="兼容性支持-api"><a class="header" href="#兼容性支持-api">兼容性支持 API</a></h2>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>getPlaylists</code></li>
 <li><input disabled="" type="checkbox" checked=""/>
 <code>getUser</code></li>
 </ul>
-<h2><a class="header" href="#无计划支持的-api-类别" id="无计划支持的-api-类别">无计划支持的 API 类别</a></h2>
+<h2 id="无计划支持的-api-类别"><a class="header" href="#无计划支持的-api-类别">无计划支持的 API 类别</a></h2>
 <ul>
 <li><code>Playlists</code></li>
 <li><code>Media annotation</code></li>
@@ -2009,36 +1978,36 @@ interface Id {
 <li><code>Bookmarks</code></li>
 <li><code>Media library scanning</code></li>
 </ul>
-<h1><a class="header" href="#已测试的客户端" id="已测试的客户端">已测试的客户端</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="已测试的客户端"><a class="header" href="#已测试的客户端">已测试的客户端</a></h1>
 <p><code>Annisonic</code> 下测试过的客户端会罗列在此处，并指明配置的详细设置和存在的问题。</p>
-<h2><a class="header" href="#dsub" id="dsub">DSub</a></h2>
+<h2 id="dsub"><a class="header" href="#dsub">DSub</a></h2>
 <p><a href="https://github.com/daneren2005/Subsonic"><code>DSub</code></a> 是 <code>Android</code> 平台下的一款 <code>Subsonic</code> 播放器。</p>
-<h3><a class="header" href="#配置" id="配置">配置</a></h3>
+<h3 id="配置"><a class="header" href="#配置">配置</a></h3>
 <ul>
 <li>Browse By Tags: Off</li>
 <li>Sync Enabled: Off</li>
 <li>Authorization Basic headers: Off</li>
 </ul>
-<h3><a class="header" href="#存在问题" id="存在问题">存在问题</a></h3>
+<h3 id="存在问题"><a class="header" href="#存在问题">存在问题</a></h3>
 <ol>
 <li>缓存时会直接从 <code>0%</code> 跳变到 <code>100%</code></li>
 </ol>
-<h2><a class="header" href="#soundwaves" id="soundwaves">Soundwaves</a></h2>
-<h3><a class="header" href="#配置-1" id="配置-1">配置</a></h3>
+<h2 id="soundwaves"><a class="header" href="#soundwaves">Soundwaves</a></h2>
+<h3 id="配置-1"><a class="header" href="#配置-1">配置</a></h3>
 <ul>
 <li>Don't Validate SSL Certificates: Off</li>
 <li>MAX BIT RATE: No Limit</li>
 </ul>
-<h3><a class="header" href="#存在问题-1" id="存在问题-1">存在问题</a></h3>
+<h3 id="存在问题-1"><a class="header" href="#存在问题-1">存在问题</a></h3>
 <p>暂无</p>
-<h2><a class="header" href="#clementine" id="clementine">Clementine</a></h2>
+<h2 id="clementine"><a class="header" href="#clementine">Clementine</a></h2>
 <p><a href="https://www.clementine-player.org/zh_CN/">Clementine</a> 是一款兼容 SubSonic 协议的桌面音乐播放器。</p>
-<h3><a class="header" href="#存在问题-2" id="存在问题-2">存在问题</a></h3>
+<h3 id="存在问题-2"><a class="header" href="#存在问题-2">存在问题</a></h3>
 <p>暂无</p>
-<h1><a class="header" href="#部署向导" id="部署向导">部署向导</a></h1>
-<h2><a class="header" href="#元数据仓库" id="元数据仓库">元数据仓库</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="部署向导"><a class="header" href="#部署向导">部署向导</a></h1>
+<h2 id="元数据仓库"><a class="header" href="#元数据仓库">元数据仓库</a></h2>
 <p>我们假设读者已将需要的元数据仓库 <code>clone</code> 到 <code>/repo</code> 下。</p>
-<h2><a class="header" href="#配置文件-1" id="配置文件-1">配置文件</a></h2>
+<h2 id="配置文件-1"><a class="header" href="#配置文件-1">配置文件</a></h2>
 <p><code>config.toml</code> 中存放了 <code>Annisonic</code> 部署相关的所有配置信息。</p>
 <pre><code class="language-toml">[server]
 # 监听的地址
@@ -2058,21 +2027,21 @@ server = &quot;https://annil.example.org&quot;
 token = &quot;ey...&quot;
 
 </code></pre>
-<h2><a class="header" href="#构建" id="构建">构建</a></h2>
+<h2 id="构建"><a class="header" href="#构建">构建</a></h2>
 <p>我们使用以下命令构建：</p>
 <pre><code class="language-bash"># 构建
 cargo build --target x86_64-unknown-linux-musl --release
 # 压缩
 upx target/x86_64-unknown-linux-musl/release/annisonic
 </code></pre>
-<h2><a class="header" href="#运行" id="运行">运行</a></h2>
+<h2 id="运行"><a class="header" href="#运行">运行</a></h2>
 <p>将 <code>annisonic</code> 和 <code>config</code> 放置于同一目录，然后通过以下命令启动即可：</p>
 <pre><code class="language-bash">RUST_LOG=info ./annisonic
 </code></pre>
-<h1><a class="header" href="#anni-命令行工具" id="anni-命令行工具">Anni 命令行工具</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anni-命令行工具"><a class="header" href="#anni-命令行工具">Anni 命令行工具</a></h1>
 <p><code>Anni</code> 命令行工具的设计初衷是通过自己实现的一整套工具，替代之前使用的包括 <code>shnsplit</code>、<code>metaflac</code> 和 <code>cuetools</code> 等分散的工具，并解决一些其不能或未涵盖的问题，如编码处理。</p>
 <p>在下文中，我们统一将 Anni 命令行工具称为 <code>anni-cli</code>。</p>
-<h2><a class="header" href="#功能列表" id="功能列表">功能列表</a></h2>
+<h2 id="功能列表"><a class="header" href="#功能列表">功能列表</a></h2>
 <p><code>anni-cli</code> 目前的功能分为以下五个部分：</p>
 <ul>
 <li><code>flac</code>：针对 <code>flac</code> 音频格式的工具集</li>
@@ -2080,7 +2049,7 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 <li><code>convention</code>：对 <code>anni</code> 音频约定进行检查的工具</li>
 <li><code>repo</code>：对 <code>Anni</code> 元数据仓库进行操作的工具</li>
 </ul>
-<h1><a class="header" href="#flac" id="flac">flac</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flac"><a class="header" href="#flac">flac</a></h1>
 <p>针对日常使用的场景，<code>anni</code> 的 <code>flac</code> 部分（需要）实现的功能列表如下：</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
@@ -2133,16 +2102,16 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 </ul>
 </li>
 </ul>
-<h1><a class="header" href="#split" id="split">split</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="split"><a class="header" href="#split">split</a></h1>
 <p>以音轨文件（如 <code>cue</code>）和整轨音频文件（如 <code>wav</code>）作为输入，分轨音频作为输出的音频分割工具。</p>
-<h2><a class="header" href="#支持格式" id="支持格式">支持格式</a></h2>
+<h2 id="支持格式"><a class="header" href="#支持格式">支持格式</a></h2>
 <table><thead><tr><th>格式</th><th>依赖工具</th><th>输入</th><th>输出</th></tr></thead><tbody>
 <tr><td><code>wav</code></td><td><code>-</code></td><td>☑</td><td>☑</td></tr>
 <tr><td><code>flac</code></td><td><a href="https://archlinux.org/packages/extra/x86_64/flac/"><code>flac</code></a></td><td>☑</td><td>☑</td></tr>
 <tr><td><code>ape</code></td><td><a href="https://archlinux.org/packages/community/x86_64/mac/"><code>mac</code></a></td><td>☑</td><td>☒</td></tr>
 <tr><td><code>tak</code></td><td><a href="https://aur.archlinux.org/packages/tak/"><code>tak</code></a></td><td>☑</td><td>☒</td></tr>
 </tbody></table>
-<h2><a class="header" href="#功能列表-1" id="功能列表-1">功能列表</a></h2>
+<h2 id="功能列表-1"><a class="header" href="#功能列表-1">功能列表</a></h2>
 <p>TODO：支持除 CUE 以外的音轨文件。</p>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
@@ -2206,10 +2175,10 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 </ul>
 </li>
 </ul>
-<h1><a class="header" href="#convention" id="convention">convention</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="convention"><a class="header" href="#convention">convention</a></h1>
 <p>检查部分优先级较低，暂时搁置。</p>
-<h1><a class="header" href="#repo" id="repo">repo</a></h1>
-<h2><a class="header" href="#专辑" id="专辑">专辑</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="repo"><a class="header" href="#repo">repo</a></h1>
+<h2 id="专辑"><a class="header" href="#专辑">专辑</a></h2>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 导入专辑
@@ -2255,7 +2224,7 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 </ul>
 </li>
 </ul>
-<h2><a class="header" href="#元数据" id="元数据">元数据</a></h2>
+<h2 id="元数据"><a class="header" href="#元数据">元数据</a></h2>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 输出元数据
@@ -2294,59 +2263,31 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-
-                
             </nav>
 
         </div>
 
-        
-
-        
-
-        
-
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-        
         <script type="text/javascript">
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
-
     </body>
 </html>

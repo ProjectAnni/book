@@ -4,47 +4,27 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>艺术家 - Project Anni 使用手册</title>
-        
-        
-
-
         <!-- Custom HTML head -->
-        
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Anni 相关的所有文档信息均在此处。翻译募集中……">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
-
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,7 +83,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -120,33 +99,26 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Project Anni 使用手册</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -154,8 +126,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -167,22 +137,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#艺术家" id="艺术家">艺术家</a></h1>
+                        <h1 id="艺术家"><a class="header" href="#艺术家">艺术家</a></h1>
 <p>艺术家必须<strong>保留原名</strong>，不可填写译名或罗马音。</p>
 <p>艺术家姓名之间不带空格，首尾不带空格。</p>
-<h2><a class="header" href="#多艺术家" id="多艺术家">多艺术家</a></h2>
+<h2 id="多艺术家"><a class="header" href="#多艺术家">多艺术家</a></h2>
 <p>多艺术家之间以中文顿号（<code>、</code>）分隔。</p>
 <p>如 <code>[140827][GNCA-1418] ごちうさブレンド</code> 中 <code>02. Rabbit Hole</code> 的艺术家就可以表示为 <code>ココア、リゼ</code>。</p>
-<h2><a class="header" href="#艺术家别名" id="艺术家别名">艺术家别名</a></h2>
+<h2 id="艺术家别名"><a class="header" href="#艺术家别名">艺术家别名</a></h2>
 <p>以中文括号用表示艺术家别名。</p>
 <p>如上文 <code>02. Rabbit Hole</code> 的艺术家还可以详细表示为 <code>ココア（佐倉綾音）、リゼ（種田梨沙）</code>。</p>
-<h2><a class="header" href="#艺术家别名嵌套" id="艺术家别名嵌套">艺术家别名嵌套</a></h2>
+<h2 id="艺术家别名嵌套"><a class="header" href="#艺术家别名嵌套">艺术家别名嵌套</a></h2>
 <p>艺术家别名和多艺术家也可以嵌套，形成以中文括号和中文顿号表示的复杂艺术家关系。</p>
 <p>如 <code>TrySail</code> 组合曲的艺术家可以表示为：<code>TrySail（雨宮天、麻倉もも、夏川椎菜）</code>。</p>
 <p>别名也支持多级嵌套，如 <code>[201028][GNCA-0620] 天空カフェテリア</code> 中 <code>01. 天空カフェテリア</code> 的艺术家可以表示为：</p>
 <pre><code>Petit Rabbit's（ココア（佐倉綾音）、チノ（水瀬いのり）、リゼ（種田梨沙）、千夜（佐藤聡美）、シャロ（内田真礼））
 </code></pre>
-<h2><a class="header" href="#艺术家别名及嵌套的意义" id="艺术家别名及嵌套的意义">艺术家别名及嵌套的意义</a></h2>
+<h2 id="艺术家别名及嵌套的意义"><a class="header" href="#艺术家别名及嵌套的意义">艺术家别名及嵌套的意义</a></h2>
 <p>虽然艺术家别名的直接观感并不是很好（尤其是在多级嵌套之后），但较为规整的格式使得播放器可以对这样的格式进行更为复杂的支持。播放器完全可以通过别名支持基于艺术家的复杂歌曲检索，组合名也就可以方便地映射到个人。</p>
 <p>而如果播放器选择不支持，艺术家别名也可以简单地消除，只留下艺术家的原名。</p>
 <p>即使播放器对这一项完全不作任何修正，得到的格式也比交杂着顿号（<code>、</code>）、斜杠（<code>/</code>）、与号（<code>&amp;</code>）等分隔符的格式要直观许多。</p>
@@ -191,67 +161,38 @@
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../01.audio-convention/04.zzzz.01.vendor-string.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
-
-                        
                             <a rel="next" href="../01.audio-convention/04.zzzz.03.album.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../01.audio-convention/04.zzzz.01.vendor-string.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
-
-                
                     <a rel="next" href="../01.audio-convention/04.zzzz.03.album.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
-
-        
-
-        
-
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-
     </body>
 </html>

@@ -4,47 +4,27 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>播放列表 - Project Anni 使用手册</title>
-        
-        
-
-
         <!-- Custom HTML head -->
-        
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Anni 相关的所有文档信息均在此处。翻译募集中……">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
-
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,7 +83,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -120,33 +99,26 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Project Anni 使用手册</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -154,8 +126,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -167,10 +137,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#播放列表" id="播放列表">播放列表</a></h1>
+                        <h1 id="播放列表"><a class="header" href="#播放列表">播放列表</a></h1>
 <p>播放列表是顺序的歌曲列表，用户可以通过播放列表对零散的歌曲进行整理。</p>
 <p>播放列表相关的功能有获取、创建、修改、删除。</p>
-<h2><a class="header" href="#错误一览" id="错误一览">错误一览</a></h2>
+<h2 id="错误一览"><a class="header" href="#错误一览">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103000</code></td><td>用户播放列表数已达上限</td></tr>
 <tr><td><code>103001</code></td><td>播放列表中歌曲数量已达上限</td></tr>
@@ -178,17 +148,17 @@
 <tr><td><code>103003</code></td><td>修改类型非法</td></tr>
 <tr><td><code>103003</code></td><td>歌曲 ID 非法</td></tr>
 </tbody></table>
-<h2><a class="header" href="#获取播放列表" id="获取播放列表">获取播放列表</a></h2>
-<h3><a class="header" href="#endpoint" id="endpoint">Endpoint</a></h3>
+<h2 id="获取播放列表"><a class="header" href="#获取播放列表">获取播放列表</a></h2>
+<h3 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h3>
 <p><code>GET /api/playlist</code></p>
-<h3><a class="header" href="#请求" id="请求">请求</a></h3>
-<h4><a class="header" href="#请求参数" id="请求参数">请求参数</a></h4>
+<h3 id="请求"><a class="header" href="#请求">请求</a></h3>
+<h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回" id="返回">返回</a></h3>
+<h3 id="返回"><a class="header" href="#返回">返回</a></h3>
 <p>请求成功时，返回播放列表的全部信息。</p>
-<h4><a class="header" href="#返回参数" id="返回参数">返回参数</a></h4>
+<h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
@@ -207,7 +177,7 @@
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
 </tbody></table>
-<h4><a class="header" href="#示例" id="示例">示例</a></h4>
+<h4 id="示例"><a class="header" href="#示例">示例</a></h4>
 <pre><code class="language-json">{
   &quot;id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
   &quot;name&quot;: &quot;测试播放列表&quot;,
@@ -224,7 +194,7 @@
   ]
 }
 </code></pre>
-<h3><a class="header" href="#参数表示" id="参数表示">参数表示</a></h3>
+<h3 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h3>
 <pre><code class="language-typescript">interface Playlist {
   id: string;
   name: string;
@@ -244,25 +214,25 @@ interface PlaylistSongWithId extends PlaylistSong {
   id: string;
 }
 </code></pre>
-<h2><a class="header" href="#错误列表" id="错误列表">错误列表</a></h2>
+<h2 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>902001</code></td><td>禁止访问私有播放列表</td></tr>
 </tbody></table>
-<h2><a class="header" href="#创建播放列表" id="创建播放列表">创建播放列表</a></h2>
-<h3><a class="header" href="#endpoint-1" id="endpoint-1">Endpoint</a></h3>
+<h2 id="创建播放列表"><a class="header" href="#创建播放列表">创建播放列表</a></h2>
+<h3 id="endpoint-1"><a class="header" href="#endpoint-1">Endpoint</a></h3>
 <p><code>PUT /api/playlist</code></p>
-<h3><a class="header" href="#请求-1" id="请求-1">请求</a></h3>
-<h4><a class="header" href="#请求参数-1" id="请求参数-1">请求参数</a></h4>
+<h3 id="请求-1"><a class="header" href="#请求-1">请求</a></h3>
+<h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
 <tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-1" id="返回-1">返回</a></h3>
+<h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
 <p>处理完成后，返回新创建的播放列表信息（<code>Playlist</code>）。</p>
-<h3><a class="header" href="#参数表示-1" id="参数表示-1">参数表示</a></h3>
+<h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
 <pre><code class="language-typescript">interface CreatePlaylistBody extends CreatePlaylistFeatureParameters {
   name: string;
   description?: string;
@@ -270,48 +240,48 @@ interface PlaylistSongWithId extends PlaylistSong {
   songs: PlaylistSong[];
 }
 </code></pre>
-<h3><a class="header" href="#错误列表-1" id="错误列表-1">错误列表</a></h3>
+<h3 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103000</code></td><td>用户播放列表数已达上限</td></tr>
 <tr><td><code>103001</code></td><td>播放列表中歌曲数量已达上限</td></tr>
 </tbody></table>
-<h2><a class="header" href="#修改播放列表" id="修改播放列表">修改播放列表</a></h2>
-<h3><a class="header" href="#endpoint-2" id="endpoint-2">Endpoint</a></h3>
+<h2 id="修改播放列表"><a class="header" href="#修改播放列表">修改播放列表</a></h2>
+<h3 id="endpoint-2"><a class="header" href="#endpoint-2">Endpoint</a></h3>
 <p><code>PATCH /api/playlist</code></p>
-<h3><a class="header" href="#请求-2" id="请求-2">请求</a></h3>
+<h3 id="请求-2"><a class="header" href="#请求-2">请求</a></h3>
 <p>对播放列表的修改分为三个部分：增加歌曲、删除歌曲和排列歌曲。</p>
-<h4><a class="header" href="#请求参数-2" id="请求参数-2">请求参数</a></h4>
+<h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
 <tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
 <tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-2" id="返回-2">返回</a></h3>
+<h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
-<h3><a class="header" href="#参数表示-2" id="参数表示-2">参数表示</a></h3>
+<h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
 <pre><code class="language-typescript">interface PatchPlaylistRequestBody {
   id: string;
   command: &quot;append&quot; | &quot;remove&quot; | &quot;reorder&quot; | &quot;replace&quot;;
   payload: PlaylistSong[] | string[] | PlaylistSongWithid[];
 }
 </code></pre>
-<h3><a class="header" href="#错误列表-2" id="错误列表-2">错误列表</a></h3>
+<h3 id="错误列表-2"><a class="header" href="#错误列表-2">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>103003</code></td><td>修改类型非法</td></tr>
 <tr><td><code>103003</code></td><td>歌曲 ID 非法</td></tr>
 </tbody></table>
-<h2><a class="header" href="#删除播放列表" id="删除播放列表">删除播放列表</a></h2>
-<h3><a class="header" href="#endpoint-3" id="endpoint-3">Endpoint</a></h3>
+<h2 id="删除播放列表"><a class="header" href="#删除播放列表">删除播放列表</a></h2>
+<h3 id="endpoint-3"><a class="header" href="#endpoint-3">Endpoint</a></h3>
 <p><code>DELETE /api/playlist</code></p>
-<h3><a class="header" href="#请求-3" id="请求-3">请求</a></h3>
-<h4><a class="header" href="#请求参数-3" id="请求参数-3">请求参数</a></h4>
+<h3 id="请求-3"><a class="header" href="#请求-3">请求</a></h3>
+<h4 id="请求参数-3"><a class="header" href="#请求参数-3">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3><a class="header" href="#返回-3" id="返回-3">返回</a></h3>
+<h3 id="返回-3"><a class="header" href="#返回-3">返回</a></h3>
 <p>删除成功时，返回 <code>204 No Content</code>。</p>
-<h3><a class="header" href="#错误列表-3" id="错误列表-3">错误列表</a></h3>
+<h3 id="错误列表-3"><a class="header" href="#错误列表-3">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
 <tr><td><code>103003</code></td><td>非法修改类型</td></tr>
@@ -321,67 +291,38 @@ interface PlaylistSongWithId extends PlaylistSong {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../06.anniv/02.user.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
-
-                        
                             <a rel="next" href="../06.anniv/04.credential.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../06.anniv/02.user.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
-
-                
                     <a rel="next" href="../06.anniv/04.credential.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
-
-        
-
-        
-
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-
     </body>
 </html>
