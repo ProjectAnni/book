@@ -144,14 +144,14 @@
 </span><span class="boring">fn main() {
 </span>#[async_trait]
 pub trait Backend {
-    // 获取可用专辑 catalog 的集合
+    // 获取可用专辑 album_id 的集合
     async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
 
     // 获取音频
-    async fn get_audio(&amp;self, catalog: &amp;str, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
+    async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
 
     // 获取封面
-    async fn get_cover(&amp;self, catalog: &amp;str) -&gt; Result&lt;BackendReader, BackendError&gt;;
+    async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;BackendReader, BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -166,6 +166,8 @@ pub struct BackendReaderExt {
     pub extension: String,
     /// 文件大小
     pub size: usize,
+    /// 音频长度
+    pub duration: u64,
     /// 读取文件内容的 Reader
     pub reader: BackendReader,
 }

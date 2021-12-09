@@ -239,7 +239,7 @@
 <h2 id="音频仓库相关"><a class="header" href="#音频仓库相关">音频仓库相关</a></h2>
 <p>音频仓库（<code>Audio Library</code>）是用于存放音频文件的系统，对目录组织的要求较为松散，但对专辑目录及音轨的命名有着较严格的要求。</p>
 <p>元数据仓库（<code>Metadata Repository</code>）是用于存放音频元数据的仓库，格式要求严格。</p>
-<p>在二者的结合下，我们便可以通过 <code>(Catalog, TrackID)</code> 二元组的形式索引 <code>Anni</code> 系统中的所有音频文件。</p>
+<p>在二者的结合下，我们便可以通过 <code>(AlbumID, DiscID, TrackID)</code> 三元组的形式索引 <code>Anni</code> 系统中的所有音频文件。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="术语表"><a class="header" href="#术语表">术语表</a></h1>
 <p>此处列出该文档中使用的所有术语。文档编写者在书写时应以此处的术语为准。</p>
 <h2 id="主要术语"><a class="header" href="#主要术语">主要术语</a></h2>
@@ -248,7 +248,7 @@
 <h3 id="anni广义"><a class="header" href="#anni广义">Anni（广义）</a></h3>
 <p><code>Project Anni</code>。</p>
 <h3 id="品番catalog"><a class="header" href="#品番catalog">品番（<code>Catalog</code>）</a></h3>
-<p>可用于唯一表示专辑的字符。</p>
+<p>在未冲突的情况下可用于唯一表示专辑的字符，但可能存在冲突情况。</p>
 <h3 id="元数据metadata"><a class="header" href="#元数据metadata">元数据（<code>Metadata</code>）</a></h3>
 <p>描述音频信息的数据，一般会内嵌在音频文件中，包括标题、专辑、艺术家等。</p>
 <h3 id="元数据仓库metadata-repository"><a class="header" href="#元数据仓库metadata-repository"><a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库（<code>Metadata Repository</code>）</a></a></h3>
@@ -422,20 +422,25 @@ KEY=OVERRIDE
 <p>封面文件名必须为 <code>cover.jpg</code>，文件名全小写。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="品番"><a class="header" href="#品番">品番</a></h1>
 <p>品番（<code>Catalog</code>） 是存在于（几乎）每一张专辑上的编号。</p>
-<p><code>Anni</code> 约定其对于各专辑唯一，并使用其作为专辑的主键。</p>
+<p><code>Anni</code> 约定其对于各专辑<strong>近似</strong>唯一，在<strong>不严格的情况下</strong>可以作为专辑的主键。</p>
 <h2 id="连续表示"><a class="header" href="#连续表示">连续表示</a></h2>
 <p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯。如：<code>VVCL-1466~7</code>。</p>
+<h2 id="私有品番域"><a class="header" href="#私有品番域">私有品番域</a></h2>
+<p>对于没有品番的专辑，<code>Anni</code> 约定以 <code>@</code> 开头的品番为私有品番域。</p>
 <h2 id="手动分配"><a class="header" href="#手动分配">手动分配</a></h2>
 <p>当 <code>CD</code> 属于 <code>BD</code> 的一部分，且 <code>BD</code> 给 <code>CD</code> 预留了 <code>Catalog</code>，则按 <code>CD</code> 对应的 <code>Catalog</code> 填写。</p>
 <p>若<strong>单张</strong> <code>CD</code> 属于 <code>BD</code> 的一部分，但 <code>BD</code> 没有为 <code>CD</code> 预留 <code>Catalog</code>，则按 <code>BD</code> 对应的 <code>Catalog</code> 填写。</p>
-<p>若 <code>CD</code> 存在<strong>多张唱片</strong>但只分配了一个 <code>Catalog</code>，则按 <code>CD</code> 的<strong>盘号</strong>（<code>DISCNUMBER</code>）填写 <code>disc</code> 部分，<strong>补足两位字符串</strong>。</p>
+<p>若 <code>CD</code> 存在<strong>多张唱片</strong>但只分配了一个 <code>Catalog</code>，如原 <code>CD</code> 定义了品番为 <code>TEST-001</code>，存在两张 <code>Disc</code>。则此时两张 <code>Disc</code> 的品番分别为：</p>
+<ul>
+<li><code>@TEST-001-01</code></li>
+<li><code>@TEST-001-02</code></li>
+</ul>
+<p>此处的 <code>@</code> 使用虚拟品番域，表示该品番并非真实品番；后缀的 <code>-01</code> 和 <code>-02</code> 为 <code>DiscId</code>，补足两位数字。</p>
 <h2 id="预定义品番域"><a class="header" href="#预定义品番域">预定义品番域</a></h2>
 <p><code>Anni</code> 定义了以下品番前缀，供整理时使用：</p>
 <table><thead><tr><th>前缀</th><th>用例</th></tr></thead><tbody>
 <tr><td>ISBN</td><td>在图书附带光盘没有品番时用于指定该光盘。<br />如 <code>ISBN-9784091592033</code> 可用于表示 <code>アイドルマスター ミリオンライブ! 1 オリジナルCD</code>。</td></tr>
 </tbody></table>
-<h2 id="私有品番域"><a class="header" href="#私有品番域">私有品番域</a></h2>
-<p>对于没有品番的专辑，<code>Anni</code> 约定以 <code>@</code> 开头的品番为私有品番域。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="约定目录结构"><a class="header" href="#约定目录结构">约定目录结构</a></h1>
 <p>除存储专辑的<strong>专辑目录</strong>以外，<code>Anni</code> 的目录并没有太多的约束。不过我们建议通过这样的层级组织你的音乐仓库：</p>
 <ol>
@@ -529,7 +534,7 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 <p>⚠️️目前的元数据仓库标准仍处于 <code>Draft</code> 状态，尚未完全定稿。欢迎随时提出意见或建议。</p>
 </blockquote>
 <blockquote>
-<p>⚠️️目前的元数据仓库标准版本（<code>edition</code>）为 <code>1.1</code>。</p>
+<p>⚠️️目前的元数据仓库标准版本（<code>edition</code>）为 <code>1.2</code>。</p>
 </blockquote>
 <p>尽管 <code>Anni</code> 约定对音频文件内嵌的标签有了严格的约束，但从实现的角度来看，如果所有的元数据都从音乐文件中获取，那么势必会导致如下问题：</p>
 <ol>
@@ -552,6 +557,8 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 <pre><code class="language-toml">######################################################
 # 专辑信息
 [album]
+# 随机 UUID，此处值仅供参考
+album_id = &quot;572c5c19-0080-404b-9d8b-2eb864aea75d&quot;
 # 专辑名称 [必填项][ALBUM]
 title = &quot;夏凪ぎ/宝物になった日&quot;
 #
@@ -804,8 +811,8 @@ SUBCOMMANDS:
 <div style="break-before: page; page-break-before: always;"></div><h1 id="音频后端"><a class="header" href="#音频后端">音频后端</a></h1>
 <p>音频后端是 <code>Anni</code> 中与实际文件系统接触的抽象层。</p>
 <p>对 <code>Anni</code> 而言，需要获取的资源主要分为两类：音频资源和图片资源。其中图片资源作为音频资源的附加而存在，如封面等。</p>
-<p>由于 <code>Anni</code> 约定的存在，我们将音频资源按照全局唯一的 <code>catalog</code> 进行了区分，因此只要以 <code>catalog</code> 和 <code>track_id</code> 作为复合主键，我们就可以索引音频仓库中的所有歌曲；而对于图片资源，目前唯一有定义的是专辑的封面，其位于专辑目录下，且文件名固定，为 <code>cover.jpg</code>，因此其只需要 <code>catalog</code> 便可唯一指定。</p>
-<p>由此，我们抽象出一个简单的文件系统，其通过 <code>catalog</code> 和 <code>track_id</code> 访问音频资源，通过 <code>catalog</code> 访问封面。</p>
+<p>根据 <code>Anni</code> 约定，我们有一个近似唯一的 <code>Catalog</code>。在很多情况下 <code>Catalog</code> 已经足以作为唯一标识，但实际情况下仍然会出现冲突。因此音频后端需要选取另一个更加独立的值作为专辑索引的主键。因此音频后端约定为每张专辑生成唯一的 <code>UUID</code> 作为 <code>album_id</code>，充当专辑层面的索引。</p>
+<p>由此，我们抽象出一个简单的文件系统，其通过 <code>album_id</code>、<code>disc_id</code> 和 <code>track_id</code> 访问音频资源，通过 <code>album_id</code> 访问封面。</p>
 <h2 id="音频后端-1"><a class="header" href="#音频后端-1">音频？后端</a></h2>
 <p>之所以命名为音频后端，是因为其核心交付内容还是音频，封面的优先度相对较低。</p>
 <h2 id="简单之外的价值"><a class="header" href="#简单之外的价值">简单之外的价值</a></h2>
@@ -818,14 +825,14 @@ SUBCOMMANDS:
 </span><span class="boring">fn main() {
 </span>#[async_trait]
 pub trait Backend {
-    // 获取可用专辑 catalog 的集合
+    // 获取可用专辑 album_id 的集合
     async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
 
     // 获取音频
-    async fn get_audio(&amp;self, catalog: &amp;str, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
+    async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
 
     // 获取封面
-    async fn get_cover(&amp;self, catalog: &amp;str) -&gt; Result&lt;BackendReader, BackendError&gt;;
+    async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;BackendReader, BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -840,6 +847,8 @@ pub struct BackendReaderExt {
     pub extension: String,
     /// 文件大小
     pub size: usize,
+    /// 音频长度
+    pub duration: u64,
     /// 读取文件内容的 Reader
     pub reader: BackendReader,
 }
@@ -890,8 +899,8 @@ pub struct BackendReaderExt {
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2021 年 12 月 04 日
-协议版本：0.1.4-DRAFT</p>
+<p>最后修改：2021 年 12 月 07 日
+协议版本：0.2.0-DRAFT</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -940,21 +949,16 @@ Access-Control-Allow-Headers: Authorization
 <h2 id="获取可用专辑"><a class="header" href="#获取可用专辑">获取可用专辑</a></h2>
 <p>由于音频仓库整合了多个音频后端，因此继承了所有音频后端的可用音频数据。</p>
 <p>获得可用专辑的 <code>API</code> 定义为 <code>GET /albums</code>，仅合法的用户 <code>Token</code> 可以正常请求。</p>
-<p>响应内容包含当前仓库所有可用的专辑 <code>Catalog</code> 包含的 <code>Catalog</code> 映射，如下例：</p>
-<pre><code class="language-json">{
-  // 所有可用的专辑 Catalog 到 Catalog 的映射
-  // 请求音频和歌词时应使用 Catalog，即数组中的 Catalog 请求资源
-  // 请求封面时，专辑 Catalog 也可以使用
-  &quot;KSLA-0155~9&quot;: [
-    &quot;KSLA-0155&quot;,
-    &quot;KSLA-0156&quot;,
-    &quot;KSLA-0157&quot;,
-    &quot;KSLA-0158&quot;,
-    &quot;KSLA-0159&quot;
-  ],
-  &quot;TS-0003&quot;: [&quot;TS-0003-01&quot;, &quot;TS-0003-02&quot;],
-  &quot;KSLA-0178&quot;: [&quot;KSLA-0178&quot;]
-}
+<p>响应内容包含当前仓库所有可用的专辑 <code>album_id</code> 列表，如下例：</p>
+<pre><code class="language-json">// 以下 UUID 不代表实际内容
+[
+  // KSLA-0155~9/2018-12-29
+  &quot;4992994f-9ede-56c2-b614-83bf89840e10&quot;,
+  // TS-0003/2015-05-20
+  &quot;c12705be-6f2d-5195-aa53-5325ce9b780a&quot;,
+  // KSLA-0178/2020-12-16
+  &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;
+]
 </code></pre>
 <h2 id="资源分享"><a class="header" href="#资源分享">资源分享</a></h2>
 <p>由于 <code>Anni</code> 音频仓库对用户身份存在验证，非注册用户无法访问未注册仓库中的资源；但如将音频仓库全面开放，则可能出现诸如滥用、版权等方面的问题。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
@@ -971,11 +975,20 @@ Access-Control-Allow-Headers: Authorization
   // 分享人用户名
   &quot;username&quot;: &quot;SeraphJACK&quot;,
   // 分享的音频，以 JSON Object 的形式表示
-  // 作为 key 的字符串表示该分享允许访问者访问的专辑（Catalog）
-  // 作为 value 的数组（[]int）表示该分享允许访问者访问的音轨号（track_id）
+  // 作为 key 的字符串表示该分享允许访问者访问的专辑 album_id
+  // value 表示该分享允许访问者访问的唱片号（disc_id）和音轨号（track_id）
   &quot;audios&quot;: {
-    &quot;LACM-14713&quot;: [1, 2, 3],
-    &quot;LACM-9595&quot;: [2]
+    // KSLA-0155~9/2018-12-29
+    &quot;4992994f-9ede-56c2-b614-83bf89840e10&quot;: {
+      // Disc 2(KSLA-0156), Track 2
+      &quot;2&quot;: [2],
+      // Disc 3(KSLA-0157), Track 3
+      &quot;3&quot;: [3]
+    },
+    // KSLA-0178/2020-12-16
+    &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;: {
+      &quot;1&quot;: [1, 2, 3]
+    }
   }
 }
 </code></pre>
@@ -985,7 +998,10 @@ Access-Control-Allow-Headers: Authorization
 <pre><code class="language-json">{
   // 需要分享的音频
   &quot;audios&quot;: {
-    &quot;LACM-14743&quot;: [1, 2, 3]
+    // KSLA-0178/2020-12-16
+    &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;: {
+      &quot;1&quot;: [1, 2, 3]
+    }
   },
   // 过期时间，单位为小时，基准时间为请求发送时间
   // 当该项省略或为 0 时，分享 Token 永不失效
@@ -993,6 +1009,7 @@ Access-Control-Allow-Headers: Authorization
 }
 </code></pre>
 <p>该请求的返回为 <code>Token</code> 的文本形式，<code>Content-Type</code> 须为 <strong><code>text/plain</code></strong>，如下例：</p>
+<!-- TODO: 修改下文的 JWT -->
 <pre><code class="language-text">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTU4MDA0MDksInR5cGUiOiJzaGFyZSIsInVzZXJuYW1lIjoidGVzdCIsImF1ZGlvcyI6eyJMQUNNLTE0NzQzIjpbMSwyLDNdfX0.oJnTo7SK2lk9aZJqQOVf0OScLiRmgU9iOxoTnVQQcGc
 </code></pre>
 <p>其对应的 <code>Claim</code> 如下所示：</p>
@@ -1001,7 +1018,7 @@ Access-Control-Allow-Headers: Authorization
   &quot;type&quot;: &quot;share&quot;,
   &quot;username&quot;: &quot;test&quot;,
   &quot;audios&quot;: {
-    &quot;LACM-14743&quot;: [1, 2, 3]
+    &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;: { &quot;1&quot;: [1, 2, 3] }
   }
 }
 </code></pre>
@@ -1014,8 +1031,8 @@ Access-Control-Allow-Headers: Authorization
 <p><code>Anni</code> 音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
 <h3 id="音频分发"><a class="header" href="#音频分发">音频分发</a></h3>
-<p>音频分发基于音频所在 <code>Disc</code> 的 <code>catalog</code> 和 <code>track_id</code>。</p>
-<p>获得音频的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}</code>。</p>
+<p>音频分发基于音频所在 <code>Disc</code> 的 <code>album_id</code>、 <code>disc_id</code> 和 <code>track_id</code>。</p>
+<p>获得音频的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/{track_id}</code>。</p>
 <h4 id="音频偏好"><a class="header" href="#音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
 <table><thead><tr><th>参数名</th><th>说明</th><th>可选项</th></tr></thead><tbody>
@@ -1037,14 +1054,15 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
 </tbody></table>
 <h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
-<p>封面分发基于音频所在专辑或 <code>Disc</code> 的 <code>catalog</code>。获得封面的 <code>API</code> 定义为 <code>GET /{catalog}/cover</code>。</p>
+<p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。</p>
+<p>获得封面的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/cover</code> 或 <code>GET /{album_id}/cover</code>，默认 <code>disc_id</code> 为 <code>1</code>。</p>
 <h4 id="返回状态表-2"><a class="header" href="#返回状态表-2">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获得封面</td><td><code>Content-Type</code> 为 <code>image/jpeg</code></td></tr>
 <tr><td><code>404</code></td><td>封面获取失败</td><td></td></tr>
 </tbody></table>
 <h3 id="歌词信息"><a class="header" href="#歌词信息">歌词信息</a></h3>
-<p>歌词信息基于音频所在专辑 <code>Disc</code> 的 <code>catalog</code> 和 <code>track_id</code>。获取歌词信息的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyrics</code>。</p>
+<p>歌词信息基于音频所在专辑 <code>Disc</code> 的 <code>album_id</code>、<code>disc_id</code> <code>track_id</code>。获取歌词信息的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/{track_id}/lyrics</code>。</p>
 <p>该请求的返回为一个 JSON 对象，<code>Content-Type</code> 须为 <strong><code>application/json</code></strong>，包含歌词的<strong>原生语言</strong>与可选<strong>翻译列表</strong> ，结构如下：</p>
 <table><thead><tr><th>成员名</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>source</code></td><td>歌曲原生语言</td></tr>
@@ -1063,7 +1081,7 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>404</code></td><td>不存在可用歌词</td></tr>
 </tbody></table>
 <h3 id="歌词分发"><a class="header" href="#歌词分发">歌词分发</a></h3>
-<p>歌词分发的 <code>API</code> 定义为 <code>GET /{catalog}/{track_id}/lyric</code>，可用参数如下：</p>
+<p>歌词分发的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/{track_id}/lyric</code>，可用参数如下：</p>
 <table><thead><tr><th>参数名</th><th>含义</th><th>可选项</th></tr></thead><tbody>
 <tr><td><code>lang</code></td><td>所请求歌词翻译的语言代码</td><td>留空、<code>zh-Hans</code>、<code>zh-Hant</code>、<code>ja</code> 等</td></tr>
 </tbody></table>
@@ -1357,7 +1375,8 @@ interface UserInfo {
 </tbody></table>
 <p><code>PlaylistSong</code> 类型格式描述如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>catalog</code></td><td><code>string</code></td><td>歌曲的 <code>catalog</code></td></tr>
+<tr><td><code>album_id</code></td><td><code>string</code></td><td>歌曲所属专辑的 <code>album_id</code></td></tr>
+<tr><td><code>disc_id</code></td><td><code>number</code></td><td>歌曲的 <code>disc_id</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>歌曲的 <code>track_id</code></td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
 </tbody></table>
@@ -1375,7 +1394,8 @@ interface UserInfo {
   &quot;songs&quot;: [
     {
       &quot;id&quot;: 0,
-      &quot;catalog&quot;: &quot;TEST-001&quot;,
+      &quot;album_id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
+      &quot;disc_id&quot;: 1,
       &quot;track_id&quot;: 1,
       &quot;description&quot;: &quot;interesting&quot;
     }
@@ -1393,7 +1413,8 @@ interface UserInfo {
 }
 
 interface PlaylistSong {
-  catalog: string;
+  album_id: string;
+  disc_id: number;
   track_id: number;
   description?: string;
 }
@@ -1555,25 +1576,25 @@ interface Id {
 <p>对于音频分享而言，我们需要的不只是音频文件的集合，还需要包含顺序、元数据等在内的一系列信息。而这一切需求汇总到一起，信息导出格式便应运而生。</p>
 <p>信息导出格式根据音频资源的三个粒度，分为单曲导出、专辑导出和播放列表导出。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="单曲导出"><a class="header" href="#单曲导出">单曲导出</a></h1>
-<p>单曲的导出最为简单，包括单曲所属专辑的 <code>catalog</code>、单曲的 <code>track_id</code>、单曲的元数据和分享 <code>Token</code>。</p>
+<p>单曲的导出最为简单，包括单曲所属专辑的 <code>album_id</code>、碟片的 <code>disc_id</code>、单曲的 <code>track_id</code>、单曲的元数据和分享 <code>Token</code>。</p>
 <pre><code class="language-json">{
-  &quot;title&quot;: &quot;僕は存在していなかった&quot;,   // 标题
-  &quot;artist&quot;: &quot;22/7&quot;,                // 艺术家
-  &quot;catalog&quot;: &quot;SRCL-9520&quot;,          // 单曲所属专辑的 catalog
-  &quot;track&quot;: 1,                      // 单曲的 track_id
-  &quot;server&quot;: &quot;https://site-url&quot;,    // 创建分享 Token 的 Annil 服务器地址
-  &quot;token&quot;: &quot;jwt token here&quot;        // 此处省略分享 JWT
+  &quot;title&quot;: &quot;僕は存在していなかった&quot;,                      // 标题
+  &quot;artist&quot;: &quot;22/7&quot;,                                   // 艺术家
+  &quot;album_id&quot;: &quot;249e4646-af8e-5873-924f-6477da4cccd8&quot;, // 单曲所属专辑的 album_id
+                                                      // SRCL-9520
+  &quot;track&quot;: 1,                                         // 单曲的 track_id
+  &quot;server&quot;: &quot;https://site-url&quot;,                       // 创建分享 Token 的 Annil 服务器地址
+  &quot;token&quot;: &quot;jwt token here&quot;                           // 此处省略分享 JWT
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="专辑导出"><a class="header" href="#专辑导出">专辑导出</a></h1>
 <p>专辑导出和单曲导出相比，需要记录专辑名和专辑内的所有单曲信息。</p>
 <pre><code class="language-json">{
+  &quot;album_id&quot;: &quot;249e4646-af8e-5873-924f-6477da4cccd8&quot;,
   &quot;title&quot;: &quot;僕は存在していなかった&quot;,
   &quot;artist&quot;: &quot;22/7&quot;,
-  &quot;catalog&quot;: &quot;SRCL-9520&quot;,
   &quot;discs&quot;: [
     {
-      &quot;catalog&quot;: &quot;SRCL-9520&quot;,
       &quot;artist&quot;: &quot;22/7&quot;, // 此处也可以填写 artist，覆盖全局艺术家
       &quot;tracks&quot;: [
         { 
@@ -1712,6 +1733,9 @@ interface Id {
 <tr><td><code>105001</code></td><td>分享链接不存在</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="播放统计"><a class="header" href="#播放统计">播放统计</a></h1>
+<blockquote>
+<p>⚠️ 该部分尚未设计完成</p>
+</blockquote>
 <p><code>Anniv</code> 提供基本的播放统计功能。</p>
 <h2 id="播放记录"><a class="header" href="#播放记录">播放记录</a></h2>
 <h3 id="endpoint-17"><a class="header" href="#endpoint-17">Endpoint</a></h3>
@@ -1724,11 +1748,12 @@ interface Id {
 </tbody></table>
 <p><code>SongPlayRecord</code> 定义如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>catalog</code></td><td><code>string</code></td><td>播放专辑的 <code>catalog</code></td></tr>
-<tr><td><code>tracks</code></td><td><code>TrackPlayRecord[]</code></td><td>播放的专辑</td></tr>
+<tr><td><code>album_id</code></td><td><code>string</code></td><td>播放专辑的 <code>album_id</code></td></tr>
+<tr><td><code>tracks</code></td><td><code>TrackPlayRecord[]</code></td><td>播放的曲目</td></tr>
 </tbody></table>
 <p><code>TrackPlayRecord</code> 定义如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>disc_id</code></td><td><code>number</code></td><td>专辑内的 <code>disc_id</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
 <tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
 </tbody></table>

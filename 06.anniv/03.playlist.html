@@ -169,7 +169,8 @@
 </tbody></table>
 <p><code>PlaylistSong</code> 类型格式描述如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>catalog</code></td><td><code>string</code></td><td>歌曲的 <code>catalog</code></td></tr>
+<tr><td><code>album_id</code></td><td><code>string</code></td><td>歌曲所属专辑的 <code>album_id</code></td></tr>
+<tr><td><code>disc_id</code></td><td><code>number</code></td><td>歌曲的 <code>disc_id</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>歌曲的 <code>track_id</code></td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
 </tbody></table>
@@ -187,7 +188,8 @@
   &quot;songs&quot;: [
     {
       &quot;id&quot;: 0,
-      &quot;catalog&quot;: &quot;TEST-001&quot;,
+      &quot;album_id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
+      &quot;disc_id&quot;: 1,
       &quot;track_id&quot;: 1,
       &quot;description&quot;: &quot;interesting&quot;
     }
@@ -205,7 +207,8 @@
 }
 
 interface PlaylistSong {
-  catalog: string;
+  album_id: string;
+  disc_id: number;
   track_id: number;
   description?: string;
 }

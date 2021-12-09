@@ -138,6 +138,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="播放统计"><a class="header" href="#播放统计">播放统计</a></h1>
+<blockquote>
+<p>⚠️ 该部分尚未设计完成</p>
+</blockquote>
 <p><code>Anniv</code> 提供基本的播放统计功能。</p>
 <h2 id="播放记录"><a class="header" href="#播放记录">播放记录</a></h2>
 <h3 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h3>
@@ -150,11 +153,12 @@
 </tbody></table>
 <p><code>SongPlayRecord</code> 定义如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>catalog</code></td><td><code>string</code></td><td>播放专辑的 <code>catalog</code></td></tr>
-<tr><td><code>tracks</code></td><td><code>TrackPlayRecord[]</code></td><td>播放的专辑</td></tr>
+<tr><td><code>album_id</code></td><td><code>string</code></td><td>播放专辑的 <code>album_id</code></td></tr>
+<tr><td><code>tracks</code></td><td><code>TrackPlayRecord[]</code></td><td>播放的曲目</td></tr>
 </tbody></table>
 <p><code>TrackPlayRecord</code> 定义如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>disc_id</code></td><td><code>number</code></td><td>专辑内的 <code>disc_id</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
 <tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
 </tbody></table>

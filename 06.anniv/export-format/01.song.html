@@ -138,14 +138,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="单曲导出"><a class="header" href="#单曲导出">单曲导出</a></h1>
-<p>单曲的导出最为简单，包括单曲所属专辑的 <code>catalog</code>、单曲的 <code>track_id</code>、单曲的元数据和分享 <code>Token</code>。</p>
+<p>单曲的导出最为简单，包括单曲所属专辑的 <code>album_id</code>、碟片的 <code>disc_id</code>、单曲的 <code>track_id</code>、单曲的元数据和分享 <code>Token</code>。</p>
 <pre><code class="language-json">{
-  &quot;title&quot;: &quot;僕は存在していなかった&quot;,   // 标题
-  &quot;artist&quot;: &quot;22/7&quot;,                // 艺术家
-  &quot;catalog&quot;: &quot;SRCL-9520&quot;,          // 单曲所属专辑的 catalog
-  &quot;track&quot;: 1,                      // 单曲的 track_id
-  &quot;server&quot;: &quot;https://site-url&quot;,    // 创建分享 Token 的 Annil 服务器地址
-  &quot;token&quot;: &quot;jwt token here&quot;        // 此处省略分享 JWT
+  &quot;title&quot;: &quot;僕は存在していなかった&quot;,                      // 标题
+  &quot;artist&quot;: &quot;22/7&quot;,                                   // 艺术家
+  &quot;album_id&quot;: &quot;249e4646-af8e-5873-924f-6477da4cccd8&quot;, // 单曲所属专辑的 album_id
+                                                      // SRCL-9520
+  &quot;track&quot;: 1,                                         // 单曲的 track_id
+  &quot;server&quot;: &quot;https://site-url&quot;,                       // 创建分享 Token 的 Annil 服务器地址
+  &quot;token&quot;: &quot;jwt token here&quot;                           // 此处省略分享 JWT
 }
 </code></pre>
 
