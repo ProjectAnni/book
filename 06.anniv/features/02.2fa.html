@@ -138,37 +138,100 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="两步验证2fa"><a class="header" href="#两步验证2fa">两步验证（2fa）</a></h1>
+<h2 id="特性定义"><a class="header" href="#特性定义">特性定义</a></h2>
+<ul>
+<li>
+<p><code>2fa</code>：表示服务端允许两步验证</p>
+</li>
+<li>
+<p><code>2fa_enforced</code>：表示服务端强制启用两步验证。<br />
+依赖 <code>2fa</code>，特性列表中不应只出现 <code>2fa_enforced</code> 而不存在 <code>2fa</code>。<br />
+当服务端强制启动两步验证时，所有新注册用户均须在注册时开启两步验证。当用户未启用两步验证时，只有以下接口可用：</p>
+<ul>
+<li>用户登出</li>
+<li>用户注销</li>
+<li>绑定 <code>2FA</code></li>
+</ul>
+<p>访问其他接口均会产生错误：<code>202000</code>：用户未启用两步验证。<br />
+客户端应引导已注册但未开启两步验证的用户尽快开启两步验证。</p>
+</li>
+</ul>
 <h2 id="适用范围"><a class="header" href="#适用范围">适用范围</a></h2>
 <ul>
-<li>用户注册</li>
-<li>用户登录</li>
-<li>用户注销</li>
-<li>播放列表删除</li>
+<li>用户注册（<code>POST /api/user/register</code>）</li>
+<li>用户登录（<code>POST /api/user/login</code>）</li>
+<li>用户注销（<code>POST /api/user/revoke</code>）</li>
 </ul>
 <p>TODO: 列举出用到 <code>2FA</code> 的所有位置</p>
 <h2 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，注册时由客户端生成，验证成功后发送至服务端</td></tr>
-<tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码</td></tr>
+<tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，注册时由客户端生成，发送至服务端。</td></tr>
+<tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。当用户未开启两步验证时，该字段填入任何值均可。</td></tr>
 </tbody></table>
-<h2 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h2>
+<h2 id="影响结构"><a class="header" href="#影响结构">影响结构</a></h2>
+<p>当 <code>2fa_enforced</code> 启用时，以下所有新增参数均为 <code>Required</code>。</p>
+<h3 id="用户注册"><a class="header" href="#用户注册">用户注册</a></h3>
+<pre><code class="language-typescript">interface UserRegisterBody {
+  // ...
+  &quot;2fa_secret&quot;?: string;
+  &quot;2fa_code&quot;?: string;
+}
+</code></pre>
+<h3 id="用户登录"><a class="header" href="#用户登录">用户登录</a></h3>
+<pre><code class="language-typescript">interface UserLoginBody {
+  // ...
+  &quot;2fa_code&quot;?: string;
+}
+
+interface UserInfo {
+  // ...
+  &quot;2fa_enabled&quot;?: boolean;
+}
+</code></pre>
+<h3 id="用户注销"><a class="header" href="#用户注销">用户注销</a></h3>
+<pre><code class="language-typescript">interface UserRevokeBody {
+  &quot;2fa_code&quot;?: string;
+}
+</code></pre>
+<h2 id="绑定-2fa"><a class="header" href="#绑定-2fa">绑定 <code>2FA</code></a></h2>
+<p>当 <code>2FA</code> 为可选项时，用户可以使用该接口绑定两步验证。当 <code>2fa_enforced</code> 启用时，未开启两步验证的用户可以通过该接口开启两步验证。</p>
+<h3 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h3>
+<p><code>POST /api/features/2fa</code></p>
+<h3 id="请求"><a class="header" href="#请求">请求</a></h3>
+<h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，由客户端生成后发送至服务端。</td></tr>
+<tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。</td></tr>
+</tbody></table>
+<h3 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>202000</code></td><td>用户或服务端未启用两步验证</td></tr>
+<tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
+<tr><td><code>202002</code></td><td>两步验证 <code>Secret</code> 非法</td></tr>
+<tr><td><code>202004</code></td><td>用户已启用两步验证，无法重复绑定</td></tr>
+</tbody></table>
+<h2 id="取消绑定-2fa"><a class="header" href="#取消绑定-2fa">取消绑定 <code>2FA</code></a></h2>
+<p>用户可以使用该接口取消当前已绑定的两步验证。</p>
+<h3 id="endpoint-1"><a class="header" href="#endpoint-1">Endpoint</a></h3>
+<p><code>DELETE /api/features/2fa</code></p>
+<h3 id="请求-1"><a class="header" href="#请求-1">请求</a></h3>
+<h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。</td></tr>
+</tbody></table>
+<h3 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h3>
+<table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>202000</code></td><td>用户未启用两步验证</td></tr>
+<tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
+<tr><td><code>202003</code></td><td>两步验证已达尝试上限</td></tr>
+</tbody></table>
+<h2 id="完整错误列表"><a class="header" href="#完整错误列表">完整错误列表</a></h2>
+<table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>202000</code></td><td>用户未启用两步验证</td></tr>
 <tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
 <tr><td><code>202002</code></td><td>两步验证 <code>Secret</code> 非法</td></tr>
 <tr><td><code>202003</code></td><td>两步验证已达尝试上限</td></tr>
+<tr><td><code>202004</code></td><td>用户已启用两步验证，无法重复绑定</td></tr>
 </tbody></table>
-<h2 id="接口列表"><a class="header" href="#接口列表">接口列表</a></h2>
-<h3 id="查询两步验证状态"><a class="header" href="#查询两步验证状态">查询两步验证状态</a></h3>
-<p>查询某用户是否启用了两步验证。</p>
-<h4 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h4>
-<p><code>GET /api/features/2fa/enabled</code></p>
-<h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>email</code></td><td><code>string</code></td><td>待查询用户的邮箱</td></tr>
-</tbody></table>
-<h4 id="返回"><a class="header" href="#返回">返回</a></h4>
-<p>一个布尔值，<code>false</code> 表示未启用，<code>true</code> 表示启用。</p>
 
                     </main>
 
