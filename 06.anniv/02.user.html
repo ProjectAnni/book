@@ -145,7 +145,6 @@
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
 <tr><td><code>102010</code></td><td>邮箱或密码错误</td></tr>
 <tr><td><code>102020</code></td><td>待注销用户不存在</td></tr>
-<tr><td><code>102030</code></td><td>验证邮件发送失败</td></tr>
 </tbody></table>
 <h2 id="对用户密码的预处理建议"><a class="header" href="#对用户密码的预处理建议">对用户密码的预处理（建议）</a></h2>
 <p>为格式统一考虑，建议客户端在向服务端发送密码之前，对用户的明文密码进行一次 <code>sha256</code> 处理。该步骤仅在一定程度上减少用户原文密码的泄露，但仍可以通过诸如彩虹表的方式破解。</p>
@@ -154,26 +153,6 @@
 <p><code>GET /api/user/info</code></p>
 <h3 id="返回"><a class="header" href="#返回">返回</a></h3>
 <p>用户已登录时，返回当前用户信息（<code>UserInfo</code>）。</p>
-<p>当用户的 <code>verified</code> 为 <code>false</code> 时，表明用户邮箱未验证。服务端可能会限制用户可用的接口，产生错误 <code>902001</code>：无权访问。</p>
-<h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
-<tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
-<tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
-<tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
-<tr><td><code>avatar</code></td><td><code>string</code></td><td>头像链接</td></tr>
-<tr><td><code>verified</code></td><td><code>boolean</code></td><td>用户邮箱是否已经确认</td></tr>
-</tbody></table>
-<h3 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h3>
-<pre><code class="language-typescript">interface UserInfo {
-  user_id: string;
-  username: string;
-  email: string;
-  nickname: string;
-  avatar: string;
-  verified: boolean;
-}
-</code></pre>
 <h2 id="用户注册"><a class="header" href="#用户注册">用户注册</a></h2>
 <h3 id="endpoint-1"><a class="header" href="#endpoint-1">Endpoint</a></h3>
 <p><code>POST /api/user/register</code></p>
@@ -187,11 +166,27 @@
 <tr><td><code>avatar</code></td><td><code>string</code></td><td>头像链接</td></tr>
 </tbody></table>
 <h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
-<p>注册成功时，返回用户信息（<code>UserInfo</code>）。此时用户的 <code>verified</code> 为 <code>false</code>。</p>
-<h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
+<p>注册成功时，返回用户信息（<code>UserInfo</code>）。</p>
+<h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
+<tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
+<tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
+<tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
+<tr><td><code>avatar</code></td><td><code>string</code></td><td>头像链接</td></tr>
+</tbody></table>
+<h3 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h3>
 <pre><code class="language-typescript">interface UserRegisterBody {
   username: string;
   password: string;
+  email: string;
+  nickname: string;
+  avatar: string;
+}
+
+interface UserInfo {
+  user_id: string;
+  username: string;
   email: string;
   nickname: string;
   avatar: string;
@@ -214,7 +209,7 @@
 </tbody></table>
 <h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>登录成功时，返回用户信息（<code>UserInfo</code>）。</p>
-<h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
+<h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
 <pre><code class="language-typescript">interface UserLoginBody {
   email: string;
   password: string;
@@ -241,7 +236,7 @@
 <p><code>POST /api/user/revoke</code></p>
 <h3 id="返回-4"><a class="header" href="#返回-4">返回</a></h3>
 <p>当注销成功时，返回 <code>204 No Content</code>。</p>
-<h3 id="参数表示-3"><a class="header" href="#参数表示-3">参数表示</a></h3>
+<h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
 <pre><code class="language-typescript">interface UserRevokeBody {
   // 暂空
 }
@@ -261,19 +256,12 @@
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 </tbody></table>
+<h3 id="返回-5"><a class="header" href="#返回-5">返回</a></h3>
+<p>当检查全部通过时，返回 <code>204 No Content</code>。</p>
 <h3 id="错误列表-4"><a class="header" href="#错误列表-4">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
-</tbody></table>
-<h2 id="验证邮箱"><a class="header" href="#验证邮箱">验证邮箱</a></h2>
-<p>向用户的当前邮箱发送验证邮件。</p>
-<h3 id="endpoint-6"><a class="header" href="#endpoint-6">Endpoint</a></h3>
-<p><code>POST /api/user/email/verify</code></p>
-<h3 id="错误列表-5"><a class="header" href="#错误列表-5">错误列表</a></h3>
-<table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>102030</code></td><td>验证邮件发送失败</td></tr>
-<tr><td><code>903000</code></td><td>超出频率限制，请稍后再试</td></tr>
 </tbody></table>
 
                     </main>
