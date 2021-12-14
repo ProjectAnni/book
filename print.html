@@ -1227,7 +1227,6 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <p><code>Anniv</code> 的用户系统分为注册、登录、注销三个部分。</p>
 <h2 id="错误代码一览"><a class="header" href="#错误代码一览">错误代码一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
 <tr><td><code>102010</code></td><td>邮箱或密码错误</td></tr>
 <tr><td><code>102020</code></td><td>待注销用户不存在</td></tr>
@@ -1245,7 +1244,6 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <h3 id="请求-1"><a class="header" href="#请求-1">请求</a></h3>
 <h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 <tr><td><code>password</code></td><td><code>string</code></td><td>密码</td></tr>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
@@ -1256,23 +1254,20 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
-<tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
 <tr><td><code>nickname</code></td><td><code>string</code></td><td>昵称</td></tr>
 <tr><td><code>avatar</code></td><td><code>string</code></td><td>头像链接</td></tr>
 </tbody></table>
 <h3 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h3>
 <pre><code class="language-typescript">interface UserRegisterBody {
-  username: string;
-  password: string;
   email: string;
+  password: string;
   nickname: string;
   avatar: string;
 }
 
 interface UserInfo {
   user_id: string;
-  username: string;
   email: string;
   nickname: string;
   avatar: string;
@@ -1308,8 +1303,6 @@ interface UserInfo {
 <h2 id="用户退出"><a class="header" href="#用户退出">用户退出</a></h2>
 <h3 id="endpoint-3"><a class="header" href="#endpoint-3">Endpoint</a></h3>
 <p><code>POST /api/user/logout</code></p>
-<h3 id="返回-4"><a class="header" href="#返回-4">返回</a></h3>
-<p>当退出成功时，返回 <code>204 No Content</code>。</p>
 <h3 id="客户端设计指引"><a class="header" href="#客户端设计指引">客户端设计指引</a></h3>
 <p>当用户退出成功时，建议清理对应客户端的 <code>Cookie</code>。</p>
 <h3 id="错误列表-3"><a class="header" href="#错误列表-3">错误列表</a></h3>
@@ -1320,8 +1313,6 @@ interface UserInfo {
 <p>注销当前用户帐号。</p>
 <h3 id="endpoint-4"><a class="header" href="#endpoint-4">Endpoint</a></h3>
 <p><code>POST /api/user/revoke</code></p>
-<h3 id="返回-5"><a class="header" href="#返回-5">返回</a></h3>
-<p>当注销成功时，返回 <code>204 No Content</code>。</p>
 <h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
 <pre><code class="language-typescript">interface UserRevokeBody {
   // 暂空
@@ -1340,13 +1331,9 @@ interface UserInfo {
 <h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
 <table><thead><tr><th>参数</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>email</code></td><td><code>string</code></td><td>邮箱</td></tr>
-<tr><td><code>username</code></td><td><code>string</code></td><td>用户名</td></tr>
 </tbody></table>
-<h3 id="返回-6"><a class="header" href="#返回-6">返回</a></h3>
-<p>当检查全部通过时，返回 <code>204 No Content</code>。</p>
 <h3 id="错误列表-5"><a class="header" href="#错误列表-5">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>102000</code></td><td>注册用户名不可用</td></tr>
 <tr><td><code>102001</code></td><td>注册邮箱不可用</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="播放列表"><a class="header" href="#播放列表">播放列表</a></h1>
@@ -1368,7 +1355,7 @@ interface UserInfo {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3 id="返回-7"><a class="header" href="#返回-7">返回</a></h3>
+<h3 id="返回-4"><a class="header" href="#返回-4">返回</a></h3>
 <p>请求成功时，返回播放列表的全部信息。</p>
 <h4 id="返回参数-1"><a class="header" href="#返回参数-1">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
@@ -1445,7 +1432,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
 <tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
 </tbody></table>
-<h3 id="返回-8"><a class="header" href="#返回-8">返回</a></h3>
+<h3 id="返回-5"><a class="header" href="#返回-5">返回</a></h3>
 <p>处理完成后，返回新创建的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-4"><a class="header" href="#参数表示-4">参数表示</a></h3>
 <pre><code class="language-typescript">interface CreatePlaylistBody extends CreatePlaylistFeatureParameters {
@@ -1471,7 +1458,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
 <tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
 </tbody></table>
-<h3 id="返回-9"><a class="header" href="#返回-9">返回</a></h3>
+<h3 id="返回-6"><a class="header" href="#返回-6">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-5"><a class="header" href="#参数表示-5">参数表示</a></h3>
 <pre><code class="language-typescript">interface PatchPlaylistRequestBody {
@@ -1494,7 +1481,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3 id="返回-10"><a class="header" href="#返回-10">返回</a></h3>
+<h3 id="返回-7"><a class="header" href="#返回-7">返回</a></h3>
 <p>删除成功时，返回 <code>204 No Content</code>。</p>
 <h3 id="错误列表-9"><a class="header" href="#错误列表-9">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1511,7 +1498,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <h2 id="获取-token"><a class="header" href="#获取-token">获取 Token</a></h2>
 <h3 id="endpoint-10"><a class="header" href="#endpoint-10">Endpoint</a></h3>
 <p><code>GET /api/credential</code></p>
-<h3 id="返回-11"><a class="header" href="#返回-11">返回</a></h3>
+<h3 id="返回-8"><a class="header" href="#返回-8">返回</a></h3>
 <p>返回包含所有请求 <code>Token</code> 的数组。</p>
 <h4 id="返回参数-2"><a class="header" href="#返回参数-2">返回参数</a></h4>
 <p><code>Token</code> 的定义如下所示：</p>
@@ -1680,7 +1667,7 @@ interface Token {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>link</code></td><td><code>string</code></td><td>分享链接的短部</td></tr>
 </tbody></table>
-<h3 id="返回-12"><a class="header" href="#返回-12">返回</a></h3>
+<h3 id="返回-9"><a class="header" href="#返回-9">返回</a></h3>
 <p>返回分享链接的实际内容。</p>
 <h3 id="错误列表-13"><a class="header" href="#错误列表-13">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1689,7 +1676,7 @@ interface Token {
 <h2 id="获取分享连接列表"><a class="header" href="#获取分享连接列表">获取分享连接列表</a></h2>
 <h3 id="endpoint-15"><a class="header" href="#endpoint-15">Endpoint</a></h3>
 <p><code>GET /api/share</code></p>
-<h3 id="返回-13"><a class="header" href="#返回-13">返回</a></h3>
+<h3 id="返回-10"><a class="header" href="#返回-10">返回</a></h3>
 <p>返回当前用户创建的所有分享链接列表。</p>
 <h4 id="返回参数-3"><a class="header" href="#返回参数-3">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
@@ -1706,7 +1693,7 @@ interface Token {
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>播放列表 <code>ID</code></td></tr>
 <tr><td><code>data</code></td><td><code>string</code></td><td>实际内容</td></tr>
 </tbody></table>
-<h3 id="返回-14"><a class="header" href="#返回-14">返回</a></h3>
+<h3 id="返回-11"><a class="header" href="#返回-11">返回</a></h3>
 <p>请求成功时，返回分享链接的短部。</p>
 <h3 id="错误列表-14"><a class="header" href="#错误列表-14">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1720,7 +1707,7 @@ interface Token {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>link</code></td><td><code>string</code></td><td>待删除分享链接的短部</td></tr>
 </tbody></table>
-<h3 id="返回-15"><a class="header" href="#返回-15">返回</a></h3>
+<h3 id="返回-12"><a class="header" href="#返回-12">返回</a></h3>
 <p>请求成功时，返回 <code>204 No Content</code>。</p>
 <h2 id="错误列表-15"><a class="header" href="#错误列表-15">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1751,7 +1738,7 @@ interface Token {
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
 <tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
 </tbody></table>
-<h3 id="返回-16"><a class="header" href="#返回-16">返回</a></h3>
+<h3 id="返回-13"><a class="header" href="#返回-13">返回</a></h3>
 <p>当记录成功时，返回 <code>204 No Content</code>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="特性"><a class="header" href="#特性">特性</a></h1>
 <p>为了控制一些可选功能的启用与否，<code>Anniv</code> 定义了一系列特性。特性的启用与否由 <code>Anniv</code> 的管理员决定，开启后会增加一些处理步骤。</p>
