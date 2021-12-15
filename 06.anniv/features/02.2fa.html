@@ -161,6 +161,7 @@
 <li>用户注册（<code>POST /api/user/register</code>）</li>
 <li>用户登录（<code>POST /api/user/login</code>）</li>
 <li>用户注销（<code>POST /api/user/revoke</code>）</li>
+<li>用户信息（<code>POST /api/user/info</code>）</li>
 </ul>
 <p>TODO: 列举出用到 <code>2FA</code> 的所有位置</p>
 <h2 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h2>
@@ -191,6 +192,12 @@ interface UserInfo {
 <h3 id="用户注销"><a class="header" href="#用户注销">用户注销</a></h3>
 <pre><code class="language-typescript">interface UserRevokeBody {
   &quot;2fa_code&quot;?: string;
+}
+</code></pre>
+<h3 id="用户信息"><a class="header" href="#用户信息">用户信息</a></h3>
+<pre><code class="language-typescript">interface UserInfo {
+  // ...
+  &quot;2fa_enabled&quot;?: boolean;
 }
 </code></pre>
 <h2 id="绑定-2fa"><a class="header" href="#绑定-2fa">绑定 <code>2FA</code></a></h2>
