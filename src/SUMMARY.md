@@ -30,6 +30,7 @@
   - [专辑信息](./02.metadata-repository/02.album-information.md)
   - [专辑标签](./02.metadata-repository/03.tag.md)
   - [仓库元数据](./02.metadata-repository/05.repo-metadata.md)
+  - [预构建数据源](./02.metadata-repository/06.metdata-db.md)
 - [FLAC 处理](./03.flac/00.readme.md)
   - [FLAC 格式简介](./03.flac/01.intro.md)
     - [FLAC 头部](./03.flac/01.zzzz.01.header.md)
