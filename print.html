@@ -1009,8 +1009,8 @@ pub struct BackendReaderExt {
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2021 年 12 月 07 日
-协议版本：0.2.0-DRAFT</p>
+<p>最后修改：2021 年 12 月 16 日
+协议版本：0.2.1</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -1054,6 +1054,21 @@ Access-Control-Allow-Headers: Authorization
   &quot;username&quot;: &quot;SeraphJACK&quot;,
   // Token 是否支持分享
   &quot;allowShare&quot;: true
+}
+</code></pre>
+<h2 id="服务端信息"><a class="header" href="#服务端信息">服务端信息</a></h2>
+<p>获取服务端信息的 <code>API</code> 定义为 <code>GET /info</code>，所有用户都可以请求。</p>
+<p>返回结果如下例：</p>
+<pre><code class="language-json">{
+  // 服务端版本描述
+  // 用于客户端展示
+  &quot;version&quot;: &quot;Annil v0.1.0&quot;,
+  // 服务端运行的 Annil 音频仓库协议版本
+  // 用于客户端比对其支持的能力
+  &quot;protocol_version&quot;: &quot;0.2.1&quot;,
+  // 服务端最近一次数据更新时间
+  // 用于客户端缓存 `/albums` 请求结果
+  &quot;last_update&quot;: 1639631487,
 }
 </code></pre>
 <h2 id="获取可用专辑"><a class="header" href="#获取可用专辑">获取可用专辑</a></h2>
