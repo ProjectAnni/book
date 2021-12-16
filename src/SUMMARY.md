@@ -56,6 +56,8 @@
     - [单曲导出](./06.anniv/export-format/01.song.md)
     - [专辑导出](./06.anniv/export-format/02.album.md)
     - [播放列表导出](./06.anniv/export-format/03.playlist.md)
+  - [专辑元数据](./06.anniv/08.meta.md)
+  - [搜索](./06.anniv/09.search.md)
   - [分享管理](./06.anniv/05.share.md)
   - [播放统计](./06.anniv/06.statistics.md)
   - [特性](./06.anniv/features/00.readme.md)
