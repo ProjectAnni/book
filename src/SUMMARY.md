@@ -53,7 +53,7 @@
   - [用户系统](./06.anniv/02.user.md)
   - [播放列表](./06.anniv/03.playlist.md)
   - [Annil Token 管理](./06.anniv/04.credential.md)
-  - [信息导出格式](./06.anniv/export-format/00.readme.md)
+  - [信息导出格式](./06.anniv/07.export-format.md)
   - [专辑元数据](./06.anniv/08.meta.md)
   - [搜索](./06.anniv/09.search.md)
   - [分享管理](./06.anniv/05.share.md)
