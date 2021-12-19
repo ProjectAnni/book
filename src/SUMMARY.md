@@ -58,6 +58,8 @@
   - [搜索](./06.anniv/09.search.md)
   - [分享管理](./06.anniv/05.share.md)
   - [播放统计](./06.anniv/06.statistics.md)
+  - [搜索](./06.anniv/09.search.md)
+  - [喜欢](./06.anniv/10.favourite.md)
   - [特性](./06.anniv/features/00.readme.md)
     - [邀请（invite）](./06.anniv/features/01.invite.md)
     - [两步验证（2fa）](./06.anniv/features/02.2fa.md)
