@@ -166,6 +166,7 @@
 <tr><td><code>owner</code></td><td><code>string</code></td><td>播放列表拥有者 <code>ID</code></td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
 <tr><td><code>songs</code></td><td><code>PlaylistSongWithId[]</code></td><td>播放列表中的歌曲</td></tr>
+<tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
 </tbody></table>
 <p><code>PlaylistSong</code> 类型格式描述如下：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
@@ -178,6 +179,11 @@
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
 </tbody></table>
+<p><code>Cover</code> 类型格式描述如下：</p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td><code>string</code></td><td>封面的专辑 ID</td></tr>
+<tr><td><code>disc_id</code></td><td><code>number</code></td><td>封面的 Disc ID</td></tr>
+</tbody></table>
 <h4 id="示例"><a class="header" href="#示例">示例</a></h4>
 <pre><code class="language-json">{
   &quot;id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
@@ -185,6 +191,10 @@
   &quot;description&quot;: &quot;对播放列表的简单介绍&quot;,
   &quot;owner&quot;: 0,
   &quot;is_public&quot;: true,
+  &quot;cover&quot;: {
+    &quot;album_id&quot;: &quot;fa28957d-4cc2-4ebd-a52a-1ac7797aeec4&quot;,
+    &quot;disc_id&quot;: 1
+  },
   &quot;songs&quot;: [
     {
       &quot;id&quot;: 0,
@@ -203,6 +213,7 @@
   description?: string;
   owner: string;
   is_public: boolean;
+  cover: Cover;
   songs: PlaylistSongWithId[];
 }
 
@@ -215,6 +226,12 @@ interface PlaylistSong {
 
 interface PlaylistSongWithId extends PlaylistSong {
   id: string;
+}
+
+interface Cover {
+  album_id: string;
+  // disc_id 缺省为 1
+  disc_id?: number;
 }
 </code></pre>
 <h2 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h2>
@@ -231,6 +248,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
+<tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
 <tr><td><code>songs</code></td><td><code>PlaylistSong[]</code></td><td>初始加入播放列表的歌曲列表</td></tr>
 </tbody></table>
 <h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
@@ -257,7 +275,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
 <tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
-<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br>  <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
+<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br> <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
 </tbody></table>
 <h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
