@@ -1260,7 +1260,6 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 </code></pre>
 <p>在后续的描述中，我们只描述类型 <code>T</code> 的结果，省略外层包裹的 <code>JSON Object</code>。</p>
 <p>当 <code>status</code> 为 <code>0</code> 时，<code>data</code> 中包含类型为 <code>T</code> 的返回数据。</p>
-<p>当返回的状态码为 <code>204 No Content</code> 时，代表处理成功，且没有数据返回。</p>
 <h3 id="返回状态"><a class="header" href="#返回状态">返回状态</a></h3>
 <p>返回状态为 <code>6</code> 位数字，具体划分如下：</p>
 <table><thead><tr><th>领域</th><th>分类</th><th>编号</th></tr></thead><tbody>
@@ -1630,8 +1629,6 @@ interface Cover {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>播放列表标识符</td></tr>
 </tbody></table>
-<h3 id="返回-10"><a class="header" href="#返回-10">返回</a></h3>
-<p>删除成功时，返回 <code>204 No Content</code>。</p>
 <h3 id="错误列表-12"><a class="header" href="#错误列表-12">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>103002</code></td><td>播放列表不存在</td></tr>
@@ -1647,7 +1644,7 @@ interface Cover {
 <h2 id="获取-token"><a class="header" href="#获取-token">获取 Token</a></h2>
 <h3 id="endpoint-13"><a class="header" href="#endpoint-13">Endpoint</a></h3>
 <p><code>GET /api/credential</code></p>
-<h3 id="返回-11"><a class="header" href="#返回-11">返回</a></h3>
+<h3 id="返回-10"><a class="header" href="#返回-10">返回</a></h3>
 <p>返回包含所有请求 <code>Token &amp; Id</code> 的数组。</p>
 <h4 id="返回参数-3"><a class="header" href="#返回参数-3">返回参数</a></h4>
 <p><code>Token</code> 的定义如下所示：</p>
@@ -1672,7 +1669,7 @@ interface Token {
 <p><code>POST /api/credential</code></p>
 <h3 id="请求-9"><a class="header" href="#请求-9">请求</a></h3>
 <p>新增请求的类型为 <code>Token</code>。</p>
-<h3 id="返回-12"><a class="header" href="#返回-12">返回</a></h3>
+<h3 id="返回-11"><a class="header" href="#返回-11">返回</a></h3>
 <p>新建成功后，返回创建完成的 <code>Token</code> 信息（<code>Token &amp; Id</code>）。</p>
 <h3 id="错误列表-13"><a class="header" href="#错误列表-13">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1866,7 +1863,7 @@ interface AlbumInfo {
 </code></pre>
 <h2 id="获取-tag-列表"><a class="header" href="#获取-tag-列表">获取 Tag 列表</a></h2>
 <p><code>GET /api/meta/tags</code></p>
-<h3 id="返回-13"><a class="header" href="#返回-13">返回</a></h3>
+<h3 id="返回-12"><a class="header" href="#返回-12">返回</a></h3>
 <p>返回包含所有 <code>Tag</code> 的数组，类型为 <code>string[]</code> 。</p>
 <h2 id="专辑信息-1"><a class="header" href="#专辑信息-1">专辑信息</a></h2>
 <p>通过 <code>album_id</code> 获得专辑元数据的接口。支持同时获取多张专辑的元数据信息。</p>
@@ -1876,7 +1873,7 @@ interface AlbumInfo {
 <table><thead><tr><th>参数名</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>id[]</code></td><td>待获取元数据的专辑 <code>ID</code> 列表</td></tr>
 </tbody></table>
-<h3 id="返回-14"><a class="header" href="#返回-14">返回</a></h3>
+<h3 id="返回-13"><a class="header" href="#返回-13">返回</a></h3>
 <p>返回以 <code>album_id</code> 为键，专辑元数据或空为值的 <code>Object</code>。</p>
 <p>当查询成功时，值为专辑的 <code>AlbumInfo</code>，否则为 <code>null</code>。</p>
 <p>类型表示为 <code>Record&lt;String, AlbumInfo | null&gt;</code>。</p>
@@ -1890,7 +1887,7 @@ interface AlbumInfo {
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>tag</code></td><td><code>string</code></td><td>Tag</td></tr>
 </tbody></table>
-<h3 id="返回-15"><a class="header" href="#返回-15">返回</a></h3>
+<h3 id="返回-14"><a class="header" href="#返回-14">返回</a></h3>
 <p><code>AlbumInfo[]</code></p>
 <h3 id="错误列表-17"><a class="header" href="#错误列表-17">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1899,7 +1896,7 @@ interface AlbumInfo {
 </tbody></table>
 <h2 id="获取-tag-关系"><a class="header" href="#获取-tag-关系">获取 Tag 关系</a></h2>
 <p><code>GET /api/meta/tag-graph</code></p>
-<h3 id="返回-16"><a class="header" href="#返回-16">返回</a></h3>
+<h3 id="返回-15"><a class="header" href="#返回-15">返回</a></h3>
 <p>返回 <code>tag</code> 依赖关系的邻接表，类型表示为 <code>Record&lt;string, string[]&gt;</code> 。</p>
 <p>其中，键对应的值为键所对应标签所包含的所有标签名。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="搜索"><a class="header" href="#搜索">搜索</a></h1>
@@ -1913,7 +1910,7 @@ interface AlbumInfo {
 <tr><td><code>search_playlists</code></td><td><code>bool</code></td><td>是否搜索播放列表</td></tr>
 <tr><td><code>keyword</code></td><td><code>string</code></td><td>搜索关键字</td></tr>
 </tbody></table>
-<h2 id="返回-17"><a class="header" href="#返回-17">返回</a></h2>
+<h2 id="返回-16"><a class="header" href="#返回-16">返回</a></h2>
 <p>返回 <code>SearchResult</code> 。</p>
 <h3 id="参数列表"><a class="header" href="#参数列表">参数列表</a></h3>
 <pre><code class="language-ts">interface SerachResult {
@@ -1952,7 +1949,7 @@ interface PlaylistResult {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>分享链接的 ID</td></tr>
 </tbody></table>
-<h3 id="返回-18"><a class="header" href="#返回-18">返回</a></h3>
+<h3 id="返回-17"><a class="header" href="#返回-17">返回</a></h3>
 <p>返回分享链接的实际内容。</p>
 <h3 id="错误列表-19"><a class="header" href="#错误列表-19">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -1961,7 +1958,7 @@ interface PlaylistResult {
 <h2 id="获取分享连接列表"><a class="header" href="#获取分享连接列表">获取分享连接列表</a></h2>
 <h3 id="endpoint-20"><a class="header" href="#endpoint-20">Endpoint</a></h3>
 <p><code>GET /api/share/</code></p>
-<h3 id="返回-19"><a class="header" href="#返回-19">返回</a></h3>
+<h3 id="返回-18"><a class="header" href="#返回-18">返回</a></h3>
 <p>返回当前用户创建的所有分享链接列表。</p>
 <h4 id="返回参数-4"><a class="header" href="#返回参数-4">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
@@ -1977,7 +1974,7 @@ interface PlaylistResult {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>data</code></td><td><code>string</code></td><td>实际内容</td></tr>
 </tbody></table>
-<h3 id="返回-20"><a class="header" href="#返回-20">返回</a></h3>
+<h3 id="返回-19"><a class="header" href="#返回-19">返回</a></h3>
 <p>请求成功时，返回分享链接的短部。</p>
 <h3 id="错误列表-20"><a class="header" href="#错误列表-20">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -2020,8 +2017,6 @@ interface PlaylistResult {
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
 <tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
 </tbody></table>
-<h3 id="返回-21"><a class="header" href="#返回-21">返回</a></h3>
-<p>当记录成功时，返回 <code>204 No Content</code>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="喜欢"><a class="header" href="#喜欢">喜欢</a></h1>
 <p>用户喜欢的单曲列表与播放列表。对应接口需要用户登录。</p>
 <h2 id="单曲"><a class="header" href="#单曲">单曲</a></h2>
@@ -2126,7 +2121,7 @@ interface LyricLanguage {
 <tr><td><code>album_id</code></td><td><code>string</code></td><td>请求歌词的专辑 <code>ID</code></td></tr>
 <tr><td><code>disc_id</code></td><td><code>number</code></td><td>请求歌词的碟片 <code>ID</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>请求歌词的单曲 <code>ID</code></td></tr>
-<tr><td><code>type</code></td><td>`&quot;text&quot;</td><td>&quot;lrc&quot;`</td></tr>
+<tr><td><code>type</code></td><td><code>&quot;text&quot; | &quot;lrc&quot;</code></td><td>修改后歌词的类型</td></tr>
 <tr><td><code>lang</code></td><td><code>LanguageCode</code></td><td>修改歌词的语言</td></tr>
 <tr><td><code>data</code></td><td><code>string</code></td><td>修改后的歌词</td></tr>
 </tbody></table>
