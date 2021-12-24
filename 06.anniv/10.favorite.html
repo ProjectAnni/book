@@ -143,17 +143,24 @@
 <h3 id="获取喜欢列表"><a class="header" href="#获取喜欢列表">获取喜欢列表</a></h3>
 <p><code>GET /api/favorite/music</code></p>
 <h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
-<pre><code class="language-ts">interface FavouriteMusicInfo {
+<p>返回 <code>TrackResponse[]</code> ，按照添加时间倒序排序。</p>
+<pre><code class="language-ts">interface TrackResponse {
   album_id: string;
   disc_id: number;
   track_id: number;
+  info?: TrackInfo;
 }
 </code></pre>
-<p>返回 <code>FavouriteMusicInfo[]</code> ，按照添加时间倒序排序。</p>
 <h3 id="添加单曲"><a class="header" href="#添加单曲">添加单曲</a></h3>
 <p><code>PUT /api/favorite/music</code></p>
 <h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
-<p>请求参数为一个 <code>FavouriteMusicInfo</code> 对象。</p>
+<p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
+<pre><code class="language-ts">interface FavoriteMusicInfo {
+  album_id: string
+  disc_id: number
+  track_id: number
+}
+</code></pre>
 <h4 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>
@@ -162,7 +169,7 @@
 <h3 id="删除单曲"><a class="header" href="#删除单曲">删除单曲</a></h3>
 <p><code>DELETE /api/favorite/music</code></p>
 <h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
-<p>请求参数为一个 <code>FavouriteMusicInfo</code> 对象。</p>
+<p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
 <h4 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>
@@ -171,13 +178,13 @@
 <h3 id="获取全部已订阅的播放列表"><a class="header" href="#获取全部已订阅的播放列表">获取全部已订阅的播放列表</a></h3>
 <p><code>GET /api/favorite/playlist</code></p>
 <h4 id="返回参数-1"><a class="header" href="#返回参数-1">返回参数</a></h4>
-<pre><code class="language-ts">interface FavouriteListInfo {
+<pre><code class="language-ts">interface FavoriteListInfo {
   playlist_id: string;
   name: string;
   owner: string;
 }
 </code></pre>
-<p>返回 <code>FavouriteListInfo[]</code> ，按照添加时间倒序排序。</p>
+<p>返回 <code>FavoriteListInfo[]</code> ，按照添加时间倒序排序。</p>
 <h3 id="订阅播放列表-1"><a class="header" href="#订阅播放列表-1">订阅播放列表</a></h3>
 <p><code>PUT /api/favorite/playlist</code></p>
 <h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
