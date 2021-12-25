@@ -991,8 +991,8 @@ pub struct BackendReaderExt {
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2021 年 12 月 23 日
-协议版本：0.2.2</p>
+<p>最后修改：2021 年 12 月 25 日
+协议版本：0.2.3</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -1138,7 +1138,7 @@ Access-Control-Allow-Headers: Authorization
 <p><code>Anni</code> 音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
 <h3 id="音频分发"><a class="header" href="#音频分发">音频分发</a></h3>
-<p>音频分发基于音频所在 <code>Disc</code> 的 <code>album_id</code>、 <code>disc_id</code> 和 <code>track_id</code>。</p>
+<p>音频分发基于音频所在 <code>Disc</code> 的 <code>album_id</code>、 <code>disc_id</code> 和 <code>track_id</code>。用户获取音频的前提是其提供的 <code>Token</code> 允许其访问对应的资源。</p>
 <p>获得音频的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/{track_id}</code>。</p>
 <h4 id="音频偏好"><a class="header" href="#音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
@@ -1161,7 +1161,7 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
 </tbody></table>
 <h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
-<p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。</p>
+<p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。获取封面无需 <code>Token</code>。</p>
 <p>获得封面的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/cover</code> 或 <code>GET /{album_id}/cover</code>，默认 <code>disc_id</code> 为 <code>1</code>。</p>
 <h4 id="返回状态表-2"><a class="header" href="#返回状态表-2">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
