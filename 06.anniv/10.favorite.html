@@ -143,22 +143,15 @@
 <h3 id="获取喜欢列表"><a class="header" href="#获取喜欢列表">获取喜欢列表</a></h3>
 <p><code>GET /api/favorite/music</code></p>
 <h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
-<p>返回 <code>TrackResponse[]</code> ，按照添加时间倒序排序。</p>
-<pre><code class="language-ts">interface TrackResponse {
-  album_id: string;
-  disc_id: number;
-  track_id: number;
-  info?: TrackInfo;
-}
-</code></pre>
+<p>返回 <code>TrackInfoWithAlbum[]</code> ，按照添加时间倒序排序。</p>
 <h3 id="添加单曲"><a class="header" href="#添加单曲">添加单曲</a></h3>
 <p><code>PUT /api/favorite/music</code></p>
 <h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
 <p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
 <pre><code class="language-ts">interface FavoriteMusicInfo {
-  album_id: string
-  disc_id: number
-  track_id: number
+  album_id: string;
+  disc_id: number;
+  track_id: number;
 }
 </code></pre>
 <h4 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h4>
