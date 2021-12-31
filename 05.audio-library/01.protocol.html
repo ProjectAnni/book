@@ -290,7 +290,7 @@ Access-Control-Allow-Headers: Authorization
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
 <h3 id="音频分发"><a class="header" href="#音频分发">音频分发</a></h3>
 <p>音频分发基于音频所在 <code>Disc</code> 的 <code>album_id</code>、 <code>disc_id</code> 和 <code>track_id</code>。用户获取音频的前提是其提供的 <code>Token</code> 允许其访问对应的资源。</p>
-<p>获得音频的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/{track_id}</code>。</p>
+<p>获得音频的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/{track_id}</code>。通过 <code>HEAD /{album_id}/{disc_id}/{track_id}</code> 可以只获取 <code>Header</code> 信息。</p>
 <h4 id="音频偏好"><a class="header" href="#音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
 <table><thead><tr><th>参数名</th><th>说明</th><th>可选项</th></tr></thead><tbody>
