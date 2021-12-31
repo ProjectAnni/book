@@ -145,13 +145,16 @@
 </span>#[async_trait]
 pub trait Backend {
     // 获取可用专辑 album_id 的集合
-    async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
+    async fn albums(&amp;self) -&gt; Result&lt;HashSet&lt;Cow&lt;str&gt;&gt;, BackendError&gt;;
 
     // 获取音频
     async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
 
     // 获取封面
     async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;BackendReader, BackendError&gt;;
+
+    // 重新加载
+    async fn reload(&amp;mut self) -&gt; Result&lt;(), BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>

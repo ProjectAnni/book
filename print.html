@@ -908,7 +908,7 @@ SUBCOMMANDS:
 <p>音频后端是 <code>Anni</code> 中与实际文件系统接触的抽象层。</p>
 <p>对 <code>Anni</code> 而言，需要获取的资源主要分为两类：音频资源和图片资源。其中图片资源作为音频资源的附加而存在，如封面等。</p>
 <p>根据 <code>Anni</code> 约定，我们有一个近似唯一的 <code>Catalog</code>。在很多情况下 <code>Catalog</code> 已经足以作为唯一标识，但实际情况下仍然会出现冲突。因此音频后端需要选取另一个更加独立的值作为专辑索引的主键。因此音频后端约定为每张专辑生成唯一的 <code>UUID</code> 作为 <code>album_id</code>，充当专辑层面的索引。</p>
-<p>由此，我们抽象出一个简单的文件系统，其通过 <code>album_id</code>、<code>disc_id</code> 和 <code>track_id</code> 访问音频资源，通过 <code>album_id</code> 访问封面。</p>
+<p>由此，我们抽象出一个简单的文件系统，其通过 <code>album_id</code>、<code>disc_id</code> 和 <code>track_id</code> 访问音频资源，通过 <code>album_id</code> 和可选的 <code>disc_id</code> 访问封面。</p>
 <h2 id="音频后端-1"><a class="header" href="#音频后端-1">音频？后端</a></h2>
 <p>之所以命名为音频后端，是因为其核心交付内容还是音频，封面的优先度相对较低。</p>
 <h2 id="简单之外的价值"><a class="header" href="#简单之外的价值">简单之外的价值</a></h2>
@@ -922,13 +922,16 @@ SUBCOMMANDS:
 </span>#[async_trait]
 pub trait Backend {
     // 获取可用专辑 album_id 的集合
-    async fn albums(&amp;mut self) -&gt; Result&lt;HashSet&lt;String&gt;, BackendError&gt;;
+    async fn albums(&amp;self) -&gt; Result&lt;HashSet&lt;Cow&lt;str&gt;&gt;, BackendError&gt;;
 
     // 获取音频
     async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
 
     // 获取封面
     async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;BackendReader, BackendError&gt;;
+
+    // 重新加载
+    async fn reload(&amp;mut self) -&gt; Result&lt;(), BackendError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
