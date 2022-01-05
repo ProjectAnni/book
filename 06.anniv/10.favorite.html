@@ -147,13 +147,7 @@
 <h3 id="添加单曲"><a class="header" href="#添加单曲">添加单曲</a></h3>
 <p><code>PUT /api/favorite/music</code></p>
 <h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
-<p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
-<pre><code class="language-ts">interface FavoriteMusicInfo {
-  album_id: string;
-  disc_id: number;
-  track_id: number;
-}
-</code></pre>
+<p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
 <h4 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>
@@ -162,7 +156,7 @@
 <h3 id="删除单曲"><a class="header" href="#删除单曲">删除单曲</a></h3>
 <p><code>DELETE /api/favorite/music</code></p>
 <h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
-<p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
+<p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
 <h4 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>

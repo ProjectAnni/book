@@ -1287,6 +1287,18 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <tr><td><code>902003</code></td><td>非法参数</td></tr>
 <tr><td><code>902004</code></td><td>内容已存在</td></tr>
 </tbody></table>
+<h2 id="通用结构"><a class="header" href="#通用结构">通用结构</a></h2>
+<pre><code class="language-typescript">interface AlbumDiscIdentifier {
+  album_id: string;
+  // 未指定时默认为 1
+  disc_id?: number;
+}
+interface TrackIdentifier {
+  album_id: string;
+  disc_id: number;
+  track_id: number;
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基本信息"><a class="header" href="#基本信息">基本信息</a></h1>
 <p>接口 <code>/api/info</code> 描述了 <code>Anniv</code> 后端的基本信息，包括站点名称、说明、特性开启状态等。</p>
 <h2 id="示例-4"><a class="header" href="#示例-4">示例</a></h2>
@@ -1504,21 +1516,13 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <tr><td><code>songs</code></td><td><code>PlaylistSongWithId[]</code></td><td>播放列表中的歌曲</td></tr>
 <tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
 </tbody></table>
-<p><code>PlaylistSong</code> 类型格式描述如下：</p>
+<p><code>PlaylistSong</code> 类型在 <code>TrackIdentifier</code> 的基础上增加了：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>album_id</code></td><td><code>string</code></td><td>歌曲所属专辑的 <code>album_id</code></td></tr>
-<tr><td><code>disc_id</code></td><td><code>number</code></td><td>歌曲的 <code>disc_id</code></td></tr>
-<tr><td><code>track_id</code></td><td><code>number</code></td><td>歌曲的 <code>track_id</code></td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
 </tbody></table>
 <p><code>PlaylistSongWithId</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
-</tbody></table>
-<p><code>Cover</code> 类型格式描述如下：</p>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>album_id</code></td><td><code>string</code></td><td>封面的专辑 ID</td></tr>
-<tr><td><code>disc_id</code></td><td><code>number</code></td><td>封面的 Disc ID</td></tr>
 </tbody></table>
 <h4 id="示例-5"><a class="header" href="#示例-5">示例</a></h4>
 <pre><code class="language-json">{
@@ -1549,25 +1553,24 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
   description?: string;
   owner: string;
   is_public: boolean;
-  cover: Cover;
+  cover: AlbumDiscIdentifier;
   songs: PlaylistSongWithId[];
 }
 
-interface PlaylistSong {
-  album_id: string;
-  disc_id: number;
-  track_id: number;
+interface PlaylistSongDummy extends TrackInfo {
+  type: 'dummy';
   description?: string;
 }
 
-interface PlaylistSongWithId extends PlaylistSong {
-  id: string;
+interface PlaylistSongNormal extends TrackIdentifier {
+  type: 'normal';
+  description?: string;
 }
 
-interface Cover {
-  album_id: string;
-  // disc_id 缺省为 1
-  disc_id?: number;
+type PlaylistSong = PlaylistSongDummy | PlaylistSongNormal;
+
+interface PlaylistSongWithId extends PlaylistSong {
+  id: string;
 }
 </code></pre>
 <h2 id="错误列表-9"><a class="header" href="#错误列表-9">错误列表</a></h2>
@@ -1839,13 +1842,11 @@ interface Token {
   tags: string[];
 }
 
-interface TrackInfoWithAlbum extends TrackInfo {
-  // track_id 与 disc_id 均为从 1 开始
-  track_id: number;
-  disc_id: number;
-  album_id: string;
+interface AlbumTitle {
   album_title: string;
 }
+
+type TrackInfoWithAlbum = TrackInfo &amp; TrackIdentifier &amp; AlbumTitle;
 
 interface DiscInfo {
   // meta 仓库中为空时返回所属 Album 的 title
@@ -2036,13 +2037,7 @@ interface PlaylistResult {
 <h3 id="添加单曲"><a class="header" href="#添加单曲">添加单曲</a></h3>
 <p><code>PUT /api/favorite/music</code></p>
 <h4 id="请求参数-17"><a class="header" href="#请求参数-17">请求参数</a></h4>
-<p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
-<pre><code class="language-ts">interface FavoriteMusicInfo {
-  album_id: string;
-  disc_id: number;
-  track_id: number;
-}
-</code></pre>
+<p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
 <h4 id="错误列表-22"><a class="header" href="#错误列表-22">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>
@@ -2051,7 +2046,7 @@ interface PlaylistResult {
 <h3 id="删除单曲"><a class="header" href="#删除单曲">删除单曲</a></h3>
 <p><code>DELETE /api/favorite/music</code></p>
 <h4 id="请求参数-18"><a class="header" href="#请求参数-18">请求参数</a></h4>
-<p>请求参数为一个 <code>FavoriteMusicInfo</code> 对象。</p>
+<p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
 <h4 id="错误列表-23"><a class="header" href="#错误列表-23">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902002</code></td><td>用户未登录</td></tr>

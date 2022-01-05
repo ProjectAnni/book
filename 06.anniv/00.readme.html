@@ -181,6 +181,18 @@
 <tr><td><code>902003</code></td><td>非法参数</td></tr>
 <tr><td><code>902004</code></td><td>内容已存在</td></tr>
 </tbody></table>
+<h2 id="通用结构"><a class="header" href="#通用结构">通用结构</a></h2>
+<pre><code class="language-typescript">interface AlbumDiscIdentifier {
+  album_id: string;
+  // 未指定时默认为 1
+  disc_id?: number;
+}
+interface TrackIdentifier {
+  album_id: string;
+  disc_id: number;
+  track_id: number;
+}
+</code></pre>
 
                     </main>
 

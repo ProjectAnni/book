@@ -168,21 +168,13 @@
 <tr><td><code>songs</code></td><td><code>PlaylistSongWithId[]</code></td><td>播放列表中的歌曲</td></tr>
 <tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
 </tbody></table>
-<p><code>PlaylistSong</code> 类型格式描述如下：</p>
+<p><code>PlaylistSong</code> 类型在 <code>TrackIdentifier</code> 的基础上增加了：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>album_id</code></td><td><code>string</code></td><td>歌曲所属专辑的 <code>album_id</code></td></tr>
-<tr><td><code>disc_id</code></td><td><code>number</code></td><td>歌曲的 <code>disc_id</code></td></tr>
-<tr><td><code>track_id</code></td><td><code>number</code></td><td>歌曲的 <code>track_id</code></td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
 </tbody></table>
 <p><code>PlaylistSongWithId</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
-</tbody></table>
-<p><code>Cover</code> 类型格式描述如下：</p>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>album_id</code></td><td><code>string</code></td><td>封面的专辑 ID</td></tr>
-<tr><td><code>disc_id</code></td><td><code>number</code></td><td>封面的 Disc ID</td></tr>
 </tbody></table>
 <h4 id="示例"><a class="header" href="#示例">示例</a></h4>
 <pre><code class="language-json">{
@@ -213,25 +205,24 @@
   description?: string;
   owner: string;
   is_public: boolean;
-  cover: Cover;
+  cover: AlbumDiscIdentifier;
   songs: PlaylistSongWithId[];
 }
 
-interface PlaylistSong {
-  album_id: string;
-  disc_id: number;
-  track_id: number;
+interface PlaylistSongDummy extends TrackInfo {
+  type: 'dummy';
   description?: string;
 }
 
-interface PlaylistSongWithId extends PlaylistSong {
-  id: string;
+interface PlaylistSongNormal extends TrackIdentifier {
+  type: 'normal';
+  description?: string;
 }
 
-interface Cover {
-  album_id: string;
-  // disc_id 缺省为 1
-  disc_id?: number;
+type PlaylistSong = PlaylistSongDummy | PlaylistSongNormal;
+
+interface PlaylistSongWithId extends PlaylistSong {
+  id: string;
 }
 </code></pre>
 <h2 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h2>
