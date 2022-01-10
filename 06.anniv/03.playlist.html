@@ -194,7 +194,8 @@
       &quot;album_id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
       &quot;disc_id&quot;: 1,
       &quot;track_id&quot;: 1,
-      &quot;description&quot;: &quot;interesting&quot;
+      &quot;description&quot;: &quot;interesting&quot;,
+      &quot;type&quot;: &quot;normal&quot;
     }
   ]
 }
@@ -239,7 +240,7 @@ interface PlaylistSongWithId extends PlaylistSong {
 <p><code>GET /api/playlists</code></p>
 <h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
+<tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID，缺省为当前用户</td></tr>
 </tbody></table>
 <h4 id="返回-1"><a class="header" href="#返回-1">返回</a></h4>
 <p>若指定用户为自己，则返回所有播放列表。否则仅返回公开的播放列表。</p>
