@@ -140,11 +140,53 @@
                         <h1 id="专辑信息"><a class="header" href="#专辑信息">专辑信息</a></h1>
 <p>对专辑信息的描述存放于元数据仓库下的 <code>album</code> 目录，以专辑的 <code>Catalog</code> 作文件名。</p>
 <p>专辑信息通过 <code>toml</code> 描述。</p>
+<h2 id="艺术家"><a class="header" href="#艺术家">艺术家</a></h2>
+<p>专辑信息中有 <code>artist</code> 和 <code>artists</code> 字段用于填写艺术家信息。其中 <code>artist</code> 字段较为简单，而 <code>artists</code> 字段则可以表示更加精确的艺术家信息。</p>
+<h3 id="artist-字段"><a class="header" href="#artist-字段"><code>artist</code> 字段</a></h3>
+<p>专辑、唱片和音轨都拥有 <code>artist</code> 字段，用于表示主要的艺术家信息。主艺术家的选取规则如下：</p>
+<ol>
+<li>当该曲目的类型为 <code>Normal</code> 时，主艺术家为演唱者。</li>
+<li>当该曲目的类型为 <code>Instrumental</code> 时，主艺术家为对应非 <code>Instrumental</code> 版本的演唱者或 <code>Composer</code>。</li>
+<li>当该曲目是某原曲的 <code>Remix/Rearrange</code> 时，主艺术家为 <code>Arranger</code>。</li>
+<li>当该曲目的类型为 <code>absolute</code> 时，主艺术家为 <code>Composer</code>。</li>
+</ol>
+<h3 id="artists-字段"><a class="header" href="#artists-字段"><code>artists</code> 字段</a></h3>
+<p><code>artists</code> 字段用于描述更加精确的艺术家信息。该字段的继承方式与 <code>artist</code> 相同，但其中字段不继承。如下所示：</p>
+<pre><code class="language-toml"># ...
+[[discs.tracks]]
+title = &quot;夏凪ぎ(Episode 9 Ver.)&quot;
+artists.vocal = &quot;やなぎなぎ&quot;
+artists.composer = &quot;麻枝准&quot;
+artists.lyricist = &quot;麻枝准&quot;
+artists.arranger = &quot;MANYO&quot;
+artists.piano = &quot;kidlit&quot;
+artists.violin = &quot;須原杏、沖増菜摘&quot;
+artists.viola = &quot;梶谷裕子&quot;
+artists.cello = &quot;渡邉雅弦&quot;
+artists.irish-harp = &quot;梅田千晶&quot;
+</code></pre>
+<p>使用 <code>TypeScript</code> 描述的类型表示如下，其中 <code>[]</code> 中的内容表示存在时向 <code>FLAC</code> 文件写入的 <code>Tag</code> 名：</p>
+<pre><code class="language-typescript">type Artists = ExtendedArtists &amp; Record&lt;string, string&gt;;
+
+interface ExtendedArtists {
+  // 歌手
+  vocal?: string;
+  // 作曲 [COMPOSER]
+  composer?: string;
+  // 作词 [LYRICIST]
+  lyricist?: string;
+  // 编曲 [ARRANGER]
+  arranger?: string;
+}
+</code></pre>
 <h2 id="示例"><a class="header" href="#示例">示例</a></h2>
 <pre><code class="language-toml">######################################################
 # 专辑信息
 [album]
-# 随机 UUID，此处值仅供参考
+#
+# 专辑 ID [必填项]
+#
+# 表示为随机生成的 UUID
 album_id = &quot;572c5c19-0080-404b-9d8b-2eb864aea75d&quot;
 # 专辑名称 [必填项][ALBUM]
 title = &quot;夏凪ぎ/宝物になった日&quot;
@@ -196,7 +238,7 @@ type = &quot;normal&quot;
 # 光盘信息
 [[discs]]
 # 光盘名称 [可选项]
-title = &quot;夏凪ぎ/宝物になった日&quot;
+title = &quot;夏凪ぎ／宝物になった日&quot;
 # 光盘艺术家 [可选项]
 artist = &quot;やなぎなぎ&quot;
 #
@@ -231,6 +273,18 @@ title = &quot;宝物になった日&quot;
 
 [[discs.tracks]]
 title = &quot;夏凪ぎ(Episode 9 Ver.)&quot;
+#
+# 音轨的详细艺术家 [可选项]
+#
+artists.vocal = &quot;やなぎなぎ&quot;
+artists.composer = &quot;麻枝准&quot;
+artists.lyricist = &quot;麻枝准&quot;
+artists.arranger = &quot;MANYO&quot;
+artists.piano = &quot;kidlit&quot;
+artists.violin = &quot;須原杏、沖増菜摘&quot;
+artists.viola = &quot;梶谷裕子&quot;
+artists.cello = &quot;渡邉雅弦&quot;
+artists.irish-harp = &quot;梅田千晶&quot;
 
 [[discs.tracks]]
 title = &quot;宝物になった日(Episode 5 Ver.)&quot;
