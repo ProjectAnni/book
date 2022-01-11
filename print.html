@@ -1571,14 +1571,15 @@ interface TrackIdentifier {
 <tr><td><code>songs</code></td><td><code>PlaylistSongWithId[]</code></td><td>播放列表中的歌曲</td></tr>
 <tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
 </tbody></table>
-<p><code>PlaylistSong</code> 类型在 <code>TrackIdentifier</code> 的基础上增加了：</p>
+<p><code>PlaylistSong</code> 可以为 <code>PlaylistSongDummy</code> 或 <code>PlaylistSongNormal</code>，分别表示占位类型和普通类型的歌曲，详见下方类型定义。</p>
+<p>每种 <code>PlaylistSong</code> 类型均含有：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本</td></tr>
+<tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本 可为空</td></tr>
 </tbody></table>
-<p><code>PlaylistSongWithId</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
-</tbody></table>
+<p><code>PlaylistSongWithId</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：
+| 参数名 | 类型     | 详情                              |
+| ------ | -------- | --------------------------------- |
+| <code>id</code>   | <code>string</code> | 歌曲在歌单中的 <code>id</code>，歌单内唯一。 |</p>
 <h5 id="示例-5"><a class="header" href="#示例-5">示例</a></h5>
 <pre><code class="language-json">{
   &quot;id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
@@ -1612,23 +1613,22 @@ interface TrackIdentifier {
   cover: AlbumDiscIdentifier;
 }
 
-interface Playlist extends PlaylistInfo {
-  songs: PlaylistSongWithId[];
+interface BasePlaylistSong {
+  type: string;
+  description?: string;
 }
 
-interface PlaylistSongDummy extends TrackInfo {
+interface PlaylistSongDummy extends TrackInfo, BasePlaylistSong {
   type: &quot;dummy&quot;;
-  description?: string;
 }
 
-interface PlaylistSongNormal extends TrackIdentifier {
+interface PlaylistSongNormal extends TrackIdentifier, BasePlaylistSong {
   type: &quot;normal&quot;;
-  description?: string;
 }
 
 type PlaylistSong = PlaylistSongDummy | PlaylistSongNormal;
 
-interface PlaylistSongWithId extends PlaylistSong {
+type PlaylistSongWithId = PlaylistSong &amp; {
   id: string;
 }
 </code></pre>
