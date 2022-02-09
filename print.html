@@ -344,6 +344,9 @@
 <h3 id="可选标签"><a class="header" href="#可选标签">可选标签</a></h3>
 <table><thead><tr><th>KEY</th><th>简介</th></tr></thead><tbody>
 <tr><td><code>ALBUMARTIST</code></td><td>专辑艺术家</td></tr>
+<tr><td><code>COMPOSER</code></td><td>作曲</td></tr>
+<tr><td><code>ARRANGER</code></td><td>编曲</td></tr>
+<tr><td><code>LYRICIST</code></td><td>作词</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="vendor-string"><a class="header" href="#vendor-string">Vendor String</a></h1>
 <p><code>Vendor String</code> 是存在于 <code>FLAC</code> 的 <code>Vorbis Comment</code> 块首部的一个字符串。</p>
@@ -367,6 +370,8 @@
 <p>由于艺术家名称中可能出现上文规定的特殊字符（括号、顿号），因此在特定情形下需要对这类字符进行转义。</p>
 <p>转义字符为 <code>\</code>，在 <code>\</code> 之后的任何字符都会被认为是艺术家名称的一部分，不会被当作控制字符。</p>
 <p>额外地，当艺术家名称中出现顿号（<code>、</code>）时，可以通过双写顿号进行转义。但如果希望将顿号用作艺术家名称的第一个字符，还是需要通过 <code>\</code> 进行转义。</p>
+<h2 id="flac-中的多艺术家"><a class="header" href="#flac-中的多艺术家">FLAC 中的多艺术家</a></h2>
+<p>由于 <code>FLAC</code> 使用的元数据格式定义了可以通过多个 <code>ARTIST</code> 字段表示多艺术家，因此第一层的多个艺术家可以通过这种形式存储，省略这一层的转义。</p>
 <h2 id="艺术家别名及嵌套的意义"><a class="header" href="#艺术家别名及嵌套的意义">艺术家别名及嵌套的意义</a></h2>
 <p>虽然艺术家别名的直接观感并不是很好（尤其是在多级嵌套之后），但较为规整的格式使得播放器可以对这样的格式进行更为复杂的支持。播放器完全可以通过别名支持基于艺术家的复杂歌曲检索，组合名也就可以方便地映射到个人。</p>
 <p>而如果播放器选择不支持，艺术家别名也可以简单地消除，只留下艺术家的原名。</p>
@@ -627,12 +632,12 @@ artist = &quot;やなぎなぎ&quot;
 # 专辑的发行日期 [必填项][DATE]
 #
 # 日期有两种表示方法：
-# date = { year = 2021, month = 6, day = 22 }
 # date = 2021-06-22
+# date = &quot;2021-06&quot;
 # 
-# 尽量精确到日，如果无法确定则精确到月或年。如：
-# date.year = 2021
-# date.month = 6
+# 日期表达形式更加精确，当没有精确日期时则可以使用字符串表达模糊的年月。
+# 在字符串表达格式通过 `-` 分隔年月日，月和日都可以省略。
+# 尽量精确到日，如果无法确定则精确到月或年。
 date = 2020-12-16
 #
 # 专辑的标签 [可选项]
@@ -764,6 +769,13 @@ edition = &quot;1.1&quot;
 <p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1</code>。</p>
 </blockquote>
 <p>为方便客户端使用仓库数据，元数据仓库中的数据可以单向地构建为 <code>SQLite DB</code> 的形式供客户端读取。</p>
+<h2 id="描述文件"><a class="header" href="#描述文件">描述文件</a></h2>
+<p>预构建数据源需要生成两个文件：<code>repo.json</code> 和 <code>repo.db</code>。其中 <code>repo.json</code> 被称为描述文件，格式如下：</p>
+<pre><code class="language-json">{
+  // 仓库上次更新的时间戳，单位为秒
+  &quot;last_modified&quot;: 1642568493
+}
+</code></pre>
 <h2 id="仓库元数据repo_info"><a class="header" href="#仓库元数据repo_info">仓库元数据（<code>repo_info</code>）</a></h2>
 <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_info&quot; (
   &quot;key&quot;    TEXT NOT NULL UNIQUE,
@@ -865,6 +877,15 @@ CREATE INDEX IF NOT EXISTS &quot;repo_tag_detail_index&quot; ON &quot;repo_tag_d
   &quot;parent_id&quot;   INTEGER NOT NULL,
   FOREIGN KEY(&quot;tag_id&quot;) REFERENCES &quot;repo_tag&quot;(&quot;tag_id&quot;),
   FOREIGN KEY(&quot;parent_id&quot;) REFERENCES &quot;repo_tag&quot;(&quot;tag_id&quot;)
+);
+</code></pre>
+<h2 id="补充艺术家repo_artists"><a class="header" href="#补充艺术家repo_artists">补充艺术家（<code>repo_artists</code>）</a></h2>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_artists&quot; (
+  &quot;album_id&quot;    BLOB NOT NULL,
+  &quot;disc_id&quot;     INTEGER,
+  &quot;track_id&quot;    INTEGER,
+  &quot;key&quot;         TEXT NOT NULL,
+  &quot;value&quot;       TEXT
 );
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="flac-处理"><a class="header" href="#flac-处理">FLAC 处理</a></h1>

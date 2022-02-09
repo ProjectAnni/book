@@ -142,6 +142,13 @@
 <p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1</code>。</p>
 </blockquote>
 <p>为方便客户端使用仓库数据，元数据仓库中的数据可以单向地构建为 <code>SQLite DB</code> 的形式供客户端读取。</p>
+<h2 id="描述文件"><a class="header" href="#描述文件">描述文件</a></h2>
+<p>预构建数据源需要生成两个文件：<code>repo.json</code> 和 <code>repo.db</code>。其中 <code>repo.json</code> 被称为描述文件，格式如下：</p>
+<pre><code class="language-json">{
+  // 仓库上次更新的时间戳，单位为秒
+  &quot;last_modified&quot;: 1642568493
+}
+</code></pre>
 <h2 id="仓库元数据repo_info"><a class="header" href="#仓库元数据repo_info">仓库元数据（<code>repo_info</code>）</a></h2>
 <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_info&quot; (
   &quot;key&quot;    TEXT NOT NULL UNIQUE,
@@ -243,6 +250,15 @@ CREATE INDEX IF NOT EXISTS &quot;repo_tag_detail_index&quot; ON &quot;repo_tag_d
   &quot;parent_id&quot;   INTEGER NOT NULL,
   FOREIGN KEY(&quot;tag_id&quot;) REFERENCES &quot;repo_tag&quot;(&quot;tag_id&quot;),
   FOREIGN KEY(&quot;parent_id&quot;) REFERENCES &quot;repo_tag&quot;(&quot;tag_id&quot;)
+);
+</code></pre>
+<h2 id="补充艺术家repo_artists"><a class="header" href="#补充艺术家repo_artists">补充艺术家（<code>repo_artists</code>）</a></h2>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_artists&quot; (
+  &quot;album_id&quot;    BLOB NOT NULL,
+  &quot;disc_id&quot;     INTEGER,
+  &quot;track_id&quot;    INTEGER,
+  &quot;key&quot;         TEXT NOT NULL,
+  &quot;value&quot;       TEXT
 );
 </code></pre>
 
