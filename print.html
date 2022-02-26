@@ -1643,7 +1643,7 @@ interface PlaylistSongDummy extends TrackInfo, BasePlaylistSong {
   type: &quot;dummy&quot;;
 }
 
-interface PlaylistSongNormal extends TrackIdentifier, BasePlaylistSong {
+interface PlaylistSongNormal extends BasePlaylistSong, TrackInfoWithAlbum {
   type: &quot;normal&quot;;
 }
 
