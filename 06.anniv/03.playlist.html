@@ -174,27 +174,31 @@
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>description</code></td><td><code>string</code></td><td>对歌曲的说明文本 可为空</td></tr>
 </tbody></table>
-<p><code>PlaylistSongWithId</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：
-| 参数名 | 类型     | 详情                              |
-| ------ | -------- | --------------------------------- |
-| <code>id</code>   | <code>string</code> | 歌曲在歌单中的 <code>id</code>，歌单内唯一。 |</p>
+<p><code>PlaylistSongWithId</code> 类型在 <code>PlaylistSong</code> 的基础上增加了：</p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td><code>string</code></td><td>歌曲在歌单中的 <code>id</code>，歌单内唯一。</td></tr>
+</tbody></table>
 <h5 id="示例"><a class="header" href="#示例">示例</a></h5>
 <pre><code class="language-json">{
-  &quot;id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
-  &quot;name&quot;: &quot;测试播放列表&quot;,
-  &quot;description&quot;: &quot;对播放列表的简单介绍&quot;,
-  &quot;owner&quot;: &quot;0&quot;,
+  &quot;id&quot;: &quot;3&quot;,
+  &quot;name&quot;: &quot;测试&quot;,
+  &quot;description&quot;: &quot;测试&quot;,
+  &quot;owner&quot;: &quot;3&quot;,
   &quot;is_public&quot;: true,
   &quot;cover&quot;: {
-    &quot;album_id&quot;: &quot;fa28957d-4cc2-4ebd-a52a-1ac7797aeec4&quot;,
+    &quot;album_id&quot;: &quot;cfbde6ad-e365-4435-bfda-5a475899fb6b&quot;,
     &quot;disc_id&quot;: 1
   },
   &quot;songs&quot;: [
     {
-      &quot;id&quot;: 0,
-      &quot;album_id&quot;: &quot;512bee46-e37d-464f-8833-00545be8a30a&quot;,
-      &quot;disc_id&quot;: 1,
+      &quot;title&quot;: &quot;ハルノヘッドフォン&quot;,
+      &quot;artist&quot;: &quot;春日部ハル（篠田みなみ）&quot;,
+      &quot;tags&quot;: [],
       &quot;track_id&quot;: 1,
+      &quot;disc_id&quot;: 1,
+      &quot;album_id&quot;: &quot;cfbde6ad-e365-4435-bfda-5a475899fb6b&quot;,
+      &quot;album_title&quot;: &quot;t7s Longing for summer&quot;,
+      &quot;id&quot;: &quot;3&quot;,
       &quot;description&quot;: &quot;interesting&quot;,
       &quot;type&quot;: &quot;normal&quot;
     }
@@ -228,7 +232,7 @@ type PlaylistSong = PlaylistSongDummy | PlaylistSongNormal;
 
 type PlaylistSongWithId = PlaylistSong &amp; {
   id: string;
-}
+};
 </code></pre>
 <h4 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
