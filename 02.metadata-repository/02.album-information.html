@@ -145,10 +145,17 @@
 <h3 id="artist-字段"><a class="header" href="#artist-字段"><code>artist</code> 字段</a></h3>
 <p>专辑、唱片和音轨都拥有 <code>artist</code> 字段，用于表示主要的艺术家信息。主艺术家的选取规则如下：</p>
 <ol>
-<li>当该曲目的类型为 <code>Normal</code> 时，主艺术家为演唱者。</li>
-<li>当该曲目的类型为 <code>Instrumental</code> 时，主艺术家为对应非 <code>Instrumental</code> 版本的演唱者或 <code>Composer</code>。</li>
-<li>当该曲目是某原曲的 <code>Remix/Rearrange</code> 时，主艺术家为 <code>Arranger</code>。</li>
-<li>当该曲目的类型为 <code>absolute</code> 时，主艺术家为 <code>Composer</code>。</li>
+<li>当该曲目的类型为 <code>Normal</code> 时，主艺术家为 <code>Vocal</code>。</li>
+<li>当该曲目的类型为 <code>Instrumental</code> 时，主艺术家为对应非 <code>Instrumental</code> 版本的 <code>Vocal</code> 或 <code>Composer</code>。特别地，当该曲目对应非 <code>Instrumental</code> 曲目为某曲目的 <code>Rearrange</code> 时，主艺术家为对应非 <code>Instrumental</code> 版本的 <code>Vocal</code> 或该曲目的 <code>Arranger</code>。</li>
+<li>当该曲目的类型为 <code>Absolute</code> 时，主艺术家为 <code>Composer</code>。特别地，当该曲目为某曲目的 <code>Remix/Rearrange</code> 时，主艺术家为 <code>Arranger</code>。</li>
+</ol>
+<p>示例如下：</p>
+<ol>
+<li>《Track A》为 <code>Artist A</code> 个人单曲中的某一音轨，曲目类型为 <code>Normal</code>。此时主艺术家为 <code>Vocal</code>，即 <code>Artist A</code>。</li>
+<li>《Track B》为 <code>Artist A</code> 个人单曲中的某一音轨，曲目类型为 <code>Instrumental</code>。此时主艺术家可以为 <strong><code>Vocal</code></strong>（即 <code>Artist A</code>），或作曲（<strong><code>Composer</code></strong>）。</li>
+<li>《Track C》为 <code>Artist A</code> 个人单曲中的某一音轨，曲目类型为 <code>Instrumental</code>，且该音轨为 《Track B》 的 <code>Rearrange</code>。此时主艺术家可以为 <strong><code>Vocal</code></strong>（即 <code>Artist A</code>），或《Track C》的 <strong><code>Arranger</code></strong>。</li>
+<li>《Track D》为 <code>Artist A</code> 个人单曲中的某一音轨，曲目类型为 <code>Absolute</code>。此时主艺术家为该曲目的作曲（<strong><code>Composer</code></strong>）。</li>
+<li>《Track E》为 <code>Artist A</code> 个人单曲中的某一音轨，曲目类型为 <code>Absolute</code>，且该音轨为 《Track D》 的 <code>Rearrange</code>。此时主艺术家为《Track E》的 <strong><code>Arranger</code></strong>。</li>
 </ol>
 <h3 id="artists-字段"><a class="header" href="#artists-字段"><code>artists</code> 字段</a></h3>
 <p><code>artists</code> 字段用于描述更加精确的艺术家信息。该字段的继承方式与 <code>artist</code> 相同，但其中字段不继承。如下所示：</p>
