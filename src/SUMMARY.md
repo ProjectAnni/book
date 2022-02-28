@@ -64,6 +64,7 @@
     - [邀请（invite）](./06.anniv/features/01.invite.md)
     - [两步验证（2fa）](./06.anniv/features/02.2fa.md)
     - [禁止注册（close）](./06.anniv/features/03.close.md)
+  - [接口类型文件（`.d.ts`）](./06.anniv/99.d.ts.md)
 - [Annisonic](./07.annisonic/00.readme.md)
   - [实现的 API](./07.annisonic/01.apis.md)
   - [已测试的客户端](./07.annisonic/02.clients.md)
