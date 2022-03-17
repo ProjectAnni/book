@@ -32,6 +32,7 @@
   - [专辑标签](./02.metadata-repository/03.tag.md)
   - [仓库元数据](./02.metadata-repository/05.repo-metadata.md)
   - [预构建数据源](./02.metadata-repository/06.metdata-db.md)
+  - [仓库合并](./02.metadata-repository/07.repo-merge.md)
 - [音频后端](./04.audio-backend/00.readme.md)
   - [trait Backend](./04.audio-backend/01.trait.md)
   - [可用后端](./04.audio-backend/02.available-backend.md)
