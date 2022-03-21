@@ -1040,10 +1040,10 @@ pub struct BackendReaderExt {
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2021 年 12 月 25 日
-协议版本：0.2.3</p>
+<p>最后修改：2022 年 03 月 20 日
+协议版本：0.3.0</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
-<p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
+<p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>，以下简称<em>音频仓库</em>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
 <li>对用户身份的鉴定</li>
 <li>对分享的权限认证及限制</li>
@@ -1087,17 +1087,17 @@ Access-Control-Allow-Headers: Authorization
   &quot;allowShare&quot;: true
 }
 </code></pre>
-<h2 id="服务端信息"><a class="header" href="#服务端信息">服务端信息</a></h2>
-<p>获取服务端信息的 <code>API</code> 定义为 <code>GET /info</code>，所有用户都可以请求。</p>
+<h2 id="音频仓库信息"><a class="header" href="#音频仓库信息">音频仓库信息</a></h2>
+<p>获取音频仓库信息的 <code>API</code> 定义为 <code>GET /info</code>，所有用户都可以请求。</p>
 <p>返回结果如下例：</p>
 <pre><code class="language-json">{
-  // 服务端版本描述
+  // 音频仓库的版本描述
   // 用于客户端展示
   &quot;version&quot;: &quot;Annil v0.1.0&quot;,
-  // 服务端运行的 Annil 音频仓库协议版本
+  // 当前运行的 Annil 音频仓库协议版本
   // 用于客户端比对其支持的能力
   &quot;protocol_version&quot;: &quot;0.2.1&quot;,
-  // 服务端最近一次数据更新时间
+  // 音频仓库最近一次数据更新时间
   // 用于客户端缓存 `/albums` 请求结果
   &quot;last_update&quot;: 1639631487,
 }
@@ -1117,7 +1117,7 @@ Access-Control-Allow-Headers: Authorization
 ]
 </code></pre>
 <h2 id="资源分享"><a class="header" href="#资源分享">资源分享</a></h2>
-<p>由于 <code>Anni</code> 音频仓库对用户身份存在验证，非注册用户无法访问未注册仓库中的资源；但如将音频仓库全面开放，则可能出现诸如滥用、版权等方面的问题。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
+<p><code>Project Anni</code> 的设计目的是 <code>Self Host</code> 使用，因此存在验证用户身份的环节，非注册用户无法访问未注册仓库中的资源。但是对部分资源的分享需求是真实存在的。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
 <h3 id="分享-tokenshare-token"><a class="header" href="#分享-tokenshare-token">分享 Token（Share Token）</a></h3>
 <p>资源共享通过 <code>JWT</code> 的方式进行鉴权，如下例：</p>
 <pre><code class="language-json">{
@@ -1149,7 +1149,7 @@ Access-Control-Allow-Headers: Authorization
 }
 </code></pre>
 <h3 id="api创建分享-token"><a class="header" href="#api创建分享-token">API：创建分享 Token</a></h3>
-<p>创建分享的 <code>API</code> 定义为 <code>POST /share</code>，仅 <strong><code>allowShare</code> 为 <code>true</code></strong> 的用户 <code>Token</code> 可以正常请求。</p>
+<p>创建分享 <code>Token</code> 的 <code>API</code> 定义为 <code>POST /share</code>，仅 <strong><code>allowShare</code> 为 <code>true</code></strong> 的用户 <code>Token</code> 可以正常请求。</p>
 <p>请求的 <code>body</code> 定义如下（不包含注释）：</p>
 <pre><code class="language-json">{
   // 需要分享的音频
@@ -1184,7 +1184,7 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>200</code></td><td>成功创建分享 <code>Token</code></td><td><code>Content-Type</code> 为 <code>text/plain</code>,<code>body</code> 为生成的 <code>JWT</code></td></tr>
 </tbody></table>
 <h2 id="资源分发"><a class="header" href="#资源分发">资源分发</a></h2>
-<p><code>Anni</code> 音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
+<p>音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
 <h3 id="音频分发"><a class="header" href="#音频分发">音频分发</a></h3>
 <p>音频分发基于音频所在 <code>Disc</code> 的 <code>album_id</code>、 <code>disc_id</code> 和 <code>track_id</code>。用户获取音频的前提是其提供的 <code>Token</code> 允许其访问对应的资源。</p>
@@ -1192,10 +1192,15 @@ Access-Control-Allow-Headers: Authorization
 <h4 id="音频偏好"><a class="header" href="#音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
 <table><thead><tr><th>参数名</th><th>说明</th><th>可选项</th></tr></thead><tbody>
-<tr><td><code>prefer_bitrate</code></td><td>客户端期待的音频码率。</td><td><code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
+<tr><td><code>quality</code></td><td>客户端<strong>期待</strong>的音频质量。</td><td><code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
 </tbody></table>
-<p>值得注意的是，客户端传递的参数仅为客户端偏好，对音频仓库仅有指导意义，不代表实际结果。</p>
+<p>需要注意的是，客户端传递的参数仅为客户端偏好，对音频仓库仅有指导意义，不代表实际结果。</p>
 <p>音频仓库在对参数进行处理时，应以<strong>枚举</strong>而非<strong>字符串拼接</strong>的形式进行，以防止命令注入。</p>
+<h4 id="请求范围"><a class="header" href="#请求范围">请求范围</a></h4>
+<p>为了达到更好的播放效果，<code>Annil</code> 实现可以选择实现 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Range_requests"><code>HTTP</code> 请求范围</a>。</p>
+<p>当音频仓库支持某一音频资源的<strong>单一范围请求</strong>时，<code>HEAD</code> 和 <code>GET</code> 请求的返回中必须带有 <code>Accept-Ranges: bytes</code>。当该头部不存在，或为 <code>none</code> 时，表示音频仓库不支持该音频文件的单一范围请求。</p>
+<p><strong><code>Anni</code> 音频仓库协议暂不支持多重范围请求。</strong></p>
+<p>当客户端向音频仓库通过 <code>GET</code> 请求某一范围时，下文所述的返回头部<strong>不保证可用</strong>。</p>
 <h4 id="返回状态表-1"><a class="header" href="#返回状态表-1">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取音频</td></tr>
@@ -1208,6 +1213,7 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>X-Origin-Type</code></td><td>源文件的 <code>MIME Type</code>，当与 <code>Content-Type</code> 不同时表明音频经过了转码</td></tr>
 <tr><td><code>X-Origin-Size</code></td><td>源文件的大小，单位为字节（<code>Byte</code>）</td></tr>
 <tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
+<tr><td><code>X-Audio-Quality</code></td><td>音频的实际音质，可选值为  <code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
 </tbody></table>
 <h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。获取封面无需 <code>Token</code>。</p>
