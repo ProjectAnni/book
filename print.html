@@ -1674,16 +1674,36 @@ type PlaylistSongWithId = PlaylistSong &amp; {
 <h4 id="请求参数-9"><a class="header" href="#请求参数-9">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>id</code></td><td><code>string</code></td><td>增加歌曲的播放列表</td></tr>
-<tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
-<tr><td><code>payload</code></td><td><code>PlaylistSong[]</code> <br> <code>string[]</code> <br> <code>PlaylistSongWithId[]</code></td><td>当 <code>command</code> 为 <code>append</code> 时表示待增加的歌曲信息<br>当 <code>command</code> 为 <code>remove</code> 或 <code>reorder</code> 时表示歌曲 <code>id</code> <br> 当 <code>command</code> 为 <code>replace</code> 时表示待修改的歌曲信息，其中 <code>catalog</code> 和 <code>track_id</code> 可选</td></tr>
+<tr><td><code>command</code></td><td><code>string</code></td><td>表示修改的类型，可选项为 <code>info</code>、<code>append</code>、<code>remove</code>、<code>reorder</code> 或 <code>replace</code></td></tr>
+<tr><td><code>payload</code></td><td></td><td>见参数表示</td></tr>
 </tbody></table>
 <h3 id="返回-10"><a class="header" href="#返回-10">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-7"><a class="header" href="#参数表示-7">参数表示</a></h3>
-<pre><code class="language-typescript">interface PatchPlaylistRequestBody {
+<pre><code class="language-typescript">type PatchPlaylistRequestBody =
+  // 修改 Playlist 本身信息
+  PatchPlaylistBodyType&lt;&quot;info&quot;, PatchedPlaylistInfo&gt; |
+  // 在 Playlist 末尾增加音乐
+  PatchPlaylistBodyType&lt;&quot;append&quot;, PlaylistSong[]&gt; |
+  // 通过 ID 从 Playlist 中删除音乐
+  PatchPlaylistBodyType&lt;&quot;remove&quot;, string[]&gt; |
+  // 通过 ID 对 Playlist 重排序
+  PatchPlaylistBodyType&lt;&quot;reorder&quot;, string[]&gt; |
+  // 修改 Playlist 中部分内容
+  PatchPlaylistBodyType&lt;&quot;replace&quot;, PlaylistSongWithid[]&gt;;
+  
+
+type PatchPlaylistBodyType&lt;K, P&gt; = {
   id: string;
-  command: &quot;append&quot; | &quot;remove&quot; | &quot;reorder&quot; | &quot;replace&quot;;
-  payload: PlaylistSong[] | string[] | PlaylistSongWithid[];
+  command: K;
+  payload: P;
+};
+
+interface PatchedPlaylistInfo {
+  name?: string;
+  description?: string;
+  is_public?: boolean;
+  cover?: AlbumDiscIdentifier;
 }
 </code></pre>
 <h3 id="错误列表-11"><a class="header" href="#错误列表-11">错误列表</a></h3>
