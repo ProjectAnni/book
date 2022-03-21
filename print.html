@@ -1192,7 +1192,7 @@ Access-Control-Allow-Headers: Authorization
 <h4 id="音频偏好"><a class="header" href="#音频偏好">音频偏好</a></h4>
 <p>考虑到客户端的不同网络场景和带宽因素，以下的参数可以向音频仓库表明客户端的格式偏好。</p>
 <table><thead><tr><th>参数名</th><th>说明</th><th>可选项</th></tr></thead><tbody>
-<tr><td><code>quality</code></td><td>客户端<strong>期待</strong>的音频质量。</td><td><code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
+<tr><td><code>quality</code></td><td>客户端<strong>期望</strong>的音频质量。</td><td><code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
 </tbody></table>
 <p>需要注意的是，客户端传递的参数仅为客户端偏好，对音频仓库仅有指导意义，不代表实际结果。</p>
 <p>音频仓库在对参数进行处理时，应以<strong>枚举</strong>而非<strong>字符串拼接</strong>的形式进行，以防止命令注入。</p>
