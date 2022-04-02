@@ -201,7 +201,7 @@ Access-Control-Allow-Headers: Authorization
   &quot;protocol_version&quot;: &quot;0.2.1&quot;,
   // 音频仓库最近一次数据更新时间
   // 用于客户端缓存 `/albums` 请求结果
-  &quot;last_update&quot;: 1639631487,
+  &quot;last_update&quot;: 1639631487
 }
 </code></pre>
 <h2 id="获取可用专辑"><a class="header" href="#获取可用专辑">获取可用专辑</a></h2>
@@ -218,6 +218,14 @@ Access-Control-Allow-Headers: Authorization
   &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;
 ]
 </code></pre>
+<p><code>Anni</code> 音频仓库协议<strong>建议</strong>音频仓库在响应中携带 <code>ETag</code> 头部，以便客户端缓存。</p>
+<h3 id="客户端实现指导"><a class="header" href="#客户端实现指导">客户端实现指导</a></h3>
+<p><code>Anni</code> 音频仓库建议，客户端每次启动时携带 <code>If-None-Match: &lt;previous-etag-value&gt;</code> 头部请求 <code>GET /albums</code> ，并判断：</p>
+<ul>
+<li>若响应状态码为 <code>304</code>，则无需更新；</li>
+<li>若响应状态码为 <code>200</code>，则根据返回结果自动更新索引，并向用户提示。</li>
+</ul>
+<p>特别地，第一次启动时客户端无需携带 <code>If-None-Match: *</code> 头部，直接请求 <code>GET /albums</code> 并自动更新索引，并向用户提示。</p>
 <h2 id="资源分享"><a class="header" href="#资源分享">资源分享</a></h2>
 <p><code>Project Anni</code> 的设计目的是 <code>Self Host</code> 使用，因此存在验证用户身份的环节，非注册用户无法访问未注册仓库中的资源。但是对部分资源的分享需求是真实存在的。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
 <h3 id="分享-tokenshare-token"><a class="header" href="#分享-tokenshare-token">分享 Token（Share Token）</a></h3>
@@ -315,7 +323,7 @@ Access-Control-Allow-Headers: Authorization
 <tr><td><code>X-Origin-Type</code></td><td>源文件的 <code>MIME Type</code>，当与 <code>Content-Type</code> 不同时表明音频经过了转码</td></tr>
 <tr><td><code>X-Origin-Size</code></td><td>源文件的大小，单位为字节（<code>Byte</code>）</td></tr>
 <tr><td><code>X-Duration-Seconds</code></td><td>音频的长度，单位为秒</td></tr>
-<tr><td><code>X-Audio-Quality</code></td><td>音频的实际音质，可选值为  <code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
+<tr><td><code>X-Audio-Quality</code></td><td>音频的实际音质，可选值为 <code>low</code>、<code>medium</code>、<code>high</code>、<code>lossless</code></td></tr>
 </tbody></table>
 <h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。获取封面无需 <code>Token</code>。</p>
