@@ -150,6 +150,23 @@ name = &quot;THE IDOLM@STER MILLION LIVE&quot;
 # 别名仅作展示用，不起任何指代作用。
 alias = []
 #
+# Tag 类型 [可选项]
+#
+# 可选项如下所示：
+# artist：单艺术家
+# group：（多艺术家）组合
+# animation：动画
+# series：系列
+# project：企划
+# game：游戏
+# organization：组织、社团、公司
+# default：默认，未分类
+#
+# 此外，还有一种特殊的 Tag：
+# category：属性，如 OP、ED、OST
+# 用于表示专辑/碟片/音轨的具体属性，这类 Tag 不会出现在 Tag 图中
+type = &quot;artist&quot;
+#
 # Tag 的父级 Tag [可选项]
 #
 # 父 Tag 必须作为已有的 Tag 存在。
@@ -161,7 +178,10 @@ included-by = [&quot;THE IDOLM@STER&quot;]
 #
 # 对结构复杂的 Tag 不建议使用子 Tag，建议以 included-by 上指的形式构建依赖关系。
 # 子 Tag 可以在 Album 信息中使用。
-includes = [&quot;THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
+#
+# 子 Tag 根据 includes 中的字段名区分类型。
+includes.series = [&quot;THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
+includes.game = [&quot;THE IDOLM@STER Million Live Theater Days&quot;]
 </code></pre>
 
                     </main>
