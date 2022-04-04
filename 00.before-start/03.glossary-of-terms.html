@@ -151,21 +151,21 @@
 <h3 id="元数据仓库metadata-repository"><a class="header" href="#元数据仓库metadata-repository"><a href="../02.metadata-repository/00.readme.html">元数据仓库（<code>Metadata Repository</code>）</a></a></h3>
 <p><code>Anni</code> 中统一管理元数据的仓库。</p>
 <h3 id="音频来源audio-provider"><a class="header" href="#音频来源audio-provider"><a href="../04.audio-provider/00.readme.html">音频来源（<code>Audio Provider</code>）</a></a></h3>
-<p><code>Anni</code> 为方便提供文件而使用的抽象文件系统。</p>
+<p><code>Anni</code> 中音频和封面文件的实际来源/存放方式。可以是本地、<code>Google Drive</code> 等。</p>
 <h3 id="音频仓库audio-libraryannil广义"><a class="header" href="#音频仓库audio-libraryannil广义"><a href="../05.audio-library/02.implements.html">音频仓库（<code>Audio Library</code>）、<code>Annil</code>（广义）</a></a></h3>
 <p>以 <code>Annil</code> 协议分发音频文件及封面的服务端。</p>
-<h3 id="annil狭义"><a class="header" href="#annil狭义"><a href="../05.audio-library/01.anni-audio-library-draft.html"><code>Annil</code>（狭义）</a></a></h3>
+<h3 id="annil狭义"><a class="header" href="#annil狭义"><a href="../05.audio-library/01.protocol.html"><code>Annil</code>（狭义）</a></a></h3>
 <p><code>Project Anni</code> 定义的一种音频服务端协议。</p>
 <h3 id="anni-音频约定anni-audio-convention"><a class="header" href="#anni-音频约定anni-audio-convention"><a href="../01.audio-convention/00.readme.html"><code>Anni</code> 音频约定（<code>Anni Audio Convention</code>）</a></a></h3>
 <p><code>Project Anni</code> 定义的一套音频文件管理方式约定，包括必须和可选部分。</p>
 <h3 id="约定目录格式"><a class="header" href="#约定目录格式"><a href="../01.audio-convention/08.directory.html">约定目录格式</a></a></h3>
 <p><code>Anni</code> 音频约定定义的音频文件、目录、封面组织形式。</p>
-<h3 id="严格目录格式"><a class="header" href="#严格目录格式">严格目录格式</a></h3>
-<p>在 <code>Anni</code> 音频约定的基础上，取消目录嵌套，将专辑目录名修改为对应品番，音轨文件名修改为对应 <code>Track Id</code> 的目录格式。</p>
+<h3 id="严格目录格式"><a class="header" href="#严格目录格式"><a href="../01.audio-convention/09.directory-strict.html">严格目录格式</a></a></h3>
+<p>在 <code>Anni</code> 音频约定的基础上，取消目录嵌套，将专辑目录名修改为对应专辑 ID，音轨文件名修改为对应 <code>Track Id</code>，更便于分发和共同整理的目录格式。</p>
 <h3 id="annix"><a class="header" href="#annix"><code>Annix</code></a></h3>
-<p>使用 <code>flutter</code> 编写的客户端。<code>x</code> 代表 <code>Cross Platform</code> 中的 <code>cross</code>。</p>
+<p>(WIP)使用 <code>flutter</code> 编写的客户端。<code>x</code> 代表 <code>Cross Platform</code> 中的 <code>cross</code>。</p>
 <h3 id="anniw"><a class="header" href="#anniw"><code>Anniw</code></a></h3>
-<p>（尚未动工的）网页端应用，<code>w</code> 代表的是 <code>web</code>。</p>
+<p>(WIP)网页端单页应用，<code>w</code> 代表的是 <code>web</code>。</p>
 <h3 id="anniv"><a class="header" href="#anniv"><a href="../06.anniv/00.readme.html"><code>Anniv</code></a></a></h3>
 <p>音频管理后端，负责歌单、歌词等，与音频仓库解耦。</p>
 <h2 id="开发术语"><a class="header" href="#开发术语">开发术语</a></h2>
@@ -178,10 +178,12 @@
 <p>实际实现音频后端的库。</p>
 <h3 id="anni-fetch"><a class="header" href="#anni-fetch"><code>anni-fetch</code></a></h3>
 <p>模拟 <code>git fetch</code> 工作的库，在该库基础上可以实现元数据仓库更新相关功能。</p>
+<h2 id="anni-vgmdb"><a class="header" href="#anni-vgmdb"><code>anni-vgmdb</code></a></h2>
+<p>获取 <code>VGMdb</code> 专辑信息的客户端。</p>
 <h3 id="anni-common"><a class="header" href="#anni-common"><code>anni-common</code></a></h3>
 <p>跨 <code>Anni</code> 项目的公用库。</p>
-<h3 id="anni-derive"><a class="header" href="#anni-derive"><code>anni-derive</code></a></h3>
-<p>过程宏。</p>
+<h3 id="anni-clap-handleranni-clap-handler-derive"><a class="header" href="#anni-clap-handleranni-clap-handler-derive"><code>anni-clap-handler</code>、<code>anni-clap-handler-derive</code></a></h3>
+<p>处理 Clap 子命令调用的 handler 库。</p>
 
                     </main>
 

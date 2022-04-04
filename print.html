@@ -143,7 +143,7 @@
 <p><code>Project Anni</code> 包括两个部分：对音乐资源的组织和对音频资源的分发。</p>
 <p>前者包含整轨切分、元信息编辑、元数据整理等。<code>Anni</code> 提供了切分整轨、检查音频的工具，并提出了<a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库</a>的概念将音频元数据和音频文件分离，便于格式化地整理音乐的元数据。</p>
 <p>后者包括一套完整的服务端、客户端应用。客户端用于实际的播放，服务端则用于提供客户端所需的音频、封面等资源。我们曾经设想过将分发的形式以 <code>P2P</code> 的方式呈现，但最终还是选择了传统的 <code>C/S</code> 架构，将 <code>Anni</code> 定位为一个便于 <code>Self host</code> 的项目。<code>Anni</code> 服务端的理想部署环境是 <code>NAS</code>，但同时也支持基于 <code>Google Drive</code> 的 <code>VPS</code> 部署方式。</p>
-<p>目前，前者的实现已较为完善，但在数据格式及工具的易用性上仍有待优化，不能完全稳定下来；后者则是目前开发的重点，待敲定的包括 <code>Anniv</code> 的协议细节，各服务端和客户端的实现也正在进行中。</p>
+<p>目前，前者的实现已较为完善，但在数据格式及工具的易用性上仍有待优化，暂时没有完全稳定；后者则是目前开发的重点，待敲定的包括 <code>Anniv</code> 的协议细节，各服务端和客户端的实现也正在进行中。</p>
 <h1 id="讲在前面"><a class="header" href="#讲在前面">讲在前面</a></h1>
 <p><code>Project Anni</code> 的出现是为了填补「不满足我们需求」的空白，而不是为了纯泛用性而生。</p>
 <p>和每一个定制项目一样，<code>Anni</code> 并不一定适合每一个人，我们也不奢求所有用户和我们的需求都完全一致。</p>
@@ -188,10 +188,10 @@
 <h2 id="与-airsonic-对比"><a class="header" href="#与-airsonic-对比">与 <code>Airsonic</code> 对比</a></h2>
 <p>和 <code>Airsonic</code> 相比，<code>Anni</code> 的优势如下：</p>
 <ul>
-<li>扫描速度快。对于以 <code>rclone</code> 挂载到本地的 <code>250G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>1</code> 分钟左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构，并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
+<li>扫描速度快。对于以 <code>Google Drive</code> 形式存储在远端的 <code>370G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>20</code> 秒左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构，并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
 <li>元数据更新方便。由于元数据和音频文件脱钩，因此修改元数据只需要对元数据仓库中的文本进行修改即可。将错误修正写回音频文件的过程<strong>并不是必须</strong>的（尽管一般个人因为强迫症会选择写回）。</li>
 <li>歌单等附加性功能（<code>Anniv</code>）与音频分发（<code>Annil</code>）脱钩。这意味着如果我们不需要多余的功能，只想专心听歌，完全可以只使用 <code>Annil</code>。而分拆出来的 <code>Anniv</code> 则可以放手实现各种附加功能。并且数据还可以跨 <code>Annil</code> 存在。</li>
-<li>资源占用小。个人实际使用下 <code>Annil</code> 的待机内存占用在 <code>10MiB</code> 以内，客户端访问时（在不转码的情况下，转码调用的是 <code>ffmpeg</code>）也不超过 <code>20MiB</code>。考虑到 <code>Annil</code> 目前的部署场景基本是 <code>Self Host</code>，这样的资源消耗对我个人而言可以说是完美的。</li>
+<li>资源占用小。个人实际使用下 <code>Annil</code> 的待机内存占用在 <code>15MiB</code> 以内，客户端访问时（在不转码的情况下，转码调用的是 <code>ffmpeg</code>）也不超过 <code>20MiB</code>。考虑到 <code>Annil</code> 目前的部署场景基本是 <code>Self Host</code>，这样的资源消耗对我个人而言可以说是完美的。</li>
 </ul>
 <p>而目前的劣势也很明显：</p>
 <ul>
@@ -254,21 +254,21 @@
 <h3 id="元数据仓库metadata-repository"><a class="header" href="#元数据仓库metadata-repository"><a href="00.before-start/../02.metadata-repository/00.readme.html">元数据仓库（<code>Metadata Repository</code>）</a></a></h3>
 <p><code>Anni</code> 中统一管理元数据的仓库。</p>
 <h3 id="音频来源audio-provider"><a class="header" href="#音频来源audio-provider"><a href="00.before-start/../04.audio-provider/00.readme.html">音频来源（<code>Audio Provider</code>）</a></a></h3>
-<p><code>Anni</code> 为方便提供文件而使用的抽象文件系统。</p>
+<p><code>Anni</code> 中音频和封面文件的实际来源/存放方式。可以是本地、<code>Google Drive</code> 等。</p>
 <h3 id="音频仓库audio-libraryannil广义"><a class="header" href="#音频仓库audio-libraryannil广义"><a href="00.before-start/../05.audio-library/02.implements.html">音频仓库（<code>Audio Library</code>）、<code>Annil</code>（广义）</a></a></h3>
 <p>以 <code>Annil</code> 协议分发音频文件及封面的服务端。</p>
-<h3 id="annil狭义"><a class="header" href="#annil狭义"><a href="00.before-start/../05.audio-library/01.anni-audio-library-draft.html"><code>Annil</code>（狭义）</a></a></h3>
+<h3 id="annil狭义"><a class="header" href="#annil狭义"><a href="00.before-start/../05.audio-library/01.protocol.html"><code>Annil</code>（狭义）</a></a></h3>
 <p><code>Project Anni</code> 定义的一种音频服务端协议。</p>
 <h3 id="anni-音频约定anni-audio-convention"><a class="header" href="#anni-音频约定anni-audio-convention"><a href="00.before-start/../01.audio-convention/00.readme.html"><code>Anni</code> 音频约定（<code>Anni Audio Convention</code>）</a></a></h3>
 <p><code>Project Anni</code> 定义的一套音频文件管理方式约定，包括必须和可选部分。</p>
 <h3 id="约定目录格式"><a class="header" href="#约定目录格式"><a href="00.before-start/../01.audio-convention/08.directory.html">约定目录格式</a></a></h3>
 <p><code>Anni</code> 音频约定定义的音频文件、目录、封面组织形式。</p>
-<h3 id="严格目录格式"><a class="header" href="#严格目录格式">严格目录格式</a></h3>
-<p>在 <code>Anni</code> 音频约定的基础上，取消目录嵌套，将专辑目录名修改为对应品番，音轨文件名修改为对应 <code>Track Id</code> 的目录格式。</p>
+<h3 id="严格目录格式"><a class="header" href="#严格目录格式"><a href="00.before-start/../01.audio-convention/09.directory-strict.html">严格目录格式</a></a></h3>
+<p>在 <code>Anni</code> 音频约定的基础上，取消目录嵌套，将专辑目录名修改为对应专辑 ID，音轨文件名修改为对应 <code>Track Id</code>，更便于分发和共同整理的目录格式。</p>
 <h3 id="annix"><a class="header" href="#annix"><code>Annix</code></a></h3>
-<p>使用 <code>flutter</code> 编写的客户端。<code>x</code> 代表 <code>Cross Platform</code> 中的 <code>cross</code>。</p>
+<p>(WIP)使用 <code>flutter</code> 编写的客户端。<code>x</code> 代表 <code>Cross Platform</code> 中的 <code>cross</code>。</p>
 <h3 id="anniw"><a class="header" href="#anniw"><code>Anniw</code></a></h3>
-<p>（尚未动工的）网页端应用，<code>w</code> 代表的是 <code>web</code>。</p>
+<p>(WIP)网页端单页应用，<code>w</code> 代表的是 <code>web</code>。</p>
 <h3 id="anniv"><a class="header" href="#anniv"><a href="00.before-start/../06.anniv/00.readme.html"><code>Anniv</code></a></a></h3>
 <p>音频管理后端，负责歌单、歌词等，与音频仓库解耦。</p>
 <h2 id="开发术语"><a class="header" href="#开发术语">开发术语</a></h2>
@@ -281,10 +281,12 @@
 <p>实际实现音频后端的库。</p>
 <h3 id="anni-fetch"><a class="header" href="#anni-fetch"><code>anni-fetch</code></a></h3>
 <p>模拟 <code>git fetch</code> 工作的库，在该库基础上可以实现元数据仓库更新相关功能。</p>
+<h2 id="anni-vgmdb"><a class="header" href="#anni-vgmdb"><code>anni-vgmdb</code></a></h2>
+<p>获取 <code>VGMdb</code> 专辑信息的客户端。</p>
 <h3 id="anni-common"><a class="header" href="#anni-common"><code>anni-common</code></a></h3>
 <p>跨 <code>Anni</code> 项目的公用库。</p>
-<h3 id="anni-derive"><a class="header" href="#anni-derive"><code>anni-derive</code></a></h3>
-<p>过程宏。</p>
+<h3 id="anni-clap-handleranni-clap-handler-derive"><a class="header" href="#anni-clap-handleranni-clap-handler-derive"><code>anni-clap-handler</code>、<code>anni-clap-handler-derive</code></a></h3>
+<p>处理 Clap 子命令调用的 handler 库。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="鸣谢"><a class="header" href="#鸣谢">鸣谢</a></h1>
 <h2 id="成员贡献者"><a class="header" href="#成员贡献者">成员/贡献者</a></h2>
 <p>TODO</p>
@@ -299,7 +301,7 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="anni-音频约定"><a class="header" href="#anni-音频约定">Anni 音频约定</a></h1>
 <p><code>Anni</code> 音频约定是 <code>Project Anni</code> 为了规整格式、简化实现而对音频文件/专辑增加的一系列规定。</p>
 <p><code>Anni</code> 保证满足 <code>Anni</code> 音频约定的音频文件/专辑在使用过程中不会出现未定义行为，并<strong>以约定为基础进行开发</strong>。</p>
-<p>约定外的需求可以通过 <code>Issue</code> 的方式申请加入约定。</p>
+<p>约定中的部分参数可以通过配置文件的形式修改，约定外的需求可以通过 <code>Issue</code> 的方式申请加入约定。</p>
 <h2 id="前言-1"><a class="header" href="#前言-1">前言</a></h2>
 <p><code>Anni</code> 音频约定实质上是基于对 <code>Project Anni</code> 的理解而生的，某种意义上也可以称作是 <code>Yesterday17's Audio Convention</code>。如对采样率和位深度的限制，完全是基于分发的角度考量的。你完全可以用 <code>Anni</code> 收藏 <code>Hi-Res</code> 的音乐，但在使用时就需要承受其体积带来的问题。</p>
 <p><code>Anni</code> 音频约定<strong>不是强制的</strong>，这只是我个人对于音乐资源整理的一己之见。<code>Anni</code> 作为贯彻我这种独断而开发出的工具，可以较为方便地将音频组织成符合该约定的格式。</p>
@@ -313,8 +315,9 @@
 <p>在 <code>Anni</code> 作为云音乐平台工作时，存在向用户分发音频的行为。这个过程中涉及到的音频格式称为分发格式。</p>
 <p><code>Anni</code> 约定以下格式可作为分发格式：</p>
 <ul>
-<li><code>MP3</code></li>
 <li><code>FLAC</code></li>
+<li><code>AAC</code></li>
+<li><code>OPUS</code></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="采样率"><a class="header" href="#采样率">采样率</a></h1>
 <p>建议取 <code>44100 Hz</code>，即 <code>CD</code> 的采样率。</p>
@@ -401,7 +404,7 @@ KEY=OVERRIDE
 <p>则会得到 <code>KEY=OVERRIDE</code>。</p>
 <h2 id="空项"><a class="header" href="#空项">空项</a></h2>
 <p><code>Anni</code> 对空项的取值为空，不存在初始值。</p>
-<p>如果在 <code>Anni</code> 处理过程中遇到必须项为空，<code>Anni</code> 会产生一个 <code>Err</code>。</p>
+<p>如果在 <code>Anni</code> 处理过程中遇到必须项为空，<code>Anni</code> 会产生一个<strong>错误</strong>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="对间隔点的说明"><a class="header" href="#对间隔点的说明">对间隔点（・）的说明</a></h1>
 <p>在音频标签中，统一使用 <code>・</code>（<code>U+30fb</code>）作为间隔点。</p>
 <p>如果遇到其他的间隔点，请修正为上述符号。在编码转换时需额外留意。</p>
@@ -414,7 +417,7 @@ KEY=OVERRIDE
 <p>当为专辑命名时，必须对专辑目录名作此修正。可以<strong>根据语义</strong>替换成分数号（<code>⁄</code>）或除号（<code>∕</code>），否则替换成全角斜线（<code>／</code>）。</p>
 <p>当为专辑内歌曲命名时，<strong>写入标签</strong>的歌曲名称<strong>不作任何修正</strong>，文件名中以全角斜线（<code>／</code>）替换斜线（<code>/</code>）。</p>
 <p><code>Anni</code> 会自动修正歌曲的文件名中的斜线。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="对波浪线的说明"><a class="header" href="#对波浪线的说明">对波浪线（〜）的说明</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="对波浪线的说明"><a class="header" href="#对波浪线的说明">对波浪线（～）的说明</a></h1>
 <p>在音频标题中，统一使用 Unicode 全角波浪线 <code>～</code>（<code>U+FF5E</code>）作为波浪线。</p>
 <p>当遇到 Wave Dash <code>〜</code>（<code>U+301C</code>）时，请修正为上述符号。</p>
 <h2 id="参考-1"><a class="header" href="#参考-1">参考</a></h2>
@@ -427,10 +430,7 @@ KEY=OVERRIDE
 <h2 id="清晰度"><a class="header" href="#清晰度">清晰度</a></h2>
 <p>封面需要尽量清晰，建议在 <code>800x800</code> 以上。</p>
 <h2 id="封面来源"><a class="header" href="#封面来源">封面来源</a></h2>
-<p>可以在发行商官网或 <a href="https://www.generasia.com/"><code>generasia</code></a>、<a href="https://i.oppsu.cn/"><code>oppsu</code></a> 等网站寻找。</p>
-<h2 id="注意事项"><a class="header" href="#注意事项">注意事项</a></h2>
-<p><code>iTunes</code> 的封面上下可能会有白边，请注意甄别去除。</p>
-<p>目录中<strong>不可保留</strong>封面裁切时使用的 PSD/XCF 文件。</p>
+<p>可以在发行商官网、iTunes、Hi-Res 平台、VGMdb 等网站寻找。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="文件名"><a class="header" href="#文件名">文件名</a></h1>
 <h2 id="音频文件"><a class="header" href="#音频文件">音频文件</a></h2>
 <p>音乐资源以 <code>{tracknumber:02}. {title}</code> 命名，扩展名为 <code>flac</code>。</p>
@@ -440,7 +440,7 @@ KEY=OVERRIDE
 <p>品番（<code>Catalog</code>） 是存在于（几乎）每一张专辑上的编号。</p>
 <p><code>Anni</code> 约定其对于各专辑<strong>近似</strong>唯一，在<strong>不严格的情况下</strong>可以作为专辑的主键。</p>
 <h2 id="连续表示"><a class="header" href="#连续表示">连续表示</a></h2>
-<p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯。如：<code>VVCL-1466~7</code>。</p>
+<p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯，取最低位连续。如表示 <code>VVCL-1466</code> 和 <code>VVCL-1467</code> 两张专辑须使用 <code>VVCL-1466~7</code>，而非 <code>VVCL-1466~67</code>。</p>
 <h2 id="私有品番域"><a class="header" href="#私有品番域">私有品番域</a></h2>
 <p>对于没有品番的专辑，<code>Anni</code> 约定以 <code>@</code> 开头的品番为私有品番域。</p>
 <h2 id="手动分配"><a class="header" href="#手动分配">手动分配</a></h2>
@@ -452,11 +452,6 @@ KEY=OVERRIDE
 <li><code>@TEST-001-02</code></li>
 </ul>
 <p>此处的 <code>@</code> 使用虚拟品番域，表示该品番并非真实品番；后缀的 <code>-01</code> 和 <code>-02</code> 为 <code>DiscId</code>，补足两位数字。</p>
-<h2 id="预定义品番域"><a class="header" href="#预定义品番域">预定义品番域</a></h2>
-<p><code>Anni</code> 定义了以下品番前缀，供整理时使用：</p>
-<table><thead><tr><th>前缀</th><th>用例</th></tr></thead><tbody>
-<tr><td>ISBN</td><td>在图书附带光盘没有品番时用于指定该光盘。<br />如 <code>ISBN-9784091592033</code> 可用于表示 <code>アイドルマスター ミリオンライブ! 1 オリジナルCD</code>。</td></tr>
-</tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="约定目录结构"><a class="header" href="#约定目录结构">约定目录结构</a></h1>
 <p>除存储专辑的<strong>专辑目录</strong>以外，<code>Anni</code> 的目录并没有太多的约束。不过我们建议通过这样的层级组织你的音乐仓库：</p>
 <ol>
@@ -470,7 +465,7 @@ KEY=OVERRIDE
 <table><thead><tr><th>标识符（<code>TYPE</code>）</th><th>类型</th><th>简介</th></tr></thead><tbody>
 <tr><td><code>A</code></td><td>个人</td><td>歌手个人专辑</td></tr>
 <tr><td><code>AAAA</code></td><td>企划</td><td>企划类专辑</td></tr>
-<tr><td><code>Bangumi</code></td><td>番剧</td><td>番剧相关专辑</td></tr>
+<tr><td><code>Anime</code></td><td>番剧</td><td>番剧相关专辑</td></tr>
 <tr><td><code>Game</code></td><td>游戏</td><td>游戏相关专辑</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="顶级目录"><a class="header" href="#顶级目录">顶级目录</a></h1>
@@ -494,10 +489,10 @@ KEY=OVERRIDE
 [AAAA] THE IDOLM@STER SHINY COLORS
 [AAAA] TrySail
  
-[Bangumi] ご注文はうさぎですか？
-[Bangumi] 神様になった日
-[Bangumi] 魔王城でおやすみ
-[Bangumi] 冴えない彼女の育てかた
+[Anime] ご注文はうさぎですか？
+[Anime] 神様になった日
+[Anime] 魔王城でおやすみ
+[Anime] 冴えない彼女の育てかた
  
 [Game] ATRI -My Dear Moments-
 [Game] ef - a fairy tale of the two.
@@ -956,42 +951,55 @@ CREATE INDEX IF NOT EXISTS &quot;repo_tag_detail_index&quot; ON &quot;repo_tag_d
 <h2 id="简单之外的价值"><a class="header" href="#简单之外的价值">简单之外的价值</a></h2>
 <p>我们最常接触的文件系统是本地的文件系统，其访问延迟相对固定且较短。但对于 <code>Anni</code>，其设计之初针对的便是 <code>Google Drive</code>，即远程文件系统。</p>
 <p>我们的根本目的是<strong>获取音频和封面</strong>。我们不一定需要一般文件系统的某些特性，比如随机可读性等，但最基本的是一定要满足的。音频后端的抽象使得我们将所有的请求最终归约到向外暴露的两个接口，从而大大简化了音频后端的实现难度。</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="trait-backend"><a class="header" href="#trait-backend">Trait Backend</a></h1>
-<p>此处描述 <code>Rust</code> 实现的 <code>anni-backend</code> 的基本 <code>Trait</code>。其他语言可模仿设计类似接口。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="trait-anniprovider"><a class="header" href="#trait-anniprovider">Trait AnniProvider</a></h1>
+<p>此处描述 <code>Rust</code> 实现的 <code>anni-provider</code> 的基本 <code>Trait</code>。其他语言可模仿设计类似接口。</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>#[async_trait]
-pub trait Backend {
-    // 获取可用专辑 album_id 的集合
-    async fn albums(&amp;self) -&gt; Result&lt;HashSet&lt;Cow&lt;str&gt;&gt;, BackendError&gt;;
+</span>/// AnniProvider is a common trait for anni resource providers.
+/// It provides functions to get cover, audio, album list and reload.
+#[async_trait]
+pub trait AnniProvider {
+    /// Get album information provided by provider.
+    async fn albums(&amp;self) -&gt; Result&lt;HashSet&lt;Cow&lt;str&gt;&gt;, ProviderError&gt;;
 
-    // 获取音频
-    async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
+    /// Get audio info describing basic information of the audio file.
+    async fn get_audio_info(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;AudioInfo, ProviderError&gt;;
 
-    // 获取封面
-    async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;BackendReader, BackendError&gt;;
+    /// Returns a reader implements AsyncRead for content reading
+    async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8, range: Range) -&gt; Result&lt;AudioResourceReader, ProviderError&gt;;
 
-    // 重新加载
-    async fn reload(&amp;mut self) -&gt; Result&lt;(), BackendError&gt;;
+    /// Returns a cover of corresponding album
+    async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;ResourceReader, ProviderError&gt;;
+
+    /// Reloads the provider for new albums
+    async fn reload(&amp;mut self) -&gt; Result&lt;(), ProviderError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>其中获取返回的类型由 <code>BackendReader</code> 和 <code>BackendReaderExt</code> 描述：</p>
+<p>其中获取返回的类型由 <code>ResourceReader</code> 和 <code>AudioResourceReader</code> 描述：</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>pub type BackendReader = Pin&lt;Box&lt;dyn AsyncRead + Send&gt;&gt;;
+</span>pub type ResourceReader = Pin&lt;Box&lt;dyn AsyncRead + Send&gt;&gt;;
 
-pub struct BackendReaderExt {
-    /// 文件扩展名
+pub struct AudioInfo {
+    /// File extension of the file
     pub extension: String,
-    /// 文件大小
+    /// File size of the file
     pub size: usize,
-    /// 音频长度
+    /// Audio duration of the file
     pub duration: u64,
-    /// 读取文件内容的 Reader
-    pub reader: BackendReader,
+}
+
+/// AudioResourceReader abstracts the file result a provider returns with extra information of audio
+pub struct AudioResourceReader {
+    /// Audio info
+    pub info: AudioInfo,
+    /// File range
+    pub range: Range,
+    /// Async Reader for the file
+    pub reader: ResourceReader,
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -1248,6 +1256,8 @@ name = &quot;My Server&quot;
 listen = &quot;localhost:3614&quot;
 # 仓库签名 JWT 的密钥
 hmac-key = &quot;a hmac key&quot;
+# 仓库刷新时的 token
+reload-token = &quot;reload-token&quot;
 
 # 音频后端名称为 default
 [backends.default]
@@ -1258,6 +1268,7 @@ type = &quot;file&quot;
 # FileBackend 的参数，根目录
 root = &quot;/path/to/music&quot;
 # 使用严格目录格式(true) 或约定目录格式(false)
+# 目前尚未实现
 strict = false
 
 # Google Drive 后端
@@ -1267,13 +1278,28 @@ type = &quot;drive&quot;
 corpora = &quot;drive&quot;
 # 团队盘 ID
 drive-id = &quot;0AJIJiIDxF1yBUk9PVA&quot;
+# 初始 Token 路径
+initial-token-path = &quot;/data/annil.token&quot;
+# Token 的存放路径
+token-path = &quot;/tmp/ruaaaa/annil.token&quot;
 
 # drive 的缓存设置
 [backends.drive.cache]
 # 缓存根目录
 root = &quot;/tmp&quot;
-# 缓存最大容量
-max-size = 0
+# 缓存最大容量，0 表示不限制
+max-size = 1073741824 # 1GB
+
+# 元数据
+[metadata]
+# 仓库地址
+repo = &quot;https://github.com/ProjectAnni/repo&quot;
+# 使用的分支
+branch = &quot;master&quot;
+# 元数据存放的路径
+base = &quot;/tmp/ruaaaa&quot;
+# 每次启动/reload 时是否更新仓库
+pull = true
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="draft-annil-音轨扩展"><a class="header" href="#draft-annil-音轨扩展">[Draft] Annil 音轨扩展</a></h1>
 <blockquote>

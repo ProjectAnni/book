@@ -141,7 +141,7 @@
 <p>品番（<code>Catalog</code>） 是存在于（几乎）每一张专辑上的编号。</p>
 <p><code>Anni</code> 约定其对于各专辑<strong>近似</strong>唯一，在<strong>不严格的情况下</strong>可以作为专辑的主键。</p>
 <h2 id="连续表示"><a class="header" href="#连续表示">连续表示</a></h2>
-<p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯。如：<code>VVCL-1466~7</code>。</p>
+<p>当多个 <code>Catalog</code> 连号时，使用 <code>~</code> 表示连贯，取最低位连续。如表示 <code>VVCL-1466</code> 和 <code>VVCL-1467</code> 两张专辑须使用 <code>VVCL-1466~7</code>，而非 <code>VVCL-1466~67</code>。</p>
 <h2 id="私有品番域"><a class="header" href="#私有品番域">私有品番域</a></h2>
 <p>对于没有品番的专辑，<code>Anni</code> 约定以 <code>@</code> 开头的品番为私有品番域。</p>
 <h2 id="手动分配"><a class="header" href="#手动分配">手动分配</a></h2>
@@ -153,11 +153,6 @@
 <li><code>@TEST-001-02</code></li>
 </ul>
 <p>此处的 <code>@</code> 使用虚拟品番域，表示该品番并非真实品番；后缀的 <code>-01</code> 和 <code>-02</code> 为 <code>DiscId</code>，补足两位数字。</p>
-<h2 id="预定义品番域"><a class="header" href="#预定义品番域">预定义品番域</a></h2>
-<p><code>Anni</code> 定义了以下品番前缀，供整理时使用：</p>
-<table><thead><tr><th>前缀</th><th>用例</th></tr></thead><tbody>
-<tr><td>ISBN</td><td>在图书附带光盘没有品番时用于指定该光盘。<br />如 <code>ISBN-9784091592033</code> 可用于表示 <code>アイドルマスター ミリオンライブ! 1 オリジナルCD</code>。</td></tr>
-</tbody></table>
 
                     </main>
 

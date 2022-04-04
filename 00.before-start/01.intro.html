@@ -176,10 +176,10 @@
 <h2 id="与-airsonic-对比"><a class="header" href="#与-airsonic-对比">与 <code>Airsonic</code> 对比</a></h2>
 <p>和 <code>Airsonic</code> 相比，<code>Anni</code> 的优势如下：</p>
 <ul>
-<li>扫描速度快。对于以 <code>rclone</code> 挂载到本地的 <code>250G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>1</code> 分钟左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构，并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
+<li>扫描速度快。对于以 <code>Google Drive</code> 形式存储在远端的 <code>370G</code> 音频资源，<code>Annil</code> 目前的扫描只需要 <code>20</code> 秒左右就可以完成。相比之下，在资源只有不到 <code>100G</code> 的时候，<code>Airsonic</code> 就需要扫描两小时以上了。这是因为 <code>Anni</code> 的扫描只需要扫描目录结构，并以专辑为单位定位其所在的目录，并不需要实际读取音频。如果将所有专辑都存放于单一目录下，或使用严格目录格式的情况下，扫描的时间理论上可以基本无视。</li>
 <li>元数据更新方便。由于元数据和音频文件脱钩，因此修改元数据只需要对元数据仓库中的文本进行修改即可。将错误修正写回音频文件的过程<strong>并不是必须</strong>的（尽管一般个人因为强迫症会选择写回）。</li>
 <li>歌单等附加性功能（<code>Anniv</code>）与音频分发（<code>Annil</code>）脱钩。这意味着如果我们不需要多余的功能，只想专心听歌，完全可以只使用 <code>Annil</code>。而分拆出来的 <code>Anniv</code> 则可以放手实现各种附加功能。并且数据还可以跨 <code>Annil</code> 存在。</li>
-<li>资源占用小。个人实际使用下 <code>Annil</code> 的待机内存占用在 <code>10MiB</code> 以内，客户端访问时（在不转码的情况下，转码调用的是 <code>ffmpeg</code>）也不超过 <code>20MiB</code>。考虑到 <code>Annil</code> 目前的部署场景基本是 <code>Self Host</code>，这样的资源消耗对我个人而言可以说是完美的。</li>
+<li>资源占用小。个人实际使用下 <code>Annil</code> 的待机内存占用在 <code>15MiB</code> 以内，客户端访问时（在不转码的情况下，转码调用的是 <code>ffmpeg</code>）也不超过 <code>20MiB</code>。考虑到 <code>Annil</code> 目前的部署场景基本是 <code>Self Host</code>，这样的资源消耗对我个人而言可以说是完美的。</li>
 </ul>
 <p>而目前的劣势也很明显：</p>
 <ul>

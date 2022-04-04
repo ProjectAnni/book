@@ -137,42 +137,55 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="trait-backend"><a class="header" href="#trait-backend">Trait Backend</a></h1>
-<p>此处描述 <code>Rust</code> 实现的 <code>anni-backend</code> 的基本 <code>Trait</code>。其他语言可模仿设计类似接口。</p>
+                        <h1 id="trait-anniprovider"><a class="header" href="#trait-anniprovider">Trait AnniProvider</a></h1>
+<p>此处描述 <code>Rust</code> 实现的 <code>anni-provider</code> 的基本 <code>Trait</code>。其他语言可模仿设计类似接口。</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>#[async_trait]
-pub trait Backend {
-    // 获取可用专辑 album_id 的集合
-    async fn albums(&amp;self) -&gt; Result&lt;HashSet&lt;Cow&lt;str&gt;&gt;, BackendError&gt;;
+</span>/// AnniProvider is a common trait for anni resource providers.
+/// It provides functions to get cover, audio, album list and reload.
+#[async_trait]
+pub trait AnniProvider {
+    /// Get album information provided by provider.
+    async fn albums(&amp;self) -&gt; Result&lt;HashSet&lt;Cow&lt;str&gt;&gt;, ProviderError&gt;;
 
-    // 获取音频
-    async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;BackendReaderExt, BackendError&gt;;
+    /// Get audio info describing basic information of the audio file.
+    async fn get_audio_info(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8) -&gt; Result&lt;AudioInfo, ProviderError&gt;;
 
-    // 获取封面
-    async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;BackendReader, BackendError&gt;;
+    /// Returns a reader implements AsyncRead for content reading
+    async fn get_audio(&amp;self, album_id: &amp;str, disc_id: u8, track_id: u8, range: Range) -&gt; Result&lt;AudioResourceReader, ProviderError&gt;;
 
-    // 重新加载
-    async fn reload(&amp;mut self) -&gt; Result&lt;(), BackendError&gt;;
+    /// Returns a cover of corresponding album
+    async fn get_cover(&amp;self, album_id: &amp;str, disc_id: Option&lt;u8&gt;) -&gt; Result&lt;ResourceReader, ProviderError&gt;;
+
+    /// Reloads the provider for new albums
+    async fn reload(&amp;mut self) -&gt; Result&lt;(), ProviderError&gt;;
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>其中获取返回的类型由 <code>BackendReader</code> 和 <code>BackendReaderExt</code> 描述：</p>
+<p>其中获取返回的类型由 <code>ResourceReader</code> 和 <code>AudioResourceReader</code> 描述：</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>pub type BackendReader = Pin&lt;Box&lt;dyn AsyncRead + Send&gt;&gt;;
+</span>pub type ResourceReader = Pin&lt;Box&lt;dyn AsyncRead + Send&gt;&gt;;
 
-pub struct BackendReaderExt {
-    /// 文件扩展名
+pub struct AudioInfo {
+    /// File extension of the file
     pub extension: String,
-    /// 文件大小
+    /// File size of the file
     pub size: usize,
-    /// 音频长度
+    /// Audio duration of the file
     pub duration: u64,
-    /// 读取文件内容的 Reader
-    pub reader: BackendReader,
+}
+
+/// AudioResourceReader abstracts the file result a provider returns with extra information of audio
+pub struct AudioResourceReader {
+    /// Audio info
+    pub info: AudioInfo,
+    /// File range
+    pub range: Range,
+    /// Async Reader for the file
+    pub reader: ResourceReader,
 }
 <span class="boring">}
 </span></code></pre></pre>
