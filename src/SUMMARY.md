@@ -31,6 +31,7 @@
   - [目录结构](./02.metadata-repository/01.folder-structure.md)
   - [专辑信息](./02.metadata-repository/02.album-information.md)
   - [专辑标签](./02.metadata-repository/03.tag.md)
+  - [`JSON` 交换格式](./02.metadata-repository/04.json.md)
   - [仓库元数据](./02.metadata-repository/05.repo-metadata.md)
   - [预构建数据源](./02.metadata-repository/06.metdata-db.md)
   - [仓库合并](./02.metadata-repository/07.repo-merge.md)
