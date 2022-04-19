@@ -220,8 +220,13 @@
   // 是否公开
   is_public: boolean;
   // 封面
-  cover: DiscIdentifier;
+  cover: PlaylistCover;
 }
+
+type PlaylistCover = DiscIdentifier; // 专辑/光盘封面
+
+// 表示无封面的结构
+type EmptyPlaylistCover = { album_id?: &quot;&quot; };
 
 interface BasePlaylistItem&lt;Info&gt; {
   // 内容类型
@@ -233,8 +238,13 @@ interface BasePlaylistItem&lt;Info&gt; {
 }
 
 // 普通音轨
-interface PlaylistItemTrack extends BasePlaylistItem&lt;TrackInfoWithAlbum&gt;, TrackIdentifier {
+interface PlaylistItemTrack extends BasePlaylistItem&lt;TrackInfoWithAlbum&gt; {
   type: &quot;normal&quot;;
+}
+
+// 普通音轨（无元数据）
+export interface PlaylistItemPlainTrack extends BasePlaylistItem&lt;TrackIdentifier&gt; {
+    type: &quot;normal&quot;;
 }
 
 // 占位音轨
@@ -248,6 +258,7 @@ interface PlaylistItemAlbum extends BasePlaylistItem&lt;AlbumIdentifier&gt; {
 }
 
 type PlaylistItem = PlaylistItemDummyTrack | PlaylistItemTrack | PlaylistItemAlbum;
+type PlaylistPatchItem = PlaylistItemDummyTrack | PlaylistItemPlainTrack | PlaylistItemAlbum;
 </code></pre>
 <h4 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -273,17 +284,14 @@ type PlaylistItem = PlaylistItemDummyTrack | PlaylistItemTrack | PlaylistItemAlb
 <tr><td><code>name</code></td><td><code>string</code></td><td>播放列表名称</td></tr>
 <tr><td><code>description</code></td><td><code>string</code></td><td>播放列表说明</td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
-<tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
-<tr><td><code>items</code></td><td><code>PlaylistItem[]</code></td><td>初始加入播放列表的内容</td></tr>
+<tr><td><code>cover</code></td><td><code>PlaylistCover</code></td><td>播放列表封面</td></tr>
+<tr><td><code>items</code></td><td><code>PlaylistPatchItem[]</code></td><td>初始加入播放列表的内容</td></tr>
 </tbody></table>
 <h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>处理完成后，返回新创建的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
-<pre><code class="language-typescript">interface CreatePlaylistBody extends CreatePlaylistFeatureParameters {
-  name: string;
-  description?: string;
-  is_public: boolean;
-  items: PlaylistItem[];
+<pre><code class="language-typescript">interface CreatePlaylistBody extends Omit&lt;PlaylistInfo, &quot;id&quot; | &quot;owner&quot;&gt; {
+    items: PlaylistPatchItem[];
 }
 </code></pre>
 <h3 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h3>
@@ -305,17 +313,23 @@ type PlaylistItem = PlaylistItemDummyTrack | PlaylistItemTrack | PlaylistItemAlb
 <h3 id="返回-3"><a class="header" href="#返回-3">返回</a></h3>
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
-<pre><code class="language-typescript">type PatchPlaylistRequestBody =
-  // 修改 Playlist 本身信息
-  PatchPlaylistBodyType&lt;&quot;info&quot;, PatchedPlaylistInfo&gt; |
-  // 在 Playlist 末尾增加音乐
-  PatchPlaylistBodyType&lt;&quot;append&quot;, PlaylistItem[]&gt; |
-  // 通过 ID 从 Playlist 中删除音乐
-  PatchPlaylistBodyType&lt;&quot;remove&quot;, string[]&gt; |
-  // 通过 ID 对 Playlist 重排序
-  PatchPlaylistBodyType&lt;&quot;reorder&quot;, string[]&gt; |
-  // 修改 Playlist 中部分内容
-  PatchPlaylistBodyType&lt;&quot;replace&quot;, (PlaylistItem &amp; Id)[]&gt;;
+<pre><code class="language-typescript">export type PatchPlaylistRequestBody =
+    | PatchPlaylistInfoBody
+    | AppendPlaylistBody
+    | RemovePlaylistItemBody
+    | ReorderPlaylistBody
+    | ReplacePlaylistItemBody;
+
+// 修改 Playlist 本身信息
+export type PatchPlaylistInfoBody = PatchPlaylistBodyType&lt;&quot;info&quot;, PatchedPlaylistInfo&gt;;
+// 在 Playlist 末尾增加音乐
+export type AppendPlaylistBody = PatchPlaylistBodyType&lt;&quot;append&quot;, PlaylistPatchItem[]&gt;;
+// 通过 ID 从 Playlist 中删除音乐
+export type RemovePlaylistItemBody = PatchPlaylistBodyType&lt;&quot;remove&quot;, string[]&gt;;
+// 通过 ID 对 Playlist 重排序
+export type ReorderPlaylistBody = PatchPlaylistBodyType&lt;&quot;reorder&quot;, string[]&gt;;
+// 修改 Playlist 中部分内容
+export type ReplacePlaylistItemBody = PatchPlaylistBodyType&lt;&quot;replace&quot;, (PlaylistPatchItem &amp; Id)[]&gt;;
   
 
 type PatchPlaylistBodyType&lt;K, P&gt; = Id &amp; {
@@ -323,12 +337,7 @@ type PatchPlaylistBodyType&lt;K, P&gt; = Id &amp; {
   payload: P;
 };
 
-interface PatchedPlaylistInfo {
-  name?: string;
-  description?: string;
-  is_public?: boolean;
-  cover?: DiscIdentifier;
-}
+type PatchedPlaylistInfo = Partial&lt;Omit&lt;PlaylistInfo, &quot;id&quot; | &quot;owner&quot;&gt;&gt;;
 </code></pre>
 <h3 id="错误列表-2"><a class="header" href="#错误列表-2">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
