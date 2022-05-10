@@ -178,8 +178,7 @@
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>info</code></td><td><code>ExportedPlaylistInfo</code></td><td>分享的必要信息</td></tr>
 <tr><td><code>metadata</code></td><td><code>ExportedPlaylistMetadata.metadata</code></td><td>可选的元数据。当未指定时，元数据由 <code>Anniv</code> 提供</td></tr>
-<tr><td><code>tokens</code></td><td><code>ExportedToken[]</code></td><td>指定的 <code>Token</code>。当未指定时，由 <code>Anniv</code> 负责签发 <code>Token</code></td></tr>
-<tr><td><code>albums</code></td><td><code>Record&lt;Id['id'], AlbumIdentifier[]&gt;</code></td><td><code>Anniv</code> 负责签发 <code>Token</code> 时 <code>Token</code> 时服务器与待签发专辑的对应关系</td></tr>
+<tr><td><code>albums</code></td><td><code>Record&lt;AlbumIdentifier, Id['id']&gt;</code></td><td>待签发专辑与 Annil Token 的对应关系</td></tr>
 </tbody></table>
 <h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>请求成功时，返回分享链接的短部。</p>

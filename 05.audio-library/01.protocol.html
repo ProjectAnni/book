@@ -194,7 +194,7 @@ Access-Control-Allow-Headers: Authorization
     &quot;secret&quot;: &quot;c398313c-b086-47ce-9a91-edfa5c93bd73&quot;,
     // 可选，表示允许签署的分享范围，省略则表示无限制
     // 结构与 /albums 的返回相同
-    &quot;allowed&quot;: [],
+    &quot;allowed&quot;: []
   }
 }
 </code></pre>
@@ -242,6 +242,14 @@ Access-Control-Allow-Headers: Authorization
 <p>用户 <code>Token</code> 的 <code>Claim</code> 部分定义了 <code>share</code> 字段，用于存储资源分享所需的相关凭据。</p>
 <p>客户端需以 <code>share.secret</code> 字段作为 <code>key</code>，对分享 <code>Token</code> 进行 <code>HS256</code> 签名。</p>
 <h3 id="分享-tokenshare-token"><a class="header" href="#分享-tokenshare-token">分享 Token（Share Token）</a></h3>
+<p><code>Header</code> 部分如下例：</p>
+<pre><code class="language-json">{
+  &quot;typ&quot;: &quot;JWT&quot;,
+  &quot;alg&quot;: &quot;HS256&quot;,
+  // 分享 Key 的 ID，当用户 Token 中携带时须包括在分享 Token 内
+  &quot;kid&quot;: &quot;409e2d92-d2c5-4dff-81e6-fe832e1b06d0&quot;
+}
+</code></pre>
 <p><code>Claim</code> 部分如下例：</p>
 <pre><code class="language-json">{
   // 该 Token 的签发时间，即分享的开始时间
@@ -251,8 +259,6 @@ Access-Control-Allow-Headers: Authorization
   &quot;exp&quot;: 1615874879,
   // JWT 类型，必须为 share
   &quot;type&quot;: &quot;share&quot;,
-  // 分享 Key 的 ID，当用户 Token 中携带时须包括在分享 Token 内
-  &quot;key_id&quot;: &quot;409e2d92-d2c5-4dff-81e6-fe832e1b06d0&quot;,
   // 分享的音频，以 JSON Object 的形式表示
   // 作为 key 的字符串表示该分享允许访问者访问的专辑 album_id
   // value 表示该分享允许访问者访问的唱片号（disc_id）和音轨号（track_id）
