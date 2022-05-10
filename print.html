@@ -1421,12 +1421,8 @@ Access-Control-Allow-Headers: Authorization
 <h2 id="管理接口"><a class="header" href="#管理接口">管理接口</a></h2>
 <p>Annil 定义了如下的管理接口，供音频仓库的管理员使用。</p>
 <p>以下所有 <code>API</code> 均为可选，对接时须确认各接口是否可用，以及公网可访问性等细节。接口仅包含最小定义，在满足下文定义行为的前提下，各实现可以自行添加部分参数以实现功能扩展。</p>
-<p>访问管理接口时需要包含以下头部：</p>
-<table><thead><tr><th>参数名</th><th>说明</th></tr></thead><tbody>
-<tr><td><code>api_key</code></td><td>鉴权中使用的 API Key</td></tr>
-<tr><td><code>api_secret</code></td><td>API Key 对应的 secret</td></tr>
-</tbody></table>
-<p>管理所用的 <code>API Key</code> 签署方式不在本文规定范围之内。</p>
+<p>访问管理接口时需要包含 <code>Authorization</code> 头部，该头部的获取方式不在本文规定范围之内。</p>
+<p>管理接口不应允许跨域访问。</p>
 <h3 id="签署用户-token"><a class="header" href="#签署用户-token">签署用户 Token</a></h3>
 <p>签署用户 <code>Token</code> 的 <code>API</code> 定义为 <code>POST /admin/sign</code>。</p>
 <pre><code class="language-json">{
