@@ -138,10 +138,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="分享管理"><a class="header" href="#分享管理">分享管理</a></h1>
-<blockquote>
-<p>⚠️ 该部分尚未设计完成</p>
-</blockquote>
-<p><code>Anniv</code> 基于<a href="./export-format/00.readme.html">信息导出格式</a>实现单曲、专辑和播放列表的分享。</p>
+<p><code>Anniv</code> 基于<a href="./07.export-format.html">信息导出格式</a>实现单曲、专辑和播放列表的分享。</p>
 <h2 id="错误一览"><a class="header" href="#错误一览">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105000</code></td><td>用户分享数已达上限</td></tr>
@@ -157,12 +154,12 @@
 <tr><td><code>id</code></td><td><code>string</code></td><td>分享链接的 ID</td></tr>
 </tbody></table>
 <h3 id="返回"><a class="header" href="#返回">返回</a></h3>
-<p>返回分享链接的实际内容。</p>
+<p>返回分享链接的实际内容，结构为 <code>ExportedPlaylist</code>。</p>
 <h3 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105001</code></td><td>分享链接不存在</td></tr>
 </tbody></table>
-<h2 id="获取分享连接列表"><a class="header" href="#获取分享连接列表">获取分享连接列表</a></h2>
+<h2 id="获取分享链接列表"><a class="header" href="#获取分享链接列表">获取分享链接列表</a></h2>
 <h3 id="endpoint-1"><a class="header" href="#endpoint-1">Endpoint</a></h3>
 <p><code>GET /api/share/</code></p>
 <h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
@@ -179,7 +176,10 @@
 <h3 id="请求-1"><a class="header" href="#请求-1">请求</a></h3>
 <h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>data</code></td><td><code>string</code></td><td>实际内容</td></tr>
+<tr><td><code>info</code></td><td><code>ExportedPlaylistInfo</code></td><td>分享的必要信息</td></tr>
+<tr><td><code>metadata</code></td><td><code>ExportedPlaylistMetadata.metadata</code></td><td>可选的元数据。当未指定时，元数据由 <code>Anniv</code> 提供</td></tr>
+<tr><td><code>tokens</code></td><td><code>ExportedToken[]</code></td><td>指定的 <code>Token</code>。当未指定时，由 <code>Anniv</code> 负责签发 <code>Token</code></td></tr>
+<tr><td><code>albums</code></td><td><code>Record&lt;Id['id'], AlbumIdentifier[]&gt;</code></td><td><code>Anniv</code> 负责签发 <code>Token</code> 时 <code>Token</code> 时服务器与待签发专辑的对应关系</td></tr>
 </tbody></table>
 <h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
 <p>请求成功时，返回分享链接的短部。</p>

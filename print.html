@@ -1249,8 +1249,8 @@ pub struct AudioResourceReader {
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2022 年 03 月 20 日
-协议版本：0.3.0</p>
+<p>最后修改：2022 年 04 月 19 日
+协议版本：0.4.0</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>，以下简称<em>音频仓库</em>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -1268,7 +1268,7 @@ Access-Control-Allow-Headers: Authorization
 </code></pre>
 <p>各实现可以允许用户选择能够进行跨域请求的域名。</p>
 <h2 id="鉴权"><a class="header" href="#鉴权">鉴权</a></h2>
-<p>对请求着的身份鉴定通过 <code>JWT</code>（<code>JSON Web Token</code>） 的形式进行，称作 <code>Token</code>。协议不限制签名的方式，只对 <code>Claim</code> 部分作出限定。各实现需要对请求者的身份进行鉴权，以判断是否有对应资源的权限。</p>
+<p>对请求者的身份鉴定通过 <code>JWT</code>（<code>JSON Web Token</code>） 的形式进行（下文称作 <code>Token</code>）。本协议不限制签名的方式，主要针对 <code>Claim</code> 部分作出规定。各实现需要对请求者的身份进行鉴权，以判断是否有对应资源的权限。</p>
 <p>协议规定了两种 <code>Token</code>：用户 <code>Token</code> 和分享 <code>Token</code>。用户 <code>Token</code> 的使用者为音频仓库的正式用户，部分用户拥有创建分享 <code>Token</code> 的权限；分享 <code>Token</code> 的使用者为任意用户，可以在分享 <code>Token</code> 的限定范围内获取 <code>Anni</code> 音频仓库中的资源。下文中除特殊说明外，限定的访问范围均为有用户 <code>Token</code> 和有对应资源访问权限的分享 <code>Token</code>。</p>
 <p><code>Anni</code> 音频仓库协议允许以下两种鉴权方式中的任意一种。客户端可以根据需要选用其中任意一种调用。</p>
 <h3 id="authorization-头部"><a class="header" href="#authorization-头部">Authorization 头部</a></h3>
@@ -1290,10 +1290,19 @@ Access-Control-Allow-Headers: Authorization
   &quot;iat&quot;: 1615788479,
   // JWT 类型，必须为 user
   &quot;type&quot;: &quot;user&quot;,
-  // 用户名
-  &quot;username&quot;: &quot;SeraphJACK&quot;,
-  // Token 是否支持分享
-  &quot;allowShare&quot;: true
+  // 用户标识，注意不要包含用户信息，只要能标记用户即可
+  &quot;user_id&quot;: &quot;rua&quot;,
+
+  // 当 Token 支持分享时，会携带以下信息
+  &quot;share&quot;: {
+    // 可选，用于标识 key
+    &quot;key_id&quot;: &quot;409e2d92-d2c5-4dff-81e6-fe832e1b06d0&quot;,
+    // secret 字段用于对分享 Token 签名
+    &quot;secret&quot;: &quot;c398313c-b086-47ce-9a91-edfa5c93bd73&quot;,
+    // 可选，表示允许签署的分享范围，省略则表示无限制
+    // 结构与 /albums 的返回相同
+    &quot;allowed&quot;: [],
+  }
 }
 </code></pre>
 <h2 id="音频仓库信息"><a class="header" href="#音频仓库信息">音频仓库信息</a></h2>
@@ -1334,19 +1343,23 @@ Access-Control-Allow-Headers: Authorization
 </ul>
 <p>特别地，第一次启动时客户端无需携带 <code>If-None-Match: *</code> 头部，直接请求 <code>GET /albums</code> 并自动更新索引，并向用户提示。</p>
 <h2 id="资源分享"><a class="header" href="#资源分享">资源分享</a></h2>
-<p><code>Project Anni</code> 的设计目的是 <code>Self Host</code> 使用，因此存在验证用户身份的环节，非注册用户无法访问未注册仓库中的资源。但是对部分资源的分享需求是真实存在的。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
+<p><code>Project Anni</code> 的设计目的是 <code>Self Host</code> 使用，因此存在验证用户身份的环节，非认证用户无法访问仓库中的资源。但是对部分资源的分享需求是真实存在的。因此 <code>Anni</code> 音频仓库草案提出了细粒度的资源共享方案。</p>
+<p>资源共享通过 <code>JWT</code> 的方式进行鉴权。</p>
+<h3 id="签署-token"><a class="header" href="#签署-token">签署 Token</a></h3>
+<p>用户 <code>Token</code> 的 <code>Claim</code> 部分定义了 <code>share</code> 字段，用于存储资源分享所需的相关凭据。</p>
+<p>客户端需以 <code>share.secret</code> 字段作为 <code>key</code>，对分享 <code>Token</code> 进行 <code>HS256</code> 签名。</p>
 <h3 id="分享-tokenshare-token"><a class="header" href="#分享-tokenshare-token">分享 Token（Share Token）</a></h3>
-<p>资源共享通过 <code>JWT</code> 的方式进行鉴权，如下例：</p>
+<p><code>Claim</code> 部分如下例：</p>
 <pre><code class="language-json">{
   // 该 Token 的签发时间，即分享的开始时间
   &quot;iat&quot;: 1615788479,
   // 该 Token 的失效时间，即分享的结束时间
-  // 该字段不存在则表明永久有效
+  // 服务端有权拒绝向不存在该字段的 Token 提供资源，播放器实现需考虑到这一点并相应地对用户作出提示
   &quot;exp&quot;: 1615874879,
   // JWT 类型，必须为 share
   &quot;type&quot;: &quot;share&quot;,
-  // 分享人用户名
-  &quot;username&quot;: &quot;SeraphJACK&quot;,
+  // 分享 Key 的 ID，当用户 Token 中携带时须包括在分享 Token 内
+  &quot;key_id&quot;: &quot;409e2d92-d2c5-4dff-81e6-fe832e1b06d0&quot;,
   // 分享的音频，以 JSON Object 的形式表示
   // 作为 key 的字符串表示该分享允许访问者访问的专辑 album_id
   // value 表示该分享允许访问者访问的唱片号（disc_id）和音轨号（track_id）
@@ -1365,41 +1378,6 @@ Access-Control-Allow-Headers: Authorization
   }
 }
 </code></pre>
-<h3 id="api创建分享-token"><a class="header" href="#api创建分享-token">API：创建分享 Token</a></h3>
-<p>创建分享 <code>Token</code> 的 <code>API</code> 定义为 <code>POST /share</code>，仅 <strong><code>allowShare</code> 为 <code>true</code></strong> 的用户 <code>Token</code> 可以正常请求。</p>
-<p>请求的 <code>body</code> 定义如下（不包含注释）：</p>
-<pre><code class="language-json">{
-  // 需要分享的音频
-  &quot;audios&quot;: {
-    // KSLA-0178/2020-12-16
-    &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;: {
-      &quot;1&quot;: [1, 2, 3]
-    }
-  },
-  // 过期时间，单位为小时，基准时间为请求发送时间
-  // 当该项省略或为 0 时，分享 Token 永不失效
-  &quot;expire&quot;: 0
-}
-</code></pre>
-<p>该请求的返回为 <code>Token</code> 的文本形式，<code>Content-Type</code> 须为 <strong><code>text/plain</code></strong>，如下例：</p>
-<!-- TODO: 修改下文的 JWT -->
-<pre><code class="language-text">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTU4MDA0MDksInR5cGUiOiJzaGFyZSIsInVzZXJuYW1lIjoidGVzdCIsImF1ZGlvcyI6eyJMQUNNLTE0NzQzIjpbMSwyLDNdfX0.oJnTo7SK2lk9aZJqQOVf0OScLiRmgU9iOxoTnVQQcGc
-</code></pre>
-<p>其对应的 <code>Claim</code> 如下所示：</p>
-<pre><code class="language-json">{
-  &quot;iat&quot;: 1615800409,
-  &quot;type&quot;: &quot;share&quot;,
-  &quot;username&quot;: &quot;test&quot;,
-  &quot;audios&quot;: {
-    &quot;896a00d4-f93d-57b2-aa0a-52b1cf521c63&quot;: { &quot;1&quot;: [1, 2, 3] }
-  }
-}
-</code></pre>
-<p>当用户 Token 没有创建分享的权限，即 <code>allowShare</code> 为 <code>false</code> 时，服务端须响应 <strong><code>403 Forbidden</code></strong>。</p>
-<h4 id="返回状态表"><a class="header" href="#返回状态表">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>成功创建分享 <code>Token</code></td><td><code>Content-Type</code> 为 <code>text/plain</code>,<code>body</code> 为生成的 <code>JWT</code></td></tr>
-</tbody></table>
 <h2 id="资源分发"><a class="header" href="#资源分发">资源分发</a></h2>
 <p>音频仓库接收用户的请求，从可用的音频后端获取数据，并将获得的数据转发给用户。</p>
 <p>由于 <code>Anni</code> 约定中的各专辑均带有封面信息，因此资源分发同时支持音频和封面。</p>
@@ -1418,7 +1396,7 @@ Access-Control-Allow-Headers: Authorization
 <p>当音频仓库支持某一音频资源的<strong>单一范围请求</strong>时，<code>HEAD</code> 和 <code>GET</code> 请求的返回中必须带有 <code>Accept-Ranges: bytes</code>。当该头部不存在，或为 <code>none</code> 时，表示音频仓库不支持该音频文件的单一范围请求。</p>
 <p><strong><code>Anni</code> 音频仓库协议暂不支持多重范围请求。</strong></p>
 <p>当客户端向音频仓库通过 <code>GET</code> 请求某一范围时，下文所述的返回头部<strong>不保证可用</strong>。</p>
-<h4 id="返回状态表-1"><a class="header" href="#返回状态表-1">返回状态表</a></h4>
+<h4 id="返回状态表"><a class="header" href="#返回状态表">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获取音频</td></tr>
 <tr><td><code>404</code></td><td>音频获取失败</td></tr>
@@ -1435,10 +1413,38 @@ Access-Control-Allow-Headers: Authorization
 <h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。获取封面无需 <code>Token</code>。</p>
 <p>获得封面的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/cover</code> 或 <code>GET /{album_id}/cover</code>，默认 <code>disc_id</code> 为 <code>1</code>。</p>
-<h4 id="返回状态表-2"><a class="header" href="#返回状态表-2">返回状态表</a></h4>
+<h4 id="返回状态表-1"><a class="header" href="#返回状态表-1">返回状态表</a></h4>
 <table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
 <tr><td><code>200</code></td><td>成功获得封面</td><td><code>Content-Type</code> 为 <code>image/jpeg</code></td></tr>
 <tr><td><code>404</code></td><td>封面获取失败</td><td></td></tr>
+</tbody></table>
+<h2 id="管理接口"><a class="header" href="#管理接口">管理接口</a></h2>
+<p>Annil 定义了如下的管理接口，供音频仓库的管理员使用。</p>
+<p>以下所有 <code>API</code> 均为可选，对接时须确认各接口是否可用，以及公网可访问性等细节。接口仅包含最小定义，在满足下文定义行为的前提下，各实现可以自行添加部分参数以实现功能扩展。</p>
+<p>访问管理接口时需要包含以下头部：</p>
+<table><thead><tr><th>参数名</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>api_key</code></td><td>鉴权中使用的 API Key</td></tr>
+<tr><td><code>api_secret</code></td><td>API Key 对应的 secret</td></tr>
+</tbody></table>
+<p>管理所用的 <code>API Key</code> 签署方式不在本文规定范围之内。</p>
+<h3 id="签署用户-token"><a class="header" href="#签署用户-token">签署用户 Token</a></h3>
+<p>签署用户 <code>Token</code> 的 <code>API</code> 定义为 <code>POST /admin/sign</code>。</p>
+<pre><code class="language-json">{
+  &quot;user_id&quot;: &quot;rua&quot;,
+  &quot;share&quot;: true
+}
+</code></pre>
+<p>返回结果为签名后的用户 <code>Token</code>。</p>
+<h4 id="返回状态表-2"><a class="header" href="#返回状态表-2">返回状态表</a></h4>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>200</code></td><td>成功获取用户 Token</td></tr>
+</tbody></table>
+<h3 id="资源热更新"><a class="header" href="#资源热更新">资源热更新</a></h3>
+<p>热更新 <code>Annil</code> 中各个 <code>Provider</code> 中资源的 <code>API</code> 定义为 <code>POST /admin/reload</code>。</p>
+<p>热更新的过程是同步的，更新结束后请求才会返回。</p>
+<h4 id="返回状态表-3"><a class="header" href="#返回状态表-3">返回状态表</a></h4>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>200</code></td><td>资源更新完成</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="不同的音频仓库实现"><a class="header" href="#不同的音频仓库实现">不同的音频仓库实现</a></h1>
 <p><code>Annil</code> 本身只是音频仓库实现的标准。我们鼓励不同的音频仓库实现。</p>
@@ -1992,7 +1998,7 @@ type PatchedPlaylistInfo = Partial&lt;Omit&lt;PlaylistInfo, &quot;id&quot; | &qu
 <h3 id="endpoint-14"><a class="header" href="#endpoint-14">Endpoint</a></h3>
 <p><code>GET /api/credential</code></p>
 <h3 id="返回-11"><a class="header" href="#返回-11">返回</a></h3>
-<p>返回包含所有请求 <code>Token &amp; Id</code> 的数组。</p>
+<p>返回包含所有请求 <code>Token &amp; Id &amp; Controlled</code> 的数组。</p>
 <h4 id="返回参数-3"><a class="header" href="#返回参数-3">返回参数</a></h4>
 <p><code>Token</code> 的定义如下所示：</p>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
@@ -2001,8 +2007,15 @@ type PatchedPlaylistInfo = Partial&lt;Omit&lt;PlaylistInfo, &quot;id&quot; | &qu
 <tr><td><code>token</code></td><td><code>string</code></td><td><code>Annil Token</code> 内容</td></tr>
 <tr><td><code>priority</code></td><td><code>number</code></td><td>客户端尝试访问时的优先级</td></tr>
 </tbody></table>
+<p><code>Controlled</code> 的定义如下所示：</p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>controlled</code></td><td><code>boolean</code></td><td>该 <code>Token</code> 是否为受控 <code>Token</code>，<strong>不可修改</strong></td></tr>
+</tbody></table>
+<p>对于受 <code>Anniv</code> 管理的 <code>Token</code>，其 <code>controlled</code> 属性为 <code>true</code>。客户端无法修改除 <code>priority</code> 之外的任何属性；对于用户手动添加的 <code>Token</code>，则可以修改其他字段。</p>
 <h3 id="参数表示-8"><a class="header" href="#参数表示-8">参数表示</a></h3>
-<pre><code class="language-typescript">type GetTokensResponse = (Token &amp; Id)[];
+<pre><code class="language-typescript">type GetTokensResponse = (Token &amp; Id &amp; Controlled)[];
+
+type Controlled = { controlled: boolean };
 
 interface Token {
   name: string;
@@ -2012,21 +2025,23 @@ interface Token {
 }
 </code></pre>
 <h2 id="新增-token"><a class="header" href="#新增-token">新增 Token</a></h2>
+<p>用户可以通过该接口，令 <code>Anniv</code> 保存自定义的 <code>Token</code> 信息。</p>
 <h3 id="endpoint-15"><a class="header" href="#endpoint-15">Endpoint</a></h3>
 <p><code>POST /api/credential</code></p>
 <h3 id="请求-9"><a class="header" href="#请求-9">请求</a></h3>
 <p>新增请求的类型为 <code>Token</code>。</p>
 <h3 id="返回-12"><a class="header" href="#返回-12">返回</a></h3>
-<p>新建成功后，返回创建完成的 <code>Token</code> 信息（<code>Token &amp; Id</code>）。</p>
+<p>新建成功后，返回创建完成的 <code>Token</code> 信息（<code>Token &amp; Id &amp; Controlled</code>）。</p>
 <h3 id="错误列表-12"><a class="header" href="#错误列表-12">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104000</code></td><td>用户 <code>Token</code> 存储数已达上限</td></tr>
 </tbody></table>
 <h2 id="修改-token"><a class="header" href="#修改-token">修改 Token</a></h2>
+<p>用户可以修改当前存在的 <code>Token</code> 信息。</p>
 <h3 id="endpoint-16"><a class="header" href="#endpoint-16">Endpoint</a></h3>
 <p><code>PATCH /api/credential</code></p>
 <h3 id="请求-10"><a class="header" href="#请求-10">请求</a></h3>
-<p>修改请求的类型为 <code>Token</code>。</p>
+<p>修改请求的类型为 <code>Partial&lt;Token&gt; &amp; Id</code>。</p>
 <h3 id="错误列表-13"><a class="header" href="#错误列表-13">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
@@ -2042,21 +2057,54 @@ interface Token {
 <h3 id="错误列表-14"><a class="header" href="#错误列表-14">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>104001</code></td><td><code>Token</code> 不存在</td></tr>
+<tr><td><code>104002</code></td><td>无法删除受控 <code>Token</code></td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="信息导出格式"><a class="header" href="#信息导出格式">信息导出格式</a></h1>
 <p><code>Annil</code> 提供了分享 <code>Token</code> 的创建功能，但这只是资源分享的基石。</p>
 <p>对于音频分享而言，我们需要的不只是音频文件的集合，还需要包含顺序、元数据等在内的一系列信息。而这一切需求汇总到一起，信息导出格式便应运而生。</p>
-<h2 id="播放列表导出"><a class="header" href="#播放列表导出">播放列表导出</a></h2>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;Example&quot;, // 播放列表名称
-  &quot;description&quot;: &quot;Example description&quot;, // 播放列表简介
+<h2 id="播放列表导出格式"><a class="header" href="#播放列表导出格式">播放列表导出格式</a></h2>
+<pre><code class="language-ts">type ExportedPlaylist = ExportedPlaylistInfo &amp; ExportedPlaylistMetadata &amp; ExportedPlaylistToken;
+
+interface ExportedPlaylistInfo {
+  // 播放列表名称
+  name: string;
+   // 播放列表简介
+  description: string;
   // 播放列表封面
+  cover: DiscIdentifier;
+  // 按顺序存放播放列表中的所有歌曲
+  songs: ExportedTrackList[];
+}
+
+interface ExportedPlaylistMetadata {
+  // 存放播放列表中的元数据
+  // 使用 AlbumInfo，不含 artists 和 tags 信息
+  metadata: Record&lt;AlbumIdentifier, AlbumInfo&gt;;
+}
+
+interface ExportedPlaylistToken {
+  // 实际访问音频文件的 Token
+  tokens: ExportedToken[];
+}
+
+interface ExportedTrackList extends DiscIdentifier {
+  tracks: number[];
+}
+
+interface ExportedToken {
+  server: string;
+  token: string;
+}
+</code></pre>
+<h2 id="样例"><a class="header" href="#样例">样例</a></h2>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Example&quot;,
+  &quot;description&quot;: &quot;Example description&quot;,
   &quot;cover&quot;: {
     &quot;album_id&quot;: &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;,
     &quot;disc_id&quot;: 1
   },
   &quot;songs&quot;: [
-    // 按顺序存放播放列表中的所有歌曲
     {
       &quot;album_id&quot;: &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;,
       &quot;disc_id&quot;: 1,
@@ -2068,8 +2116,6 @@ interface Token {
       &quot;tracks&quot;: [1]
     }
   ],
-  // 存放播放列表中的元数据
-  // 此处仅作演示，省略剩余 Metadata
   &quot;metadata&quot;: {
     &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;: {
       &quot;album_id&quot;: &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;,
@@ -2232,10 +2278,7 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="分享管理"><a class="header" href="#分享管理">分享管理</a></h1>
-<blockquote>
-<p>⚠️ 该部分尚未设计完成</p>
-</blockquote>
-<p><code>Anniv</code> 基于<a href="06.anniv/./export-format/00.readme.html">信息导出格式</a>实现单曲、专辑和播放列表的分享。</p>
+<p><code>Anniv</code> 基于<a href="06.anniv/./07.export-format.html">信息导出格式</a>实现单曲、专辑和播放列表的分享。</p>
 <h2 id="错误一览-2"><a class="header" href="#错误一览-2">错误一览</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105000</code></td><td>用户分享数已达上限</td></tr>
@@ -2251,12 +2294,12 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <tr><td><code>id</code></td><td><code>string</code></td><td>分享链接的 ID</td></tr>
 </tbody></table>
 <h3 id="返回-18"><a class="header" href="#返回-18">返回</a></h3>
-<p>返回分享链接的实际内容。</p>
+<p>返回分享链接的实际内容，结构为 <code>ExportedPlaylist</code>。</p>
 <h3 id="错误列表-16"><a class="header" href="#错误列表-16">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>105001</code></td><td>分享链接不存在</td></tr>
 </tbody></table>
-<h2 id="获取分享连接列表"><a class="header" href="#获取分享连接列表">获取分享连接列表</a></h2>
+<h2 id="获取分享链接列表"><a class="header" href="#获取分享链接列表">获取分享链接列表</a></h2>
 <h3 id="endpoint-22"><a class="header" href="#endpoint-22">Endpoint</a></h3>
 <p><code>GET /api/share/</code></p>
 <h3 id="返回-19"><a class="header" href="#返回-19">返回</a></h3>
@@ -2273,7 +2316,10 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <h3 id="请求-13"><a class="header" href="#请求-13">请求</a></h3>
 <h4 id="请求参数-15"><a class="header" href="#请求参数-15">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>data</code></td><td><code>string</code></td><td>实际内容</td></tr>
+<tr><td><code>info</code></td><td><code>ExportedPlaylistInfo</code></td><td>分享的必要信息</td></tr>
+<tr><td><code>metadata</code></td><td><code>ExportedPlaylistMetadata.metadata</code></td><td>可选的元数据。当未指定时，元数据由 <code>Anniv</code> 提供</td></tr>
+<tr><td><code>tokens</code></td><td><code>ExportedToken[]</code></td><td>指定的 <code>Token</code>。当未指定时，由 <code>Anniv</code> 负责签发 <code>Token</code></td></tr>
+<tr><td><code>albums</code></td><td><code>Record&lt;Id['id'], AlbumIdentifier[]&gt;</code></td><td><code>Anniv</code> 负责签发 <code>Token</code> 时 <code>Token</code> 时服务器与待签发专辑的对应关系</td></tr>
 </tbody></table>
 <h3 id="返回-20"><a class="header" href="#返回-20">返回</a></h3>
 <p>请求成功时，返回分享链接的短部。</p>

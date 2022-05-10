@@ -140,17 +140,49 @@
                         <h1 id="信息导出格式"><a class="header" href="#信息导出格式">信息导出格式</a></h1>
 <p><code>Annil</code> 提供了分享 <code>Token</code> 的创建功能，但这只是资源分享的基石。</p>
 <p>对于音频分享而言，我们需要的不只是音频文件的集合，还需要包含顺序、元数据等在内的一系列信息。而这一切需求汇总到一起，信息导出格式便应运而生。</p>
-<h2 id="播放列表导出"><a class="header" href="#播放列表导出">播放列表导出</a></h2>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;Example&quot;, // 播放列表名称
-  &quot;description&quot;: &quot;Example description&quot;, // 播放列表简介
+<h2 id="播放列表导出格式"><a class="header" href="#播放列表导出格式">播放列表导出格式</a></h2>
+<pre><code class="language-ts">type ExportedPlaylist = ExportedPlaylistInfo &amp; ExportedPlaylistMetadata &amp; ExportedPlaylistToken;
+
+interface ExportedPlaylistInfo {
+  // 播放列表名称
+  name: string;
+   // 播放列表简介
+  description: string;
   // 播放列表封面
+  cover: DiscIdentifier;
+  // 按顺序存放播放列表中的所有歌曲
+  songs: ExportedTrackList[];
+}
+
+interface ExportedPlaylistMetadata {
+  // 存放播放列表中的元数据
+  // 使用 AlbumInfo，不含 artists 和 tags 信息
+  metadata: Record&lt;AlbumIdentifier, AlbumInfo&gt;;
+}
+
+interface ExportedPlaylistToken {
+  // 实际访问音频文件的 Token
+  tokens: ExportedToken[];
+}
+
+interface ExportedTrackList extends DiscIdentifier {
+  tracks: number[];
+}
+
+interface ExportedToken {
+  server: string;
+  token: string;
+}
+</code></pre>
+<h2 id="样例"><a class="header" href="#样例">样例</a></h2>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Example&quot;,
+  &quot;description&quot;: &quot;Example description&quot;,
   &quot;cover&quot;: {
     &quot;album_id&quot;: &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;,
     &quot;disc_id&quot;: 1
   },
   &quot;songs&quot;: [
-    // 按顺序存放播放列表中的所有歌曲
     {
       &quot;album_id&quot;: &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;,
       &quot;disc_id&quot;: 1,
@@ -162,8 +194,6 @@
       &quot;tracks&quot;: [1]
     }
   ],
-  // 存放播放列表中的元数据
-  // 此处仅作演示，省略剩余 Metadata
   &quot;metadata&quot;: {
     &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;: {
       &quot;album_id&quot;: &quot;e54fdcc4-662e-4e10-b91a-73984ce8248e&quot;,
