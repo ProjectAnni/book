@@ -142,8 +142,8 @@
 <blockquote>
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
-<p>最后修改：2022 年 04 月 19 日
-协议版本：0.4.0</p>
+<p>最后修改：2022 年 05 月 10 日
+协议版本：0.4.1</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>，以下简称<em>音频仓库</em>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -160,6 +160,14 @@ Access-Control-Allow-Headers: Authorization
 <pre><code class="language-http">Access-Control-Allow-Origin: *
 </code></pre>
 <p>各实现可以允许用户选择能够进行跨域请求的域名。</p>
+<h2 id="返回状态码"><a class="header" href="#返回状态码">返回状态码</a></h2>
+<p><code>Anni</code> 音频仓库协议使用了以下 HTTP 状态码。</p>
+<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>400</code></td><td>请求非法</td></tr>
+<tr><td><code>200</code></td><td>请求成功</td></tr>
+<tr><td><code>403</code></td><td><code>Token</code> 校验失败或权限不足</td></tr>
+<tr><td><code>404</code></td><td>资源不存在</td></tr>
+</tbody></table>
 <h2 id="鉴权"><a class="header" href="#鉴权">鉴权</a></h2>
 <p>对请求者的身份鉴定通过 <code>JWT</code>（<code>JSON Web Token</code>） 的形式进行（下文称作 <code>Token</code>）。本协议不限制签名的方式，主要针对 <code>Claim</code> 部分作出规定。各实现需要对请求者的身份进行鉴权，以判断是否有对应资源的权限。</p>
 <p>协议规定了两种 <code>Token</code>：用户 <code>Token</code> 和分享 <code>Token</code>。用户 <code>Token</code> 的使用者为音频仓库的正式用户，部分用户拥有创建分享 <code>Token</code> 的权限；分享 <code>Token</code> 的使用者为任意用户，可以在分享 <code>Token</code> 的限定范围内获取 <code>Anni</code> 音频仓库中的资源。下文中除特殊说明外，限定的访问范围均为有用户 <code>Token</code> 和有对应资源访问权限的分享 <code>Token</code>。</p>
@@ -170,12 +178,6 @@ Access-Control-Allow-Headers: Authorization
 <p>该方式对所有请求均有效。</p>
 <h3 id="auth"><a class="header" href="#auth">?auth=</a></h3>
 <p>和 <code>Authorization</code> 类似，客户端也可以选择将 <code>JWT</code> 夹带在 <code>URL</code> 的 <code>query</code> 中。仅对 <strong>GET 请求</strong>可用。</p>
-<h3 id="错误响应"><a class="header" href="#错误响应">错误响应</a></h3>
-<p>鉴权阶段可能会产生如下错误响应：</p>
-<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
-<tr><td><code>401</code></td><td><code>Token</code> 不存在或校验失败</td></tr>
-<tr><td><code>403</code></td><td><code>Token</code> 权限不足</td></tr>
-</tbody></table>
 <h2 id="用户身份鉴定"><a class="header" href="#用户身份鉴定">用户身份鉴定</a></h2>
 <p>以下为用户 <code>Token</code>（<code>User Token</code>） 的 <code>Claim</code> 部分样例：</p>
 <pre><code class="language-json">{
@@ -295,11 +297,6 @@ Access-Control-Allow-Headers: Authorization
 <p>当音频仓库支持某一音频资源的<strong>单一范围请求</strong>时，<code>HEAD</code> 和 <code>GET</code> 请求的返回中必须带有 <code>Accept-Ranges: bytes</code>。当该头部不存在，或为 <code>none</code> 时，表示音频仓库不支持该音频文件的单一范围请求。</p>
 <p><strong><code>Anni</code> 音频仓库协议暂不支持多重范围请求。</strong></p>
 <p>当客户端向音频仓库通过 <code>GET</code> 请求某一范围时，下文所述的返回头部<strong>不保证可用</strong>。</p>
-<h4 id="返回状态表"><a class="header" href="#返回状态表">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>成功获取音频</td></tr>
-<tr><td><code>404</code></td><td>音频获取失败</td></tr>
-</tbody></table>
 <h4 id="返回头部"><a class="header" href="#返回头部">返回头部</a></h4>
 <p>当成功获取音频时，返回的头部会携带如下额外信息：</p>
 <table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
@@ -312,10 +309,10 @@ Access-Control-Allow-Headers: Authorization
 <h3 id="封面分发"><a class="header" href="#封面分发">封面分发</a></h3>
 <p>封面分发基于音频所在专辑的 <code>album_id</code> 和可选的 <code>disc_id</code>。获取封面无需 <code>Token</code>。</p>
 <p>获得封面的 <code>API</code> 定义为 <code>GET /{album_id}/{disc_id}/cover</code> 或 <code>GET /{album_id}/cover</code>，默认 <code>disc_id</code> 为 <code>1</code>。</p>
-<h4 id="返回状态表-1"><a class="header" href="#返回状态表-1">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th><th>返回</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>成功获得封面</td><td><code>Content-Type</code> 为 <code>image/jpeg</code></td></tr>
-<tr><td><code>404</code></td><td>封面获取失败</td><td></td></tr>
+<h4 id="返回头部-1"><a class="header" href="#返回头部-1">返回头部</a></h4>
+<p>当成功获取封面时，返回的头部会携带如下额外信息：</p>
+<table><thead><tr><th>Key</th><th>含义</th></tr></thead><tbody>
+<tr><td><code>Content-Type</code></td><td>图片的 <code>MIME Type</code>，当前定义中只能是 <code>image/jpeg</code></td></tr>
 </tbody></table>
 <h2 id="管理接口"><a class="header" href="#管理接口">管理接口</a></h2>
 <p>Annil 定义了如下的管理接口，供音频仓库的管理员使用。</p>
@@ -330,17 +327,9 @@ Access-Control-Allow-Headers: Authorization
 }
 </code></pre>
 <p>返回结果为签名后的用户 <code>Token</code>。</p>
-<h4 id="返回状态表-2"><a class="header" href="#返回状态表-2">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>成功获取用户 Token</td></tr>
-</tbody></table>
 <h3 id="资源热更新"><a class="header" href="#资源热更新">资源热更新</a></h3>
 <p>热更新 <code>Annil</code> 中各个 <code>Provider</code> 中资源的 <code>API</code> 定义为 <code>POST /admin/reload</code>。</p>
 <p>热更新的过程是同步的，更新结束后请求才会返回。</p>
-<h4 id="返回状态表-3"><a class="header" href="#返回状态表-3">返回状态表</a></h4>
-<table><thead><tr><th>状态码</th><th>含义</th></tr></thead><tbody>
-<tr><td><code>200</code></td><td>资源更新完成</td></tr>
-</tbody></table>
 
                     </main>
 
