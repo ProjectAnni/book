@@ -61,6 +61,7 @@
     - [邀请（invite）](./06.anniv/features/01.invite.md)
     - [两步验证（2fa）](./06.anniv/features/02.2fa.md)
     - [禁止注册（close）](./06.anniv/features/03.close.md)
+    - [元数据仓库（metadata-db）](./06.anniv/features/04.metadata-db.md)
 - [Annisonic](./07.annisonic/00.readme.md)
   - [实现的 API](./07.annisonic/01.apis.md)
   - [已测试的客户端](./07.annisonic/02.clients.md)
