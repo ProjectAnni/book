@@ -1607,7 +1607,7 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <h3 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h3>
 <p><code>GET /api/user/info</code></p>
 <h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
-<p>用户已登录时，返回当前用户信息（<code>UserInfo</code>）。</p>
+<p>返回当前用户信息（<code>UserInfo</code>）。</p>
 <h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>user_id</code></td><td><code>string</code></td><td>用户 ID</td></tr>
@@ -1632,7 +1632,7 @@ b8105a43-7a4e-5797-9084-f00f26abd829 # 霜雪千年 - 洛天依,乐正绫,COPY
 <tr><td><code>new_password</code></td><td><code>string</code></td><td>新密码</td></tr>
 </tbody></table>
 <h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
-<p>用户已登录，且原密码正确时，将用户密码修改为新密码。</p>
+<p>原密码正确时，将用户密码修改为新密码。</p>
 <h3 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>102010</code></td><td>原密码错误</td></tr>
@@ -2369,10 +2369,6 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <p><code>PUT /api/favorite/music</code></p>
 <h4 id="请求参数-18"><a class="header" href="#请求参数-18">请求参数</a></h4>
 <p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
-<h4 id="错误列表-19"><a class="header" href="#错误列表-19">错误列表</a></h4>
-<table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>902004</code></td><td>单曲已存在</td></tr>
-</tbody></table>
 <h3 id="删除单曲"><a class="header" href="#删除单曲">删除单曲</a></h3>
 <p><code>DELETE /api/favorite/music</code></p>
 <h4 id="请求参数-19"><a class="header" href="#请求参数-19">请求参数</a></h4>
@@ -2394,7 +2390,7 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>需要订阅的列表</td></tr>
 </tbody></table>
-<h4 id="错误列表-20"><a class="header" href="#错误列表-20">错误列表</a></h4>
+<h4 id="错误列表-19"><a class="header" href="#错误列表-19">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902004</code></td><td>列表已订阅</td></tr>
 </tbody></table>
@@ -2406,7 +2402,6 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="歌词"><a class="header" href="#歌词">歌词</a></h1>
 <p><code>Anniv</code> 歌词 <code>API</code> 提供了灵活的音乐歌词管理策略。</p>
-<p>歌词接口需要登录才可以使用。</p>
 <h2 id="歌词分发"><a class="header" href="#歌词分发">歌词分发</a></h2>
 <p><code>GET /api/lyric</code></p>
 <h3 id="请求参数-22"><a class="header" href="#请求参数-22">请求参数</a></h3>
@@ -2433,7 +2428,7 @@ interface LyricLanguage {
 }
 </code></pre>
 <p>涉及到的语言代码（<code>LanguageCode</code>）参考 <a href="https://datatracker.ietf.org/doc/html/rfc5646">RFC5646</a> 标准。</p>
-<h3 id="错误列表-21"><a class="header" href="#错误列表-21">错误列表</a></h3>
+<h3 id="错误列表-20"><a class="header" href="#错误列表-20">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>902000</code></td><td>该歌曲不存在可用歌词</td></tr>
 </tbody></table>
@@ -2467,7 +2462,7 @@ interface LyricLanguage {
 </ul>
 <h2 id="参数列表-1"><a class="header" href="#参数列表-1">参数列表</a></h2>
 <p>当特性对原有功能做加法时，通常会增加一定的输入参数。参数列表指定了这些参数的名称和类型。</p>
-<h2 id="错误列表-22"><a class="header" href="#错误列表-22">错误列表</a></h2>
+<h2 id="错误列表-21"><a class="header" href="#错误列表-21">错误列表</a></h2>
 <p>当某一特性开启时，往往会增加特性相关的特定错误。错误列表指定了错误代码和其代表的详细错误内容。</p>
 <h2 id="接口列表"><a class="header" href="#接口列表">接口列表</a></h2>
 <p>某些特性可能会定义其独有的接口。接口列表负责描述这些接口的请求参数和返回格式。</p>
@@ -2480,7 +2475,7 @@ interface LyricLanguage {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>invite_code</code></td><td><code>string</code></td><td>邀请码</td></tr>
 </tbody></table>
-<h2 id="错误列表-23"><a class="header" href="#错误列表-23">错误列表</a></h2>
+<h2 id="错误列表-22"><a class="header" href="#错误列表-22">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>201000</code></td><td>邀请系统未开启</td></tr>
 <tr><td><code>201001</code></td><td>邀请码无效</td></tr>
@@ -2567,7 +2562,7 @@ interface UserInfo {
 <tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，由客户端生成后发送至服务端。</td></tr>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。</td></tr>
 </tbody></table>
-<h3 id="错误列表-24"><a class="header" href="#错误列表-24">错误列表</a></h3>
+<h3 id="错误列表-23"><a class="header" href="#错误列表-23">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
 <tr><td><code>202002</code></td><td>两步验证 <code>Secret</code> 非法</td></tr>
@@ -2582,7 +2577,7 @@ interface UserInfo {
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。</td></tr>
 </tbody></table>
-<h3 id="错误列表-25"><a class="header" href="#错误列表-25">错误列表</a></h3>
+<h3 id="错误列表-24"><a class="header" href="#错误列表-24">错误列表</a></h3>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>202000</code></td><td>用户未启用两步验证</td></tr>
 <tr><td><code>202001</code></td><td>两步验证代码错误</td></tr>
@@ -2601,7 +2596,7 @@ interface UserInfo {
 <ul>
 <li>用户注册。</li>
 </ul>
-<h2 id="错误列表-26"><a class="header" href="#错误列表-26">错误列表</a></h2>
+<h2 id="错误列表-25"><a class="header" href="#错误列表-25">错误列表</a></h2>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>203000</code></td><td>站点关闭注册</td></tr>
 </tbody></table>
