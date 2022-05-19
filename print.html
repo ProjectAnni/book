@@ -548,8 +548,9 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 <p>专辑中的各张碟片均以 <code>disc_id</code> 命名目录，且不允许携带前缀 <code>0</code>。碟片目录中须存在 <code>cover.jpg</code> 表示该碟片的封面。</p>
 <p>碟片中的各音轨以 <code>{track_id}.{ext}</code> 命名，<code>ext</code> 表示音频的扩展名。<code>track_id</code> 同样不允许携带前缀 <code>0</code>。</p>
 <h3 id="hash-分散"><a class="header" href="#hash-分散">Hash 分散</a></h3>
-<p>为了减少单一目录下子目录的数量，严格目录结构在 <code>album_id</code> 的基础上增加了两级目录名。每一级目录名均取 <code>album_id</code> 字符串的两位（一个字节），且不允许携带前缀 <code>0</code>。</p>
-<p>以 <code>5a0c666f-fe66-4c01-8cde-a3b45118f25f</code> 为例，则第一级目录名为 <code>5a</code>，第二级为 <code>c</code>。</p>
+<p>为了减少单一目录下子目录的数量，严格目录结构允许在 <code>album_id</code> 的基础上通过多级子目录对目录进行分散。子目录嵌套层数由参数 <code>layer</code> 控制，取值区间为 <code>0-4</code>，默认为 <code>2</code>。</p>
+<p>每一级目录名均取 <code>album_id</code> 字符串的两位（一个字节），且不携带前缀 <code>0</code>。</p>
+<p>以默认情况下的 <code>5a0c666f-fe66-4c01-8cde-a3b45118f25f</code> 为例，其第一级目录名为 <code>5a</code>，第二级为 <code>c</code>。</p>
 <h2 id="目录结构示例"><a class="header" href="#目录结构示例">目录结构示例</a></h2>
 <pre><code class="language-text">.
 ├── 5a
