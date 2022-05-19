@@ -145,7 +145,7 @@
 <h3 id="artist-字段"><a class="header" href="#artist-字段"><code>artist</code> 字段</a></h3>
 <p>专辑、唱片和音轨都拥有 <code>artist</code> 字段，用于表示主要的艺术家信息。主艺术家的选取规则如下：</p>
 <ol>
-<li>当该曲目的类型为 <code>Normal</code> 时，主艺术家为 <code>Vocal</code>。</li>
+<li>当该曲目的类型为 <code>Normal</code> 时，主艺术家为 <code>Vocal</code>。特别地，对于 <code>VOCALOID</code> 或其他歌声合成软件制作的歌曲，<code>Vocal</code> 由P主和歌姬共同构成。</li>
 <li>当该曲目的类型为 <code>Instrumental</code> 时，主艺术家为对应非 <code>Instrumental</code> 版本的 <code>Vocal</code> 或 <code>Composer</code>。特别地，当该曲目对应非 <code>Instrumental</code> 曲目为某曲目的 <code>Rearrange</code> 时，主艺术家为对应非 <code>Instrumental</code> 版本的 <code>Vocal</code> 或该曲目的 <code>Arranger</code>。</li>
 <li>当该曲目的类型为 <code>Absolute</code> 时，主艺术家为 <code>Composer</code>。特别地，当该曲目为某曲目的 <code>Remix/Rearrange</code> 时，主艺术家为 <code>Arranger</code>。</li>
 </ol>
@@ -195,6 +195,11 @@ interface ExtendedArtists {
 <p>当用于检索时，标签使用「向上合并」的语义。即：专辑的合并标签定义为专辑内所有专辑标签、光盘标签和音轨标签的<strong>并集</strong>。此时标签的语义为「包含」。如：</p>
 <pre><code class="language-text">（专辑）夏凪ぎ/宝物になった日 包含 神様になった日、OP、ED
 </code></pre>
+<h2 id="音乐类型"><a class="header" href="#音乐类型">音乐类型</a></h2>
+<p>对明显有歌、曲的音轨，定义其类型为 <code>Normal</code>；对于此类歌曲的伴奏版本，定义类型为 <code>Instrumental</code>；对于不为上述情况的无人声音轨，或 <code>Vocal &amp; Chorus</code> 音轨，定义其类型为 <code>Absoulte</code>。</p>
+<p>对于以角色身份进行故事演绎的音轨，定义其类型为 <code>Drama</code>。</p>
+<p>对于以真人身份进行的，明确以广播形式发行的音轨或广播节目，定义其类型为 <code>Radio</code>。</p>
+<p>对于以真人身份进行的，但不属于广播的音轨（如 Bonus Track 中的对话），或以角色身份演绎的，仅包含单句或多句语音的短音轨，定义其类型为 <code>Vocal</code>。</p>
 <h2 id="示例"><a class="header" href="#示例">示例</a></h2>
 <pre><code class="language-toml">######################################################
 # 专辑信息
