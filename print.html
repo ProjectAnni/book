@@ -655,6 +655,11 @@ interface ExtendedArtists {
 <p>当用于检索时，标签使用「向上合并」的语义。即：专辑的合并标签定义为专辑内所有专辑标签、光盘标签和音轨标签的<strong>并集</strong>。此时标签的语义为「包含」。如：</p>
 <pre><code class="language-text">（专辑）夏凪ぎ/宝物になった日 包含 神様になった日、OP、ED
 </code></pre>
+<p>对于标签的使用方式，作如下约定：</p>
+<ol>
+<li>对单曲碟片中的曲目，同一曲目在其各版本收录单曲中标签应保持一致。</li>
+<li>对专辑碟片中的曲目，如同一曲目在此前发售的单曲碟片中已经存在，则专辑中不需要包括该标签。</li>
+</ol>
 <h2 id="音乐类型"><a class="header" href="#音乐类型">音乐类型</a></h2>
 <p>对明显有歌、曲的音轨，定义其类型为 <code>Normal</code>；对于此类歌曲的伴奏版本，定义类型为 <code>Instrumental</code>；对于不为上述情况的无人声音轨，或 <code>Vocal &amp; Chorus</code> 音轨，定义其类型为 <code>Absoulte</code>。</p>
 <p>对于以角色身份进行故事演绎的音轨，定义其类型为 <code>Drama</code>。</p>
