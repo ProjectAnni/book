@@ -167,7 +167,8 @@
 <tr><td><code>owner</code></td><td><code>string</code></td><td>播放列表拥有者 <code>ID</code></td></tr>
 <tr><td><code>is_public</code></td><td><code>boolean</code></td><td>是否公开</td></tr>
 <tr><td><code>items</code></td><td><code>(PlaylistItem &amp; Id)[]</code></td><td>播放列表中的内容</td></tr>
-<tr><td><code>cover</code></td><td><code>Cover</code></td><td>播放列表封面</td></tr>
+<tr><td><code>cover</code></td><td><code>PlaylistCover</code></td><td>播放列表封面，为 <code>null</code> 时客户端应使用该 Playlist 的第一个 Track 封面</td></tr>
+<tr><td><code>last_modified</code></td><td><code>number</code></td><td>播放列表最后修改时间戳（秒）</td></tr>
 </tbody></table>
 <p><code>PlaylistItem</code> 可以为 <code>PlaylistItemTrack</code>、<code>PlaylistItemDummyTrack</code> 或 <code>PlaylistItemAlbum</code>，分别表示歌曲、占位歌曲和专辑，详见下方类型定义。</p>
 <p>每种 <code>PlaylistItem</code> 类型均含有：</p>
@@ -201,10 +202,11 @@
         &quot;track_id&quot;: 1,
         &quot;title&quot;: &quot;ハルノヘッドフォン&quot;,
         &quot;artist&quot;: &quot;春日部ハル（篠田みなみ）&quot;,
-        &quot;album_title&quot;: &quot;t7s Longing for summer&quot;,
+        &quot;album_title&quot;: &quot;t7s Longing for summer&quot;
       }
     }
-  ]
+  ],
+  &quot;last_modified&quot;: 1145141919810
 }
 </code></pre>
 <h4 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h4>
@@ -223,7 +225,7 @@
   cover: PlaylistCover;
 }
 
-type PlaylistCover = DiscIdentifier; // 专辑/光盘封面
+type PlaylistCover = DiscIdentifier | null; // 专辑/光盘封面
 
 // 表示无封面的结构
 type EmptyPlaylistCover = { album_id?: &quot;&quot; };
@@ -243,8 +245,9 @@ interface PlaylistItemTrack extends BasePlaylistItem&lt;TrackInfoWithAlbum&gt; {
 }
 
 // 普通音轨（无元数据）
-export interface PlaylistItemPlainTrack extends BasePlaylistItem&lt;TrackIdentifier&gt; {
-    type: &quot;normal&quot;;
+export interface PlaylistItemPlainTrack
+  extends BasePlaylistItem&lt;TrackIdentifier&gt; {
+  type: &quot;normal&quot;;
 }
 
 // 占位音轨
@@ -257,8 +260,14 @@ interface PlaylistItemAlbum extends BasePlaylistItem&lt;AlbumIdentifier&gt; {
   type: &quot;album&quot;;
 }
 
-type PlaylistItem = PlaylistItemDummyTrack | PlaylistItemTrack | PlaylistItemAlbum;
-type PlaylistPatchItem = PlaylistItemDummyTrack | PlaylistItemPlainTrack | PlaylistItemAlbum;
+type PlaylistItem =
+  | PlaylistItemDummyTrack
+  | PlaylistItemTrack
+  | PlaylistItemAlbum;
+type PlaylistPatchItem =
+  | PlaylistItemDummyTrack
+  | PlaylistItemPlainTrack
+  | PlaylistItemAlbum;
 </code></pre>
 <h4 id="错误列表"><a class="header" href="#错误列表">错误列表</a></h4>
 <table><thead><tr><th>错误代码</th><th>详情</th></tr></thead><tbody>
@@ -291,7 +300,7 @@ type PlaylistPatchItem = PlaylistItemDummyTrack | PlaylistItemPlainTrack | Playl
 <p>处理完成后，返回新创建的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
 <pre><code class="language-typescript">interface CreatePlaylistBody extends Omit&lt;PlaylistInfo, &quot;id&quot; | &quot;owner&quot;&gt; {
-    items: PlaylistPatchItem[];
+  items: PlaylistPatchItem[];
 }
 </code></pre>
 <h3 id="错误列表-1"><a class="header" href="#错误列表-1">错误列表</a></h3>
@@ -314,23 +323,31 @@ type PlaylistPatchItem = PlaylistItemDummyTrack | PlaylistItemPlainTrack | Playl
 <p>修改成功后，返回修改后的播放列表信息（<code>Playlist</code>）。</p>
 <h3 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h3>
 <pre><code class="language-typescript">export type PatchPlaylistRequestBody =
-    | PatchPlaylistInfoBody
-    | AppendPlaylistBody
-    | RemovePlaylistItemBody
-    | ReorderPlaylistBody
-    | ReplacePlaylistItemBody;
+  | PatchPlaylistInfoBody
+  | AppendPlaylistBody
+  | RemovePlaylistItemBody
+  | ReorderPlaylistBody
+  | ReplacePlaylistItemBody;
 
 // 修改 Playlist 本身信息
-export type PatchPlaylistInfoBody = PatchPlaylistBodyType&lt;&quot;info&quot;, PatchedPlaylistInfo&gt;;
+export type PatchPlaylistInfoBody = PatchPlaylistBodyType&lt;
+  &quot;info&quot;,
+  PatchedPlaylistInfo
+&gt;;
 // 在 Playlist 末尾增加音乐
-export type AppendPlaylistBody = PatchPlaylistBodyType&lt;&quot;append&quot;, PlaylistPatchItem[]&gt;;
+export type AppendPlaylistBody = PatchPlaylistBodyType&lt;
+  &quot;append&quot;,
+  PlaylistPatchItem[]
+&gt;;
 // 通过 ID 从 Playlist 中删除音乐
 export type RemovePlaylistItemBody = PatchPlaylistBodyType&lt;&quot;remove&quot;, string[]&gt;;
 // 通过 ID 对 Playlist 重排序
 export type ReorderPlaylistBody = PatchPlaylistBodyType&lt;&quot;reorder&quot;, string[]&gt;;
 // 修改 Playlist 中部分内容
-export type ReplacePlaylistItemBody = PatchPlaylistBodyType&lt;&quot;replace&quot;, (PlaylistPatchItem &amp; Id)[]&gt;;
-  
+export type ReplacePlaylistItemBody = PatchPlaylistBodyType&lt;
+  &quot;replace&quot;,
+  (PlaylistPatchItem &amp; Id)[]
+&gt;;
 
 type PatchPlaylistBodyType&lt;K, P&gt; = Id &amp; {
   command: K;

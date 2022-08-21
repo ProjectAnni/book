@@ -162,6 +162,10 @@ interface LyricLanguage {
   data: string;
   // 贡献者
   contributor: UserIntro;
+  // 来源
+  source: string;
+  // 最后修改
+  last_modified: number;
 }
 </code></pre>
 <p>涉及到的语言代码（<code>LanguageCode</code>）参考 <a href="https://datatracker.ietf.org/doc/html/rfc5646">RFC5646</a> 标准。</p>
@@ -180,6 +184,7 @@ interface LyricLanguage {
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>请求歌词的单曲 <code>ID</code></td></tr>
 <tr><td><code>type</code></td><td><code>&quot;text&quot; | &quot;lrc&quot;</code></td><td>修改后歌词的类型</td></tr>
 <tr><td><code>lang</code></td><td><code>LanguageCode</code></td><td>修改歌词的语言</td></tr>
+<tr><td><code>source</code></td><td><code>string</code></td><td>歌词来源</td></tr>
 <tr><td><code>data</code></td><td><code>string</code></td><td>修改后的歌词</td></tr>
 </tbody></table>
 <h4 id="错误代码"><a class="header" href="#错误代码">错误代码</a></h4>
