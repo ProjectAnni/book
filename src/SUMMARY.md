@@ -71,6 +71,7 @@
 
 - [Anni 命令行工具](./50.anni-cli/00.readme.md)
   - [flac](./50.anni-cli/01.flac.md)
-  - [split](50.anni-cli/02.split.md)
-  - [convention](50.anni-cli/03.convention.md)
-  - [repo](50.anni-cli/04.repo.md)
+  - [split](./50.anni-cli/02.split.md)
+  - [convention](./50.anni-cli/03.convention.md)
+  - [repo](./50.anni-cli/04.repo.md)
+  - [library](./50.anni-cli/05.library.md)
