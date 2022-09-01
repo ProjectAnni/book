@@ -144,23 +144,51 @@
 <p><code>Anniv</code> 提供基本的播放统计功能。</p>
 <h2 id="播放记录"><a class="header" href="#播放记录">播放记录</a></h2>
 <h3 id="endpoint"><a class="header" href="#endpoint">Endpoint</a></h3>
-<p><code>POST /api/statistics</code></p>
+<p><code>POST /api/stat</code></p>
 <h3 id="请求"><a class="header" href="#请求">请求</a></h3>
 <h4 id="请求参数"><a class="header" href="#请求参数">请求参数</a></h4>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>time</code></td><td><code>timestamp</code></td><td>播放的时间戳</td></tr>
-<tr><td><code>songs</code></td><td><code>SongPlayRecord[]</code></td><td>播放记录</td></tr>
+<p>请求参数类型为 <code>SongPlayRecord[]</code> 。</p>
+<h4 id="参数表示"><a class="header" href="#参数表示">参数表示</a></h4>
+<pre><code class="language-ts">interface SongPlayRecord {
+  track: TrackIdentifier;
+  // 播放开始的时间
+  at: number[];
+}
+</code></pre>
+<h3 id="客户端设计指引"><a class="header" href="#客户端设计指引">客户端设计指引</a></h3>
+<p>当用户播放时间过短（如少于 10 秒，少于全曲的 1/3 等，具体由播放器决定）时，不应该汇报本次播放。</p>
+<h2 id="获取当前用户播放记录"><a class="header" href="#获取当前用户播放记录">获取当前用户播放记录</a></h2>
+<h3 id="endpoint-1"><a class="header" href="#endpoint-1">Endpoint</a></h3>
+<p><code>GET /api/stat/self</code></p>
+<h3 id="请求-1"><a class="header" href="#请求-1">请求</a></h3>
+<h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>from</code></td><td>统计区间开始时间戳（秒）</td></tr>
+<tr><td><code>to</code></td><td>统计区间结束时间戳（秒），默认为请求提交时间</td></tr>
 </tbody></table>
-<p><code>SongPlayRecord</code> 定义如下：</p>
-<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>album_id</code></td><td><code>string</code></td><td>播放专辑的 <code>album_id</code></td></tr>
-<tr><td><code>tracks</code></td><td><code>TrackPlayRecord[]</code></td><td>播放的曲目</td></tr>
+<h3 id="返回"><a class="header" href="#返回">返回</a></h3>
+<p>返回 <code>SongPlayRecordResult[]</code> ，按播放次数降序排序。</p>
+<h3 id="参数表示-1"><a class="header" href="#参数表示-1">参数表示</a></h3>
+<pre><code class="language-typescript">interface SongPlayRecordResult {
+  track: TrackIdentifier;
+  count: number;
+}
+</code></pre>
+<h2 id="获取歌曲的播放统计"><a class="header" href="#获取歌曲的播放统计">获取歌曲的播放统计</a></h2>
+<h3 id="endpoint-2"><a class="header" href="#endpoint-2">Endpoint</a></h3>
+<p><code>GET /api/stat/song</code></p>
+<h3 id="请求-2"><a class="header" href="#请求-2">请求</a></h3>
+<h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td>请求歌曲所属专辑的 <code>album_id</code></td></tr>
+<tr><td><code>disc_id</code></td><td>请求歌曲的 <code>disc_id</code></td></tr>
+<tr><td><code>track_id</code></td><td>请求歌曲的 <code>track_id</code></td></tr>
 </tbody></table>
-<p><code>TrackPlayRecord</code> 定义如下：</p>
+<h3 id="返回-1"><a class="header" href="#返回-1">返回</a></h3>
+<p>若请求成功，返回对应曲目的播放统计。</p>
+<h4 id="返回参数"><a class="header" href="#返回参数">返回参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
-<tr><td><code>disc_id</code></td><td><code>number</code></td><td>专辑内的 <code>disc_id</code></td></tr>
-<tr><td><code>track_id</code></td><td><code>number</code></td><td>专辑内的 <code>track_id</code></td></tr>
-<tr><td><code>times</code></td><td><code>number</code></td><td>播放次数</td></tr>
+<tr><td><code>count</code></td><td><code>number</code></td><td>请求曲目的播放次数</td></tr>
 </tbody></table>
 
                     </main>
