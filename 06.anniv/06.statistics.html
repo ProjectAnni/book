@@ -190,6 +190,41 @@
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>count</code></td><td><code>number</code></td><td>请求曲目的播放次数</td></tr>
 </tbody></table>
+<h2 id="获取当前用户播放历史记录"><a class="header" href="#获取当前用户播放历史记录">获取当前用户播放历史记录</a></h2>
+<h3 id="endpoint-3"><a class="header" href="#endpoint-3">Endpoint</a></h3>
+<p><code>GET /api/stat/self/history</code></p>
+<h3 id="请求-3"><a class="header" href="#请求-3">请求</a></h3>
+<h4 id="请求参数-3"><a class="header" href="#请求参数-3">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>limit</code></td><td>返回条目数量上限，默认为 <code>10</code></td></tr>
+<tr><td><code>offset</code></td><td>返回条目的偏移量，默认为 <code>0</code></td></tr>
+</tbody></table>
+<h3 id="返回-2"><a class="header" href="#返回-2">返回</a></h3>
+<p>返回 <code>HistoryRecord[]</code> ，按播放时间降序排序。</p>
+<h4 id="参数表示-2"><a class="header" href="#参数表示-2">参数表示</a></h4>
+<pre><code class="language-typescript">interface HistoryRecord {
+  track: TrackIdentifier;
+  at: number;
+}
+</code></pre>
+<h2 id="获取当前用户单曲播放次数"><a class="header" href="#获取当前用户单曲播放次数">获取当前用户单曲播放次数</a></h2>
+<h3 id="endpoint-4"><a class="header" href="#endpoint-4">Endpoint</a></h3>
+<p><code>GET /api/stat/self/song</code></p>
+<h3 id="请求-4"><a class="header" href="#请求-4">请求</a></h3>
+<h4 id="请求参数-4"><a class="header" href="#请求参数-4">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td>请求歌曲所属专辑的 <code>album_id</code></td></tr>
+<tr><td><code>disc_id</code></td><td>请求歌曲的 <code>disc_id</code></td></tr>
+<tr><td><code>track_id</code></td><td>请求歌曲的 <code>track_id</code></td></tr>
+<tr><td><code>from</code></td><td>统计区间开始时间戳（秒），默认为 <code>0</code></td></tr>
+<tr><td><code>to</code></td><td>统计区间结束时间戳（秒），默认为请求提交时间</td></tr>
+</tbody></table>
+<h3 id="返回-3"><a class="header" href="#返回-3">返回</a></h3>
+<p>若请求成功，返回对应曲目的播放次数。</p>
+<h4 id="返回参数-1"><a class="header" href="#返回参数-1">返回参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>count</code></td><td><code>number</code></td><td>请求曲目的播放次数</td></tr>
+</tbody></table>
 
                     </main>
 
