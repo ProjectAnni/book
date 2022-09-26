@@ -2464,10 +2464,26 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <p><code>DELETE /api/favorite/music</code></p>
 <h4 id="请求参数-23"><a class="header" href="#请求参数-23">请求参数</a></h4>
 <p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
+<h2 id="专辑"><a class="header" href="#专辑">专辑</a></h2>
+<h3 id="获取收藏专辑列表"><a class="header" href="#获取收藏专辑列表">获取收藏专辑列表</a></h3>
+<p><code>GET /api/favorite/album</code></p>
+<h4 id="返回参数-8"><a class="header" href="#返回参数-8">返回参数</a></h4>
+<p>返回 <code>AlbumIdentifier[]</code> ，按照添加时间倒序排序。</p>
+<h3 id="添加收藏专辑"><a class="header" href="#添加收藏专辑">添加收藏专辑</a></h3>
+<p><code>PUT /api/favorite/album</code></p>
+<h4 id="请求参数-24"><a class="header" href="#请求参数-24">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td><code>AlbumIdentifier</code></td><td>待添加专辑的 <code>AlbumIdentifier</code></td></tr>
+</tbody></table>
+<h3 id="删除收藏专辑"><a class="header" href="#删除收藏专辑">删除收藏专辑</a></h3>
+<p><code>DELETE /api/favorite/album</code></p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td><code>AlbumIdentifier</code></td><td>待添加专辑的 <code>AlbumIdentifier</code></td></tr>
+</tbody></table>
 <h2 id="订阅播放列表"><a class="header" href="#订阅播放列表">订阅播放列表</a></h2>
 <h3 id="获取全部已订阅的播放列表"><a class="header" href="#获取全部已订阅的播放列表">获取全部已订阅的播放列表</a></h3>
 <p><code>GET /api/favorite/playlist</code></p>
-<h4 id="返回参数-8"><a class="header" href="#返回参数-8">返回参数</a></h4>
+<h4 id="返回参数-9"><a class="header" href="#返回参数-9">返回参数</a></h4>
 <pre><code class="language-ts">interface FavoriteListInfo {
   playlist_id: string;
   name: string;
@@ -2477,7 +2493,7 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <p>返回 <code>FavoriteListInfo[]</code> ，按照添加时间倒序排序。</p>
 <h3 id="订阅播放列表-1"><a class="header" href="#订阅播放列表-1">订阅播放列表</a></h3>
 <p><code>PUT /api/favorite/playlist</code></p>
-<h4 id="请求参数-24"><a class="header" href="#请求参数-24">请求参数</a></h4>
+<h4 id="请求参数-25"><a class="header" href="#请求参数-25">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>需要订阅的列表</td></tr>
 </tbody></table>
@@ -2487,7 +2503,7 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 </tbody></table>
 <h3 id="取消订阅"><a class="header" href="#取消订阅">取消订阅</a></h3>
 <p><code>DELETE /api/favorite/playlist</code></p>
-<h4 id="请求参数-25"><a class="header" href="#请求参数-25">请求参数</a></h4>
+<h4 id="请求参数-26"><a class="header" href="#请求参数-26">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>需要取消订阅的列表</td></tr>
 </tbody></table>
@@ -2495,13 +2511,13 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <p><code>Anniv</code> 歌词 <code>API</code> 提供了灵活的音乐歌词管理策略。</p>
 <h2 id="歌词分发"><a class="header" href="#歌词分发">歌词分发</a></h2>
 <p><code>GET /api/lyric</code></p>
-<h3 id="请求参数-26"><a class="header" href="#请求参数-26">请求参数</a></h3>
+<h3 id="请求参数-27"><a class="header" href="#请求参数-27">请求参数</a></h3>
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>album_id</code></td><td><code>string</code></td><td>请求歌词的专辑 <code>ID</code></td></tr>
 <tr><td><code>disc_id</code></td><td><code>number</code></td><td>请求歌词的碟片 <code>ID</code></td></tr>
 <tr><td><code>track_id</code></td><td><code>number</code></td><td>请求歌词的单曲 <code>ID</code></td></tr>
 </tbody></table>
-<h3 id="返回参数-9"><a class="header" href="#返回参数-9">返回参数</a></h3>
+<h3 id="返回参数-10"><a class="header" href="#返回参数-10">返回参数</a></h3>
 <pre><code class="language-typescript">interface LyricResponse {
   source: LyricLanguage;
   translations: LyricLanguage[];
@@ -2531,7 +2547,7 @@ interface LyricLanguage {
 <p><code>PATCH /api/lyric</code></p>
 <p>当歌词不存在时，自动创建该歌词。</p>
 <p>返回无错误不代表歌词立即可用，可能会有审核环节。因此客户端不应期望创建后立即有可用的歌词，应积极尝试获取。</p>
-<h4 id="请求参数-27"><a class="header" href="#请求参数-27">请求参数</a></h4>
+<h4 id="请求参数-28"><a class="header" href="#请求参数-28">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>album_id</code></td><td><code>string</code></td><td>请求歌词的专辑 <code>ID</code></td></tr>
 <tr><td><code>disc_id</code></td><td><code>number</code></td><td>请求歌词的碟片 <code>ID</code></td></tr>
@@ -2567,7 +2583,7 @@ interface LyricLanguage {
 <ul>
 <li>用户注册</li>
 </ul>
-<h2 id="请求参数-28"><a class="header" href="#请求参数-28">请求参数</a></h2>
+<h2 id="请求参数-29"><a class="header" href="#请求参数-29">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>invite_code</code></td><td><code>string</code></td><td>邀请码</td></tr>
 </tbody></table>
@@ -2606,7 +2622,7 @@ interface LyricLanguage {
 <li>用户修改密码（<code>PATCH /api/user/password</code>）</li>
 </ul>
 <p>TODO: 列举出用到 <code>2FA</code> 的所有位置</p>
-<h2 id="请求参数-29"><a class="header" href="#请求参数-29">请求参数</a></h2>
+<h2 id="请求参数-30"><a class="header" href="#请求参数-30">请求参数</a></h2>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，注册时由客户端生成，发送至服务端。</td></tr>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。当用户未开启两步验证时，该字段填入任何值均可。</td></tr>
@@ -2653,7 +2669,7 @@ interface UserInfo {
 <h3 id="endpoint-30"><a class="header" href="#endpoint-30">Endpoint</a></h3>
 <p><code>POST /api/features/2fa</code></p>
 <h3 id="请求-20"><a class="header" href="#请求-20">请求</a></h3>
-<h4 id="请求参数-30"><a class="header" href="#请求参数-30">请求参数</a></h4>
+<h4 id="请求参数-31"><a class="header" href="#请求参数-31">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_secret</code></td><td><code>string</code></td><td>两步验证的 <code>Secret</code>，由客户端生成后发送至服务端。</td></tr>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。</td></tr>
@@ -2669,7 +2685,7 @@ interface UserInfo {
 <h3 id="endpoint-31"><a class="header" href="#endpoint-31">Endpoint</a></h3>
 <p><code>DELETE /api/features/2fa</code></p>
 <h3 id="请求-21"><a class="header" href="#请求-21">请求</a></h3>
-<h4 id="请求参数-31"><a class="header" href="#请求参数-31">请求参数</a></h4>
+<h4 id="请求参数-32"><a class="header" href="#请求参数-32">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
 <tr><td><code>2fa_code</code></td><td><code>\d{6}</code></td><td>两步验证的代码。</td></tr>
 </tbody></table>
@@ -3046,7 +3062,7 @@ upx target/x86_64-unknown-linux-musl/release/annisonic
 对文件名和歌曲标题一致性的检测</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="repo"><a class="header" href="#repo">repo</a></h1>
-<h2 id="专辑"><a class="header" href="#专辑">专辑</a></h2>
+<h2 id="专辑-1"><a class="header" href="#专辑-1">专辑</a></h2>
 <ul>
 <li><input disabled="" type="checkbox" checked=""/>
 导入专辑

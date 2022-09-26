@@ -152,10 +152,26 @@
 <p><code>DELETE /api/favorite/music</code></p>
 <h4 id="请求参数-1"><a class="header" href="#请求参数-1">请求参数</a></h4>
 <p>请求参数为一个 <code>TrackIdentifier</code> 对象。</p>
+<h2 id="专辑"><a class="header" href="#专辑">专辑</a></h2>
+<h3 id="获取收藏专辑列表"><a class="header" href="#获取收藏专辑列表">获取收藏专辑列表</a></h3>
+<p><code>GET /api/favorite/album</code></p>
+<h4 id="返回参数-1"><a class="header" href="#返回参数-1">返回参数</a></h4>
+<p>返回 <code>AlbumIdentifier[]</code> ，按照添加时间倒序排序。</p>
+<h3 id="添加收藏专辑"><a class="header" href="#添加收藏专辑">添加收藏专辑</a></h3>
+<p><code>PUT /api/favorite/album</code></p>
+<h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td><code>AlbumIdentifier</code></td><td>待添加专辑的 <code>AlbumIdentifier</code></td></tr>
+</tbody></table>
+<h3 id="删除收藏专辑"><a class="header" href="#删除收藏专辑">删除收藏专辑</a></h3>
+<p><code>DELETE /api/favorite/album</code></p>
+<table><thead><tr><th>参数名</th><th>类型</th><th>详情</th></tr></thead><tbody>
+<tr><td><code>album_id</code></td><td><code>AlbumIdentifier</code></td><td>待添加专辑的 <code>AlbumIdentifier</code></td></tr>
+</tbody></table>
 <h2 id="订阅播放列表"><a class="header" href="#订阅播放列表">订阅播放列表</a></h2>
 <h3 id="获取全部已订阅的播放列表"><a class="header" href="#获取全部已订阅的播放列表">获取全部已订阅的播放列表</a></h3>
 <p><code>GET /api/favorite/playlist</code></p>
-<h4 id="返回参数-1"><a class="header" href="#返回参数-1">返回参数</a></h4>
+<h4 id="返回参数-2"><a class="header" href="#返回参数-2">返回参数</a></h4>
 <pre><code class="language-ts">interface FavoriteListInfo {
   playlist_id: string;
   name: string;
@@ -165,7 +181,7 @@
 <p>返回 <code>FavoriteListInfo[]</code> ，按照添加时间倒序排序。</p>
 <h3 id="订阅播放列表-1"><a class="header" href="#订阅播放列表-1">订阅播放列表</a></h3>
 <p><code>PUT /api/favorite/playlist</code></p>
-<h4 id="请求参数-2"><a class="header" href="#请求参数-2">请求参数</a></h4>
+<h4 id="请求参数-3"><a class="header" href="#请求参数-3">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>需要订阅的列表</td></tr>
 </tbody></table>
@@ -175,7 +191,7 @@
 </tbody></table>
 <h3 id="取消订阅"><a class="header" href="#取消订阅">取消订阅</a></h3>
 <p><code>DELETE /api/favorite/playlist</code></p>
-<h4 id="请求参数-3"><a class="header" href="#请求参数-3">请求参数</a></h4>
+<h4 id="请求参数-4"><a class="header" href="#请求参数-4">请求参数</a></h4>
 <table><thead><tr><th>参数名</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>playlist_id</code></td><td><code>string</code></td><td>需要取消订阅的列表</td></tr>
 </tbody></table>
