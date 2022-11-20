@@ -146,12 +146,14 @@
 # Tag 名称 [必填项]
 name = &quot;THE IDOLM@STER MILLION LIVE&quot;
 #
-# Tag 别名 [可选项]
+# Tag 本地化名称 [可选项]
 #
-# 别名仅作展示用，不起任何指代作用。
-alias = []
+# 不同语言下的 Tag 名称。仅用于展示，不能用于指代。
+names.zh-hans = &quot;偶像大师百万现场&quot;
 #
 # Tag 类型 [必填项]
+#
+# 用于区别不同类型的 Tag。所有相同类型的 Tag 实际拥有以该类型名命名的隐式 Parent Tag。
 #
 # 可选值如下所示：
 # artist：单艺术家
@@ -177,12 +179,17 @@ included-by = [&quot;THE IDOLM@STER&quot;]
 #
 # 指定子 Tag 时会自动创建对应的 Tag。如果该 Tag 已经存在，检查时会抛出一个错误。
 #
-# 对结构复杂的 Tag 不建议使用子 Tag，建议以 included-by 上指的形式构建依赖关系。
+# 对结构复杂的 Tag 不建议使用子 Tag。建议以 included-by 上指的形式构建依赖关系，如下例所示。
 # 子 Tag 可以在 Album 信息中使用。
 #
 # 子 Tag 根据 includes 中的字段名区分类型。
 includes.series = [&quot;THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
-includes.game = [&quot;THE IDOLM@STER Million Live Theater Days&quot;]
+
+[[tag]]
+name = &quot;THE IDOLM@STER Million Live Theater Days&quot;
+names.zh-hans = &quot;偶像大师百万现场剧场时光&quot;
+type = &quot;game&quot;
+included-by = [&quot;THE IDOLM@STER MILLION LIVE&quot;]
 </code></pre>
 
                     </main>

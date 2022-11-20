@@ -261,8 +261,8 @@ interface TagInfo {
 
 // 标签详细信息
 type TagDetail = TagInfo &amp; {
-  // Tag 别名
-  alias?: string[];
+  // Tag 本地化名
+  names?: Record&lt;string, string&gt;;
   // 父级 Tag
   included_by?: string[];
   // 子 Tag
