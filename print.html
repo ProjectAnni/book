@@ -1018,7 +1018,7 @@ albums = ['album-beta', 'album']
 <p>专辑可以存放在任意指定的子目录中，方便整理者以目录为单位对专辑信息进行分类。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="预构建数据源"><a class="header" href="#预构建数据源">预构建数据源</a></h1>
 <blockquote>
-<p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1</code>。</p>
+<p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1.1</code>。</p>
 </blockquote>
 <p>为方便客户端使用仓库数据，元数据仓库中的数据可以单向地构建为 <code>SQLite DB</code> 的形式供客户端读取。</p>
 <h2 id="描述文件"><a class="header" href="#描述文件">描述文件</a></h2>
@@ -1117,10 +1117,11 @@ CREATE INDEX IF NOT EXISTS &quot;repo_tag_detail_index&quot; ON &quot;repo_tag_d
   &quot;track_id&quot;
 );
 </code></pre>
-<h2 id="标签别名repo_tag_alias"><a class="header" href="#标签别名repo_tag_alias">标签别名（<code>repo_tag_alias</code>）</a></h2>
-<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_tag_alias&quot; (
+<h2 id="标签本地化名repo_tag_i18n"><a class="header" href="#标签本地化名repo_tag_i18n">标签本地化名（<code>repo_tag_i18n</code>）</a></h2>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_tag_i18n&quot; (
   &quot;tag_id&quot;    INTEGER NOT NULL,
-  &quot;alias&quot;     TEXT NOT NULL,
+  &quot;language&quot;  TEXT NOT NULL,
+  &quot;name&quot;      TEXT NOT NULL,
   FOREIGN KEY(&quot;tag_id&quot;) REFERENCES &quot;repo_tag&quot;(&quot;tag_id&quot;)
 );
 </code></pre>
