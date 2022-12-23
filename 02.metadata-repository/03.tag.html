@@ -140,10 +140,14 @@
                         <h1 id="专辑标签"><a class="header" href="#专辑标签">专辑标签</a></h1>
 <p>为了显示更加有序的专辑列表，元数据仓库以 <code>Tag</code> 的形式对专辑、唱片和音轨进行了分类。</p>
 <p>专辑标签信息通过 <code>toml</code> 格式描述。</p>
+<p>相同类型的专辑标签名称不可重复；不同类型的标签可以通过 <code>&lt;EDITION&gt;:&lt;NAME&gt;</code> 的格式进行有限的重名。</p>
 <pre><code class="language-toml">######################################################
 # Tag 信息
 [[tag]]
+#
 # Tag 名称 [必填项]
+#
+# 标签的名称，前后不带空格
 name = &quot;THE IDOLM@STER MILLION LIVE&quot;
 #
 # Tag 本地化名称 [可选项]
@@ -156,24 +160,25 @@ names.zh-hans = &quot;偶像大师百万现场&quot;
 # 用于区别不同类型的 Tag。所有相同类型的 Tag 实际拥有以该类型名命名的隐式 Parent Tag。
 #
 # 可选值如下所示：
-# artist：单艺术家
-# group：（多艺术家）组合
-# animation：动画
-# series：系列
-# project：企划
-# game：游戏
-# organization：组织、社团、公司
-# default：默认，未分类
+# artist: 单艺术家
+# group: 多艺术家组合
+# animation: 动画
+# radio: 广播节目
+# series: 系列
+# project: 企划
+# game: 游戏
+# organization: 组织、社团、公司
+# unknown: 【不建议】默认，未分类
 #
 # 此外，还有一种特殊的 Tag：
-# category：属性，如 OP、ED、OST
+# category: 属性，如 OP、ED、OST
 # 用于表示专辑/碟片/音轨的具体属性，这类 Tag 不会出现在 Tag 图中
 type = &quot;artist&quot;
 #
 # Tag 的父级 Tag [可选项]
 #
 # 父 Tag 必须作为已有的 Tag 存在。
-included-by = [&quot;THE IDOLM@STER&quot;]
+included-by = [&quot;project:THE IDOLM@STER&quot;]
 #
 # Tag 的子 Tag [可选项]
 #
@@ -183,13 +188,13 @@ included-by = [&quot;THE IDOLM@STER&quot;]
 # 子 Tag 可以在 Album 信息中使用。
 #
 # 子 Tag 根据 includes 中的字段名区分类型。
-includes.series = [&quot;THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
+includes = [&quot;series:THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
 
 [[tag]]
 name = &quot;THE IDOLM@STER Million Live Theater Days&quot;
 names.zh-hans = &quot;偶像大师百万现场剧场时光&quot;
 type = &quot;game&quot;
-included-by = [&quot;THE IDOLM@STER MILLION LIVE&quot;]
+included-by = [&quot;project:THE IDOLM@STER MILLION LIVE&quot;]
 </code></pre>
 
                     </main>

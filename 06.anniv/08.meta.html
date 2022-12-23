@@ -179,7 +179,7 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <p><code>GET /api/meta/tag-graph</code></p>
 <h3 id="返回-3"><a class="header" href="#返回-3">返回</a></h3>
 <p>返回 <code>tag</code> 依赖关系的邻接表，类型表示为 <code>Record&lt;string, string[]&gt;</code> 。</p>
-<p>其中，键对应的值为键所对应标签所包含的所有标签名。</p>
+<p><code>Key-Value</code> 对应的是标签与其所包含的子标签。字符串格式为 <code>&lt;EDITION&gt;:&lt;NAME&gt;</code>，标签类型不可省略。</p>
 
                     </main>
 

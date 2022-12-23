@@ -251,13 +251,12 @@ date = 2020-12-16
 #
 # 会和光盘/音轨的标签取并集，共同描述专辑中所含内容的分类。
 tags = [
+  # 使用标签的 type 指定重名 Tag 的具体指代对象
+  # 标签名称前后的空格会被自动剔除
+  &quot;group:4U&quot;,
+  # 当没有指定标签类型时，如果仓库内存在类型不同的同名标签，则会抛出错误
+  # 当该标签名称唯一时，则不会报错
   &quot;神様になった日&quot;,
-  # 使用多个 Tag 定位实际使用的 Tag 名称
-  # 第一项为重名 Tag 的名称，后面的各项为用于辅助定位 Tag 树的 Parent Tag
-  # 此处使用了 animation 规定 Tag 类型
-  [&quot;神様になった日&quot;, &quot;animation&quot;],
-  # 此处使用了 Parent Tag 限定了 4U 的所处树
-  [&quot;4U&quot;, &quot;Tokyo 7th シスターズ&quot;],
 ]
 #
 # 音乐类型 [必填项]

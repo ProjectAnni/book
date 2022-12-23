@@ -139,7 +139,7 @@
                     <main>
                         <h1 id="预构建数据源"><a class="header" href="#预构建数据源">预构建数据源</a></h1>
 <blockquote>
-<p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1.1</code>。</p>
+<p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1.0+alpha-1.1</code>。</p>
 </blockquote>
 <p>为方便客户端使用仓库数据，元数据仓库中的数据可以单向地构建为 <code>SQLite DB</code> 的形式供客户端读取。</p>
 <h2 id="描述文件"><a class="header" href="#描述文件">描述文件</a></h2>
@@ -219,7 +219,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS &quot;repo_track_index&quot; ON &quot;repo_tra
 <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_tag&quot; (
   &quot;tag_id&quot;      INTEGER NOT NULL UNIQUE,
   &quot;name&quot;        TEXT NOT NULL UNIQUE,
-  &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'default' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'series', 'project', 'game', 'organization', 'default', 'category')),
+  &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'unknown' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'series', 'project', 'game', 'organization', 'unknown', 'category')),
   PRIMARY KEY(&quot;tag_id&quot; AUTOINCREMENT)
 );
 </code></pre>

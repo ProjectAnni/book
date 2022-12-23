@@ -577,7 +577,7 @@ DATE-8 = /\d{4}-\d{2}-\d{2}/
 <p>⚠️️目前的元数据仓库标准仍处于 <code>Draft</code> 状态，尚未完全定稿。欢迎随时提出意见或建议。</p>
 </blockquote>
 <blockquote>
-<p>⚠️️目前的元数据仓库标准版本（<code>edition</code>）为 <code>1.5</code>。</p>
+<p>⚠️️目前的元数据仓库标准版本（<code>edition</code>）为 <code>1.0+alpha.1.5.1</code>。</p>
 </blockquote>
 <p>尽管 <code>Anni</code> 约定对音频文件内嵌的标签有了严格的约束，但从实现的角度来看，如果所有的元数据都从音乐文件中获取，那么势必会导致如下问题：</p>
 <ol>
@@ -711,13 +711,12 @@ date = 2020-12-16
 #
 # 会和光盘/音轨的标签取并集，共同描述专辑中所含内容的分类。
 tags = [
+  # 使用标签的 type 指定重名 Tag 的具体指代对象
+  # 标签名称前后的空格会被自动剔除
+  &quot;group:4U&quot;,
+  # 当没有指定标签类型时，如果仓库内存在类型不同的同名标签，则会抛出错误
+  # 当该标签名称唯一时，则不会报错
   &quot;神様になった日&quot;,
-  # 使用多个 Tag 定位实际使用的 Tag 名称
-  # 第一项为重名 Tag 的名称，后面的各项为用于辅助定位 Tag 树的 Parent Tag
-  # 此处使用了 animation 规定 Tag 类型
-  [&quot;神様になった日&quot;, &quot;animation&quot;],
-  # 此处使用了 Parent Tag 限定了 4U 的所处树
-  [&quot;4U&quot;, &quot;Tokyo 7th シスターズ&quot;],
 ]
 #
 # 音乐类型 [必填项]
@@ -817,10 +816,14 @@ type = &quot;instrumental&quot;
 <div style="break-before: page; page-break-before: always;"></div><h1 id="专辑标签"><a class="header" href="#专辑标签">专辑标签</a></h1>
 <p>为了显示更加有序的专辑列表，元数据仓库以 <code>Tag</code> 的形式对专辑、唱片和音轨进行了分类。</p>
 <p>专辑标签信息通过 <code>toml</code> 格式描述。</p>
+<p>相同类型的专辑标签名称不可重复；不同类型的标签可以通过 <code>&lt;EDITION&gt;:&lt;NAME&gt;</code> 的格式进行有限的重名。</p>
 <pre><code class="language-toml">######################################################
 # Tag 信息
 [[tag]]
+#
 # Tag 名称 [必填项]
+#
+# 标签的名称，前后不带空格
 name = &quot;THE IDOLM@STER MILLION LIVE&quot;
 #
 # Tag 本地化名称 [可选项]
@@ -833,24 +836,25 @@ names.zh-hans = &quot;偶像大师百万现场&quot;
 # 用于区别不同类型的 Tag。所有相同类型的 Tag 实际拥有以该类型名命名的隐式 Parent Tag。
 #
 # 可选值如下所示：
-# artist：单艺术家
-# group：（多艺术家）组合
-# animation：动画
-# series：系列
-# project：企划
-# game：游戏
-# organization：组织、社团、公司
-# default：默认，未分类
+# artist: 单艺术家
+# group: 多艺术家组合
+# animation: 动画
+# radio: 广播节目
+# series: 系列
+# project: 企划
+# game: 游戏
+# organization: 组织、社团、公司
+# unknown: 【不建议】默认，未分类
 #
 # 此外，还有一种特殊的 Tag：
-# category：属性，如 OP、ED、OST
+# category: 属性，如 OP、ED、OST
 # 用于表示专辑/碟片/音轨的具体属性，这类 Tag 不会出现在 Tag 图中
 type = &quot;artist&quot;
 #
 # Tag 的父级 Tag [可选项]
 #
 # 父 Tag 必须作为已有的 Tag 存在。
-included-by = [&quot;THE IDOLM@STER&quot;]
+included-by = [&quot;project:THE IDOLM@STER&quot;]
 #
 # Tag 的子 Tag [可选项]
 #
@@ -860,13 +864,13 @@ included-by = [&quot;THE IDOLM@STER&quot;]
 # 子 Tag 可以在 Album 信息中使用。
 #
 # 子 Tag 根据 includes 中的字段名区分类型。
-includes.series = [&quot;THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
+includes = [&quot;series:THE IDOLM@STER LIVE THE@TER DREAMERS&quot;]
 
 [[tag]]
 name = &quot;THE IDOLM@STER Million Live Theater Days&quot;
 names.zh-hans = &quot;偶像大师百万现场剧场时光&quot;
 type = &quot;game&quot;
-included-by = [&quot;THE IDOLM@STER MILLION LIVE&quot;]
+included-by = [&quot;project:THE IDOLM@STER MILLION LIVE&quot;]
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="json-交换格式"><a class="header" href="#json-交换格式">JSON 交换格式</a></h1>
 <p>用于描述仓库元数据的 <code>TOML</code> 格式便于书写和阅读，但受到各语言实现的限制，解析可能存在一些问题。</p>
@@ -1001,7 +1005,7 @@ type TagDetail = TagInfo &amp; {
 }
 
 // 标签类型
-type TagType = &quot;artist&quot; | &quot;group&quot; | &quot;animation&quot; | &quot;series&quot; | &quot;project&quot; | &quot;game&quot; | &quot;organization&quot; | &quot;category&quot; | &quot;default&quot;;
+type TagType = &quot;artist&quot; | &quot;group&quot; | &quot;animation&quot; | &quot;radio&quot; | &quot;series&quot; | &quot;project&quot; | &quot;game&quot; | &quot;organization&quot; | &quot;category&quot; | &quot;unknown&quot;;
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="仓库元数据"><a class="header" href="#仓库元数据">仓库元数据</a></h1>
 <p>仓库元数据位于仓库根目录下，文件名为 <code>repo.toml</code>，用于描述元数据仓库的属性。</p>
@@ -1010,7 +1014,7 @@ type TagType = &quot;artist&quot; | &quot;group&quot; | &quot;animation&quot; | 
 # 仓库名
 name = &quot;Yesterday17's Metadata Repo&quot;
 # 仓库使用的元数据仓库描述版本
-edition = &quot;1.5&quot;
+edition = &quot;1.0&quot;
 # 存放专辑的子目录，默认为 ['album']
 albums = ['album-beta', 'album']
 </code></pre>
@@ -1018,7 +1022,7 @@ albums = ['album-beta', 'album']
 <p>专辑可以存放在任意指定的子目录中，方便整理者以目录为单位对专辑信息进行分类。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="预构建数据源"><a class="header" href="#预构建数据源">预构建数据源</a></h1>
 <blockquote>
-<p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1.1</code>。</p>
+<p>⚠️️目前<strong>预构建数据源</strong>的描述版本为 <code>1.0+alpha-1.1</code>。</p>
 </blockquote>
 <p>为方便客户端使用仓库数据，元数据仓库中的数据可以单向地构建为 <code>SQLite DB</code> 的形式供客户端读取。</p>
 <h2 id="描述文件"><a class="header" href="#描述文件">描述文件</a></h2>
@@ -1098,7 +1102,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS &quot;repo_track_index&quot; ON &quot;repo_tra
 <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_tag&quot; (
   &quot;tag_id&quot;      INTEGER NOT NULL UNIQUE,
   &quot;name&quot;        TEXT NOT NULL UNIQUE,
-  &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'default' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'series', 'project', 'game', 'organization', 'default', 'category')),
+  &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'unknown' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'series', 'project', 'game', 'organization', 'unknown', 'category')),
   PRIMARY KEY(&quot;tag_id&quot; AUTOINCREMENT)
 );
 </code></pre>
@@ -2296,7 +2300,7 @@ type TrackInfoWithAlbum = TrackIdentifier &amp; Required&lt;TrackInfo&gt; &amp; 
 <p><code>GET /api/meta/tag-graph</code></p>
 <h3 id="返回-16"><a class="header" href="#返回-16">返回</a></h3>
 <p>返回 <code>tag</code> 依赖关系的邻接表，类型表示为 <code>Record&lt;string, string[]&gt;</code> 。</p>
-<p>其中，键对应的值为键所对应标签所包含的所有标签名。</p>
+<p><code>Key-Value</code> 对应的是标签与其所包含的子标签。字符串格式为 <code>&lt;EDITION&gt;:&lt;NAME&gt;</code>，标签类型不可省略。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="搜索"><a class="header" href="#搜索">搜索</a></h1>
 <h2 id="endpoint-20"><a class="header" href="#endpoint-20">Endpoint</a></h2>
 <p><code>GET /api/search</code></p>
