@@ -1102,7 +1102,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS &quot;repo_track_index&quot; ON &quot;repo_tra
 <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_tag&quot; (
   &quot;tag_id&quot;      INTEGER NOT NULL UNIQUE,
   &quot;name&quot;        TEXT NOT NULL UNIQUE,
-  &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'unknown' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'series', 'project', 'game', 'organization', 'unknown', 'category')),
+  &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'unknown' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'radio', 'series', 'project', 'game', 'organization', 'unknown', 'category')),
   PRIMARY KEY(&quot;tag_id&quot; AUTOINCREMENT)
 );
 </code></pre>
