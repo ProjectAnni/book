@@ -218,9 +218,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS &quot;repo_track_index&quot; ON &quot;repo_tra
 <h2 id="标签定义repo_tag"><a class="header" href="#标签定义repo_tag">标签定义（<code>repo_tag</code>）</a></h2>
 <pre><code class="language-sql">CREATE TABLE IF NOT EXISTS &quot;repo_tag&quot; (
   &quot;tag_id&quot;      INTEGER NOT NULL UNIQUE,
-  &quot;name&quot;        TEXT NOT NULL UNIQUE,
+  &quot;name&quot;        TEXT NOT NULL,
   &quot;tag_type&quot;    TEXT NOT NULL DEFAULT 'unknown' CHECK(&quot;tag_type&quot; IN ('artist', 'group', 'animation', 'radio', 'series', 'project', 'game', 'organization', 'unknown', 'category')),
-  PRIMARY KEY(&quot;tag_id&quot; AUTOINCREMENT)
+  PRIMARY KEY(&quot;tag_id&quot; AUTOINCREMENT),
+  UNIQUE(&quot;name&quot;, &quot;tag_type&quot;)
 );
 </code></pre>
 <h2 id="标签表示repo_tag_detail"><a class="header" href="#标签表示repo_tag_detail">标签表示（<code>repo_tag_detail</code>）</a></h2>
