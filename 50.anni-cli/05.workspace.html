@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>workspace - Project Anni 使用手册</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Anni 相关的所有文档信息均在此处。翻译募集中……">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00.before-start/00.readme.html"><strong aria-hidden="true">1.</strong> 开始之前</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../00.before-start/01.intro.html"><strong aria-hidden="true">1.1.</strong> 前言</a></li><li class="chapter-item expanded "><a href="../00.before-start/02.how-it-works.html"><strong aria-hidden="true">1.2.</strong> Anni 是如何工作的？</a></li><li class="chapter-item expanded "><a href="../00.before-start/03.glossary-of-terms.html"><strong aria-hidden="true">1.3.</strong> 术语表</a></li><li class="chapter-item expanded "><a href="../00.before-start/04.credits.html"><strong aria-hidden="true">1.4.</strong> 鸣谢</a></li></ol></li><li class="chapter-item expanded "><a href="../01.audio-convention/00.readme.html"><strong aria-hidden="true">2.</strong> Anni 音频约定</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01.audio-convention/01.format.html"><strong aria-hidden="true">2.1.</strong> 音频格式</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/02.sample-rate.html"><strong aria-hidden="true">2.2.</strong> 采样率</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/03.bit-per-sample.html"><strong aria-hidden="true">2.3.</strong> 位深度</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.tags.html"><strong aria-hidden="true">2.4.</strong> 音频标签</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.01.vendor-string.html"><strong aria-hidden="true">2.4.1.</strong> Vendor String</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.02.artist.html"><strong aria-hidden="true">2.4.2.</strong> 艺术家</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.03.album.html"><strong aria-hidden="true">2.4.3.</strong> 专辑名</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.04.date.html"><strong aria-hidden="true">2.4.4.</strong> 日期</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.05.duplicate-empty.html"><strong aria-hidden="true">2.4.5.</strong> 对重复项、空项的说明</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.06.middle-dot.html"><strong aria-hidden="true">2.4.6.</strong> 对间隔点（・）的说明</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.07.slash.html"><strong aria-hidden="true">2.4.7.</strong> 对斜线（/）的说明</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/04.zzzz.08.tidal.html"><strong aria-hidden="true">2.4.8.</strong> 对波浪线（～）的说明</a></li></ol></li><li class="chapter-item expanded "><a href="../01.audio-convention/05.cover.html"><strong aria-hidden="true">2.5.</strong> 专辑封面</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/06.filename.html"><strong aria-hidden="true">2.6.</strong> 文件名</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/07.catalog.html"><strong aria-hidden="true">2.7.</strong> Catalog</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.directory.html"><strong aria-hidden="true">2.8.</strong> 约定目录结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.01.directory-type.html"><strong aria-hidden="true">2.8.1.</strong> 目录类型</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.02.top-directory.html"><strong aria-hidden="true">2.8.2.</strong> 顶级目录</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.03.album-directory.html"><strong aria-hidden="true">2.8.3.</strong> 专辑目录</a></li><li class="chapter-item expanded "><a href="../01.audio-convention/08.zzzz.04.category-directory.html"><strong aria-hidden="true">2.8.4.</strong> 分类目录</a></li></ol></li><li class="chapter-item expanded "><a href="../01.audio-convention/09.directory-strict.html"><strong aria-hidden="true">2.9.</strong> 严格目录结构</a></li></ol></li><li class="chapter-item expanded "><a href="../02.metadata-repository/00.readme.html"><strong aria-hidden="true">3.</strong> Anni 元数据仓库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../02.metadata-repository/01.folder-structure.html"><strong aria-hidden="true">3.1.</strong> 目录结构</a></li><li class="chapter-item expanded "><a href="../02.metadata-repository/02.album-information.html"><strong aria-hidden="true">3.2.</strong> 专辑信息</a></li><li class="chapter-item expanded "><a href="../02.metadata-repository/03.tag.html"><strong aria-hidden="true">3.3.</strong> 专辑标签</a></li><li class="chapter-item expanded "><a href="../02.metadata-repository/04.json.html"><strong aria-hidden="true">3.4.</strong> JSON 交换格式</a></li><li class="chapter-item expanded "><a href="../02.metadata-repository/05.repo-metadata.html"><strong aria-hidden="true">3.5.</strong> 仓库元数据</a></li><li class="chapter-item expanded "><a href="../02.metadata-repository/06.metdata-db.html"><strong aria-hidden="true">3.6.</strong> 预构建数据源</a></li><li class="chapter-item expanded "><a href="../02.metadata-repository/07.repo-merge.html"><strong aria-hidden="true">3.7.</strong> 仓库合并</a></li></ol></li><li class="chapter-item expanded "><a href="../04.audio-provider/00.readme.html"><strong aria-hidden="true">4.</strong> 音频来源</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04.audio-provider/01.trait.html"><strong aria-hidden="true">4.1.</strong> trait AnniProvider</a></li><li class="chapter-item expanded "><a href="../04.audio-provider/02.available-providers.html"><strong aria-hidden="true">4.2.</strong> 可用选项</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04.audio-provider/providers/01.file.html"><strong aria-hidden="true">4.2.1.</strong> 文件系统</a></li><li class="chapter-item expanded "><a href="../04.audio-provider/providers/02.drive.html"><strong aria-hidden="true">4.2.2.</strong> Google Drive</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../05.audio-library/00.readme.html"><strong aria-hidden="true">5.</strong> 音频仓库 Annil</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05.audio-library/01.protocol.html"><strong aria-hidden="true">5.1.</strong> Anni 音频仓库协议</a></li><li class="chapter-item expanded "><a href="../05.audio-library/02.implements.html"><strong aria-hidden="true">5.2.</strong> 不同的音频仓库实现</a></li><li class="chapter-item expanded "><a href="../05.audio-library/03.annil-rs.html"><strong aria-hidden="true">5.3.</strong> annil-rs</a></li><li class="chapter-item expanded "><a href="../05.audio-library/04.annil-track-extension.html"><strong aria-hidden="true">5.4.</strong> [Draft] Annil 音轨扩展</a></li></ol></li><li class="chapter-item expanded "><a href="../06.anniv/00.readme.html"><strong aria-hidden="true">6.</strong> 管理后端 Anniv</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06.anniv/01.info.html"><strong aria-hidden="true">6.1.</strong> 基本信息</a></li><li class="chapter-item expanded "><a href="../06.anniv/02.user.html"><strong aria-hidden="true">6.2.</strong> 用户系统</a></li><li class="chapter-item expanded "><a href="../06.anniv/03.playlist.html"><strong aria-hidden="true">6.3.</strong> 播放列表</a></li><li class="chapter-item expanded "><a href="../06.anniv/04.credential.html"><strong aria-hidden="true">6.4.</strong> Annil Token 管理</a></li><li class="chapter-item expanded "><a href="../06.anniv/07.export-format.html"><strong aria-hidden="true">6.5.</strong> 信息导出格式</a></li><li class="chapter-item expanded "><a href="../06.anniv/08.meta.html"><strong aria-hidden="true">6.6.</strong> 专辑元数据</a></li><li class="chapter-item expanded "><a href="../06.anniv/09.search.html"><strong aria-hidden="true">6.7.</strong> 搜索</a></li><li class="chapter-item expanded "><a href="../06.anniv/05.share.html"><strong aria-hidden="true">6.8.</strong> 分享管理</a></li><li class="chapter-item expanded "><a href="../06.anniv/06.statistics.html"><strong aria-hidden="true">6.9.</strong> 播放统计</a></li><li class="chapter-item expanded "><a href="../06.anniv/10.favorite.html"><strong aria-hidden="true">6.10.</strong> 喜欢</a></li><li class="chapter-item expanded "><a href="../06.anniv/11.lyric.html"><strong aria-hidden="true">6.11.</strong> 歌词</a></li><li class="chapter-item expanded "><a href="../06.anniv/features/00.readme.html"><strong aria-hidden="true">6.12.</strong> 特性</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06.anniv/features/01.invite.html"><strong aria-hidden="true">6.12.1.</strong> 邀请（invite）</a></li><li class="chapter-item expanded "><a href="../06.anniv/features/02.2fa.html"><strong aria-hidden="true">6.12.2.</strong> 两步验证（2fa）</a></li><li class="chapter-item expanded "><a href="../06.anniv/features/03.close.html"><strong aria-hidden="true">6.12.3.</strong> 禁止注册（close）</a></li><li class="chapter-item expanded "><a href="../06.anniv/features/04.metadata-db.html"><strong aria-hidden="true">6.12.4.</strong> 预构建数据源（metadata-db）</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../07.annisonic/00.readme.html"><strong aria-hidden="true">7.</strong> Annisonic</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07.annisonic/01.apis.html"><strong aria-hidden="true">7.1.</strong> 实现的 API</a></li><li class="chapter-item expanded "><a href="../07.annisonic/02.clients.html"><strong aria-hidden="true">7.2.</strong> 已测试的客户端</a></li><li class="chapter-item expanded "><a href="../07.annisonic/03.deploy.html"><strong aria-hidden="true">7.3.</strong> 部署向导</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../50.anni-cli/00.readme.html"><strong aria-hidden="true">8.</strong> Anni 命令行工具</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../50.anni-cli/01.flac.html"><strong aria-hidden="true">8.1.</strong> flac</a></li><li class="chapter-item expanded "><a href="../50.anni-cli/02.split.html"><strong aria-hidden="true">8.2.</strong> split</a></li><li class="chapter-item expanded "><a href="../50.anni-cli/03.convention.html"><strong aria-hidden="true">8.3.</strong> convention</a></li><li class="chapter-item expanded "><a href="../50.anni-cli/04.repo.html"><strong aria-hidden="true">8.4.</strong> repo</a></li><li class="chapter-item expanded "><a href="../50.anni-cli/05.workspace.html" class="active"><strong aria-hidden="true">8.5.</strong> workspace</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Project Anni 使用手册</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/ProjectAnni/anni" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="workspace"><a class="header" href="#workspace">workspace</a></h1>
+<p><code>anni workspace</code> 提供了一系列对<em>本地音频整理工作空间</em>的管理命令。</p>
+<h2 id="术语表"><a class="header" href="#术语表">术语表</a></h2>
+<p>| 名称             | 英语        | 简称     | 详情                                                                                |
+| ---------------- | ----------- | -------- |
+| 音频整理工作空间 | <code>Workspace</code> | 工作空间 | <code>anni workspace</code> 工作的目录                                                         |
+| 工作目录         |             |          | <strong>工作空间</strong>根目录下的 <code>.anni</code> 目录，由 <code>anni</code> 控制状态                             |
+| 用户目录         |             |          | 用户视图中使用的，实际工作的目录                                                    |
+| 专辑目录         |             |          | <strong>用户目录</strong>下，实际存放专辑的子目录                                                |
+| 受控专辑目录     |             |          | <strong>工作目录</strong>下，实际存放专辑的子目录                                                |
+| 受控链接         |             |          | <strong>用户目录</strong>下，链接到 <strong>工作目录</strong> 的符号链接，名称为 <code>.album</code>                     |
+| 专辑状态：未跟踪 | <code>Untracked</code> | 未跟踪   | 用户通过 <code>create</code> 创建专辑，但未将专辑跟踪时的状态                                  |
+| 提交             | <code>Commit</code>    | -        | 通过 <code>add</code> 将专辑从工作空间中移交到音频仓库的行为                                   |
+| 专辑状态：已跟踪 | <code>Committed</code> | 已跟踪   | 用户通过 <code>add</code> 将专辑结构交由 <code>anni</code> 托管后的状态                                   |
+| 发布             | <code>Publish</code>   | -        | 通过 <code>publish</code> 将专辑从工作空间中移交到音频仓库的行为                               |
+| 专辑状态：已发布 | <code>Published</code> | 已发布   | 用户通过 <code>publish --soft</code> 发布专辑后的状态                                          |
+| 专辑状态：悬垂   | <code>Dangling</code>  | -        | 用户目录下存在专辑，但工作目录中不存在 <code>AlbumID</code> 对应目录，或符号链接错误           |
+| 专辑状态：待回收 | <code>Garbage</code>   | -        | 用户目录中不存在该专辑，且该专辑在工作目录中对应为空                                |
+| 专辑锁           |             |          | 在对某一专辑目录进行状态变更时，为防止并行冲突放置的锁。通常为命名为 <code>.lock</code> 的文件 |</p>
+<h2 id="工作空间"><a class="header" href="#工作空间">工作空间</a></h2>
+<p><del>音频整理工作空间看起来有点拗口的样子，之后我们就用工作空间来代替好了</del></p>
+<p>工作空间的由来是为了替代掉原有的，没有任何约束的任意目录。工作空间的存在目的有两个：</p>
+<ol>
+<li>通过固定的目录结构，防止误操作的出现。
+<br />
+常见的误操作包括在保种的目录应用元数据、在保种的目录修改音频内嵌封面等修改原文件内容的行为。<del>全是血泪史</del></li>
+<li>通过一定的机制，简化音频整理的操作。
+<br />
+在规定了目录结构后，音频目录就可以和元数据文件关联起来。元数据文件的品番在整理过程中可能（由于填写错误）存在变更，但 <code>AlbumID</code> 一般不会变化。</li>
+</ol>
+<h2 id="目录结构"><a class="header" href="#目录结构">目录结构</a></h2>
+<p>工作空间的结构分为两部分：<strong>工作目录</strong>和<strong>用户目录</strong>。</p>
+<h3 id="工作目录"><a class="header" href="#工作目录">工作目录</a></h3>
+<p>工作目录是名为 <code>.anni</code> 的隐藏目录，其结构如下：</p>
+<pre><code>├── objects
+│   ├── 10
+│   │   └── 77
+│   │       └── 1077d96b-8fd3-4585-a6ab-8eef265a48df
+│   ├── 25
+│   │   └── eb
+│   ├── d2
+│   │   └── 74
+│   ├── e
+│   │   └── ff
+│   └── fc
+│       └── 50
+├── repo
+│   ├── album
+│   ├── tag
+│   ├── repo.toml
+│   └── Readme.md
+└── config.toml
+</code></pre>
+<p>该目录中保存了音频整理所需的两大元素：音频资源和元数据仓库。目前根目录下定义的内容如下：</p>
+<ol>
+<li>音频资源，以<strong>严格目录格式</strong>存放于 <code>objects</code> 目录下，层级为 2。当专辑目录下存在 <code>.publish</code> 文件时，该专辑的状态为<strong>已发布</strong>。</li>
+<li>元数据仓库，位于 <code>repo</code> 目录。</li>
+<li><code>config.toml</code>，负责记录一些额外的配置信息。</li>
+</ol>
+<h3 id="用户目录"><a class="header" href="#用户目录">用户目录</a></h3>
+<p>工作空间中除工作目录的部分都是用户目录。用户目录结构基本满足<a href="../01.audio-convention/08.directory.html">约定目录结构</a>，但存在以下区别：</p>
+<ol>
+<li>专辑目录中碟片数量的限定（<code>[n Discs]</code>）将不起作用</li>
+<li>碟片目录的名称没有任何限制</li>
+</ol>
+<h3 id="示例"><a class="header" href="#示例">示例</a></h3>
+<p>一个典型的用户目录结构如下：</p>
+<pre><code>├── [A] halca
+│   ├── [210519][VVXX-01011] キミがいたしるし
+│   │   ├── 01. キミがいたしるし.flac -&gt; ./.album/1/1.flac
+│   │   ├── 02. もういいや。.flac -&gt; ./.album/1/2.flac
+│   │   ├── 03. キミがいたしるし (TV Size).flac -&gt; ./.album/1/3.flac
+│   │   ├── 04. キミがいたしるし (Instrumental).flac -&gt; ./.album/1/4.flac
+│   │   ├── 05. もういいや。 (Instrumental).flac -&gt; ./.album/1/5.flac
+│   │   ├── .album -&gt; ../../.anni/objects/10/77/1077d96b-8fd3-4585-a6ab-8eef265a48df
+│   │   └── cover.jpg -&gt; ./.album/cover.jpg
+│   └── [220817][VVXX-01253] 誰彼スクランブル／あれこれドラスティック【Complete Edition】
+│       ├── 01. 誰彼スクランブル.flac
+│       ├── 02. あれこれドラスティック.flac
+│       ├── 03. reprise.flac
+│       ├── 04. あれこれドラスティック (halca Ver.).flac
+│       ├── 05. 誰彼スクランブル (Remixed by Snail's House).flac
+│       ├── 06. 時としてバイオレンス (Remixed by キノシタ).flac
+│       ├── 07. 誰彼スクランブル (TV Size).flac
+│       ├── 08. あれこれドラスティック (TV Size).flac
+│       ├── 09. 誰彼スクランブル (Instrumental).flac
+│       ├── 10. あれこれドラスティック (Instrumental).flac
+│       ├── 11. reprise (Instrumental).flac
+│       ├── .album -&gt; ../../.anni/objects/e1/5/e1057cfd-cd38-4280-bccf-4a48d4cf39f6
+│       └── cover.jpg
+└── .anni
+    ├── config.toml
+    ├── objects
+    │   └── 10
+    │       └── 77
+    │           └── 1077d96b-8fd3-4585-a6ab-8eef265a48df
+    │               ├── 1
+    │               │   ├── 1.flac
+    │               │   ├── 2.flac
+    │               │   ├── 3.flac
+    │               │   ├── 4.flac
+    │               │   ├── 5.flac
+    │               │   └── cover.jpg
+    │               └── cover.jpg
+    └── repo
+</code></pre>
+<p>观察上述目录结构中的 <code>[A] halca</code> 部分。用户部分有以下几个特征：</p>
+<ol>
+<li>专辑目录可以位于任意嵌套层级下。</li>
+<li>在整理过程中，目录中所有文件都是普通文件。
+<br />
+如 <code>[220817][VVXX-01253] 誰彼スクランブル／あれこれドラスティック【Complete Edition】</code>。</li>
+<li>在文件基本已经确定后，可以通过 <code>workspace add</code> 将专辑状态更新为已跟踪。此时，所有文件都会被转移到工作目录中，原目录下仅保留符号链接。
+<br />
+如 <code>[210519][VVXX-01011] キミがいたしるし</code>。</li>
+<li>专辑的目录下都存在名为 <code>.album</code> 的符号链接，链接到工作目录中的实际专辑位置。
+<br />
+因此，不存在 <code>.album</code> 的目录会被 <code>anni</code> 忽略。<code>anni</code> 只会处理存在专辑指向的目录。</li>
+</ol>
+<h2 id="配置文件"><a class="header" href="#配置文件">配置文件</a></h2>
+<p>工作空间中的配置文件可以用于记录与整理相关的配置。一个简单的配置文件样例如下所示：</p>
+<pre><code class="language-toml">[workspace]
+publish-to = [&quot;default&quot;]
+
+[library.default]
+root = &quot;/home/yesterday17/Music&quot;
+</code></pre>
+<h2 id="命令"><a class="header" href="#命令">命令</a></h2>
+<h3 id="init"><a class="header" href="#init">init</a></h3>
+<p>初始化工作空间。</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+全新创建工作空间</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>--repo</code>：从指定位置 <code>clone</code> 元数据仓库</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>--repo-config</code>：使用元数据仓库的 <code>repo.toml</code> 作为工作空间的配置文件
+<br />
+创建从 <code>.anni/config.toml</code> 到 <code>.anni/repo/repo.toml</code> 的符号链接。</li>
+</ul>
+<h3 id="status"><a class="header" href="#status">status</a></h3>
+<p>查看工作空间中各专辑的状态。</p>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-a</code>, <code>--album-id</code>：显示完整的 <code>Album ID</code>，而非 8 位的 <code>Album ID</code> 前缀</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-j</code>, <code>--json</code>：输出当前工作空间的完整状态为 <code>JSON</code> 格式</li>
+</ul>
+<h3 id="create"><a class="header" href="#create">create</a></h3>
+<p>新建专辑目录。新建的专辑目录状态为<strong>未跟踪</strong>。</p>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-a</code>, <code>--album-id</code>：创建专辑的 <code>Album ID</code></li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-d</code>, <code>--disc-num</code>：创建专辑对应的光盘数量</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-f</code>, <code>--force</code>：当创建目录的路径存在时，是否强制创建专辑目录</li>
+</ul>
+<h3 id="add"><a class="header" href="#add">add</a></h3>
+<p>将专辑的状态变更为已跟踪。状态变更前，<code>anni</code> 会输出一些信息供对比。</p>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-t</code>, <code>--tags</code>：变更状态的同时，向元数据仓库导入音频中内嵌的元数据</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-y</code>, <code>--yes</code>：跳过信息检查</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>d</code>, <code>--dry-run</code>：不实际变更专辑状态，仅运行流程。该属性搭配 <code>-t</code> 使用可以仅导入专辑元数据</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>e</code>, <code>--editor</code>：状态变更后，打开元数据仓库中的元数据文件</li>
+</ul>
+<h3 id="rm"><a class="header" href="#rm">rm</a></h3>
+<p>从工作空间中删除某一专辑。</p>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-y</code>, <code>--yes</code>：跳过人工确认</li>
+</ul>
+<h3 id="update"><a class="header" href="#update">update</a></h3>
+<p>在已跟踪状态下，对音频、封面或元数据进行更新。</p>
+<h3 id="publish"><a class="header" href="#publish">publish</a></h3>
+<p>在已跟踪状态下，将元数据和封面写入，并将专辑从工作空间中移动到音频仓库。</p>
+<p>专辑发布后，用户目录中的专辑目录也会被删除。</p>
+<p>当专辑目录中存在任意非符号链接的正常文件时，发布过程中止。</p>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-w</code>, <code>--write</code>：在发布前写入元数据和封面，效果与 <code>update -tc</code> 相同。</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-u</code>, <code>--uuid</code>：通过 <code>Album ID</code> 而非专辑路径发布专辑</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-s</code>, <code>--soft</code>：在专辑发布时，采用移动+软删除的方式替代直接移动目录。发布结束后，专辑状态变更为<strong>已发布</strong>。工作目录中仍然会保留专辑信息，但用户目录中的专辑会被移除。</li>
+</ul>
+<h3 id="fsck"><a class="header" href="#fsck">fsck</a></h3>
+<p>修复一些常见的工作空间问题。</p>
+<ol>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>-d</code>, <code>--fix-dangling</code>：修复状态为<strong>悬垂</strong>的专辑目录</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>--gc</code>：清除状态为<strong>待回收</strong>的专辑目录</li>
+</ol>
+<h3 id="serve"><a class="header" href="#serve">serve</a></h3>
+<p>启动工作空间的服务端环境，包括：</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+一个基于严格目录格式的 <code>Annil</code> 服务端</li>
+<li><input disabled="" type="checkbox"/>
+一个基于 <code>GraphQL</code> 的元数据服务端</li>
+<li><input disabled="" type="checkbox"/>
+一个基于 <code>WebSocket</code> 的终端转发服务</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../50.anni-cli/04.repo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../50.anni-cli/04.repo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
