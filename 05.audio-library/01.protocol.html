@@ -143,7 +143,7 @@
 <p>⚠️️ 在协议版本迈入 <code>1.0</code> 之前，任何改动都有可能发生。</p>
 </blockquote>
 <p>最后修改：2022 年 05 月 10 日
-协议版本：0.4.1</p>
+协议版本：0.5.0</p>
 <h2 id="定义"><a class="header" href="#定义">定义</a></h2>
 <p><code>Anni</code> 音频仓库（<code>Anni Audio Library</code>，以下简称<em>音频仓库</em>）是指实现了 <code>Anni</code> 音频仓库协议中定义 <code>API</code> 的服务端应用程序。其核心功能有三：</p>
 <ol>
@@ -196,6 +196,10 @@ Access-Control-Allow-Headers: Authorization
     &quot;secret&quot;: &quot;c398313c-b086-47ce-9a91-edfa5c93bd73&quot;,
     // 可选，表示允许签署的分享范围，省略则表示无限制
     // 结构与 /albums 的返回相同
+    // 该字段若存在则必须为数组，其他情况均未定义。
+    &quot;scope&quot;: [],
+    // @deprecated `scope` 的别名，不建议使用。
+    // 协议进入 1.0 后会将该字段删除。
     &quot;allowed&quot;: []
   }
 }
