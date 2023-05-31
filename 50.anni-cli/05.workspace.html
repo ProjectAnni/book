@@ -140,22 +140,22 @@
                         <h1 id="workspace"><a class="header" href="#workspace">workspace</a></h1>
 <p><code>anni workspace</code> 提供了一系列对<em>本地音频整理工作空间</em>的管理命令。</p>
 <h2 id="术语表"><a class="header" href="#术语表">术语表</a></h2>
-<p>| 名称             | 英语        | 简称     | 详情                                                                                |
-| ---------------- | ----------- | -------- |
-| 音频整理工作空间 | <code>Workspace</code> | 工作空间 | <code>anni workspace</code> 工作的目录                                                         |
-| 工作目录         |             |          | <strong>工作空间</strong>根目录下的 <code>.anni</code> 目录，由 <code>anni</code> 控制状态                             |
-| 用户目录         |             |          | 用户视图中使用的，实际工作的目录                                                    |
-| 专辑目录         |             |          | <strong>用户目录</strong>下，实际存放专辑的子目录                                                |
-| 受控专辑目录     |             |          | <strong>工作目录</strong>下，实际存放专辑的子目录                                                |
-| 受控链接         |             |          | <strong>用户目录</strong>下，链接到 <strong>工作目录</strong> 的符号链接，名称为 <code>.album</code>                     |
-| 专辑状态：未跟踪 | <code>Untracked</code> | 未跟踪   | 用户通过 <code>create</code> 创建专辑，但未将专辑跟踪时的状态                                  |
-| 提交             | <code>Commit</code>    | -        | 通过 <code>add</code> 将专辑从工作空间中移交到音频仓库的行为                                   |
-| 专辑状态：已跟踪 | <code>Committed</code> | 已跟踪   | 用户通过 <code>add</code> 将专辑结构交由 <code>anni</code> 托管后的状态                                   |
-| 发布             | <code>Publish</code>   | -        | 通过 <code>publish</code> 将专辑从工作空间中移交到音频仓库的行为                               |
-| 专辑状态：已发布 | <code>Published</code> | 已发布   | 用户通过 <code>publish --soft</code> 发布专辑后的状态                                          |
-| 专辑状态：悬垂   | <code>Dangling</code>  | -        | 用户目录下存在专辑，但工作目录中不存在 <code>AlbumID</code> 对应目录，或符号链接错误           |
-| 专辑状态：待回收 | <code>Garbage</code>   | -        | 用户目录中不存在该专辑，且该专辑在工作目录中对应为空                                |
-| 专辑锁           |             |          | 在对某一专辑目录进行状态变更时，为防止并行冲突放置的锁。通常为命名为 <code>.lock</code> 的文件 |</p>
+<table><thead><tr><th>名称</th><th>英语</th><th>简称</th><th>详情</th></tr></thead><tbody>
+<tr><td>音频整理工作空间</td><td><code>Workspace</code></td><td>工作空间</td><td><code>anni workspace</code> 工作的目录</td></tr>
+<tr><td>工作目录</td><td></td><td></td><td><strong>工作空间</strong>根目录下的 <code>.anni</code> 目录，由 <code>anni</code> 控制状态</td></tr>
+<tr><td>用户目录</td><td></td><td></td><td>用户视图中使用的，实际工作的目录</td></tr>
+<tr><td>专辑目录</td><td></td><td></td><td><strong>用户目录</strong>下，实际存放专辑的子目录</td></tr>
+<tr><td>受控专辑目录</td><td></td><td></td><td><strong>工作目录</strong>下，实际存放专辑的子目录</td></tr>
+<tr><td>受控链接</td><td></td><td></td><td><strong>用户目录</strong>下，链接到 <strong>工作目录</strong> 的符号链接，名称为 <code>.album</code></td></tr>
+<tr><td>专辑状态：未跟踪</td><td><code>Untracked</code></td><td>未跟踪</td><td>用户通过 <code>create</code> 创建专辑，但未将专辑跟踪时的状态</td></tr>
+<tr><td>提交</td><td><code>Commit</code></td><td>-</td><td>通过 <code>add</code> 将专辑从工作空间中移交到音频仓库的行为</td></tr>
+<tr><td>专辑状态：已跟踪</td><td><code>Committed</code></td><td>已跟踪</td><td>用户通过 <code>add</code> 将专辑结构交由 <code>anni</code> 托管后的状态</td></tr>
+<tr><td>发布</td><td><code>Publish</code></td><td>-</td><td>通过 <code>publish</code> 将专辑从工作空间中移交到音频仓库的行为</td></tr>
+<tr><td>专辑状态：已发布</td><td><code>Published</code></td><td>已发布</td><td>用户通过 <code>publish --soft</code> 发布专辑后的状态</td></tr>
+<tr><td>专辑状态：悬垂</td><td><code>Dangling</code></td><td>-</td><td>用户目录下存在专辑，但工作目录中不存在 <code>AlbumID</code> 对应目录，或符号链接错误</td></tr>
+<tr><td>专辑状态：待回收</td><td><code>Garbage</code></td><td>-</td><td>用户目录中不存在该专辑，且该专辑在工作目录中对应为空</td></tr>
+<tr><td>专辑锁</td><td></td><td></td><td>在对某一专辑目录进行状态变更时，为防止并行冲突放置的锁。通常为命名为 <code>.lock</code> 的文件</td></tr>
+</tbody></table>
 <h2 id="工作空间"><a class="header" href="#工作空间">工作空间</a></h2>
 <p><del>音频整理工作空间看起来有点拗口的样子，之后我们就用工作空间来代替好了</del></p>
 <p>工作空间的由来是为了替代掉原有的，没有任何约束的任意目录。工作空间的存在目的有两个：</p>
