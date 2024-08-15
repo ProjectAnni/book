@@ -67,6 +67,8 @@
   - [已测试的客户端](./07.annisonic/02.clients.md)
   - [部署向导](./07.annisonic/03.deploy.md)
 - [Annim](./08.annim/00.readme.md)
+  - [术语与定义](./08.annim/01.definition.md)
+  - [Anni 元数据协议](./08.annim/02.protocol.md)
 
 ---
 
